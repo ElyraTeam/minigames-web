@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="197.776" height="193.535" viewBox="0 0 197.776 193.535">
+  <defs>
+    <filter id="Rectangle_1" x="0" y="9.758" width="102.775" height="102.775" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_3" x="95.872" y="9.758" width="101.904" height="102.775" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_4" x="95.872" y="92.501" width="101.904" height="101.033" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2" x="0" y="92.501" width="102.775" height="101.033" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-4"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_4" data-name="Group 4" transform="translate(20.225 20.258)">
+    <g transform="matrix(1, 0, 0, 1, -20.23, -20.26)" filter="url(#Rectangle_1)">
+      <rect id="Rectangle_1-2" data-name="Rectangle 1" width="75.775" height="75.775" transform="translate(20.5 20.26)" fill="#f8f811"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -20.23, -20.26)" filter="url(#Rectangle_3)">
+      <rect id="Rectangle_3-2" data-name="Rectangle 3" width="74.904" height="75.775" transform="translate(102.37 20.26)" fill="#11f820"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -20.23, -20.26)" filter="url(#Rectangle_4)">
+      <rect id="Rectangle_4-2" data-name="Rectangle 4" width="74.904" height="74.033" transform="translate(102.37 103)" fill="#ffbe66"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -20.23, -20.26)" filter="url(#Rectangle_2)">
+      <rect id="Rectangle_2-2" data-name="Rectangle 2" width="75.775" height="74.033" transform="translate(20.5 103)" fill="#56ffe8"/>
+    </g>
+    <text id="ل" transform="translate(14.565 52.742)" fill="#fff" font-size="56" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ل</tspan></text>
+    <text id="ك" transform="translate(97.179 54.742)" fill="#fff" font-size="56" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ك</tspan></text>
+    <text id="م" transform="translate(105.179 128.742)" fill="#fff" font-size="56" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">م</tspan></text>
+    <text id="ة" transform="translate(20.565 135.614)" fill="#fff" font-size="55" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ة</tspan></text>
+  </g>
+</svg>
