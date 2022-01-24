@@ -11,9 +11,6 @@ module.exports = {
       "btngradient-from": "#73f12f",
       "btngradient-to": "#3eb691",
     },
-    fontFamily: {
-      'cairo': ["cairo", "sans-serif"],
-    },
     extend: {},
   },
   plugins: [],
