@@ -1,0 +1,388 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="linear-gradient" x2="0.037" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1af8b3"/>
+      <stop offset="1" stop-color="#281f82"/>
+    </linearGradient>
+    <filter id="Rectangle_1" x="-204.423" y="275.804" width="284.208" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_3" x="87.479" y="275.804" width="281.251" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_4" x="87.479" y="556.663" width="281.251" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_1273" x="-204.423" y="556.663" width="284.208" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-4"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_1-2" x="1461.347" y="275.804" width="284.208" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-5"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-5"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_3-2" x="1753.249" y="275.804" width="281.251" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-6"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-6"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_4-2" x="1753.249" y="556.663" width="281.251" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-7"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-7"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2" x="1461.347" y="556.663" width="284.208" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-8"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-8"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_1-3" x="1461.347" y="826.805" width="284.208" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-9"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-9"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_3-3" x="1753.249" y="826.805" width="281.251" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-10"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-10"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_4-3" x="1753.249" y="1107.664" width="281.251" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-11"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-11"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2-2" x="1461.347" y="1107.664" width="284.208" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-12"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-12"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_1-4" x="907.423" y="826.805" width="284.208" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-13"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-13"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_3-4" x="1199.325" y="826.805" width="281.251" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-14"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-14"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_4-4" x="1199.325" y="1107.664" width="281.251" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-15"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-15"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2-3" x="907.423" y="1107.664" width="284.208" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-16"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-16"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_1-5" x="907.423" y="275.804" width="284.208" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-17"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-17"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_3-5" x="1199.325" y="275.804" width="281.251" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-18"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-18"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_4-5" x="1199.325" y="556.663" width="281.251" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-19"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-19"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2-4" x="907.423" y="556.663" width="284.208" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-20"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-20"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_1-6" x="351.5" y="826.805" width="284.208" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-21"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-21"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_3-6" x="643.402" y="826.805" width="281.251" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-22"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-22"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_4-6" x="643.402" y="1107.664" width="281.251" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-23"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-23"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2-5" x="351.5" y="1107.664" width="284.208" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-24"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-24"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_1-7" x="351.5" y="275.804" width="284.208" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-25"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-25"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_3-7" x="643.402" y="275.804" width="281.251" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-26"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-26"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_4-7" x="643.402" y="556.663" width="281.251" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-27"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-27"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2-6" x="351.5" y="556.663" width="284.208" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-28"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-28"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_1-8" x="-204.423" y="826.805" width="284.208" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-29"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-29"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_3-8" x="87.479" y="826.805" width="281.251" height="284.208" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-30"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-30"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_4-8" x="87.479" y="1107.664" width="281.251" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-31"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-31"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2-7" x="-204.423" y="1107.664" width="284.208" height="278.295" filterUnits="userSpaceOnUse">
+      <feOffset dx="-7" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-32"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-32"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-Web_1920_28">
+      <rect width="1920" height="1080"/>
+    </clipPath>
+  </defs>
+  <g id="Web_1920_28" data-name="Web 1920 – 28" clip-path="url(#clip-Web_1920_28)">
+    <rect width="1920" height="1080" fill="url(#linear-gradient)"/>
+    <g id="Group_116" data-name="Group 116">
+      <g id="Group_82" data-name="Group 82" transform="translate(-184.197 237.799)" opacity="0.28">
+        <g transform="matrix(1, 0, 0, 1, 184.2, -237.8)" filter="url(#Rectangle_1)">
+          <rect id="Rectangle_1-9" data-name="Rectangle 1" width="257.208" height="257.208" transform="translate(-183.92 286.3)" fill="#f8f811"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, 184.2, -237.8)" filter="url(#Rectangle_3)">
+          <rect id="Rectangle_3-9" data-name="Rectangle 3" width="254.251" height="257.208" transform="translate(93.98 286.3)" fill="#11f820"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, 184.2, -237.8)" filter="url(#Rectangle_4)">
+          <rect id="Rectangle_4-9" data-name="Rectangle 4" width="254.251" height="251.295" transform="translate(93.98 567.16)" fill="#ffbe66"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, 184.2, -237.8)" filter="url(#Path_1273)">
+          <path id="Path_1273-2" data-name="Path 1273" d="M0,0H257.208V251.295H0Z" transform="translate(-183.92 567.16)" fill="#56ffe8"/>
+        </g>
+        <text id="و" transform="translate(108.782 204.742)" fill="#fff" font-size="173" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">و</tspan></text>
+        <text id="ن" transform="translate(347.803 202.531)" fill="#fff" font-size="166" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ن</tspan></text>
+        <text id="هـ" transform="translate(333.203 474.712)" fill="#fff" font-size="182" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">هـ</tspan></text>
+        <text id="ة" transform="translate(69.148 465.433)" fill="#fff" font-size="154" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ة</tspan></text>
+      </g>
+      <g id="Group_83" data-name="Group 83" transform="translate(1481.572 237.799)" opacity="0.28">
+        <g transform="matrix(1, 0, 0, 1, -1481.57, -237.8)" filter="url(#Rectangle_1-2)">
+          <rect id="Rectangle_1-10" data-name="Rectangle 1" width="257.208" height="257.208" transform="translate(1481.85 286.3)" fill="#f8f811"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -1481.57, -237.8)" filter="url(#Rectangle_3-2)">
+          <rect id="Rectangle_3-10" data-name="Rectangle 3" width="254.251" height="257.208" transform="translate(1759.75 286.3)" fill="#11f820"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -1481.57, -237.8)" filter="url(#Rectangle_4-2)">
+          <rect id="Rectangle_4-10" data-name="Rectangle 4" width="254.251" height="251.295" transform="translate(1759.75 567.16)" fill="#ffbe66"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -1481.57, -237.8)" filter="url(#Rectangle_2)">
+          <rect id="Rectangle_2-8" data-name="Rectangle 2" width="257.208" height="251.295" transform="translate(1481.85 567.16)" fill="#56ffe8"/>
+        </g>
+        <text id="ت" transform="translate(68.782 226.742)" fill="#fff" font-size="173" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ت</tspan></text>
+        <text id="أ" transform="translate(366.858 264.505)" fill="#fff" font-size="166" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">أ</tspan></text>
+        <text id="ب" transform="translate(331.302 474.712)" fill="#fff" font-size="182" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ب</tspan></text>
+        <text id="ث" transform="translate(83.782 503.201)" fill="#fff" font-size="154" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ث</tspan></text>
+      </g>
+      <g id="Group_84" data-name="Group 84" transform="translate(1481.572 788.8)" opacity="0.28">
+        <g transform="matrix(1, 0, 0, 1, -1481.57, -788.8)" filter="url(#Rectangle_1-3)">
+          <rect id="Rectangle_1-11" data-name="Rectangle 1" width="257.208" height="257.208" transform="translate(1481.85 837.3)" fill="#f8f811"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -1481.57, -788.8)" filter="url(#Rectangle_3-3)">
+          <rect id="Rectangle_3-11" data-name="Rectangle 3" width="254.251" height="257.208" transform="translate(1759.75 837.3)" fill="#11f820"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -1481.57, -788.8)" filter="url(#Rectangle_4-3)">
+          <rect id="Rectangle_4-11" data-name="Rectangle 4" width="254.251" height="251.295" transform="translate(1759.75 1118.16)" fill="#ffbe66"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -1481.57, -788.8)" filter="url(#Rectangle_2-2)">
+          <rect id="Rectangle_2-9" data-name="Rectangle 2" width="257.208" height="251.295" transform="translate(1481.85 1118.16)" fill="#56ffe8"/>
+        </g>
+        <text id="ج" transform="translate(68.782 226.742)" fill="#fff" font-size="173" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ج</tspan></text>
+        <text id="ح" transform="translate(340.428 217.742)" fill="#fff" font-size="166" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ح</tspan></text>
+        <text id="ب-2" data-name="ب" transform="translate(331.302 474.712)" fill="#fff" font-size="182" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ب</tspan></text>
+        <text id="ث-2" data-name="ث" transform="translate(96.148 484.433)" fill="#fff" font-size="154" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ث</tspan></text>
+      </g>
+      <g id="Group_85" data-name="Group 85" transform="translate(927.648 788.8)" opacity="0.28">
+        <g transform="matrix(1, 0, 0, 1, -927.65, -788.8)" filter="url(#Rectangle_1-4)">
+          <rect id="Rectangle_1-12" data-name="Rectangle 1" width="257.208" height="257.208" transform="translate(927.92 837.3)" fill="#f8f811"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -927.65, -788.8)" filter="url(#Rectangle_3-4)">
+          <rect id="Rectangle_3-12" data-name="Rectangle 3" width="254.251" height="257.208" transform="translate(1205.83 837.3)" fill="#11f820"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -927.65, -788.8)" filter="url(#Rectangle_4-4)">
+          <rect id="Rectangle_4-12" data-name="Rectangle 4" width="254.251" height="251.295" transform="translate(1205.83 1118.16)" fill="#ffbe66"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -927.65, -788.8)" filter="url(#Rectangle_2-3)">
+          <rect id="Rectangle_2-10" data-name="Rectangle 2" width="257.208" height="251.295" transform="translate(927.92 1118.16)" fill="#56ffe8"/>
+        </g>
+        <text id="ت-2" data-name="ت" transform="translate(68.782 226.742)" fill="#fff" font-size="173" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ت</tspan></text>
+        <text id="أ-2" data-name="أ" transform="translate(366.858 264.505)" fill="#fff" font-size="166" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">أ</tspan></text>
+        <text id="ب-3" data-name="ب" transform="translate(331.302 474.712)" fill="#fff" font-size="182" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ب</tspan></text>
+        <text id="ث-3" data-name="ث" transform="translate(96.148 484.433)" fill="#fff" font-size="154" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ث</tspan></text>
+      </g>
+      <g id="Group_94" data-name="Group 94" transform="translate(927.648 237.799)" opacity="0.28">
+        <g transform="matrix(1, 0, 0, 1, -927.65, -237.8)" filter="url(#Rectangle_1-5)">
+          <rect id="Rectangle_1-13" data-name="Rectangle 1" width="257.208" height="257.208" transform="translate(927.92 286.3)" fill="#f8f811"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -927.65, -237.8)" filter="url(#Rectangle_3-5)">
+          <rect id="Rectangle_3-13" data-name="Rectangle 3" width="254.251" height="257.208" transform="translate(1205.83 286.3)" fill="#11f820"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -927.65, -237.8)" filter="url(#Rectangle_4-5)">
+          <rect id="Rectangle_4-13" data-name="Rectangle 4" width="254.251" height="251.295" transform="translate(1205.83 567.16)" fill="#ffbe66"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -927.65, -237.8)" filter="url(#Rectangle_2-4)">
+          <rect id="Rectangle_2-11" data-name="Rectangle 2" width="257.208" height="251.295" transform="translate(927.92 567.16)" fill="#56ffe8"/>
+        </g>
+        <text id="ت-3" data-name="ت" transform="translate(68.782 226.742)" fill="#fff" font-size="173" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ت</tspan></text>
+        <text id="أ-3" data-name="أ" transform="translate(366.858 264.505)" fill="#fff" font-size="166" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">أ</tspan></text>
+        <text id="ب-4" data-name="ب" transform="translate(331.302 474.712)" fill="#fff" font-size="182" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ب</tspan></text>
+        <text id="ث-4" data-name="ث" transform="translate(66.379 506.713)" fill="#fff" font-size="154" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ث</tspan></text>
+      </g>
+      <g id="Group_86" data-name="Group 86" transform="translate(371.726 788.8)" opacity="0.28">
+        <g transform="matrix(1, 0, 0, 1, -371.73, -788.8)" filter="url(#Rectangle_1-6)">
+          <rect id="Rectangle_1-14" data-name="Rectangle 1" width="257.208" height="257.208" transform="translate(372 837.3)" fill="#f8f811"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -371.73, -788.8)" filter="url(#Rectangle_3-6)">
+          <rect id="Rectangle_3-14" data-name="Rectangle 3" width="254.251" height="257.208" transform="translate(649.9 837.3)" fill="#11f820"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -371.73, -788.8)" filter="url(#Rectangle_4-6)">
+          <rect id="Rectangle_4-14" data-name="Rectangle 4" width="254.251" height="251.295" transform="translate(649.9 1118.16)" fill="#ffbe66"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -371.73, -788.8)" filter="url(#Rectangle_2-5)">
+          <rect id="Rectangle_2-12" data-name="Rectangle 2" width="257.208" height="251.295" transform="translate(372 1118.16)" fill="#56ffe8"/>
+        </g>
+        <text id="ص" transform="translate(24.378 226.742)" fill="#fff" font-size="173" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ص</tspan></text>
+        <text id="أ-4" data-name="أ" transform="translate(366.858 264.505)" fill="#fff" font-size="166" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">أ</tspan></text>
+        <text id="ب-5" data-name="ب" transform="translate(331.302 474.712)" fill="#fff" font-size="182" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ب</tspan></text>
+        <text id="ث-5" data-name="ث" transform="translate(96.148 484.433)" fill="#fff" font-size="154" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ث</tspan></text>
+      </g>
+      <g id="Group_95" data-name="Group 95" transform="translate(371.726 237.799)" opacity="0.28">
+        <g transform="matrix(1, 0, 0, 1, -371.73, -237.8)" filter="url(#Rectangle_1-7)">
+          <rect id="Rectangle_1-15" data-name="Rectangle 1" width="257.208" height="257.208" transform="translate(372 286.3)" fill="#f8f811"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -371.73, -237.8)" filter="url(#Rectangle_3-7)">
+          <rect id="Rectangle_3-15" data-name="Rectangle 3" width="254.251" height="257.208" transform="translate(649.9 286.3)" fill="#11f820"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -371.73, -237.8)" filter="url(#Rectangle_4-7)">
+          <rect id="Rectangle_4-15" data-name="Rectangle 4" width="254.251" height="251.295" transform="translate(649.9 567.16)" fill="#ffbe66"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, -371.73, -237.8)" filter="url(#Rectangle_2-6)">
+          <rect id="Rectangle_2-13" data-name="Rectangle 2" width="257.208" height="251.295" transform="translate(372 567.16)" fill="#56ffe8"/>
+        </g>
+        <text id="ص-2" data-name="ص" transform="translate(24.378 226.742)" fill="#fff" font-size="173" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ص</tspan></text>
+        <text id="أ-5" data-name="أ" transform="translate(366.858 264.505)" fill="#fff" font-size="166" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">أ</tspan></text>
+        <text id="ب-6" data-name="ب" transform="translate(331.302 474.712)" fill="#fff" font-size="182" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ب</tspan></text>
+        <text id="ث-6" data-name="ث" transform="translate(66.378 503.201)" fill="#fff" font-size="154" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ث</tspan></text>
+      </g>
+      <g id="Group_87" data-name="Group 87" transform="translate(-184.197 788.8)" opacity="0.28">
+        <g transform="matrix(1, 0, 0, 1, 184.2, -788.8)" filter="url(#Rectangle_1-8)">
+          <rect id="Rectangle_1-16" data-name="Rectangle 1" width="257.208" height="257.208" transform="translate(-183.92 837.3)" fill="#f8f811"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, 184.2, -788.8)" filter="url(#Rectangle_3-8)">
+          <rect id="Rectangle_3-16" data-name="Rectangle 3" width="254.251" height="257.208" transform="translate(93.98 837.3)" fill="#11f820"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, 184.2, -788.8)" filter="url(#Rectangle_4-8)">
+          <rect id="Rectangle_4-16" data-name="Rectangle 4" width="254.251" height="251.295" transform="translate(93.98 1118.16)" fill="#ffbe66"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, 184.2, -788.8)" filter="url(#Rectangle_2-7)">
+          <rect id="Rectangle_2-14" data-name="Rectangle 2" width="257.208" height="251.295" transform="translate(-183.92 1118.16)" fill="#56ffe8"/>
+        </g>
+        <text id="ت-4" data-name="ت" transform="translate(68.782 226.742)" fill="#fff" font-size="173" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ت</tspan></text>
+        <text id="ط" transform="translate(340.303 237.609)" fill="#fff" font-size="166" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ط</tspan></text>
+        <text id="ب-7" data-name="ب" transform="translate(331.302 474.712)" fill="#fff" font-size="182" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ب</tspan></text>
+        <text id="ث-7" data-name="ث" transform="translate(96.148 484.433)" fill="#fff" font-size="154" font-family="Cairo-SemiBold, Cairo" font-weight="600"><tspan x="0" y="0">ث</tspan></text>
+      </g>
+      <g id="Path_1275" data-name="Path 1275" fill="#0030cc" opacity="0.43">
+        <path d="M 1919.5 1079.5 L 0.5 1079.5 L 0.5 0.5 L 1919.5 0.5 L 1919.5 1079.5 Z" stroke="none"/>
+        <path d="M 1 1 L 1 1079 L 1919 1079 L 1919 1 L 1 1 M 0 0 L 1920 0 L 1920 1080 L 0 1080 L 0 0 Z" stroke="none" fill="#707070"/>
+      </g>
+    </g>
+  </g>
+</svg>
