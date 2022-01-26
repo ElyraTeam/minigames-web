@@ -73,7 +73,7 @@ const WordCreate: NextPage = () => {
   }
 
   function deleteCategory(categoryName: string) {
-    if (categoriesArabic.length == 3) return;
+    if (categoriesArabic.length === 3) return;
     setCategories(categoriesArabic.filter((cat) => cat != categoryName));
   }
 
@@ -91,15 +91,17 @@ const WordCreate: NextPage = () => {
   }
 
   return (
-    <div className="word-create-main h-screen bg-[url('../public/wordbackground.svg')] bg-cover flex justify-center items-center">
-      <div className="main-content-box bg-light sm:px-8 pb-5 pt-3 rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] max-w-4xl ">
-        <Head>
-          <title>Word - Create</title>
-        </Head>
+    <div className="word-create-main h-screen flex justify-center items-center">
+      <Head>
+        <title>Word - Create</title>
+      </Head>
 
+      <div className="bg-[url('../public/wordbackground.svg')] bg-cover z-0 h-screen fixed top-0 left-0 w-full h-full"></div>
+
+      <div className="main-content-box absolute bg-light sm:px-8 pb-5 pt-3 rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] max-w-4xl ">
         <Image src="/wordlogo.svg" width="85" height="85" alt="logo" />
 
-        <div className="content-box bg-dark lg:px-8 md:px-32 py-8 rounded-2xl mb-5 mt-3 mx-5 scrollbar overflow-y-scroll max-h-96">
+        <div className="content-box bg-dark lg:px-8 md:px-8 py-8 rounded-2xl mb-5 mt-3 mx-5 scrollbar overflow-y-scroll max-h-96">
           <div className="choose-chars overflow-hidden">
             <h2 className="mb-5 text-white text-2xl font-semibold">الحروف</h2>
             <div
@@ -197,6 +199,10 @@ const WordCreate: NextPage = () => {
                   <option value="6">6</option>
                   <option value="7">7</option>
                   <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
                 </select>
               </div>
             </div>
@@ -211,7 +217,7 @@ const WordCreate: NextPage = () => {
         <Link href="/">
           <h3 className="text-white ml-10 text-xl cursor-pointer float-left hover:text-black font-semibold">
             <FaArrowLeft className="inline mr-2" />
-            التالي
+            إنشاء غرفة
           </h3>
         </Link>
       </div>
