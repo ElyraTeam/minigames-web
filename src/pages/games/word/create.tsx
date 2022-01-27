@@ -99,6 +99,11 @@ const WordCreate: NextPage = () => {
     setNewCategoryError(null);
   }
 
+  const nickname =
+    localStorage.getItem("nickname") ||
+    "User" + (Math.floor(Math.random() * 100) + 1);
+  localStorage.setItem("nickname", nickname);
+
   async function makeRoom() {
     const options: RoomOptions = {
       letters: charsSelected,
@@ -106,7 +111,7 @@ const WordCreate: NextPage = () => {
       maxPlayers,
       categories: categoriesArabic,
     };
-    const { roomId } = await createRoom("test", options);
+    const { roomId } = await createRoom(nickname, options);
     if (!roomId) return; // TODO: show error
     router.replace(`/games/word/${roomId}`);
   }

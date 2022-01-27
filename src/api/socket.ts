@@ -13,7 +13,8 @@ class LocalPlayer {
     this.sync();
   }
 
-  sync() { // onPlayersSync: (sync: GamePlayersSync) => void // onOptionsSync: (sync: GameOptionsSync) => void, // onGameSync: (sync: GameSync) => void,
+  sync() {
+    // onPlayersSync: (sync: GamePlayersSync) => void // onOptionsSync: (sync: GameOptionsSync) => void, // onGameSync: (sync: GameSync) => void,
     this.socket.on("sync", (sync: GameSync) => store.dispatch(setGame(sync)));
     this.socket.on("options", (options: GameOptionsSync) =>
       store.dispatch(setRoom(options))
@@ -30,6 +31,22 @@ class LocalPlayer {
     this.socket.emit("authenticate", authReqOptions, (result: any) => {
       ack(result);
     });
+  }
+
+  chat(msg: string) {
+    this.socket.emit("chat", msg);
+  }
+
+  startRound() {
+    this.socket.emit("start-game");
+  }
+
+  finishRound() {
+    this.socket.emit("stop-game");
+  }
+
+  sendVotes(voteData: Map<string, number>) {
+    this.socket.emit("vote", voteData);
   }
 }
 

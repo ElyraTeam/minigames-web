@@ -30,6 +30,7 @@ enum State {
   LOBBY,
   VOTING,
   INGAME,
+  WAITING, //used in between rounds
 }
 
 interface GameSync {
@@ -37,7 +38,7 @@ interface GameSync {
   owner?: string;
   state?: State;
   currentRound?: number;
-  currentCategory?: number;
+  currentLetter?: string;
 }
 
 interface GameOptionsSync {
@@ -56,4 +57,16 @@ interface Player {
   owner: boolean;
   totalScore: number;
   lastRoundScore: number;
+}
+
+interface CategoryVoteData {
+  category: string;
+  values: Map<string, string>;
+  votes: Map<string, number>;
+}
+
+interface ChatMessage {
+  type: "system" | "player";
+  sender: string;
+  message: string;
 }

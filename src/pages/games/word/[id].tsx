@@ -11,7 +11,7 @@ import {
   FaShareAlt,
 } from "react-icons/fa";
 import { MdSend } from "react-icons/md";
-import { joinRoom } from "../../../api/rooms";
+import { joinRoom, leaveRoom } from "../../../api/rooms";
 import localPlayer from "../../../api/socket";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { setToken } from "../../../state/reducers/local";
@@ -27,8 +27,18 @@ const WordGame: NextPage = () => {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
-  //FOR TESTING
-  const nickname = "Alberto";
+  const nickname =
+    localStorage.getItem("nickname") ||
+    "User" + (Math.floor(Math.random() * 100) + 1);
+  localStorage.setItem("nickname", nickname);
+
+  async function pageLeaveRoom() {
+    await leaveRoom(nickname, id as string);
+    dispatch(setToken(""));
+    dispatch(setRoom({}));
+
+    router.replace(`/games/word/create`);
+  }
 
   //join room
   if (typeof window !== "undefined") {
@@ -39,26 +49,39 @@ const WordGame: NextPage = () => {
           dispatch(setToken(authToken));
           dispatch(setRoom({ id: id as string, options: roomOptions }));
 
-          localPlayer.authenticate(
-            {
-              authToken,
-              roomId: id as string,
-              nickname,
-            },
-            (res) => {
-              if (res === "good") {
-                setLoading(false);
-              } else {
-                //TODO: show error
+          //register socket events HERE
+
+          localPlayer.socket.connect();
+
+          const doAuth = () => {
+            localPlayer.authenticate(
+              {
+                authToken,
+                roomId: id as string,
+                nickname,
+              },
+              (res) => {
+                if (res === "good") {
+                  setLoading(false);
+                } else {
+                  //TODO: show error
+                }
               }
-            }
-          );
+            );
+          };
+
+          if (localPlayer.socket.connected) {
+            doAuth();
+          } else {
+            localPlayer.socket.on("connect", doAuth);
+          }
         });
       }
     }, [id]);
   }
 
   function startRound() {
+    //TODO: NO DOM PLS -hos
     (document.querySelector(".game-stats") as any)!.style.display = "none";
     (document.querySelector(".timer") as any)!.style.display = "flex";
     (document.querySelector(".bottom-link") as any)!.style.display = "none";
@@ -68,15 +91,19 @@ const WordGame: NextPage = () => {
       if (i === 0) {
         clearInterval(timer);
         (document.querySelector(".content-box") as any)!.style.padding = "0";
-        (document.querySelector(".content-box") as any)!.style.overflow = "hidden";
+        (document.querySelector(".content-box") as any)!.style.overflow =
+          "hidden";
         (document.querySelector(".timer") as any)!.style.display = "none";
-        (document.querySelector(".game-board-main") as any)!.style.display = "flex";
+        (document.querySelector(".game-board-main") as any)!.style.display =
+          "flex";
         return;
       }
 
       (document.querySelector(".timer") as any)!.textContent = i;
-      i--
+      i--;
     }, 1000);
+
+    localPlayer.startRound();
   }
 
   function sendMessage(event: any, msg: string, keypressed: boolean) {
@@ -87,13 +114,19 @@ const WordGame: NextPage = () => {
       }
     }
 
+    localPlayer.chat(msg);
+
     (document.querySelector(".messages") as any)!.innerHTML += `
     <div className="message-cont" style="text-align:right;margin:0 .75rem .25rem">
-      <p className="sender" style="color: #5ee494">حمدي</p>
+      <p className="sender" style="color: #5ee494">ملوخية</p>
       <p className="message" style="overflow-wrap: break-word">${msg}</p>
     </div>`;
 
     setMessage("");
+  }
+
+  function finishRound() {
+    localPlayer.finishRound();
   }
 
   return (
@@ -111,14 +144,22 @@ const WordGame: NextPage = () => {
           <div>
             <div className="top-info relative">
               <div className="icons absolute bottom-2 left-12">
-                <FaSignOutAlt className="inline text-4xl mr-3 text-[#f00] bg-[#a0f3c0] rounded-full p-2 cursor-pointer" />
-                <FaCog className="inline text-4xl mr-3 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer" />
+                <FaSignOutAlt
+                  onClick={pageLeaveRoom}
+                  className="inline text-4xl mr-3 text-[#f00] bg-[#a0f3c0] rounded-full p-2 cursor-pointer"
+                />
+                {game.state == 0 ? (
+                  <FaCog className="inline text-4xl mr-3 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer" />
+                ) : null}
                 <FaShareAlt className="inline text-4xl mr-3 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer" />
               </div>
               <Image src="/wordlogo.svg" width="85" height="85" alt="logo" />
               <h2 className="rounds absolute text-3xl right-8 bottom-0">
-                الجولة <span className="game-rounds">{room.options?.rounds}</span>
-                <span className="current-round text-[#1a8c90]">/0</span>
+                الجولة{" "}
+                <span className="game-rounds">{room.options?.rounds}</span>
+                <span className="current-round text-[#1a8c90]">
+                  /{game.currentRound}
+                </span>
               </h2>
             </div>
 
@@ -156,7 +197,10 @@ const WordGame: NextPage = () => {
 
                 <div className="players-list flex flex-row-reverse flex-wrap">
                   {(players || []).map((p, num) => (
-                    <div key={num} className="player text-right mb-4 ml-8 flex[1 1 80px]">
+                    <div
+                      key={num}
+                      className="player text-right mb-4 ml-8 flex[1 1 80px]"
+                    >
                       <div className="number float-right ml-2 text-5xl bg-white text-[#d3d3d3] w-16 h-16 flex justify-center items-center rounded-full shadow-[0_4px_8px_0_rgba(0,0,0,0.4)]">
                         {num + 1}
                       </div>
@@ -166,7 +210,8 @@ const WordGame: NextPage = () => {
                         </span>
                         <br />
                         <p className="points-main text-[12px]" dir="rtl">
-                          <span className="points">{p.lastRoundScore}</span> نقطة{" "}
+                          <span className="points">{p.lastRoundScore}</span>{" "}
+                          نقطة{" "}
                         </p>
                       </div>
                     </div>
@@ -174,63 +219,55 @@ const WordGame: NextPage = () => {
                 </div>
               </div>
 
-              <h3 className="timer hidden text-8xl rounded-full w-40 h-40 relative left-[50%] translate-x-[-50%] justify-center items-center bg-light">3</h3>
+              <h3 className="timer hidden text-8xl rounded-full w-40 h-40 relative left-[50%] translate-x-[-50%] justify-center items-center bg-light">
+                3
+              </h3>
 
               <div className="game-board-main hidden h-80 flex relative">
                 <div className="chat-main bg-[#38b77f] h-full w-[22%]">
-                  <div className="messages h-[80%] flex flex-col justify-end">
-                    <div className="message-cont text-right mx-3 mb-1">
-                      <p className="sender text-[#5ee494]">جاست</p>
-                      <p className="message break-words">ddddddddddddddddddddddddddddddddddddddddd</p>
-                    </div>
-                    <div className="message-cont text-right mx-3 mb-1">
-                      <p className="sender text-[#5ee494]">حمدي</p>
-                      <p className="message">صياحك</p>
-                    </div>
-                  </div>
+                  <div className="messages h-[80%] flex flex-col justify-end"></div>
                   <div className="type-message relative bg-[#2ca686] h-[20%] flex justify-center items-center">
-                    <MdSend className="scale-[-1] mr-1 text-[#005c44] cursor-pointer" onClick={(e) => sendMessage(e, message, false)} />
-                    <input type="text" placeholder="اكتب رسالة" value={message} onKeyPress={(e) => sendMessage(e, message, true)} onChange={(input) => setMessage(input.target.value)} className="bg-transparent placeholder:text-white focus:outline-0 w-32 pb-2 border-b" dir="rtl" />
+                    <MdSend
+                      className="scale-[-1] mr-1 text-[#005c44] cursor-pointer"
+                      onClick={(e) => sendMessage(e, message, false)}
+                    />
+                    <input
+                      type="text"
+                      placeholder="اكتب رسالة"
+                      value={message}
+                      onKeyPress={(e) => sendMessage(e, message, true)}
+                      onChange={(input) => setMessage(input.target.value)}
+                      className="bg-transparent placeholder:text-white focus:outline-0 w-32 pb-2 border-b"
+                      dir="rtl"
+                    />
                   </div>
                 </div>
                 <div className="game-board pt-10 w-[78%] overflow-y-scroll scrollbar">
-                  <h2 className="text-2xl text-right pr-10">اكتب كلمات تبدا بحرف:&nbsp; <span className="char text-3xl">ك</span></h2>
+                  <h2 className="text-2xl text-right pr-10">
+                    اكتب كلمات تبدأ بحرف:&nbsp;{" "}
+                    <span className="char text-3xl">{game.currentLetter}</span>
+                  </h2>
 
                   <div className="inputs flex flex-wrap" dir="rtl">
-                    <div className="input m-4 mb-2">
-                      <p className="text-xl mb-3">ولد</p>
-                      <input type="text" placeholder="ولد" className="py-3 px-5 text-black rounded-3xl w-40 border border-[#447e83] focus:border-2 focus:outline-0" />
-                    </div>
-                    <div className="input m-4 mb-2">
-                      <p className="text-xl mb-3">ولد</p>
-                      <input type="text" placeholder="ولد" className="py-3 px-5 text-black rounded-3xl w-40 border border-[#447e83] focus:border-2 focus:outline-0" />
-                    </div>
-                    <div className="input m-4 mb-2">
-                      <p className="text-xl mb-3">ولد</p>
-                      <input type="text" placeholder="ولد" className="py-3 px-5 text-black rounded-3xl w-40 border border-[#447e83] focus:border-2 focus:outline-0" />
-                    </div>
-                    <div className="input m-4 mb-2">
-                      <p className="text-xl mb-3">ولد</p>
-                      <input type="text" placeholder="ولد" className="py-3 px-5 text-black rounded-3xl w-40 border border-[#447e83] focus:border-2 focus:outline-0" />
-                    </div>
-                    <div className="input m-4 mb-2">
-                      <p className="text-xl mb-3">ولد</p>
-                      <input type="text" placeholder="ولد" className="py-3 px-5 text-black rounded-3xl w-40 border border-[#447e83] focus:border-2 focus:outline-0" />
-                    </div>
-                    <div className="input m-4 mb-2">
-                      <p className="text-xl mb-3">ولد</p>
-                      <input type="text" placeholder="ولد" className="py-3 px-5 text-black rounded-3xl w-40 border border-[#447e83] focus:border-2 focus:outline-0" />
-                    </div>
-                    <div className="input m-4 mb-2">
-                      <p className="text-xl mb-3">ولد</p>
-                      <input type="text" placeholder="ولد" className="py-3 px-5 text-black rounded-3xl w-40 border border-[#447e83] focus:border-2 focus:outline-0" />
-                    </div>
+                    {room.options?.categories.map((category) => (
+                      <div key={category} className="input m-4 mb-2">
+                        <p className="text-xl mb-3">{category}</p>
+                        <input
+                          type="text"
+                          placeholder={category}
+                          className="py-3 px-5 text-black rounded-3xl w-40 border border-[#447e83] focus:border-2 focus:outline-0"
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
 
-            <h3 className="bottom-link text-white ml-10 text-xl cursor-pointer float-left hover:text-[#1A8B90] font-semibold" onClick={startRound}>
+            <h3
+              className="bottom-link text-white ml-10 text-xl cursor-pointer float-left hover:text-[#1A8B90] font-semibold"
+              onClick={startRound}
+            >
               <FaArrowLeft className="inline mr-2" />
               بدء الجولة
             </h3>
