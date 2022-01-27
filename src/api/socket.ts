@@ -1,9 +1,9 @@
-import { HOST } from './../config/constants';
-import io, { Socket } from 'socket.io-client';
-import { store } from '../state/store';
-import { setGame } from '../state/reducers/game';
-import { setPlayers } from '../state/reducers/players';
-import { setRoom } from '../state/reducers/room';
+import { HOST } from "./../config/constants";
+import io, { Socket } from "socket.io-client";
+import { store } from "../state/store";
+import { setGame } from "../state/reducers/game";
+import { setPlayers } from "../state/reducers/players";
+import { setRoom } from "../state/reducers/room";
 
 class LocalPlayer {
   socket: Socket;
@@ -13,21 +13,22 @@ class LocalPlayer {
     this.sync();
   }
 
-  sync() // onOptionsSync: (sync: GameOptionsSync) => void, // onGameSync: (sync: GameSync) => void,
-  // onPlayersSync: (sync: GamePlayersSync) => void
-  {
-    this.socket.on('sync', (sync: GameSync) => store.dispatch(setGame(sync)));
-    this.socket.on('options', (options: GameOptionsSync) =>
+  sync() { // onPlayersSync: (sync: GamePlayersSync) => void // onOptionsSync: (sync: GameOptionsSync) => void, // onGameSync: (sync: GameSync) => void,
+    this.socket.on("sync", (sync: GameSync) => store.dispatch(setGame(sync)));
+    this.socket.on("options", (options: GameOptionsSync) =>
       store.dispatch(setRoom(options))
     );
-    this.socket.on('players', (players: GamePlayersSync) =>
+    this.socket.on("players", (players: GamePlayersSync) =>
       store.dispatch(setPlayers(players))
     );
   }
 
-  authenticate(authReqOptions: AuthenticateRequest) {
-    this.socket.emit('authenticate', authReqOptions, (result: any) => {
-      console.log(result);
+  authenticate(
+    authReqOptions: AuthenticateRequest,
+    ack: (res: string) => void
+  ) {
+    this.socket.emit("authenticate", authReqOptions, (result: any) => {
+      ack(result);
     });
   }
 }

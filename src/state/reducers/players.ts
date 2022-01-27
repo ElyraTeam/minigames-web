@@ -1,19 +1,19 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { HYDRATE } from 'next-redux-wrapper';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 
 const initialState: GamePlayersSync = {};
 
 const playersSlice = createSlice({
-  name: 'plrs',
+  name: "plrs",
   initialState,
   reducers: {
     setPlayers(state, action: PayloadAction<GamePlayersSync>) {
-      state = action.payload;
+      return action.payload;
     },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
-      console.log('HYDRATE', state, action.payload);
+      console.log("HYDRATE", state, action.payload);
       return {
         ...state,
         ...action.payload,
