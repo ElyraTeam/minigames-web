@@ -99,10 +99,13 @@ const WordCreate: NextPage = () => {
     setNewCategoryError(null);
   }
 
-  const nickname =
-    localStorage.getItem("nickname") ||
-    "User" + (Math.floor(Math.random() * 100) + 1);
-  localStorage.setItem("nickname", nickname);
+  let nickname = "User" + (Math.floor(Math.random() * 100) + 1);
+  if (typeof window !== "undefined") {
+    nickname =
+      localStorage.getItem("nickname") ||
+      "User" + (Math.floor(Math.random() * 100) + 1);
+    localStorage.setItem("nickname", nickname);
+  }
 
   async function makeRoom() {
     const options: RoomOptions = {

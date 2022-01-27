@@ -27,10 +27,13 @@ const WordGame: NextPage = () => {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
-  const nickname =
-    localStorage.getItem("nickname") ||
-    "User" + (Math.floor(Math.random() * 100) + 1);
-  localStorage.setItem("nickname", nickname);
+  let nickname = "User" + (Math.floor(Math.random() * 100) + 1);
+  if (typeof window !== "undefined") {
+    nickname =
+      localStorage.getItem("nickname") ||
+      "User" + (Math.floor(Math.random() * 100) + 1);
+    localStorage.setItem("nickname", nickname);
+  }
 
   async function pageLeaveRoom() {
     await leaveRoom(nickname, id as string);
