@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import {
   FaArrowLeft,
@@ -11,6 +12,11 @@ import {
   FaPlusSquare,
   FaRedoAlt,
 } from 'react-icons/fa';
+import { createRoom, joinRoom } from '../../../api/rooms';
+import { setRoom } from '../../../state/reducers/room';
+import { useRouter } from 'next/router';
+import { setToken } from '../../../state/reducers/local';
+import localPlayer from '../../../api/socket';
 
 const DEFAULT_CATEGORIES_ARABIC = [
   'ولد',
@@ -57,12 +63,16 @@ const charsArabic: string[] = [
 ];
 
 const WordCreate: NextPage = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [categoriesArabic, setCategories] = useState(DEFAULT_CATEGORIES_ARABIC);
   const [charsSelected, setCharsSelected] = useState<string[]>(
     charsArabic.slice(0, 8)
   );
   const [newCategory, setNewCategory] = useState('');
   const [newCategoryError, setNewCategoryError] = useState<string | null>(null);
+  const [maxPlayers, setMaxPlayers] = useState<number>(8);
+  const [rounds, setRounds] = useState<number>(charsSelected.length);
 
   function charClick(char: string) {
     if (charsSelected.includes(char)) {
@@ -90,13 +100,30 @@ const WordCreate: NextPage = () => {
     setNewCategoryError(null);
   }
 
+  async function makeRoom() {
+    const options: RoomOptions = {
+      letters: charsSelected,
+      rounds,
+      maxPlayers,
+      categories: categoriesArabic,
+    };
+    const { roomId } = await createRoom('test', options);
+    if (!roomId) return; // TODO: show error
+    const { authToken } = await joinRoom('test', roomId);
+    if (!authToken) return; // TODO: show error
+    dispatch(setToken(authToken));
+    dispatch(setRoom({ id: roomId, options }));
+    router.replace(`/games/word/${roomId}`);
+    localPlayer.authenticate({ authToken, roomId, nickname: 'test' });
+  }
+
   return (
     <div className="word-create-main h-screen flex justify-center items-center">
       <Head>
         <title>Word - Create</title>
       </Head>
 
-      <div className="bg-[url('../public/wordbackground.svg')] bg-cover z-0 h-screen fixed top-0 left-0 w-full h-full"></div>
+      <div className="bg-[url('../../public/wordbackground.svg')] bg-cover z-0 fixed top-0 left-0 w-full h-full"></div>
 
       <div className="main-content-box absolute bg-light sm:px-8 pb-5 pt-3 rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] max-w-4xl ">
         <Image src="/wordlogo.svg" width="85" height="85" alt="logo" />
@@ -177,7 +204,11 @@ const WordCreate: NextPage = () => {
               <div className="mr-12">
                 <span className="text-lg">عدد الجولات</span>
                 <br />
-                <select className="bg-transparent border-b-2 my-1 w-12 focus:outline-none">
+                <select
+                  className="bg-transparent border-b-2 my-1 w-12 focus:outline-none"
+                  value={rounds}
+                  onChange={(e) => setRounds(+e.target.value)}
+                >
                   {Array.from(
                     { length: charsSelected.length },
                     (x, i) => i + 1
@@ -191,7 +222,11 @@ const WordCreate: NextPage = () => {
               <div>
                 <span className="text-lg">عدد اللاعبين</span>
                 <br />
-                <select className="bg-transparent border-b-2 my-1 w-12 focus:outline-none">
+                <select
+                  className="bg-transparent border-b-2 my-1 w-12 focus:outline-none"
+                  onChange={(e) => setMaxPlayers(+e.target.value)}
+                  value={maxPlayers}
+                >
                   <option value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
@@ -214,12 +249,13 @@ const WordCreate: NextPage = () => {
             الرئيسية <FaArrowRight className="inline ml-2" />
           </h3>
         </Link>
-        <Link href="/">
-          <h3 className="text-white ml-10 text-xl cursor-pointer float-left hover:text-black font-semibold">
-            <FaArrowLeft className="inline mr-2" />
-            إنشاء غرفة
-          </h3>
-        </Link>
+        <h3
+          className="text-white ml-10 text-xl cursor-pointer float-left hover:text-black font-semibold"
+          onClick={makeRoom}
+        >
+          <FaArrowLeft className="inline mr-2" />
+          إنشاء غرفة
+        </h3>
       </div>
     </div>
   );
