@@ -4,7 +4,7 @@ import axios from "axios";
 const client = axios.create({
   baseURL: HOST,
   responseType: "json",
-  //withCredentials: true,
+  withCredentials: true,
 });
 
 export const createRoom = async (

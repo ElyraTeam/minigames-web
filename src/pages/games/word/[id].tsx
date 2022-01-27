@@ -10,6 +10,7 @@ import {
   FaCog,
   FaShareAlt,
 } from "react-icons/fa";
+import { MdSend } from "react-icons/md";
 import { joinRoom } from "../../../api/rooms";
 import localPlayer from "../../../api/socket";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
@@ -24,9 +25,10 @@ const WordGame: NextPage = () => {
   const game = useAppSelector((state) => state.gameSlice);
   const room = useAppSelector((state) => state.roomSlice);
   const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
 
   //FOR TESTING
-  const nickname = "test";
+  const nickname = "Alberto";
 
   //join room
   if (typeof window !== "undefined") {
@@ -53,7 +55,45 @@ const WordGame: NextPage = () => {
           );
         });
       }
-    }, []);
+    }, [id]);
+  }
+
+  function startRound() {
+    (document.querySelector(".game-stats") as any)!.style.display = "none";
+    (document.querySelector(".timer") as any)!.style.display = "flex";
+    (document.querySelector(".bottom-link") as any)!.style.display = "none";
+
+    let i = 2;
+    let timer = setInterval(() => {
+      if (i === 0) {
+        clearInterval(timer);
+        (document.querySelector(".content-box") as any)!.style.padding = "0";
+        (document.querySelector(".content-box") as any)!.style.overflow = "hidden";
+        (document.querySelector(".timer") as any)!.style.display = "none";
+        (document.querySelector(".game-board-main") as any)!.style.display = "flex";
+        return;
+      }
+
+      (document.querySelector(".timer") as any)!.textContent = i;
+      i--
+    }, 1000);
+  }
+
+  function sendMessage(event: any, msg: string, keypressed: boolean) {
+    if (msg === "" || msg === " ") return;
+    if (keypressed) {
+      if (event.charCode !== 13) {
+        return;
+      }
+    }
+
+    (document.querySelector(".messages") as any)!.innerHTML += `
+    <div className="message-cont" style="text-align:right;margin:0 .75rem .25rem">
+      <p className="sender" style="color: #5ee494">حمدي</p>
+      <p className="message" style="overflow-wrap: break-word">${msg}</p>
+    </div>`;
+
+    setMessage("");
   }
 
   return (
@@ -64,9 +104,9 @@ const WordGame: NextPage = () => {
 
       <div className="bg-[url('../../public/wordbackground.svg')] bg-cover z-0 fixed top-0 left-0 w-full h-full"></div>
 
-      <div className="main-content-box absolute bg-light sm:px-8 pb-5 pt-3 rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] max-w-4xl ">
+      <div className="main-content-box min-w-[900px] absolute bg-light sm:px-8 pb-5 pt-3 rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] max-w-4xl ">
         {loading ? (
-          <p>Loading lol</p>
+          <div className="loader"></div>
         ) : (
           <div>
             <div className="top-info relative">
@@ -77,61 +117,120 @@ const WordGame: NextPage = () => {
               </div>
               <Image src="/wordlogo.svg" width="85" height="85" alt="logo" />
               <h2 className="rounds absolute text-3xl right-8 bottom-0">
-                الجولة <span className="current-round">0</span>/
-                <span className="game-rounds">{room.options?.rounds}</span>
+                الجولة <span className="game-rounds">{room.options?.rounds}</span>
+                <span className="current-round text-[#1a8c90]">/0</span>
               </h2>
             </div>
 
-            <div className="content-box bg-dark lg:px-8 md:px-8 py-6 rounded-2xl mb-5 mt-3 mx-5 scrollbar overflow-y-scroll max-h-96 flex">
-              <div className="top-players-main mr-[320px]">
-                <h3 className="mb-5">أعلى النقاط</h3>
-                <div className="top-players bg-[#58de85] py-8 px-12 rounded-3xl overflow-hidden">
-                  <div className="rank rank-1 text-right">
-                    <FaMedal className="float-right text-5xl ml-5 text-[#FFD700]" />
-                    <span className="name text-xl">جاست</span>
-                    <br />
-                    <p className="points-main text-[12px]" dir="rtl">
-                      <span className="points">0</span> نقطة{" "}
-                    </p>
+            <div className="content-box bg-dark relative lg:px-8 md:px-8 py-6 rounded-2xl mb-5 mt-3 mx-5 scrollbar overflow-y-scroll max-h-96">
+              <div className="game-stats">
+                <div className="top-players-main mr-[10px] float-left">
+                  <h3 className="mb-5">أعلى النقاط</h3>
+                  <div className="top-players bg-[#58de85] py-8 px-12 rounded-3xl overflow-hidden">
+                    <div className="rank rank-1 text-right">
+                      <FaMedal className="float-right text-5xl ml-5 text-[#FFD700]" />
+                      <span className="name text-xl">جاست</span>
+                      <br />
+                      <p className="points-main text-[12px]" dir="rtl">
+                        <span className="points">0</span> نقطة{" "}
+                      </p>
+                    </div>
+                    <div className="rank rank-2 my-10 text-right">
+                      <FaMedal className="float-right text-5xl ml-5 text-[##C0C0C0]" />
+                      <span className="name text-xl">إيهاد</span>
+                      <br />
+                      <p className="points-main text-[12px]" dir="rtl">
+                        <span className="points">0</span> نقطة{" "}
+                      </p>
+                    </div>
+                    <div className="rank rank-3 text-right">
+                      <FaMedal className="float-right text-5xl ml-5 text-[#CD7F32]" />
+                      <span className="name text-xl">سوسن</span>
+                      <br />
+                      <p className="points-main text-[12px]" dir="rtl">
+                        <span className="points">0</span> نقطة{" "}
+                      </p>
+                    </div>
                   </div>
-                  <div className="rank rank-2 my-10 text-right">
-                    <FaMedal className="float-right text-5xl ml-5 text-[##C0C0C0]" />
-                    <span className="name text-xl">إيهاد</span>
-                    <br />
-                    <p className="points-main text-[12px]" dir="rtl">
-                      <span className="points">0</span> نقطة{" "}
-                    </p>
-                  </div>
-                  <div className="rank rank-3 text-right">
-                    <FaMedal className="float-right text-5xl ml-5 text-[#CD7F32]" />
-                    <span className="name text-xl">سوسن</span>
-                    <br />
-                    <p className="points-main text-[12px]" dir="rtl">
-                      <span className="points">0</span> نقطة{" "}
-                    </p>
-                  </div>
+                </div>
+
+                <div className="players-list flex flex-row-reverse flex-wrap">
+                  {(players || []).map((p, num) => (
+                    <div key={num} className="player text-right mb-4 ml-8 flex[1 1 80px]">
+                      <div className="number float-right ml-2 text-5xl bg-white text-[#d3d3d3] w-16 h-16 flex justify-center items-center rounded-full shadow-[0_4px_8px_0_rgba(0,0,0,0.4)]">
+                        {num + 1}
+                      </div>
+                      <div className="">
+                        <span className="name text-2xl mt-2 inline-block">
+                          {p.nickname}
+                        </span>
+                        <br />
+                        <p className="points-main text-[12px]" dir="rtl">
+                          <span className="points">{p.lastRoundScore}</span> نقطة{" "}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              <div className="players-list flex flex-col flex-wrap-reverse">
-                {(players || []).map((p, num) => (
-                  <div key={num} className="player text-right mb-4 ml-8">
-                    <div className="number float-right ml-2 text-5xl bg-white text-[#d3d3d3] w-16 h-16 flex justify-center items-center rounded-full shadow-[0_4px_8px_0_rgba(0,0,0,0.4)]">
-                      {num + 1}
+              <h3 className="timer hidden text-8xl rounded-full w-40 h-40 relative left-[50%] translate-x-[-50%] justify-center items-center bg-light">3</h3>
+
+              <div className="game-board-main hidden h-80 flex relative">
+                <div className="chat-main bg-[#38b77f] h-full w-[22%]">
+                  <div className="messages h-[80%] flex flex-col justify-end">
+                    <div className="message-cont text-right mx-3 mb-1">
+                      <p className="sender text-[#5ee494]">جاست</p>
+                      <p className="message break-words">ddddddddddddddddddddddddddddddddddddddddd</p>
                     </div>
-                    <span className="name text-2xl mt-2 inline-block">
-                      {p.nickname}
-                    </span>
-                    <br />
-                    <p className="points-main text-[12px]" dir="rtl">
-                      <span className="points">{p.lastRoundScore}</span> نقطة{" "}
-                    </p>
+                    <div className="message-cont text-right mx-3 mb-1">
+                      <p className="sender text-[#5ee494]">حمدي</p>
+                      <p className="message">صياحك</p>
+                    </div>
                   </div>
-                ))}
+                  <div className="type-message relative bg-[#2ca686] h-[20%] flex justify-center items-center">
+                    <MdSend className="scale-[-1] mr-1 text-[#005c44] cursor-pointer" onClick={(e) => sendMessage(e, message, false)} />
+                    <input type="text" placeholder="اكتب رسالة" value={message} onKeyPress={(e) => sendMessage(e, message, true)} onChange={(input) => setMessage(input.target.value)} className="bg-transparent placeholder:text-white focus:outline-0 w-32 pb-2 border-b" dir="rtl" />
+                  </div>
+                </div>
+                <div className="game-board pt-10 w-[78%] overflow-y-scroll scrollbar">
+                  <h2 className="text-2xl text-right pr-10">اكتب كلمات تبدا بحرف:&nbsp; <span className="char text-3xl">ك</span></h2>
+
+                  <div className="inputs flex flex-wrap" dir="rtl">
+                    <div className="input m-4 mb-2">
+                      <p className="text-xl mb-3">ولد</p>
+                      <input type="text" placeholder="ولد" className="py-3 px-5 text-black rounded-3xl w-40 border border-[#447e83] focus:border-2 focus:outline-0" />
+                    </div>
+                    <div className="input m-4 mb-2">
+                      <p className="text-xl mb-3">ولد</p>
+                      <input type="text" placeholder="ولد" className="py-3 px-5 text-black rounded-3xl w-40 border border-[#447e83] focus:border-2 focus:outline-0" />
+                    </div>
+                    <div className="input m-4 mb-2">
+                      <p className="text-xl mb-3">ولد</p>
+                      <input type="text" placeholder="ولد" className="py-3 px-5 text-black rounded-3xl w-40 border border-[#447e83] focus:border-2 focus:outline-0" />
+                    </div>
+                    <div className="input m-4 mb-2">
+                      <p className="text-xl mb-3">ولد</p>
+                      <input type="text" placeholder="ولد" className="py-3 px-5 text-black rounded-3xl w-40 border border-[#447e83] focus:border-2 focus:outline-0" />
+                    </div>
+                    <div className="input m-4 mb-2">
+                      <p className="text-xl mb-3">ولد</p>
+                      <input type="text" placeholder="ولد" className="py-3 px-5 text-black rounded-3xl w-40 border border-[#447e83] focus:border-2 focus:outline-0" />
+                    </div>
+                    <div className="input m-4 mb-2">
+                      <p className="text-xl mb-3">ولد</p>
+                      <input type="text" placeholder="ولد" className="py-3 px-5 text-black rounded-3xl w-40 border border-[#447e83] focus:border-2 focus:outline-0" />
+                    </div>
+                    <div className="input m-4 mb-2">
+                      <p className="text-xl mb-3">ولد</p>
+                      <input type="text" placeholder="ولد" className="py-3 px-5 text-black rounded-3xl w-40 border border-[#447e83] focus:border-2 focus:outline-0" />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <h3 className="text-white ml-10 text-xl cursor-pointer float-left hover:text-black font-semibold">
+            <h3 className="bottom-link text-white ml-10 text-xl cursor-pointer float-left hover:text-[#1A8B90] font-semibold" onClick={startRound}>
               <FaArrowLeft className="inline mr-2" />
               بدء الجولة
             </h3>
