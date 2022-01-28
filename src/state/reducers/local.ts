@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk, AppDispatch } from '../store';
 import { HYDRATE } from 'next-redux-wrapper';
+import { setGame } from './game';
+import { setPlayers } from './players';
+import { setRoom } from './room';
 
 const initialState: LocalState = {};
 
@@ -11,8 +14,8 @@ const localSlice = createSlice({
     setToken(state, action: PayloadAction<string>) {
       state.token = action.payload;
     },
-    setPlayer(state, action: PayloadAction<Player>) {
-      state.plr = action.payload;
+    setNickname(state, action: PayloadAction<string>) {
+      state.nickname = action.payload;
     },
   },
   extraReducers: {
@@ -26,13 +29,20 @@ const localSlice = createSlice({
   },
 });
 
-export const savePlayer =
-  (plr: Player): AppThunk =>
+export const saveNickname =
+  (nickname: string): AppThunk =>
   async (dispatch: AppDispatch) => {
-    localStorage.setItem('plr', JSON.stringify(plr));
-    dispatch(setPlayer(plr));
+    localStorage.setItem('nickname', nickname);
+    dispatch(setNickname(nickname));
   };
 
-export const { setToken, setPlayer } = localSlice.actions;
+export const resetData = (): AppThunk => async (dispatch: AppDispatch) => {
+  dispatch(setToken(''));
+  dispatch(setRoom({}));
+  dispatch(setGame({}));
+  dispatch(setPlayers({}));
+};
+
+export const { setToken, setNickname } = localSlice.actions;
 
 export default localSlice.reducer;

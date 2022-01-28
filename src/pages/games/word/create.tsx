@@ -1,9 +1,9 @@
-import { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { NextPage } from 'next';
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import {
   FaArrowLeft,
@@ -11,55 +11,55 @@ import {
   FaTimes,
   FaPlusSquare,
   FaRedoAlt,
-} from "react-icons/fa";
-import { createRoom, joinRoom } from "../../../api/rooms";
-import { setRoom } from "../../../state/reducers/room";
-import { useRouter } from "next/router";
-import { setToken } from "../../../state/reducers/local";
-import localPlayer from "../../../api/socket";
+} from 'react-icons/fa';
+import { createRoom, joinRoom } from '../../../api/rooms';
+import { setRoom } from '../../../state/reducers/room';
+import { useRouter } from 'next/router';
+import { setToken } from '../../../state/reducers/local';
+import localPlayer from '../../../api/socket';
 
 const DEFAULT_CATEGORIES_ARABIC = [
-  "ولد",
-  "بنت",
-  "حيوان",
-  "جماد",
-  "نبات",
-  "بلد",
-  "فيلم",
-  "حشرة",
-  "لون",
-  "مدينة",
+  'ولد',
+  'بنت',
+  'حيوان',
+  'جماد',
+  'نبات',
+  'بلد',
+  'فيلم',
+  'حشرة',
+  'لون',
+  'مدينة',
 ];
 
 const charsArabic: string[] = [
-  "أ",
-  "ب",
-  "ت",
-  "ث",
-  "ج",
-  "ح",
-  "خ",
-  "د",
-  "ذ",
-  "ر",
-  "ز",
-  "س",
-  "ش",
-  "ص",
-  "ض",
-  "ط",
-  "ظ",
-  "ع",
-  "غ",
-  "ف",
-  "ق",
-  "ك",
-  "ل",
-  "م",
-  "ن",
-  "هـ",
-  "و",
-  "ى",
+  'أ',
+  'ب',
+  'ت',
+  'ث',
+  'ج',
+  'ح',
+  'خ',
+  'د',
+  'ذ',
+  'ر',
+  'ز',
+  'س',
+  'ش',
+  'ص',
+  'ض',
+  'ط',
+  'ظ',
+  'ع',
+  'غ',
+  'ف',
+  'ق',
+  'ك',
+  'ل',
+  'م',
+  'ن',
+  'هـ',
+  'و',
+  'ى',
 ];
 
 const WordCreate: NextPage = () => {
@@ -68,7 +68,7 @@ const WordCreate: NextPage = () => {
   const [charsSelected, setCharsSelected] = useState<string[]>(
     charsArabic.slice(0, 8)
   );
-  const [newCategory, setNewCategory] = useState("");
+  const [newCategory, setNewCategory] = useState('');
   const [newCategoryError, setNewCategoryError] = useState<string | null>(null);
   const [maxPlayers, setMaxPlayers] = useState<number>(8);
   const [rounds, setRounds] = useState<number>(charsSelected.length);
@@ -93,18 +93,18 @@ const WordCreate: NextPage = () => {
   function addCategory(categoryName: string) {
     if (categoryName.length == 0) return;
     if (categoriesArabic.includes(categoryName))
-      return setNewCategoryError("لا يمكنك اضافة نفس الكلمة مرتين");
+      return setNewCategoryError('لا يمكنك اضافة نفس الكلمة مرتين');
     setCategories([...categoriesArabic, categoryName]);
-    setNewCategory("");
+    setNewCategory('');
     setNewCategoryError(null);
   }
 
-  let nickname = "User" + (Math.floor(Math.random() * 100) + 1);
-  if (typeof window !== "undefined") {
+  let nickname = 'User' + (Math.floor(Math.random() * 100) + 1);
+  if (typeof window !== 'undefined') {
     nickname =
-      localStorage.getItem("nickname") ||
-      "User" + (Math.floor(Math.random() * 100) + 1);
-    localStorage.setItem("nickname", nickname);
+      localStorage.getItem('nickname') ||
+      'User' + (Math.floor(Math.random() * 100) + 1);
+    localStorage.setItem('nickname', nickname);
   }
 
   async function makeRoom() {
@@ -143,8 +143,8 @@ const WordCreate: NextPage = () => {
                     key={charsArabic.indexOf(char)}
                     onClick={() => charClick(char)}
                     className={
-                      "py-2 px-3 text-lg m-2 bg-white cursor-pointer rounded-full font-semibold flex justify-center items-center shadow-[0_4px_8px_0_rgba(0,0,0,0.3)] transition-colors hover:bg-primary hover:text-white w-10 " +
-                      (charsSelected.includes(char) ? "active" : "")
+                      'py-2 px-3 text-lg m-2 bg-white cursor-pointer rounded-full font-semibold flex justify-center items-center shadow-[0_4px_8px_0_rgba(0,0,0,0.3)] transition-colors hover:bg-primary hover:text-white w-10 ' +
+                      (charsSelected.includes(char) ? 'active' : '')
                     }
                   >
                     {char}
@@ -171,7 +171,7 @@ const WordCreate: NextPage = () => {
                       <FaTimes
                         className="absolute -top-1 -right-1 bg-[#f00] text-white text-[1.6rem] rounded-3xl p-1 cursor-pointer"
                         onClick={() => deleteCategory(category)}
-                      ></FaTimes>
+                      />
                       {category}
                     </div>
                   );

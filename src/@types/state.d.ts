@@ -1,4 +1,4 @@
 interface LocalState {
   token?: string;
-  plr?: Player;
+  nickname?: string;
 }

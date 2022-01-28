@@ -26,13 +26,6 @@ interface AuthenticateRequest {
   authToken: string;
 }
 
-enum State {
-  LOBBY,
-  VOTING,
-  INGAME,
-  WAITING, //used in between rounds
-}
-
 interface GameSync {
   id?: string;
   owner?: string;
@@ -66,7 +59,7 @@ interface CategoryVoteData {
 }
 
 interface ChatMessage {
-  type: "system" | "player";
+  type: 'system' | 'player';
   sender: string;
   message: string;
 }
