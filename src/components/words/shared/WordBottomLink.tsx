@@ -14,7 +14,7 @@ const WordBottomLink: React.FC<WordBottomLinkProps> = ({
   return (
     <h3
       className={
-        'bottom-link text-white ml-10 text-xl float-left font-semibold ' +
+        'bottom-link text-white ml-10 text-xl float-left font-bold ' +
         (!disabled ? 'hover:text-[#1A8B90] cursor-pointer' : '')
       }
       onClick={!disabled ? onClick : undefined}

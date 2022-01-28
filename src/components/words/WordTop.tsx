@@ -31,34 +31,36 @@ const WordTop: React.FC<WordTopProps> = ({
     }
     dispatch(resetData());
 
-    router.replace(`/games/word/create`);
+    router.replace(`/games/word`);
   }
 
   return (
     <div className="top-info relative">
-      <div className="icons absolute bottom-2 left-12">
+      <Image src="/wordlogo.svg" width="85" height="85" alt="logo" />
+
+      <div className="icons xs:my-4 sm:absolute bottom-3 left-12">
         <FaSignOutAlt
           onClick={pageLeaveRoom}
-          className="inline text-4xl mr-3 text-[#f00] bg-[#a0f3c0] rounded-full p-2 cursor-pointer"
+          className="inline text-[38px] mr-6 text-[#f00] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#f00] hover:text-white"
         />
         {game.owner == nickname && game.state == State.LOBBY ? (
-          <FaCog className="inline text-4xl mr-3 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer" />
+          <FaCog className="inline text-[38px] mr-6 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white" />
         ) : null}
         {!hideShare && (
           <FaShareAlt
-            className="inline text-4xl mr-3 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer"
+            className="inline text-[38px] mr-6 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
             onClick={() =>
               navigator.clipboard.writeText(`${HOST_TEMP}/games/word/${roomId}`)
             }
           />
         )}
       </div>
-      <Image src="/wordlogo.svg" width="85" height="85" alt="logo" />
+
       {!hideRounds && (
-        <h2 className="rounds absolute text-3xl right-8 bottom-0">
-          الجولة <span className="game-rounds">{room.options?.rounds}</span>
-          <span className="current-round text-[#1a8c90]">
-            /{game.currentRound}
+        <h2 className="rounds sm:absolute text-3xl right-8 bottom-3 font-bold">
+          الجولة&nbsp;&nbsp; <span className="game-rounds">{room.options?.rounds}</span>
+          /<span className="current-round text-[#1a8c90]">
+            {game.currentRound}
           </span>
         </h2>
       )}

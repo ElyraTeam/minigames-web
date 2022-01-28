@@ -27,6 +27,7 @@ const WordGamePage: NextPage = () => {
   const [isTimerRunning, setTimerRunning] = useState(false);
   const [countdown, setCountdown] = useState<number>(0);
   const [kickMessage, setKicked] = useState<string>('');
+  const [lobbyPage, setLobbyPage] = useState<boolean>(true);
 
   let nickname = 'User' + (Math.floor(Math.random() * 100) + 1);
   if (typeof window !== 'undefined') {
@@ -118,10 +119,13 @@ const WordGamePage: NextPage = () => {
     );
   } else if (isTimerRunning) {
     content = <WordTimer countdown={countdown} />;
+    setLobbyPage(false);
   } else if (isLoading) {
     content = <Spinner />;
+    setLobbyPage(false);
   } else if (game.state == State.INGAME) {
     content = <WordGame messages={messages} />;
+    setLobbyPage(false);
   }
 
   const isOwner = game.owner == nickname;
@@ -133,7 +137,7 @@ const WordGamePage: NextPage = () => {
       </Head>
 
       <WordBackground>
-        <div className="main-content-box bg-light sm:px-8 pb-5 pt-3 rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] w-[900px] self-center h-[575px]">
+        <div className="main-content-box bg-light sm:px-8 pb-5 pt-3 sm:rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] w-[100%] sm:w-[630px] md:w-[770px] lg:w-[900px] self-center">
           <div>
             <WordTop
               nickname={nickname}
@@ -143,7 +147,7 @@ const WordGamePage: NextPage = () => {
 
             <div
               className={
-                'content-box bg-dark relative rounded-2xl mb-5 mt-3 mx-5 h-full' +
+                'content-box bg-dark relative rounded-2xl mb-5 mt-3 mx-5 h-[384px] ' + (lobbyPage ? "" : "lg:flex") + ' lg:items-center lg:pb-0' +
                 (game.state == State.INGAME || wasKicked
                   ? ''
                   : ' lg:px-8 md:px-8 py-6 scrollbar overflow-y-scroll')
@@ -158,6 +162,10 @@ const WordGamePage: NextPage = () => {
                 disabled={!isOwner}
                 label={isOwner ? 'بدء الجولة' : 'في انتظار منشئ الغرفة'}
               />
+            )}
+
+            {game.state == State.INGAME && (
+              <button className='finish-button bg-[#1a8b90] hover:bg-[#12595c] text-white py-2 px-5 rounded-3xl' onClick={finishRound}>!انتهيت</button>
             )}
           </div>
         </div>

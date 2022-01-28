@@ -1,7 +1,7 @@
-interface SpinnerProps {}
+interface SpinnerProps { }
 
-const Spinner: React.FC<SpinnerProps> = ({}) => {
-  return <div className="loader" />;
+const Spinner: React.FC<SpinnerProps> = ({ }) => {
+  return <div className="loader" />
 };
 
 export default Spinner;

@@ -11,6 +11,7 @@ import {
   FaTimes,
   FaPlusSquare,
   FaRedoAlt,
+  FaCheckCircle,
 } from 'react-icons/fa';
 import { createRoom, joinRoom } from '../../../api/rooms';
 import { setRoom } from '../../../state/reducers/room';
@@ -81,6 +82,10 @@ const WordCreate: NextPage = () => {
     }
   }
 
+  function selectAllChars() {
+    setCharsSelected([...charsArabic]);
+  }
+
   function deleteCategory(categoryName: string) {
     if (categoriesArabic.length === 3) return;
     setCategories(categoriesArabic.filter((cat) => cat != categoryName));
@@ -90,10 +95,14 @@ const WordCreate: NextPage = () => {
     setCategories(DEFAULT_CATEGORIES_ARABIC);
   }
 
-  function addCategory(categoryName: string) {
+  function addCategory(categoryName: string, key?: string) {
     if (categoryName.length == 0) return;
+    if (key) {
+      if (key !== 'Enter') return;
+    }
     if (categoriesArabic.includes(categoryName))
       return setNewCategoryError('لا يمكنك اضافة نفس الكلمة مرتين');
+
     setCategories([...categoriesArabic, categoryName]);
     setNewCategory('');
     setNewCategoryError(null);
@@ -127,14 +136,20 @@ const WordCreate: NextPage = () => {
 
       <div className="bg-[url('../../public/wordbackground.svg')] bg-cover z-0 fixed top-0 left-0 w-full h-full"></div>
 
-      <div className="main-content-box absolute bg-light sm:px-8 pb-5 pt-3 rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] max-w-4xl ">
-        <Image src="/wordlogo.svg" width="85" height="85" alt="logo" />
+      <div className="main-content-box relative bg-light sm:px-8 pb-5 pt-3 sm:rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] max-w-[900px] ">
+        <Link href="/"><Image src="/wordlogo.svg" width="85" height="85" alt="logo" /></Link>
 
         <div className="content-box bg-dark lg:px-8 md:px-8 py-8 rounded-2xl mb-5 mt-3 mx-5 scrollbar overflow-y-scroll max-h-96">
           <div className="choose-chars overflow-hidden">
-            <h2 className="mb-5 text-white text-2xl font-semibold">الحروف</h2>
+            <h2 className="mb-5 text-white text-2xl font-semibold">
+              الحروف
+              <FaCheckCircle
+                className="inline ml-2 bg-[#92E4AB] p-1 text-[#4caf50] rounded-full cursor-pointer text-3xl"
+                onClick={selectAllChars}
+              />
+            </h2>
             <div
-              className="chars grid lg:grid-cols-12 md:grid-cols-10 grid-cols-6"
+              className="chars flex flex-wrap xs:justify-center"
               dir="rtl"
             >
               {charsArabic.map((char, i) => {
@@ -143,7 +158,7 @@ const WordCreate: NextPage = () => {
                     key={charsArabic.indexOf(char)}
                     onClick={() => charClick(char)}
                     className={
-                      'py-2 px-3 text-lg m-2 bg-white cursor-pointer rounded-full font-semibold flex justify-center items-center shadow-[0_4px_8px_0_rgba(0,0,0,0.3)] transition-colors hover:bg-primary hover:text-white w-10 ' +
+                      'py-2 px-3 text-lg m-2 bg-white cursor-pointer rounded-full font-semibold flex justify-center items-center shadow-[0_4px_8px_0_rgba(0,0,0,0.3)] transition-colors w-10 ' +
                       (charsSelected.includes(char) ? 'active' : '')
                     }
                   >
@@ -177,6 +192,13 @@ const WordCreate: NextPage = () => {
                   );
                 })}
               </div>
+
+              {newCategoryError && (
+                <p className="text-[#f00] mt-4 font-semibold">
+                  {newCategoryError}
+                </p>
+              )}
+
               <div className="add-category mt-8 relative inline-block text-white">
                 <input
                   type="text"
@@ -184,6 +206,7 @@ const WordCreate: NextPage = () => {
                   className="bg-transparent border-0 border-b-2 border-b-[#eee] p-2 text-right text-white placeholder:text-white focus:outline-none text-lg focus:border-b-light transition-[border]"
                   maxLength={15}
                   value={newCategory}
+                  onKeyPress={(e) => addCategory(newCategory, e.key)}
                   onChange={(input) => setNewCategory(input.target.value)}
                 />
                 <FaPlusSquare
@@ -191,11 +214,6 @@ const WordCreate: NextPage = () => {
                   onClick={() => addCategory(newCategory)}
                 />
               </div>
-              {newCategoryError && (
-                <p className="text-[#f00] mt-4 font-semibold">
-                  {newCategoryError}
-                </p>
-              )}
             </div>
           </div>
           <div className="choose-categories mt-16">
@@ -247,12 +265,12 @@ const WordCreate: NextPage = () => {
         </div>
 
         <Link href="/">
-          <h3 className="text-white mr-10 text-xl cursor-pointer float-right hover:text-black font-semibold">
+          <h3 className="text-white mr-10 text-xl cursor-pointer float-right hover:text-[#1A8B90] font-semibold">
             الرئيسية <FaArrowRight className="inline ml-2" />
           </h3>
         </Link>
         <h3
-          className="text-white ml-10 text-xl cursor-pointer float-left hover:text-black font-semibold"
+          className="text-white ml-10 text-xl cursor-pointer float-left hover:text-[#1A8B90] font-semibold"
           onClick={makeRoom}
         >
           <FaArrowLeft className="inline mr-2" />

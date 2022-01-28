@@ -13,6 +13,12 @@
       width: 15px;
     }
 
+    @media (max-width: 639px) {
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+    }
+
     &::-webkit-scrollbar-track {
       background: none;
     }

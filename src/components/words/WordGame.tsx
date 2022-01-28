@@ -7,7 +7,7 @@ interface WordGameProps {
 
 const WordGame: React.FC<WordGameProps> = ({ messages }) => {
   return (
-    <div className="game-board-main h-80 flex relative">
+    <div className="game-board-main h-[384px] flex relative">
       <WordChat messages={messages} />
       <WordGameBoard />
     </div>
