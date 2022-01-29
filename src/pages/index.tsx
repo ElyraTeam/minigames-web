@@ -1,7 +1,7 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import Link from 'next/link';
-import { APP_NAME } from '../config/constants';
+import type { NextPage } from "next";
+import Head from "next/head";
+import Link from "next/link";
+import { APP_NAME } from "../config/constants";
 
 const Home: NextPage = () => {
   return (
@@ -11,7 +11,7 @@ const Home: NextPage = () => {
       </Head>
 
       <h2>Homepage</h2>
-      <Link href="/games/word">
+      <Link href="/games/getstarted">
         <p className="text-primary cursor-pointer">Word Game</p>
       </Link>
     </div>

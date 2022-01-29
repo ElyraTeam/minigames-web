@@ -6,7 +6,9 @@ import { setPlayers } from "./players";
 import { setRoom } from "./room";
 import { setChat } from "./chat";
 
-const initialState: LocalState = {};
+const initialState: LocalState = {
+  nickname: "User" + (Math.floor(Math.random() * 100) + 1),
+};
 
 const localSlice = createSlice({
   name: "local",
@@ -17,6 +19,9 @@ const localSlice = createSlice({
     },
     setNickname(state, action: PayloadAction<string>) {
       state.nickname = action.payload;
+      if (typeof window !== "undefined") {
+        localStorage.setItem("nickname", action.payload);
+      }
     },
   },
   extraReducers: {

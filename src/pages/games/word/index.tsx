@@ -1,10 +1,12 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import Head from 'next/head';
-import type { NextPage } from 'next';
-import { APP_NAME } from '../../../config/constants';
+import Image from "next/image";
+import Link from "next/link";
+import Head from "next/head";
+import type { NextPage } from "next";
+import { APP_NAME } from "../../../config/constants";
+import { useAppSelector } from "../../../state/hooks";
 
 const Word: NextPage = () => {
+  const nickname = useAppSelector((state) => state.localSlice.nickname);
   return (
     <div className="word-main pt-8 h-screen text-white">
       <Head>
@@ -24,7 +26,7 @@ const Word: NextPage = () => {
             />
           </Link>
           <h2 className="text-5xl mb-10 mt-5">
-            ! مرحبا <span className="text-primary">جاست</span>
+            ! مرحبا <span className="text-primary">{nickname}</span>
           </h2>
           <p className="text-2xl leading-10">
             لعبة "كلمة" هي نسخة الكترونية للعبة القديمة والممتعة التي لعبناها

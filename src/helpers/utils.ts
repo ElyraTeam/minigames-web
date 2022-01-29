@@ -1,9 +1,9 @@
 export const openInNewTab = (url: string): void => {
-  const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+  const newWindow = window.open(url, "_blank", "noopener,noreferrer");
   if (newWindow) newWindow.opener = null;
 };
 
-export const shuffle = (array: any[]) => {
+export const shuffle = <T>(array: T[]): T[] => {
   let currentIndex = array.length,
     randomIndex;
 

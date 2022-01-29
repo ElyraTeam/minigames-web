@@ -1,21 +1,21 @@
-import { NextPage } from 'next';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { joinRoom } from '../../../api/rooms';
-import localPlayer from '../../../api/socket';
-import Spinner from '../../../components/shared/Spinner';
-import WordLobby from '../../../components/words/WordLobby';
-import WordBackground from '../../../components/words/shared/WordBackground';
-import { useAppDispatch, useAppSelector } from '../../../state/hooks';
-import { resetData, setToken } from '../../../state/reducers/local';
-import { setRoom } from '../../../state/reducers/room';
-import WordTimer from '../../../components/words/WordTimer';
-import WordBottomLink from '../../../components/words/shared/WordBottomLink';
-import WordTop from '../../../components/words/WordTop';
-import WordGame from '../../../components/words/WordGame';
-import { State } from '../../../models/game';
-import { addChatMessage } from '../../../state/reducers/chat';
+import { NextPage } from "next";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { joinRoom } from "../../../api/rooms";
+import localPlayer from "../../../api/socket";
+import Spinner from "../../../components/shared/Spinner";
+import WordLobby from "../../../components/words/WordLobby";
+import WordBackground from "../../../components/words/shared/WordBackground";
+import { useAppDispatch, useAppSelector } from "../../../state/hooks";
+import { resetData, setToken } from "../../../state/reducers/local";
+import { setRoom } from "../../../state/reducers/room";
+import WordTimer from "../../../components/words/WordTimer";
+import WordBottomLink from "../../../components/words/shared/WordBottomLink";
+import WordTop from "../../../components/words/WordTop";
+import WordGame from "../../../components/words/WordGame";
+import { State } from "../../../models/game";
+import { addChatMessage } from "../../../state/reducers/chat";
 
 const WordGamePage: NextPage = () => {
   const router = useRouter();
@@ -25,15 +25,8 @@ const WordGamePage: NextPage = () => {
   const [isLoading, setLoading] = useState(false);
   const [isTimerRunning, setTimerRunning] = useState(false);
   const [countdown, setCountdown] = useState<number>(0);
-  const [lobbyMessage, setLobbyMessage] = useState<string>('');
-
-  let nickname = 'User' + (Math.floor(Math.random() * 100) + 1);
-  if (typeof window !== 'undefined') {
-    nickname =
-      localStorage.getItem('nickname') ||
-      'User' + (Math.floor(Math.random() * 100) + 1);
-    localStorage.setItem('nickname', nickname);
-  }
+  const [lobbyMessage, setLobbyMessage] = useState<string>("");
+  const nickname = useAppSelector((state) => state.localSlice.nickname)!;
 
   useEffect(() => {
     if (countdown != 0) {
@@ -44,7 +37,7 @@ const WordGamePage: NextPage = () => {
   }, [countdown]);
 
   //join room
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     useEffect(() => {
       if (id) {
         joinRoom(nickname, id as string).then(
@@ -80,7 +73,7 @@ const WordGamePage: NextPage = () => {
                   nickname,
                 },
                 (res) => {
-                  if (res === 'good') {
+                  if (res === "good") {
                     setLoading(false);
                   } else {
                     //TODO: show error
@@ -92,7 +85,7 @@ const WordGamePage: NextPage = () => {
             if (localPlayer.socket.connected) {
               doAuth();
             } else {
-              localPlayer.socket.on('connect', doAuth);
+              localPlayer.socket.on("connect", doAuth);
             }
           }
         );
@@ -113,7 +106,7 @@ const WordGamePage: NextPage = () => {
   }
 
   let content = undefined;
-  const showLobbyMessage = lobbyMessage != '';
+  const showLobbyMessage = lobbyMessage != "";
   const isInLobby = !isTimerRunning && !isLoading && game.state != State.INGAME;
 
   if (showLobbyMessage) {
@@ -151,12 +144,12 @@ const WordGamePage: NextPage = () => {
 
             <div
               className={
-                'content-box bg-dark relative rounded-2xl mb-5 mt-3 mx-5 h-[384px] ' +
-                (isInLobby ? '' : 'lg:flex') +
-                ' lg:items-center lg:pb-0' +
+                "content-box bg-dark relative rounded-2xl mb-5 mt-3 mx-5 h-[384px] " +
+                (isInLobby ? "" : "lg:flex") +
+                " lg:items-center lg:pb-0" +
                 (game.state == State.INGAME || showLobbyMessage
-                  ? ''
-                  : ' pr-4 scrollbar overflow-y-scroll')
+                  ? ""
+                  : " pr-4 scrollbar overflow-y-scroll")
               }
             >
               {content}
@@ -166,7 +159,7 @@ const WordGamePage: NextPage = () => {
               <WordBottomLink
                 onClick={() => localPlayer.startRound()}
                 disabled={!isOwner}
-                label={isOwner ? 'بدء الجولة' : 'في انتظار منشئ الغرفة'}
+                label={isOwner ? "بدء الجولة" : "في انتظار منشئ الغرفة"}
               />
             )}
 
