@@ -1,11 +1,12 @@
-import Image from "next/image";
-import router, { useRouter } from "next/router";
-import { FaSignOutAlt, FaCog, FaShareAlt } from "react-icons/fa";
-import { leaveRoom } from "../../api/rooms";
-import { HOST_TEMP } from "../../config/constants";
-import { State } from "../../models/game";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
-import { resetData } from "../../state/reducers/local";
+import Image from 'next/image';
+import router, { useRouter } from 'next/router';
+import { FaSignOutAlt, FaCog, FaShareAlt } from 'react-icons/fa';
+import { leaveRoom } from '../../api/rooms';
+import { HOST_TEMP } from '../../config/constants';
+import { State } from '../../models/game';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { resetData } from '../../state/reducers/local';
+import WordLogo from './shared/WordLogo';
 
 interface WordTopProps {
   nickname: string;
@@ -36,7 +37,7 @@ const WordTop: React.FC<WordTopProps> = ({
 
   return (
     <div className="top-info relative">
-      <Image src="/wordlogo.svg" width="85" height="85" alt="logo" />
+      <WordLogo />
 
       <div className="icons xs:my-4 sm:absolute bottom-3 left-12">
         <FaSignOutAlt
@@ -58,7 +59,7 @@ const WordTop: React.FC<WordTopProps> = ({
 
       {!hideRounds && (
         <h2 className="rounds sm:absolute text-3xl right-8 bottom-3 font-bold">
-          الجولة&nbsp;&nbsp;{" "}
+          الجولة&nbsp;&nbsp;{' '}
           <span className="game-rounds">{room.options?.rounds}</span>/
           <span className="current-round text-[#1a8c90]">
             {game.currentRound}

@@ -83,7 +83,11 @@ const WordCreate: NextPage = () => {
   }
 
   function selectAllChars() {
-    setCharsSelected([...charsArabic]);
+    if (charsArabic.length == charsSelected.length) {
+      setCharsSelected([...charsArabic.slice(0, 8)]);
+    } else {
+      setCharsSelected([...charsArabic]);
+    }
   }
 
   function deleteCategory(categoryName: string) {
@@ -137,7 +141,9 @@ const WordCreate: NextPage = () => {
       <div className="bg-[url('../../public/wordbackground.svg')] bg-cover z-0 fixed top-0 left-0 w-full h-full"></div>
 
       <div className="main-content-box relative bg-light sm:px-8 pb-5 pt-3 sm:rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] max-w-[900px] ">
-        <Link href="/"><Image src="/wordlogo.svg" width="85" height="85" alt="logo" /></Link>
+        <Link href="/">
+          <Image src="/wordlogo.svg" width="85" height="85" alt="logo" />
+        </Link>
 
         <div className="content-box bg-dark lg:px-8 md:px-8 py-8 rounded-2xl mb-5 mt-3 mx-5 scrollbar overflow-y-scroll max-h-96">
           <div className="choose-chars overflow-hidden">
@@ -148,10 +154,7 @@ const WordCreate: NextPage = () => {
                 onClick={selectAllChars}
               />
             </h2>
-            <div
-              className="chars flex flex-wrap xs:justify-center"
-              dir="rtl"
-            >
+            <div className="chars flex flex-wrap xs:justify-center" dir="rtl">
               {charsArabic.map((char, i) => {
                 return (
                   <div
@@ -264,7 +267,7 @@ const WordCreate: NextPage = () => {
           </div>
         </div>
 
-        <Link href="/">
+        <Link href="/games/word">
           <h3 className="text-white mr-10 text-xl cursor-pointer float-right hover:text-[#1A8B90] font-semibold">
             الرئيسية <FaArrowRight className="inline ml-2" />
           </h3>

@@ -2,12 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 import type { NextPage } from 'next';
+import { APP_NAME } from '../../../config/constants';
 
 const Word: NextPage = () => {
   return (
     <div className="word-main pt-8 h-screen text-white">
       <Head>
-        <title>BianMinis - Word</title>
+        <title>{APP_NAME} - Word</title>
       </Head>
 
       <div className="bg-[url('../../public/wordbackground.svg')] bg-cover fixed top-0 left-0 w-full h-full"></div>
