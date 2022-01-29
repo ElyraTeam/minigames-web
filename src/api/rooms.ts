@@ -5,6 +5,7 @@ const client = axios.create({
   baseURL: HOST,
   responseType: "json",
   withCredentials: true,
+  validateStatus: (s) => true,
 });
 
 export const createRoom = async (

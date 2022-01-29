@@ -1,40 +1,39 @@
-import { NextPage } from 'next';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { joinRoom } from '../../../api/rooms';
-import localPlayer from '../../../api/socket';
-import Spinner from '../../../components/shared/Spinner';
-import WordLobby from '../../../components/words/WordLobby';
-import WordBackground from '../../../components/words/shared/WordBackground';
-import { useAppDispatch, useAppSelector } from '../../../state/hooks';
-import { resetData, setToken } from '../../../state/reducers/local';
-import { setRoom } from '../../../state/reducers/room';
-import WordTimer from '../../../components/words/WordTimer';
-import WordBottomLink from '../../../components/words/shared/WordBottomLink';
-import WordTop from '../../../components/words/WordTop';
-import WordGame from '../../../components/words/WordGame';
-import { State } from '../../../models/game';
+import { NextPage } from "next";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { joinRoom } from "../../../api/rooms";
+import localPlayer from "../../../api/socket";
+import Spinner from "../../../components/shared/Spinner";
+import WordLobby from "../../../components/words/WordLobby";
+import WordBackground from "../../../components/words/shared/WordBackground";
+import { useAppDispatch, useAppSelector } from "../../../state/hooks";
+import { resetData, setToken } from "../../../state/reducers/local";
+import { setRoom } from "../../../state/reducers/room";
+import WordTimer from "../../../components/words/WordTimer";
+import WordBottomLink from "../../../components/words/shared/WordBottomLink";
+import WordTop from "../../../components/words/WordTop";
+import WordGame from "../../../components/words/WordGame";
+import { State } from "../../../models/game";
+import { addChatMessage } from "../../../state/reducers/chat";
 
 const WordGamePage: NextPage = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { id } = router.query;
   const game = useAppSelector((state) => state.gameSlice);
-  const room = useAppSelector((state) => state.roomSlice);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const messages = useAppSelector((state) => state.chatSlice);
   const [isLoading, setLoading] = useState(false);
   const [isTimerRunning, setTimerRunning] = useState(false);
   const [countdown, setCountdown] = useState<number>(0);
-  const [kickMessage, setKicked] = useState<string>('');
-  const [lobbyPage, setLobbyPage] = useState<boolean>(true);
+  const [lobbyMessage, setLobbyMessage] = useState<string>("");
 
-  let nickname = 'User' + (Math.floor(Math.random() * 100) + 1);
-  if (typeof window !== 'undefined') {
+  let nickname = "User" + (Math.floor(Math.random() * 100) + 1);
+  if (typeof window !== "undefined") {
     nickname =
-      localStorage.getItem('nickname') ||
-      'User' + (Math.floor(Math.random() * 100) + 1);
-    localStorage.setItem('nickname', nickname);
+      localStorage.getItem("nickname") ||
+      "User" + (Math.floor(Math.random() * 100) + 1);
+    localStorage.setItem("nickname", nickname);
   }
 
   useEffect(() => {
@@ -46,53 +45,58 @@ const WordGamePage: NextPage = () => {
   }, [countdown]);
 
   //join room
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     useEffect(() => {
       if (id) {
-        joinRoom(nickname, id as string).then(({ authToken, roomOptions }) => {
-          if (!authToken) return; // TODO: show error
-          dispatch(setToken(authToken));
-          dispatch(setRoom({ id: id as string, options: roomOptions }));
+        joinRoom(nickname, id as string).then(
+          ({ authToken, roomOptions, error }) => {
+            if (!authToken && error) {
+              setLobbyMessage(error);
+              return;
+            }
+            dispatch(setToken(authToken!));
+            dispatch(setRoom({ id: id as string, options: roomOptions }));
 
-          localPlayer.onChat((msg) => {
-            setMessages([...messages, msg]);
-          });
+            localPlayer.onChat((msg) => {
+              dispatch(addChatMessage(msg));
+            });
 
-          localPlayer.onKick((kickMsg) => {
-            dispatch(resetData());
-            setKicked(kickMsg);
-          });
+            localPlayer.onKick((kickMsg) => {
+              dispatch(resetData());
+              setLobbyMessage(kickMsg);
+            });
 
-          localPlayer.onStartTimer((countdown) => {
-            setTimerRunning(true);
-            setCountdown(countdown);
-          });
+            localPlayer.onStartTimer((countdown) => {
+              setTimerRunning(true);
+              setCountdown(countdown);
+            });
 
-          localPlayer.socket.connect();
+            localPlayer.socket.connect();
 
-          const doAuth = () => {
-            localPlayer.authenticate(
-              {
-                authToken,
-                roomId: id as string,
-                nickname,
-              },
-              (res) => {
-                if (res === 'good') {
-                  setLoading(false);
-                } else {
-                  //TODO: show error
+            const doAuth = () => {
+              localPlayer.authenticate(
+                {
+                  authToken: authToken!,
+                  roomId: id as string,
+                  nickname,
+                },
+                (res) => {
+                  if (res === "good") {
+                    setLoading(false);
+                  } else {
+                    //TODO: show error
+                  }
                 }
-              }
-            );
-          };
+              );
+            };
 
-          if (localPlayer.socket.connected) {
-            doAuth();
-          } else {
-            localPlayer.socket.on('connect', doAuth);
+            if (localPlayer.socket.connected) {
+              doAuth();
+            } else {
+              localPlayer.socket.on("connect", doAuth);
+            }
           }
-        });
+        );
       }
       return () => localPlayer.offAll();
     }, [id]);
@@ -109,23 +113,24 @@ const WordGamePage: NextPage = () => {
     localPlayer.finishRound();
   }
 
-  let content = <WordLobby nickname={nickname} />;
-  const wasKicked = kickMessage != '';
+  let content = undefined;
+  const showLobbyMessage = lobbyMessage != "";
   const isInLobby = !isTimerRunning && !isLoading && game.state != State.INGAME;
 
-  if (wasKicked) {
+  if (showLobbyMessage) {
     content = (
-      <p className="text-lg font-bold text-center p-12">{kickMessage}</p>
+      <p className="text-xl font-bold text-center p-12 h-full flex items-center justify-center">
+        {lobbyMessage}
+      </p>
     );
   } else if (isTimerRunning) {
     content = <WordTimer countdown={countdown} />;
-    setLobbyPage(false);
   } else if (isLoading) {
     content = <Spinner />;
-    setLobbyPage(false);
   } else if (game.state == State.INGAME) {
     content = <WordGame messages={messages} />;
-    setLobbyPage(false);
+  } else {
+    content = <WordLobby nickname={nickname} />;
   }
 
   const isOwner = game.owner == nickname;
@@ -141,31 +146,38 @@ const WordGamePage: NextPage = () => {
           <div>
             <WordTop
               nickname={nickname}
-              hideRounds={wasKicked}
-              hideShare={wasKicked}
+              hideRounds={showLobbyMessage}
+              hideShare={showLobbyMessage}
             />
 
             <div
               className={
-                'content-box bg-dark relative rounded-2xl mb-5 mt-3 mx-5 h-[384px] ' + (lobbyPage ? "" : "lg:flex") + ' lg:items-center lg:pb-0' +
-                (game.state == State.INGAME || wasKicked
-                  ? ''
-                  : ' lg:px-8 md:px-8 py-6 scrollbar overflow-y-scroll')
+                "content-box bg-dark relative rounded-2xl mb-5 mt-3 mx-5 h-[384px] " +
+                (isInLobby ? "" : "lg:flex") +
+                " lg:items-center lg:pb-0" +
+                (game.state == State.INGAME || showLobbyMessage
+                  ? ""
+                  : " lg:px-8 md:px-8 scrollbar overflow-y-scroll")
               }
             >
               {content}
             </div>
 
-            {isInLobby && !wasKicked && (
+            {isInLobby && !showLobbyMessage && (
               <WordBottomLink
                 onClick={() => localPlayer.startRound()}
                 disabled={!isOwner}
-                label={isOwner ? 'بدء الجولة' : 'في انتظار منشئ الغرفة'}
+                label={isOwner ? "بدء الجولة" : "في انتظار منشئ الغرفة"}
               />
             )}
 
-            {game.state == State.INGAME && (
-              <button className='finish-button bg-[#1a8b90] hover:bg-[#12595c] text-white py-2 px-5 rounded-3xl' onClick={finishRound}>!انتهيت</button>
+            {game.state == State.INGAME && !isTimerRunning && (
+              <button
+                className="finish-button bg-[#1a8b90] hover:bg-[#12595c] text-white py-2 px-5 rounded-3xl"
+                onClick={finishRound}
+              >
+                !انتهيت
+              </button>
             )}
           </div>
         </div>

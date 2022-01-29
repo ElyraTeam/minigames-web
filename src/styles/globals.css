@@ -33,6 +33,31 @@
     }
   }
 
+  .scrollbar-thin {
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    @media (max-width: 639px) {
+      &::-webkit-scrollbar {
+        width: 2px;
+      }
+    }
+
+    &::-webkit-scrollbar-track {
+      background: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #1a8b90;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #146b6e;
+    }
+  }
+
   .loader {
     display: inline-block;
     position: relative;
@@ -70,7 +95,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'cairo', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+  font-family: "cairo", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 

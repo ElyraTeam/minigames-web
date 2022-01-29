@@ -1,5 +1,5 @@
-import WordChat from './WordChat';
-import WordGameBoard from './WordGameBoard';
+import WordChat from "./WordChat";
+import WordGameBoard from "./WordGameBoard";
 
 interface WordGameProps {
   messages: ChatMessage[];
