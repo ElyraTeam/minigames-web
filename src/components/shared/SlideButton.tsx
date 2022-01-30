@@ -45,7 +45,7 @@ const SlideButton: React.FC<SlideButtonProps> = ({
         <input
           className="focus:outline-none border-2 border-transparent focus:border-light rounded-2xl px-4 shadow-[0_2px_8px_0_rgba(0,0,0,0.35)] w-full h-full"
           type="text"
-          value={initialValue}
+          defaultValue={initialValue}
           placeholder={placeholderLabel}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}

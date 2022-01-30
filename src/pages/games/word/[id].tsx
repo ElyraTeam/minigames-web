@@ -105,9 +105,9 @@ const WordGamePage: NextPage = () => {
     localPlayer.finishRound();
   }
 
-  let content = undefined;
+  let content = <Spinner />;
   const showLobbyMessage = lobbyMessage != "";
-  const isInLobby = !isTimerRunning && !isLoading && game.state != State.INGAME;
+  const isInLobby = !isTimerRunning && !isLoading && game.state == State.LOBBY;
 
   if (showLobbyMessage) {
     content = (
@@ -119,6 +119,12 @@ const WordGamePage: NextPage = () => {
     content = <WordTimer countdown={countdown} />;
   } else if (game.state == State.INGAME) {
     content = <WordGame />;
+  } else if (game.state == State.WAITING) {
+    //TODO: waiting page (someone finished)
+  } else if (game.state == State.VOTING) {
+    //TODO: voting page
+  } else if (isLoading) {
+    content = <Spinner />;
   } else {
     content = <WordLobby nickname={nickname} />;
   }

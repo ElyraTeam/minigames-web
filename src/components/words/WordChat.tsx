@@ -1,23 +1,23 @@
-import { useState } from 'react';
-import { MdSend } from 'react-icons/md';
-import localPlayer from '../../api/socket';
-import { useAppSelector } from '../../state/hooks';
+import { useState } from "react";
+import { MdSend } from "react-icons/md";
+import localPlayer from "../../api/socket";
+import { useAppSelector } from "../../state/hooks";
 
-interface WordChatProps { }
+interface WordChatProps {}
 
-const WordChat: React.FC<WordChatProps> = ({ }) => {
+const WordChat: React.FC<WordChatProps> = ({}) => {
   const messages = useAppSelector((state) => state.chatSlice);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   function sendMessage(msg: string, key?: string) {
-    if (msg === '' || msg === ' ') return;
+    if (msg === "" || msg === " ") return;
     if (key) {
-      if (key !== 'Enter') return;
+      if (key !== "Enter") return;
     }
 
     localPlayer.chat(msg);
 
-    setMessage('');
+    setMessage("");
   }
 
   return (
@@ -26,7 +26,7 @@ const WordChat: React.FC<WordChatProps> = ({ }) => {
         {messages.map((msg, i) => (
           <div className="message-cont text-right my-1 mx-2" key={i}>
             <p className="sender text-[#5ee494]">
-              {msg.type == 'player' ? msg.sender : 'System'}
+              {msg.type == "player" ? msg.sender : "System"}
             </p>
             <p className="message break-words">{msg.message}</p>
           </div>

@@ -32,6 +32,7 @@ interface GameSync {
   state?: State;
   currentRound?: number;
   currentLetter?: string;
+  stopClicker?: string;
 }
 
 interface GameOptionsSync {
@@ -59,7 +60,7 @@ interface CategoryVoteData {
 }
 
 interface ChatMessage {
-  type: 'system' | 'player';
+  type: "system" | "player";
   sender: string;
   message: string;
 }

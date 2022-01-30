@@ -25,8 +25,8 @@ const Word: NextPage = () => {
               className="cursor-pointer"
             />
           </Link>
-          <h2 className="text-5xl mb-10 mt-5">
-            ! مرحبا <span className="text-primary">{nickname}</span>
+          <h2 dir="rtl" className="text-5xl mb-10 mt-5">
+            مرحبا <span className="text-primary">{nickname}</span>!
           </h2>
           <p className="text-2xl leading-10">
             لعبة "كلمة" هي نسخة الكترونية للعبة القديمة والممتعة التي لعبناها

@@ -13,14 +13,14 @@ import WordLogo from "../../components/words/shared/WordLogo";
 import { APP_NAME, CREDITS, TEAM_NAME } from "../../config/constants";
 import { shuffle } from "../../helpers/utils";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
-import { setNickname } from "../../state/reducers/local";
+import { saveNickname, setNickname } from "../../state/reducers/local";
 
 const Home: NextPage = () => {
   const router = useRouter();
   const [showCreds, setShowCreds] = useState(false);
-  const [nickname, setName] = useState("");
   const [creds, setCreds] = useState<UserCredit[]>([]);
   const stateNickname = useAppSelector((state) => state.localSlice.nickname);
+  const [nickname, setName] = useState(stateNickname);
   const useDispatch = useAppDispatch();
   useEffect(() => {
     setCreds(shuffle(CREDITS));
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
 
   function updateNickname() {
     if (nickname && nickname != "") {
-      useDispatch(setNickname(nickname));
+      useDispatch(saveNickname(nickname));
       router.replace(`/games/word`);
     }
   }
@@ -46,7 +46,7 @@ const Home: NextPage = () => {
           onInputTextChange={setName}
           center
           label="ابدأ اللعب"
-          initialValue={stateNickname}
+          initialValue={nickname}
           onKeyPress={(k) => k == "Enter" && updateNickname()}
           placeholderLabel="اكتب اسمك"
         >
@@ -87,7 +87,7 @@ const Home: NextPage = () => {
           )}
         >
           {creds.map((u, i) => (
-            <div>
+            <div key={i}>
               <Credit credit={u} className="my-4" />
               {i >= 0 && i != CREDITS.length - 1 && (
                 <hr className="border-[#eee] border-b-[2px]" />

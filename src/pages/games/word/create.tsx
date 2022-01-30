@@ -75,6 +75,7 @@ const WordCreate: NextPage = () => {
   const [maxPlayers, setMaxPlayers] = useState<number>(8);
   const [rounds, setRounds] = useState<number>(charsSelected.length);
   const nickname = useAppSelector((state) => state.localSlice.nickname)!;
+  console.log(nickname);
 
   function charClick(char: string) {
     if (charsSelected.includes(char)) {

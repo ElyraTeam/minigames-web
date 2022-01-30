@@ -6,8 +6,14 @@ import { setPlayers } from "./players";
 import { setRoom } from "./room";
 import { setChat } from "./chat";
 
+const generateRandomNickname = () =>
+  "User" + (Math.floor(Math.random() * 100) + 1);
+
 const initialState: LocalState = {
-  nickname: "User" + (Math.floor(Math.random() * 100) + 1),
+  nickname:
+    typeof window !== "undefined"
+      ? localStorage.getItem("nickname") || generateRandomNickname()
+      : generateRandomNickname(),
 };
 
 const localSlice = createSlice({
@@ -38,7 +44,9 @@ const localSlice = createSlice({
 export const saveNickname =
   (nickname: string): AppThunk =>
   async (dispatch: AppDispatch) => {
-    localStorage.setItem("nickname", nickname);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("nickname", nickname);
+    }
     dispatch(setNickname(nickname));
   };
 
