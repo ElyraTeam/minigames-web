@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { FaMedal, FaTimes, FaCrown } from 'react-icons/fa';
 import { kickPlayer } from '../../api/rooms';
 import { useAppSelector } from '../../state/hooks';
+import WordChat from './WordChat';
 import WordSidebar from './WordSidebar';
 
 interface LobbyProps {
@@ -31,7 +32,7 @@ const Lobby: React.FC<LobbyProps> = ({ nickname }) => {
     return (
       <div
         key={num}
-        className="relative player text-center sm:text-right xs:mt-8 sm:mb-8 sm:w-[100%] md:w-[50%] lg:w-[33.33333%]"
+        className="relative player text-center sm:text-right xs:mt-8 sm:mb-8 sm:w-[100%]"
       >
         <div
           className={`number relative sm:float-right mx-auto sm:ml-2 text-3xl ${color} text-[#d3d3d3] w-12 h-12 flex justify-center items-center rounded-full shadow-[0_4px_8px_0_rgba(0,0,0,0.4)]`}
@@ -49,11 +50,10 @@ const Lobby: React.FC<LobbyProps> = ({ nickname }) => {
         </div>
         <div className="whitespace-nowrap overflow-hidden">
           <span
-            className={`name text-xl inline-block ${
-              nickname === pNick
-                ? 'drop-shadow-[0_4px_3px_rgba(0,0,0,0.1)] text-[#70FF75]'
-                : ''
-            }`}
+            className={`name text-xl inline-block ${nickname === pNick
+              ? 'drop-shadow-[0_4px_3px_rgba(0,0,0,0.1)] text-[#70FF75]'
+              : ''
+              }`}
           >
             {pNick.length > 6 ? pNick.slice(0, 6) + '..' : pNick}
           </span>
@@ -69,9 +69,39 @@ const Lobby: React.FC<LobbyProps> = ({ nickname }) => {
   // #FFD700 - #C0C0C0 - #CD7F32
 
   return (
-    <div className="game-stats flex justify-between items-center h-full">
-      <WordSidebar />
-      <div className="players-list xs:justify-center sm:flex flex-row-reverse flex-wrap">
+    <div className="game-stats grid grid-cols-8 h-full sm:overflow-hidden">
+      {/* <WordSidebar /> */}
+
+      <div className="chat-section col-span-2">
+        <WordChat />
+      </div>
+
+      <div className="stats col-span-4 sm:text-center py-8">
+        <h3 className="text-2xl">المتصدرون</h3>
+
+        <div className="leaderboard bg-[#58de85] grid grid-cols-3 my-5 py-5 px-[20px] mx-5 rounded-3xl">
+          <div className="1st text-center order-2">
+            <FaMedal className="mx-auto text-6xl text-[#ffd700] drop-shadow-lg mb-2" />
+            <p className="1st-name">------</p>
+            <p className="1st-points"><span className="1st-points">0</span> نقطة</p>
+          </div>
+          <div className="2st text-center order-1">
+            <FaMedal className="mx-auto text-5xl text-[#d5f7ef] drop-shadow-lg mb-2" />
+            <p className="2nd-name">------</p>
+            <p className="2nd-points"><span className="2nd-points">0</span> نقطة</p>
+          </div>
+          <div className="3rd text-center order-3">
+            <FaMedal className="mx-auto text-5xl text-[#b28812] drop-shadow-lg mb-2" />
+            <p className="3rd-name">------</p>
+            <p className="3rd-points"><span className="3rd-points">0</span> نقطة</p>
+          </div>
+        </div>
+
+        <p className="text-xl font-bold mb-2 mt-10" dir="rtl">مجموع نقاطك:</p>
+        <p dir="rtl"><span className="your-points text-[#1a8b90]">0</span> نقطة</p>
+      </div>
+
+      <div className="players-list gird grid-cols col-span-2 rounded-r-3xl scrollbar-thin overflow-y-scroll text-right px-[20px] pt-[30px] pb-[20px] bg-[#38b880]">
         {sortedPlayers.map((p, num) => {
           let color = 'bg-[#ebb10f]';
           if (num == 1) {
