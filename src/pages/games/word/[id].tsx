@@ -117,8 +117,6 @@ const WordGamePage: NextPage = () => {
     );
   } else if (isTimerRunning) {
     content = <WordTimer countdown={countdown} />;
-  } else if (isLoading) {
-    content = <Spinner />;
   } else if (game.state == State.INGAME) {
     content = <WordGame />;
   } else {
@@ -132,6 +130,8 @@ const WordGamePage: NextPage = () => {
       <Head>
         <title>Word - Game</title>
       </Head>
+
+      {/* {isLoading && <div className="absolute w-full h-full top-0 left-0 bg-primary flex justify-center items-center z-40"><Spinner /></div>} */}
 
       <WordBackground>
         <div className="main-content-box bg-light sm:px-8 pb-5 pt-3 sm:rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] w-[100%] sm:w-[630px] md:w-[770px] lg:w-[900px] self-center">
@@ -147,9 +147,9 @@ const WordGamePage: NextPage = () => {
                 "content-box bg-dark relative rounded-2xl mb-5 mt-3 mx-5 h-[384px] " +
                 (isInLobby ? "" : "lg:flex") +
                 " lg:items-center lg:pb-0" +
-                (game.state == State.INGAME || showLobbyMessage
+                (game.state == State.INGAME || !showLobbyMessage
                   ? ""
-                  : " pr-4 scrollbar overflow-y-scroll")
+                  : " scrollbar overflow-y-scroll")
               }
             >
               {content}

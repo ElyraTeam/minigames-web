@@ -8,6 +8,6 @@ export const HOST_TEMP = `https://bian-games.netlify.app`;
 export const CREDITS: UserCredit[] = [
   { name: 'كريم وائل', facebookLink: 'f', twitterLink: 'f', githubLink: 'f' },
   { name: 'حسام محسن', facebookLink: 'f', twitterLink: 'f', githubLink: 'f' },
-  { name: 'اياد خالد', facebookLink: 'f', twitterLink: 'f', githubLink: 'f' },
+  { name: 'إياد خالد', facebookLink: 'f', twitterLink: 'f', githubLink: 'f' },
   { name: 'محمد وليد', facebookLink: 'f', twitterLink: 'f', githubLink: 'f' },
 ];
