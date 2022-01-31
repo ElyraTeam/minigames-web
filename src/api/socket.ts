@@ -79,13 +79,18 @@ class LocalPlayer {
     this.socket.on("update-vote-count", ack);
   }
 
+  onPlayerVotes(ack: (votes: AllPlayersVotes) => void) {
+    this.socket.on("player-votes", ack);
+  }
+
   offAll() {
-    this.socket.off("start-timer");
-    this.socket.off("kick");
-    this.socket.off("chat");
-    this.socket.off("update-vote-count");
-    this.socket.off("start-vote");
-    this.socket.off("request-values");
+    this.socket.removeAllListeners("start-timer");
+    this.socket.removeAllListeners("kick");
+    this.socket.removeAllListeners("chat");
+    this.socket.removeAllListeners("update-vote-count");
+    this.socket.removeAllListeners("start-vote");
+    this.socket.removeAllListeners("request-values");
+    this.socket.removeAllListeners("player-votes");
   }
 }
 

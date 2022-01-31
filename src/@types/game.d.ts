@@ -1,5 +1,6 @@
 type CategoryValues = { [name: string]: string };
 type Votes = { [name: string]: number };
+type AllPlayersVotes = { [key: string]: { [k: string]: number } };
 
 interface ErrorResponse {
   errorCode?: number;
@@ -54,6 +55,7 @@ interface Player {
   owner: boolean;
   totalScore: number;
   lastRoundScore: number;
+  voted: boolean;
 }
 
 interface CategoryVoteData {
