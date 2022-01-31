@@ -11,7 +11,7 @@ import {
   FaTimes,
   FaPlusSquare,
   FaRedoAlt,
-  FaCheckCircle,
+  FaCheck,
 } from "react-icons/fa";
 import { createRoom, joinRoom } from "../../../api/rooms";
 import { setRoom } from "../../../state/reducers/room";
@@ -19,6 +19,7 @@ import { useRouter } from "next/router";
 import { setToken } from "../../../state/reducers/local";
 import localPlayer from "../../../api/socket";
 import { useAppSelector } from "../../../state/hooks";
+import Footer from "../../../components/shared/Footer";
 
 const DEFAULT_CATEGORIES_ARABIC = [
   "ولد",
@@ -87,7 +88,7 @@ const WordCreate: NextPage = () => {
 
   function selectAllChars() {
     if (charsArabic.length == charsSelected.length) {
-      setCharsSelected([...charsArabic.slice(0, 8)]);
+      setCharsSelected([]);
     } else {
       setCharsSelected([...charsArabic]);
     }
@@ -135,7 +136,7 @@ const WordCreate: NextPage = () => {
 
       <div className="bg-[url('../../public/wordbackground.svg')] bg-cover z-0 fixed top-0 left-0 w-full h-full"></div>
 
-      <div className="main-content-box relative bg-light sm:px-8 pb-5 pt-3 sm:rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] max-w-[900px] ">
+      <div className="main-content-box relative z-20 bg-light sm:px-8 pb-5 pt-3 sm:rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] max-w-[900px] ">
         <Link href="/">
           <Image src="/wordlogo.svg" width="85" height="85" alt="logo" />
         </Link>
@@ -144,8 +145,8 @@ const WordCreate: NextPage = () => {
           <div className="choose-chars overflow-hidden">
             <h2 className="mb-5 text-white text-2xl font-semibold">
               الحروف
-              <FaCheckCircle
-                className="inline ml-2 bg-[#92E4AB] p-1 text-[#4caf50] rounded-full cursor-pointer text-3xl"
+              <FaCheck
+                className="inline ml-2 bg-[#92E4AB] text-[#6BCF89] p-2 rounded-full cursor-pointer text-3xl hover:text-white hover:bg-[#1a8c90]"
                 onClick={selectAllChars}
               />
             </h2>
@@ -166,11 +167,11 @@ const WordCreate: NextPage = () => {
               })}
             </div>
 
-            <div className="choose-categories mt-16">
-              <h2 className="mb-5 text-white text-2xl font-semibold">
+            <div className="choose-categories mt-16 text-right">
+              <h2 className="mb-5 text-white text-2xl font-semibold text-center">
                 الفئات
                 <FaRedoAlt
-                  className="inline ml-2 bg-[#92E4AB] p-2 rounded-full cursor-pointer text-3xl"
+                  className="inline ml-2 bg-[#92E4AB] text-[#6BCF89] p-2 rounded-full cursor-pointer text-3xl hover:text-white hover:bg-[#1a8c90]"
                   onClick={resetCategories}
                 />
               </h2>
@@ -201,7 +202,7 @@ const WordCreate: NextPage = () => {
                 <input
                   type="text"
                   placeholder="أضف فئة"
-                  className="bg-transparent border-0 border-b-2 border-b-[#eee] p-2 text-right text-white placeholder:text-white focus:outline-none text-lg focus:border-b-light transition-[border]"
+                  className="bg-transparent mr-2 border-0 border-b-2 border-b-[#eee] p-2 text-right text-white placeholder:text-white focus:outline-none text-lg focus:border-b-light transition-[border]"
                   maxLength={15}
                   value={newCategory}
                   onKeyPress={(e) => addCategory(newCategory, e.key)}
@@ -220,10 +221,9 @@ const WordCreate: NextPage = () => {
             </h2>
             <div className="flex justify-center align-middle text-white text-center font-light">
               <div className="mr-12">
-                <span className="text-lg">عدد الجولات</span>
-                <br />
                 <select
-                  className="bg-transparent border-b-2 my-1 w-12 focus:outline-none"
+                  dir="rtl"
+                  className="bg-transparent mr-5 border-b-[1px] my-1 w-12 focus:outline-none"
                   value={rounds}
                   onChange={(e) => setRounds(+e.target.value)}
                 >
@@ -236,12 +236,13 @@ const WordCreate: NextPage = () => {
                     </option>
                   ))}
                 </select>
+                <span className="text-lg pr-16 font-[500]">عدد الجولات</span>
+
               </div>
               <div>
-                <span className="text-lg">عدد اللاعبين</span>
-                <br />
                 <select
-                  className="bg-transparent border-b-2 my-1 w-12 focus:outline-none"
+                  dir="rtl"
+                  className="bg-transparent mr-5 border-b-[1px] my-1 w-12 focus:outline-none"
                   onChange={(e) => setMaxPlayers(+e.target.value)}
                   value={maxPlayers}
                 >
@@ -257,24 +258,27 @@ const WordCreate: NextPage = () => {
                   <option value="11">11</option>
                   <option value="12">12</option>
                 </select>
+                <span className="text-lg font-[500]">عدد اللاعبين</span>
               </div>
             </div>
           </div>
         </div>
 
         <Link href="/games/word">
-          <h3 className="text-white mr-10 text-xl cursor-pointer float-right hover:text-[#1A8B90] font-semibold">
+          <h3 className="text-white mr-10 text-xl cursor-pointer float-right hover:text-[#1A8B90] font-bold">
             الرئيسية <FaArrowRight className="inline ml-2" />
           </h3>
         </Link>
         <h3
-          className="text-white ml-10 text-xl cursor-pointer float-left hover:text-[#1A8B90] font-semibold"
+          className="text-white ml-10 text-xl cursor-pointer float-left hover:text-[#1A8B90] font-bold"
           onClick={makeRoom}
         >
           <FaArrowLeft className="inline mr-2" />
           إنشاء غرفة
         </h3>
       </div>
+
+      <Footer />
     </div>
   );
 };

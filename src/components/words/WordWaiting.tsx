@@ -22,7 +22,7 @@ const WordWaiting: React.FC<WordWaitingProps> = ({
   }, []);
 
   return (
-    <div dir="rtl" className="flex flex-col text-center w-full justify-center">
+    <div dir="rtl" className="flex flex-col text-center w-full h-full justify-center">
       <Image src="/assets/svg/stopwatch.svg" height="40" width="40" />
       <p className="text-2xl font-bold mt-5">
         انتهي <span className="text-secondary">{stopperNickname}</span> من

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import router, { useRouter } from 'next/router';
-import { FaSignOutAlt, FaCog, FaShareAlt } from 'react-icons/fa';
+import { useState } from 'react';
+import { FaSignOutAlt, FaCog, FaShareAlt, FaExclamationTriangle, FaCheck } from 'react-icons/fa';
 import { leaveRoom } from '../../api/rooms';
 import { HOST_TEMP } from '../../config/constants';
 import { State } from '../../models/game';
@@ -23,6 +24,8 @@ const WordTop: React.FC<WordTopProps> = ({
   const room = useAppSelector((state) => state.roomSlice);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const [showLeaveBox, setShowLeaveBox] = useState(false);
+  const [showCheckIcon, setShowCheckIcon] = useState(false);
 
   const roomId = game.id!;
 
@@ -40,19 +43,32 @@ const WordTop: React.FC<WordTopProps> = ({
 
       <div className="icons xs:my-4 sm:absolute bottom-3 left-12">
         <FaSignOutAlt
-          onClick={pageLeaveRoom}
+          onClick={() => setShowLeaveBox(true)}
           className="inline text-[38px] mr-6 text-[#f00] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#f00] hover:text-white"
         />
         {game.owner == nickname && game.state == State.LOBBY ? (
           <FaCog className="inline text-[38px] mr-6 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white" />
         ) : null}
         {!hideShare && (
-          <FaShareAlt
-            className="inline text-[38px] mr-6 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
-            onClick={() =>
-              navigator.clipboard.writeText(`${HOST_TEMP}/games/word/${roomId}`)
+          <>
+            {!showCheckIcon &&
+              <FaShareAlt
+                className="inline text-[38px] mr-6 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
+                onClick={() => {
+                  navigator.clipboard.writeText(`${HOST_TEMP}/games/word/${roomId}`)
+                  setShowCheckIcon(true);
+                  setTimeout(() => {
+                    setShowCheckIcon(false);
+                  }, 1000);
+                }
+                }
+              />
             }
-          />
+
+            {showCheckIcon &&
+              <FaCheck className="inline text-[38px] mr-6 text-white bg-[#4CAF50] rounded-full p-2" />
+            }
+          </>
         )}
       </div>
 
@@ -65,6 +81,17 @@ const WordTop: React.FC<WordTopProps> = ({
           </span>
         </h2>
       )}
+
+      {showLeaveBox &&
+        <div className="leave-box absolute w-[400px] shadow-2xl rounded-2xl text-center text-black p-5 top-1/2 left-1/2 -translate-x-1/2 bg-white z-50">
+          <FaExclamationTriangle className="text-[#f00] mx-auto text-4xl" />
+          <h3 className="mt-2 mb-5">أنت على وشك الخروج من الغرفة</h3>
+          <div className="buttons">
+            <button className="mr-5" onClick={() => setShowLeaveBox(false)}>إلغاء</button>
+            <button className="bg-[#f00] text-white py-1 px-4 rounded-xl" onClick={pageLeaveRoom}>تأكيد</button>
+          </div>
+        </div>
+      }
     </div>
   );
 };

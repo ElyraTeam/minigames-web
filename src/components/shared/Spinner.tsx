@@ -1,7 +1,11 @@
-interface SpinnerProps {}
+interface SpinnerProps { }
 
-const Spinner: React.FC<SpinnerProps> = ({}) => {
-  return <div className="loader grow justify-center flex" />;
+const Spinner: React.FC<SpinnerProps> = ({ }) => {
+  return (
+    <div className="flex justify-center items-center h-full w-full">
+      <div className="loader" />
+    </div>
+  )
 };
 
 export default Spinner;

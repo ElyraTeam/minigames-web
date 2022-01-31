@@ -10,6 +10,7 @@ const Word: NextPage = () => {
   return (
     <div className="word-main pt-8 h-screen text-white">
       <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{APP_NAME} - Word</title>
       </Head>
 
@@ -26,7 +27,7 @@ const Word: NextPage = () => {
             />
           </Link>
           <h2 dir="rtl" className="text-5xl mb-10 mt-5">
-            مرحبا <span className="text-primary">{nickname}</span>!
+            مرحبا <span className="text-[#6fed37]">{nickname}</span>!
           </h2>
           <p className="text-2xl leading-10">
             لعبة "كلمة" هي نسخة الكترونية للعبة القديمة والممتعة التي لعبناها
@@ -41,7 +42,7 @@ const Word: NextPage = () => {
 
         <div className="buttons text-center mt-16 sm:mt-28 pb-10">
           <Link href="/">
-            <button className="homepage text-xl xs:block xs:mx-auto mb-8 sm:mb-0 sm:mr-8 px-12 py-3 text-primary rounded-2xl border-primary border">
+            <button className="homepage text-xl xs:block xs:mx-auto mb-8 sm:mb-0 sm:mr-8 px-12 py-3 text-[#6fed37] rounded-2xl border-[#6fed37] border">
               الواجهة الرئيسية
             </button>
           </Link>

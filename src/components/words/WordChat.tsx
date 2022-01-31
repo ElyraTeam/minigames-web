@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MdSend } from 'react-icons/md';
 import localPlayer from '../../api/socket';
 import { useAppSelector } from '../../state/hooks';
 
-interface WordChatProps {}
+interface WordChatProps { }
 
-const WordChat: React.FC<WordChatProps> = ({}) => {
+const WordChat: React.FC<WordChatProps> = ({ }) => {
   const messages = useAppSelector((state) => state.chatSlice);
   const [message, setMessage] = useState('');
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   function sendMessage(msg: string, key?: string) {
     if (msg === '' || msg === ' ') return;
@@ -20,9 +21,17 @@ const WordChat: React.FC<WordChatProps> = ({}) => {
     setMessage('');
   }
 
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages]);
+
   return (
     <div className="chat-main flex flex-col h-full">
-      <div className="messages justify-end overflow-y-scroll overflow-x-hidden scrollbar-thin flex-grow rounded-tl-3xl bg-[#38b880] max-h-[335px]">
+      <div className="messages justify-end overflow-y-scroll overflow-x-hidden scrollbar-thin flex-grow rounded-tl-3xl bg-[#38b880] max-h-[318px]">
         {messages.map((msg, i) => (
           <div className="message-cont text-right my-1 mx-2" key={i}>
             <p className="sender text-[#5ee494]">
@@ -31,6 +40,7 @@ const WordChat: React.FC<WordChatProps> = ({}) => {
             <p className="message break-words">{msg.message}</p>
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
       <div className="type-message relative bg-[#2ca686] flex justify-center items-center rounded-bl-2xl p-4">
         <MdSend
