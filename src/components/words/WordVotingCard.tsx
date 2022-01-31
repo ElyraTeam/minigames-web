@@ -1,19 +1,22 @@
-import classNames from "classnames";
-import { useState } from "react";
-import Card from "../shared/Card";
+import classNames from 'classnames';
+import { useState } from 'react';
+import Card from '../shared/Card';
 
 interface WordVotingCardProps {
   nickname: string;
   value: string;
   onVoteChange: (nickname: string, vote: number) => void;
   activeVote: number;
+  hideVotes?: boolean;
+  locked?: boolean;
 }
 
 interface VotingCircleProps {
   vote: number;
-  onClick: () => void;
+  onClick?: () => void;
   active?: boolean;
   canChangeVote?: boolean;
+  locked?: boolean;
 }
 
 const VotingCircle: React.FC<VotingCircleProps> = ({
@@ -21,12 +24,16 @@ const VotingCircle: React.FC<VotingCircleProps> = ({
   onClick,
   active,
   canChangeVote,
+  locked,
 }) => {
   return (
     <div
       className={classNames(
-        "text-[0.92rem] font-semibold rounded-full w-7 h-7 bg-[#eee] bg-opacity-20 flex align-middle justify-center items-center font-[arial] cursor-pointer ",
-        { "bg-secondary bg-opacity-100 border-2": active }
+        'text-[0.92rem] font-semibold rounded-full w-7 h-7 bg-[#eee] bg-opacity-20 flex align-middle justify-center items-center font-[arial] cursor-pointer hover:bg-opacity-40 transition-colors ',
+        {
+          'bg-secondary bg-opacity-100 border-2': active,
+          'bg-secondary bg-opacity-60 border-2': active && locked,
+        }
       )}
       onClick={canChangeVote ? onClick : undefined}
     >
@@ -40,6 +47,8 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
   value,
   activeVote,
   onVoteChange,
+  hideVotes,
+  locked,
 }) => {
   return (
     <Card
@@ -48,22 +57,27 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
     >
       <p className="font-thin">{nickname}</p>
       <p className="font-bold text-2xl">
-        {!value || value === ""
-          ? "------"
+        {!value || value === ''
+          ? '------'
           : value.length > 10
-          ? value.slice(0, 10) + "..."
+          ? value.slice(0, 10) + '...'
           : value}
       </p>
       <div className="flex justify-center gap-3" dir="ltr">
-        {[0, 5, 10].map((vote) => (
-          <VotingCircle
-            key={vote}
-            vote={vote}
-            active={activeVote == vote}
-            canChangeVote={value !== undefined && value !== ""}
-            onClick={() => onVoteChange(nickname, vote)}
-          />
-        ))}
+        {!hideVotes &&
+          [0, 5, 10].map((vote) => {
+            const isValueEmpty = value == undefined || value == '';
+            const isActiveVote = activeVote == vote;
+            return (
+              <VotingCircle
+                key={vote}
+                vote={vote}
+                active={isActiveVote}
+                canChangeVote={!isValueEmpty}
+                locked={locked}
+              />
+            );
+          })}
       </div>
     </Card>
   );

@@ -1,9 +1,9 @@
-import { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { NextPage } from 'next';
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   FaArrowLeft,
@@ -12,58 +12,58 @@ import {
   FaPlusSquare,
   FaRedoAlt,
   FaCheck,
-} from "react-icons/fa";
-import { createRoom, joinRoom } from "../../../api/rooms";
-import { setRoom } from "../../../state/reducers/room";
-import { useRouter } from "next/router";
-import { setToken } from "../../../state/reducers/local";
-import localPlayer from "../../../api/socket";
-import { useAppSelector } from "../../../state/hooks";
-import Footer from "../../../components/shared/Footer";
-import useNickname from "../../../helpers/hooks/useNickname";
+} from 'react-icons/fa';
+import { createRoom, joinRoom } from '../../../api/rooms';
+import { setRoom } from '../../../state/reducers/room';
+import { useRouter } from 'next/router';
+import { setToken } from '../../../state/reducers/local';
+import localPlayer from '../../../api/socket';
+import { useAppSelector } from '../../../state/hooks';
+import Footer from '../../../components/shared/Footer';
+import useNickname from '../../../helpers/hooks/useNickname';
 
 const DEFAULT_CATEGORIES_ARABIC = [
-  "ولد",
-  "بنت",
-  "حيوان",
-  "جماد",
-  "نبات",
-  "بلد",
-  "فيلم",
-  "حشرة",
-  "لون",
-  "مدينة",
+  'ولد',
+  'بنت',
+  'حيوان',
+  'جماد',
+  'نبات',
+  'بلد',
+  'فيلم',
+  'حشرة',
+  'لون',
+  'مدينة',
 ];
 
 const charsArabic: string[] = [
-  "أ",
-  "ب",
-  "ت",
-  "ث",
-  "ج",
-  "ح",
-  "خ",
-  "د",
-  "ذ",
-  "ر",
-  "ز",
-  "س",
-  "ش",
-  "ص",
-  "ض",
-  "ط",
-  "ظ",
-  "ع",
-  "غ",
-  "ف",
-  "ق",
-  "ك",
-  "ل",
-  "م",
-  "ن",
-  "هـ",
-  "و",
-  "ى",
+  'أ',
+  'ب',
+  'ت',
+  'ث',
+  'ج',
+  'ح',
+  'خ',
+  'د',
+  'ذ',
+  'ر',
+  'ز',
+  'س',
+  'ش',
+  'ص',
+  'ض',
+  'ط',
+  'ظ',
+  'ع',
+  'غ',
+  'ف',
+  'ق',
+  'ك',
+  'ل',
+  'م',
+  'ن',
+  'هـ',
+  'و',
+  'ى',
 ];
 
 const WordCreate: NextPage = () => {
@@ -72,7 +72,7 @@ const WordCreate: NextPage = () => {
   const [charsSelected, setCharsSelected] = useState<string[]>(
     charsArabic.slice(0, 8)
   );
-  const [newCategory, setNewCategory] = useState("");
+  const [newCategory, setNewCategory] = useState('');
   const [newCategoryError, setNewCategoryError] = useState<string | null>(null);
   const [maxPlayers, setMaxPlayers] = useState<number>(8);
   const [rounds, setRounds] = useState<number>(charsSelected.length);
@@ -106,13 +106,13 @@ const WordCreate: NextPage = () => {
   function addCategory(categoryName: string, key?: string) {
     if (categoryName.length == 0) return;
     if (key) {
-      if (key !== "Enter") return;
+      if (key !== 'Enter') return;
     }
     if (categoriesArabic.includes(categoryName))
-      return setNewCategoryError("لا يمكنك اضافة نفس الكلمة مرتين");
+      return setNewCategoryError('لا يمكنك اضافة نفس الكلمة مرتين');
 
     setCategories([...categoriesArabic, categoryName]);
-    setNewCategory("");
+    setNewCategory('');
     setNewCategoryError(null);
   }
 
@@ -157,8 +157,8 @@ const WordCreate: NextPage = () => {
                     key={charsArabic.indexOf(char)}
                     onClick={() => charClick(char)}
                     className={
-                      "py-2 px-3 text-lg m-2 bg-white cursor-pointer rounded-full font-semibold flex justify-center items-center shadow-[0_4px_8px_0_rgba(0,0,0,0.3)] transition-colors w-10 " +
-                      (charsSelected.includes(char) ? "active" : "")
+                      'py-2 px-3 text-lg m-2 bg-white cursor-pointer rounded-full font-semibold flex justify-center items-center shadow-[0_4px_8px_0_rgba(0,0,0,0.3)] transition-colors w-10 ' +
+                      (charsSelected.includes(char) ? 'active' : '')
                     }
                   >
                     {char}
@@ -264,12 +264,12 @@ const WordCreate: NextPage = () => {
         </div>
 
         <Link href="/games/word">
-          <h3 className="text-white mr-10 text-xl cursor-pointer float-right hover:text-[#1A8B90] font-bold">
+          <h3 className="text-white mr-10 text-xl cursor-pointer float-right hover:text-[#1A8B90] font-bold transition-colors">
             الرئيسية <FaArrowRight className="inline ml-2" />
           </h3>
         </Link>
         <h3
-          className="text-white ml-10 text-xl cursor-pointer float-left hover:text-[#1A8B90] font-bold"
+          className="text-white ml-10 text-xl cursor-pointer float-left hover:text-[#1A8B90] font-bold transition-colors"
           onClick={makeRoom}
         >
           <FaArrowLeft className="inline mr-2" />

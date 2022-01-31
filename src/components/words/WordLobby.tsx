@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { FaMedal, FaTimes, FaCrown } from "react-icons/fa";
-import { kickPlayer } from "../../api/rooms";
-import useNickname from "../../helpers/hooks/useNickname";
-import { useAppSelector } from "../../state/hooks";
-import WordChat from "./WordChat";
+import { useEffect, useState } from 'react';
+import { FaMedal, FaTimes, FaCrown } from 'react-icons/fa';
+import { kickPlayer } from '../../api/rooms';
+import useNickname from '../../helpers/hooks/useNickname';
+import { useAppSelector } from '../../state/hooks';
+import WordChat from './WordChat';
 
 interface LobbyProps {}
 
@@ -35,38 +35,42 @@ const Lobby: React.FC<LobbyProps> = () => {
     dummy: boolean
   ) => {
     return (
-      <div
-        key={num}
-        className="relative player text-center sm:text-right xs:mt-8 sm:mb-8 sm:w-[100%]"
-      >
+      <div>
         <div
-          className={`number relative sm:float-right mx-auto sm:ml-2 text-3xl ${color} text-[#d3d3d3] w-12 h-12 flex justify-center items-center rounded-full shadow-[0_4px_8px_0_rgba(0,0,0,0.4)]`}
+          key={num}
+          className="relative player text-center sm:text-right xs:mt-8 sm:mb-4 sm:w-[100%]"
         >
-          {num + 1}
-          {!dummy && game.owner === nickname && nickname !== pNick && (
-            <FaTimes
-              className="absolute -top-1 -right-1 bg-[#f00] text-white text-[1.4rem] rounded-3xl p-1 cursor-pointer"
-              onClick={() => kickPlayer(game.owner!, game.id!, pNick)}
-            />
-          )}
-          {game.owner === pNick && (
-            <FaCrown className="absolute -top-1 -right-1 bg-white text-[#EBB10F] text-[1.4rem] border rounded-3xl p-1" />
-          )}
-        </div>
-        <div className="whitespace-nowrap overflow-hidden">
-          <span
-            className={`name text-xl inline-block ${nickname === pNick
-                ? "drop-shadow-[0_4px_3px_rgba(0,0,0,0.1)] text-[#70FF75]"
-                : ""
-              }`}
+          <div
+            className={`number relative sm:float-right mx-auto sm:ml-2 text-3xl ${color} text-[#d3d3d3] w-12 h-12 flex justify-center items-center rounded-full shadow-[0_4px_8px_0_rgba(0,0,0,0.4)]`}
           >
-            {pNick.length > 6 ? pNick.slice(0, 6) + ".." : pNick}
-          </span>
-          <br />
-          <p className="points-main text-[12px]" dir="rtl">
-            <span className="points">{score}</span> نقطة{" "}
-          </p>
+            {num + 1}
+            {!dummy && game.owner === nickname && nickname !== pNick && (
+              <FaTimes
+                className="absolute -top-1 -right-1 bg-[#f00] text-white text-[1.4rem] rounded-3xl p-1 cursor-pointer"
+                onClick={() => kickPlayer(game.owner!, game.id!, pNick)}
+              />
+            )}
+            {game.owner === pNick && (
+              <FaCrown className="absolute -top-1 -right-1 bg-white text-[#EBB10F] text-[1.4rem] border rounded-3xl p-1" />
+            )}
+          </div>
+          <div className="whitespace-nowrap overflow-hidden">
+            <span
+              className={`name text-xl inline-block ${
+                nickname === pNick
+                  ? 'drop-shadow-[0_4px_3px_rgba(0,0,0,0.1)] text-[#70FF75]'
+                  : ''
+              }`}
+            >
+              {pNick.length > 8 ? pNick.slice(0, 8) + '..' : pNick}
+            </span>
+            <br />
+            <p className="points-main text-[12px]" dir="rtl">
+              <span className="points">{score}</span> نقطة{' '}
+            </p>
+          </div>
         </div>
+        <hr className="my-4 h-1 mx-6 opacity-20" />
       </div>
     );
   };
@@ -93,12 +97,12 @@ const Lobby: React.FC<LobbyProps> = () => {
           <div className="1st text-center order-2">
             <FaMedal className="mx-auto text-6xl text-[#ffd700] drop-shadow-lg mb-2" />
             <p className="1st-name">
-              {!firstP || firstP.totalScore == 0 ? "------" : firstP.nickname}
+              {!firstP || firstP.totalScore == 0 ? '------' : firstP.nickname}
             </p>
             <p className="1st-points">
               <span className="1st-points">
                 {firstP ? firstP.totalScore : 0}
-              </span>{" "}
+              </span>{' '}
               نقطة
             </p>
           </div>
@@ -106,25 +110,25 @@ const Lobby: React.FC<LobbyProps> = () => {
             <FaMedal className="mx-auto text-5xl text-[#d5f7ef] drop-shadow-lg mb-2" />
             <p className="2nd-name">
               {!secondP || secondP.totalScore == 0
-                ? "------"
+                ? '------'
                 : secondP.nickname}
             </p>
             <p className="2nd-points">
               <span className="2nd-points">
                 {secondP ? secondP.totalScore : 0}
-              </span>{" "}
+              </span>{' '}
               نقطة
             </p>
           </div>
           <div className="3rd text-center order-3">
             <FaMedal className="mx-auto text-5xl text-[#b28812] drop-shadow-lg mb-2" />
             <p className="3rd-name">
-              {!thirdP || thirdP.totalScore == 0 ? "------" : thirdP.nickname}
+              {!thirdP || thirdP.totalScore == 0 ? '------' : thirdP.nickname}
             </p>
             <p className="3rd-points">
               <span className="3rd-points">
                 {thirdP ? thirdP.totalScore : 0}
-              </span>{" "}
+              </span>{' '}
               نقطة
             </p>
           </div>
@@ -134,18 +138,21 @@ const Lobby: React.FC<LobbyProps> = () => {
           مجموع نقاطك:
         </p>
         <p dir="rtl">
-          <span className="your-points text-[#1a8b90]">0</span> نقطة
+          <span className="your-points text-[#1a8b90] font-bold">0</span> نقطة
         </p>
       </div>
 
-      <div className="players-list gird grid-cols col-span-2 rounded-r-3xl scrollbar-thin overflow-y-scroll text-right px-[20px] pt-[30px] pb-[20px] bg-[#38b880]">
+      <div className="players-list gird grid-cols col-span-2 rounded-r-3xl scrollbar-thin overflow-y-scroll text-right px-[11px] pt-[30px] pb-[20px] bg-[#38b880]">
         {sortedPlayers.map((p, num) => {
           console.log(p, num);
-          let color = "bg-[#ebb10f]";
+          let color = 'bg-[#fff]';
+          if (num == 0) {
+            color = 'bg-[#ebb10f]';
+          }
           if (num == 1) {
-            color = "bg-[#ccfff3]";
+            color = 'bg-[#E6EDF5]';
           } else if (num == 2) {
-            color = "bg-[#ca7d31]";
+            color = 'bg-[#ca7d31]';
           }
           return playerCircle(num, color, p.nickname, p.lastRoundScore, false);
         })}
@@ -156,8 +163,8 @@ const Lobby: React.FC<LobbyProps> = () => {
           ).map((num) =>
             playerCircle(
               num + sortedPlayers.length - 1,
-              "bg-white",
-              "------",
+              'bg-white',
+              '------',
               0,
               true
             )

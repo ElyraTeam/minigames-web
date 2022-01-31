@@ -1,7 +1,13 @@
 import Image from 'next/image';
 import router, { useRouter } from 'next/router';
 import { useState } from 'react';
-import { FaSignOutAlt, FaCog, FaShareAlt, FaExclamationTriangle, FaCheck } from 'react-icons/fa';
+import {
+  FaSignOutAlt,
+  FaCog,
+  FaShareAlt,
+  FaExclamationTriangle,
+  FaCheck,
+} from 'react-icons/fa';
 import { leaveRoom } from '../../api/rooms';
 import { HOST_TEMP } from '../../config/constants';
 import { State } from '../../models/game';
@@ -51,23 +57,24 @@ const WordTop: React.FC<WordTopProps> = ({
         ) : null}
         {!hideShare && (
           <>
-            {!showCheckIcon &&
+            {!showCheckIcon && (
               <FaShareAlt
                 className="inline text-[38px] mr-6 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
                 onClick={() => {
-                  navigator.clipboard.writeText(`${HOST_TEMP}/games/word/${roomId}`)
+                  navigator.clipboard.writeText(
+                    `${HOST_TEMP}/games/word/${roomId}`
+                  );
                   setShowCheckIcon(true);
                   setTimeout(() => {
                     setShowCheckIcon(false);
                   }, 1000);
-                }
-                }
+                }}
               />
-            }
+            )}
 
-            {showCheckIcon &&
-              <FaCheck className="inline text-[38px] mr-6 text-white bg-[#4CAF50] rounded-full p-2" />
-            }
+            {showCheckIcon && (
+              <FaCheck className="inline text-[38px] mr-6 text-white bg-[#4ae24f] rounded-full p-2" />
+            )}
           </>
         )}
       </div>
@@ -82,16 +89,26 @@ const WordTop: React.FC<WordTopProps> = ({
         </h2>
       )}
 
-      {showLeaveBox &&
+      {showLeaveBox && (
         <div className="leave-box absolute w-[400px] shadow-2xl rounded-2xl text-center text-black p-5 top-1/2 left-1/2 -translate-x-1/2 bg-white z-50">
           <FaExclamationTriangle className="text-[#f00] mx-auto text-4xl" />
-          <h3 className="mt-2 mb-5">أنت على وشك الخروج من الغرفة</h3>
+          <h3 className="mt-2 mb-5">هل أنت متأكد من رغبتك بالمغادرة؟</h3>
           <div className="buttons">
-            <button className="mr-5" onClick={() => setShowLeaveBox(false)}>إلغاء</button>
-            <button className="bg-[#f00] text-white py-1 px-4 rounded-xl" onClick={pageLeaveRoom}>تأكيد</button>
+            <button
+              className="mr-5 hover:opacity-50 transition-opacity"
+              onClick={() => setShowLeaveBox(false)}
+            >
+              إلغاء
+            </button>
+            <button
+              className="bg-[#f00] text-white py-1 px-4 rounded-xl hover:bg-opacity-70 transition-colors"
+              onClick={pageLeaveRoom}
+            >
+              تأكيد
+            </button>
           </div>
         </div>
-      }
+      )}
     </div>
   );
 };
