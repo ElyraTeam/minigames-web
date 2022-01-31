@@ -20,6 +20,7 @@ import { setToken } from "../../../state/reducers/local";
 import localPlayer from "../../../api/socket";
 import { useAppSelector } from "../../../state/hooks";
 import Footer from "../../../components/shared/Footer";
+import useNickname from "../../../helpers/hooks/useNickname";
 
 const DEFAULT_CATEGORIES_ARABIC = [
   "ولد",
@@ -75,8 +76,7 @@ const WordCreate: NextPage = () => {
   const [newCategoryError, setNewCategoryError] = useState<string | null>(null);
   const [maxPlayers, setMaxPlayers] = useState<number>(8);
   const [rounds, setRounds] = useState<number>(charsSelected.length);
-  const nickname = useAppSelector((state) => state.localSlice.nickname)!;
-  console.log(nickname);
+  const nickname = useNickname();
 
   function charClick(char: string) {
     if (charsSelected.includes(char)) {
@@ -237,7 +237,6 @@ const WordCreate: NextPage = () => {
                   ))}
                 </select>
                 <span className="text-lg pr-16 font-[500]">عدد الجولات</span>
-
               </div>
               <div>
                 <select

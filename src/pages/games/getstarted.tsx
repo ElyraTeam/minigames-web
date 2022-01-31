@@ -13,23 +13,34 @@ import WordLogo from "../../components/words/shared/WordLogo";
 import { APP_NAME, CREDITS, TEAM_NAME } from "../../config/constants";
 import { shuffle } from "../../helpers/utils";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
-import { saveNickname, setNickname } from "../../state/reducers/local";
+import {
+  saveNickname,
+  setNextRoute,
+  setNickname,
+} from "../../state/reducers/local";
 
 const Home: NextPage = () => {
   const router = useRouter();
   const [showCreds, setShowCreds] = useState(false);
   const [creds, setCreds] = useState<UserCredit[]>([]);
   const stateNickname = useAppSelector((state) => state.localSlice.nickname);
+  const nextRoute = useAppSelector((state) => state.localSlice.nextRoute);
   const [nickname, setName] = useState(stateNickname);
-  const useDispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   useEffect(() => {
     setCreds(shuffle(CREDITS));
   }, []);
 
   function updateNickname() {
     if (nickname && nickname != "") {
-      useDispatch(saveNickname(nickname));
-      router.replace(`/games/word`);
+      dispatch(saveNickname(nickname));
+
+      if (nextRoute) {
+        router.replace(nextRoute);
+        dispatch(setNextRoute(""));
+      } else {
+        router.replace(`/games/word`);
+      }
     }
   }
 
