@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
-import { setCategoryInputValues } from "../../state/reducers/local";
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { setCategoryInputValues } from '../../state/reducers/local';
 
 interface WordGameBoardProps {
   // categoriesValues: CategoryValues;
@@ -39,7 +39,7 @@ const WordGameBoard: React.FC<WordGameBoardProps> = (
               <input
                 type="text"
                 placeholder={`${game.currentLetter} ......`}
-                className="py-3 px-5 text-black rounded-3xl w-40 border-[1px] border-[#2a5c60] focus:border-[3px] focus:outline-0 placeholder:tracking-[0.2rem]"
+                className="py-3 px-5 text-black rounded-3xl w-40 border-[2px] border-[#1a9c1a] focus:border-[#2a5c60] focus:border-[2px] focus:outline-0 placeholder:tracking-[0.2rem] transition-colors"
                 value={categoryValues[category]}
                 onChange={(e) =>
                   //onCategoryValueChange(category, e.target.value)

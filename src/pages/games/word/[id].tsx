@@ -88,6 +88,7 @@ const WordGamePage: NextPage = () => {
 
             localPlayer.onStartVote((categoryData) => {
               setVoted(false);
+              setVotes({});
               setCategoryVoteData(categoryData);
             });
 
@@ -165,6 +166,7 @@ const WordGamePage: NextPage = () => {
           setVotes((oldVal) => ({ ...oldVal, [nickname]: vote }))
         }
         categoryVoteData={categoryVoteData!}
+        disableVotes={voted}
       />
     );
   } else if (game.state == State.GAME_OVER) {
@@ -230,7 +232,7 @@ const WordGamePage: NextPage = () => {
               (game.state == State.VOTING && isWaitingDone)) &&
               !isTimerRunning && (
                 <div className="flex justify-center align-middle">
-                  {game.state == State.VOTING && (
+                  {game.state == State.VOTING && voted && (
                     <p className="align-middle self-center text-2xl font-bold">
                       {players?.length ?? 0}/
                       <span className="text-secondary">{votedCount}</span>

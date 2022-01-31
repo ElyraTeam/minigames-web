@@ -6,12 +6,14 @@ interface WordVotingProps {
   votes: Votes;
   categoryVoteData: CategoryVoteData;
   onVoteChange: (nickname: string, vote: number) => void;
+  disableVotes?: boolean;
 }
 
 const WordVoting: React.FC<WordVotingProps> = ({
   votes,
   onVoteChange,
   categoryVoteData,
+  disableVotes,
 }) => {
   const playerNickname = useAppSelector((state) => state.localSlice.nickname);
   return (
@@ -37,7 +39,7 @@ const WordVoting: React.FC<WordVotingProps> = ({
                 value={value}
                 onVoteChange={onVoteChange}
                 activeVote={isValueEmpty ? 0 : votes[nickname]}
-                hideVotes={nickname == playerNickname}
+                disableVotes={disableVotes || nickname == playerNickname}
                 locked={isValueEmpty}
               />
             );

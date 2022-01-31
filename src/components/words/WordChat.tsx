@@ -34,15 +34,28 @@ const WordChat: React.FC<WordChatProps> = ({}) => {
 
   return (
     <div className="chat-main flex flex-col h-full">
-      <div className="messages justify-end overflow-y-scroll overflow-x-hidden scrollbar-thin flex-grow rounded-tl-3xl bg-[#38b880] max-h-[318px] max-w-[100%]">
+      <div className="messages justify-end overflow-y-scroll overflow-x-hidden scrollbar-thin flex-grow rounded-tl-3xl bg-[#38b880] max-h-[318px] max-w-[197px]">
         {messages.map((msg, i) => (
           <div className="message-cont text-right my-1 mx-2" key={i} dir="rtl">
-            <p className="sender text-[#5ee494]">
+            <p
+              className={classNames(
+                'sender text-[#5ee494] font-semibold text-md',
+                {
+                  'text-[#fff] opacity-60': msg.type == 'system',
+                }
+              )}
+            >
               {msg.type == 'player'
                 ? msg.sender + (msg.sender == playerNickname ? ' (انت)' : '')
                 : 'الغرفة'}
             </p>
-            <p className="message break-words">{msg.message}</p>
+            <p
+              className={classNames('message break-words', {
+                'text-white opacity-60': msg.type == 'system',
+              })}
+            >
+              {msg.message}
+            </p>
           </div>
         ))}
         <div ref={messagesEndRef} />
