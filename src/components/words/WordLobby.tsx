@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { FaMedal, FaTimes, FaCrown } from "react-icons/fa";
-import { kickPlayer } from "../../api/rooms";
-import { useAppSelector } from "../../state/hooks";
-import WordChat from "./WordChat";
-import WordSidebar from "./WordSidebar";
+import { useEffect, useState } from 'react';
+import { FaMedal, FaTimes, FaCrown } from 'react-icons/fa';
+import { kickPlayer } from '../../api/rooms';
+import { useAppSelector } from '../../state/hooks';
+import WordChat from './WordChat';
+import WordSidebar from './WordSidebar';
 
 interface LobbyProps {
   nickname: string;
@@ -58,15 +58,15 @@ const Lobby: React.FC<LobbyProps> = ({ nickname }) => {
           <span
             className={`name text-xl inline-block ${
               nickname === pNick
-                ? "drop-shadow-[0_4px_3px_rgba(0,0,0,0.1)] text-[#70FF75]"
-                : ""
+                ? 'drop-shadow-[0_4px_3px_rgba(0,0,0,0.1)] text-[#70FF75]'
+                : ''
             }`}
           >
-            {pNick.length > 6 ? pNick.slice(0, 6) + ".." : pNick}
+            {pNick.length > 6 ? pNick.slice(0, 6) + '..' : pNick}
           </span>
           <br />
           <p className="points-main text-[12px]" dir="rtl">
-            <span className="points">{score}</span> نقطة{" "}
+            <span className="points">{score}</span> نقطة{' '}
           </p>
         </div>
       </div>
@@ -95,12 +95,12 @@ const Lobby: React.FC<LobbyProps> = ({ nickname }) => {
           <div className="1st text-center order-2">
             <FaMedal className="mx-auto text-6xl text-[#ffd700] drop-shadow-lg mb-2" />
             <p className="1st-name">
-              {!firstP || firstP.totalScore == 0 ? "------" : firstP.nickname}
+              {!firstP || firstP.totalScore == 0 ? '------' : firstP.nickname}
             </p>
             <p className="1st-points">
               <span className="1st-points">
                 {firstP ? firstP.totalScore : 0}
-              </span>{" "}
+              </span>{' '}
               نقطة
             </p>
           </div>
@@ -108,25 +108,25 @@ const Lobby: React.FC<LobbyProps> = ({ nickname }) => {
             <FaMedal className="mx-auto text-5xl text-[#d5f7ef] drop-shadow-lg mb-2" />
             <p className="2nd-name">
               {!secondP || secondP.totalScore == 0
-                ? "------"
+                ? '------'
                 : secondP.nickname}
             </p>
             <p className="2nd-points">
               <span className="2nd-points">
                 {secondP ? secondP.totalScore : 0}
-              </span>{" "}
+              </span>{' '}
               نقطة
             </p>
           </div>
           <div className="3rd text-center order-3">
             <FaMedal className="mx-auto text-5xl text-[#b28812] drop-shadow-lg mb-2" />
             <p className="3rd-name">
-              {!thirdP || thirdP.totalScore == 0 ? "------" : thirdP.nickname}
+              {!thirdP || thirdP.totalScore == 0 ? '------' : thirdP.nickname}
             </p>
             <p className="3rd-points">
               <span className="3rd-points">
                 {thirdP ? thirdP.totalScore : 0}
-              </span>{" "}
+              </span>{' '}
               نقطة
             </p>
           </div>
@@ -142,11 +142,11 @@ const Lobby: React.FC<LobbyProps> = ({ nickname }) => {
 
       <div className="players-list gird grid-cols col-span-2 rounded-r-3xl scrollbar-thin overflow-y-scroll text-right px-[20px] pt-[30px] pb-[20px] bg-[#38b880]">
         {sortedPlayers.map((p, num) => {
-          let color = "bg-[#ebb10f]";
+          let color = 'bg-[#ebb10f]';
           if (num == 1) {
-            color = "bg-[#ccfff3]";
+            color = 'bg-[#ccfff3]';
           } else if (num == 2) {
-            color = "bg-[#ca7d31]";
+            color = 'bg-[#ca7d31]';
           }
           return playerCircle(num, color, p.nickname, p.lastRoundScore, false);
         })}
@@ -157,8 +157,8 @@ const Lobby: React.FC<LobbyProps> = ({ nickname }) => {
           ).map((num) =>
             playerCircle(
               num + sortedPlayers.length - 1,
-              "bg-white",
-              "------",
+              'bg-white',
+              '------',
               0,
               true
             )

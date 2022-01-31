@@ -1,7 +1,8 @@
 export const IS_TESTING = false;
 export const APP_NAME = 'BianMinis';
 export const TEAM_NAME = 'بيان';
-export const DOMAIN = 'minigames-backend.herokuapp.com';
+// export const DOMAIN = 'minigames-backend.herokuapp.com';
+export const DOMAIN = 'c312-102-191-185-88.ngrok.io';
 export const HOST = IS_TESTING ? 'http://localhost:3000' : `https://${DOMAIN}`;
 export const HOST_TEMP = `https://bian-games.netlify.app`;
 

@@ -1,8 +1,15 @@
-import { useAppSelector } from "../../state/hooks";
+import { useState } from 'react';
+import { useAppSelector } from '../../state/hooks';
 
-interface WordGameBoardProps {}
+interface WordGameBoardProps {
+  categoriesValues: CategoriesValues;
+  onCategoryValueChange: (category: string, value: string) => void;
+}
 
-const WordGameBoard: React.FC<WordGameBoardProps> = () => {
+const WordGameBoard: React.FC<WordGameBoardProps> = ({
+  categoriesValues,
+  onCategoryValueChange,
+}) => {
   const game = useAppSelector((state) => state.gameSlice);
   const room = useAppSelector((state) => state.roomSlice);
 
@@ -23,6 +30,8 @@ const WordGameBoard: React.FC<WordGameBoardProps> = () => {
               type="text"
               placeholder={`${game.currentLetter} ......`}
               className="py-3 px-5 text-black rounded-3xl w-40 border-[1px] border-[#2a5c60] focus:border-[3px] focus:outline-0 placeholder:tracking-[0.2rem]"
+              value={categoriesValues[category]}
+              onChange={(e) => onCategoryValueChange(category, e.target.value)}
             />
           </div>
         ))}

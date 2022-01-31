@@ -1,12 +1,12 @@
-import Image from "next/image";
-import router, { useRouter } from "next/router";
-import { FaSignOutAlt, FaCog, FaShareAlt } from "react-icons/fa";
-import { leaveRoom } from "../../api/rooms";
-import { HOST_TEMP } from "../../config/constants";
-import { State } from "../../models/game";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
-import { resetData } from "../../state/reducers/local";
-import WordLogo from "./shared/WordLogo";
+import Image from 'next/image';
+import router, { useRouter } from 'next/router';
+import { FaSignOutAlt, FaCog, FaShareAlt } from 'react-icons/fa';
+import { leaveRoom } from '../../api/rooms';
+import { HOST_TEMP } from '../../config/constants';
+import { State } from '../../models/game';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { resetData } from '../../state/reducers/local';
+import WordLogo from './shared/WordLogo';
 
 interface WordTopProps {
   nickname: string;
@@ -58,9 +58,9 @@ const WordTop: React.FC<WordTopProps> = ({
 
       {!hideRounds && (
         <h2 className="rounds sm:absolute text-3xl right-8 bottom-3 font-bold">
-          الجولة&nbsp;&nbsp;{" "}
+          الجولة&nbsp;&nbsp;{' '}
           <span className="game-rounds">{room.options?.rounds}</span>/
-          <span className="current-round text-[#1a8c90]">
+          <span className="current-round text-secondary">
             {game.currentRound}
           </span>
         </h2>
