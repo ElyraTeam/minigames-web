@@ -14,6 +14,7 @@ const initialState: LocalState = {
     typeof window !== "undefined"
       ? localStorage.getItem("nickname") || generateRandomNickname()
       : generateRandomNickname(),
+  categoryInputValues: {},
 };
 
 const localSlice = createSlice({
@@ -28,6 +29,9 @@ const localSlice = createSlice({
       if (typeof window !== "undefined") {
         localStorage.setItem("nickname", action.payload);
       }
+    },
+    setCategoryInputValues(state, action: PayloadAction<CategoryValues>) {
+      state.categoryInputValues = action.payload;
     },
   },
   extraReducers: {
@@ -50,6 +54,12 @@ export const saveNickname =
     dispatch(setNickname(nickname));
   };
 
+// export const setCategoryValues =
+// (values: CategoryValues): AppThunk =>
+// async (dispatch: AppDispatch) => {
+//   dispatch(setCa(nickname));
+// };
+
 export const resetData = (): AppThunk => async (dispatch: AppDispatch) => {
   dispatch(setToken(""));
   dispatch(setRoom({}));
@@ -58,6 +68,7 @@ export const resetData = (): AppThunk => async (dispatch: AppDispatch) => {
   dispatch(setChat([]));
 };
 
-export const { setToken, setNickname } = localSlice.actions;
+export const { setToken, setNickname, setCategoryInputValues } =
+  localSlice.actions;
 
 export default localSlice.reducer;

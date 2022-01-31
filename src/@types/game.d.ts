@@ -1,4 +1,5 @@
-type CategoriesValues = { [name: string]: string };
+type CategoryValues = { [name: string]: string };
+type Votes = { [name: string]: number };
 
 interface ErrorResponse {
   errorCode?: number;
@@ -57,12 +58,12 @@ interface Player {
 
 interface CategoryVoteData {
   category: string;
-  values: Map<string, string>;
-  votes: Map<string, number>;
+  values: CategoryValues;
+  votes: Votes;
 }
 
 interface ChatMessage {
-  type: 'system' | 'player';
+  type: "system" | "player";
   sender: string;
   message: string;
 }

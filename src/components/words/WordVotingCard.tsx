@@ -1,6 +1,6 @@
-import classNames from 'classnames';
-import { useState } from 'react';
-import Card from '../shared/Card';
+import classNames from "classnames";
+import { useState } from "react";
+import Card from "../shared/Card";
 
 interface WordVotingCardProps {
   nickname: string;
@@ -23,8 +23,8 @@ const VotingCircle: React.FC<VotingCircleProps> = ({
   return (
     <div
       className={classNames(
-        'text-[0.92rem] font-semibold rounded-full w-7 h-7 bg-[#eee] bg-opacity-20 flex align-middle justify-center items-center font-[arial] cursor-pointer ',
-        { 'bg-secondary bg-opacity-100 border-2': active }
+        "text-[0.92rem] font-semibold rounded-full w-7 h-7 bg-[#eee] bg-opacity-20 flex align-middle justify-center items-center font-[arial] cursor-pointer ",
+        { "bg-secondary bg-opacity-100 border-2": active }
       )}
       onClick={onClick}
     >
@@ -46,11 +46,12 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
     >
       <p className="font-thin">{nickname}</p>
       <p className="font-bold text-2xl">
-        {value.length > 10 ? value.slice(0, 10) + '...' : value}
+        {value.length > 10 ? value.slice(0, 10) + "..." : value}
       </p>
       <div className="flex justify-center gap-3" dir="ltr">
         {[0, 5, 10].map((vote) => (
           <VotingCircle
+            key={vote}
             vote={vote}
             active={activeVote == vote}
             onClick={() => onVoteChange(nickname, vote)}
