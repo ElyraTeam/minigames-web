@@ -31,7 +31,7 @@ const WordChat: React.FC<WordChatProps> = ({ }) => {
 
   return (
     <div className="chat-main flex flex-col h-full">
-      <div className="messages justify-end overflow-y-scroll overflow-x-hidden scrollbar-thin flex-grow rounded-tl-3xl bg-[#38b880] max-h-[318px]">
+      <div className="messages justify-end overflow-y-scroll overflow-x-hidden scrollbar-thin flex-grow rounded-tl-3xl bg-[#38b880] max-h-[318px] max-w-[197px]">
         {messages.map((msg, i) => (
           <div className="message-cont text-right my-1 mx-2" key={i}>
             <p className="sender text-[#5ee494]">

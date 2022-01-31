@@ -56,11 +56,10 @@ const Lobby: React.FC<LobbyProps> = ({ nickname }) => {
         </div>
         <div className="whitespace-nowrap overflow-hidden">
           <span
-            className={`name text-xl inline-block ${
-              nickname === pNick
+            className={`name text-xl inline-block ${nickname === pNick
                 ? "drop-shadow-[0_4px_3px_rgba(0,0,0,0.1)] text-[#70FF75]"
                 : ""
-            }`}
+              }`}
           >
             {pNick.length > 6 ? pNick.slice(0, 6) + ".." : pNick}
           </span>
