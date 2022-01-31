@@ -45,6 +45,10 @@ class LocalPlayer {
     this.socket.emit("stop-game");
   }
 
+  resetGame() {
+    this.socket.emit("reset-game");
+  }
+
   onRequestValues(
     ack: (callback: (values: { [name: string]: string }) => void) => void
   ) {

@@ -25,6 +25,7 @@ import WordGameBoard from "../../../components/words/WordGameBoard";
 import useCountdown from "../../../helpers/hooks/useCountdown";
 import WordVoting from "../../../components/words/WordVoting";
 import { store } from "../../../state/store";
+import useNickname from "../../../helpers/hooks/useNickname";
 
 const DUMMY_CATEGORY_DATA: CategoryVoteData = {
   category: "مدينة",
@@ -46,16 +47,14 @@ const WordGamePage: NextPage = () => {
   const [categoryVoteData, setCategoryVoteData] = useState<CategoryVoteData>();
   const [votes, setVotes] = useState<Votes>({});
   const [votedCount, setVotedCount] = useState(0);
+  const [voted, setVoted] = useState(false);
   const isTimerRunning = countdown != 0;
-  const nickname = useAppSelector((state) => state.localSlice.nickname)!;
-  const categoryValues = useAppSelector(
-    (state) => state.localSlice.categoryInputValues
-  );
+  const nickname = useNickname(`/games/word/${id}`);
 
   //join room
   if (typeof window !== "undefined") {
     useEffect(() => {
-      if (id) {
+      if (id && typeof window !== "undefined") {
         joinRoom(nickname, id as string).then(
           ({ authToken, roomOptions, error }) => {
             if (!authToken && error) {
@@ -88,14 +87,13 @@ const WordGamePage: NextPage = () => {
             });
 
             localPlayer.onStartVote((categoryData) => {
+              setVoted(false);
               setCategoryVoteData(categoryData);
             });
 
             localPlayer.onUpdateVotedCount((count) => {
               setVotedCount(count);
             });
-
-            localPlayer.socket.connect();
 
             const doAuth = () => {
               localPlayer.authenticate(
@@ -113,12 +111,8 @@ const WordGamePage: NextPage = () => {
                 }
               );
             };
-
-            if (localPlayer.socket.connected) {
-              doAuth();
-            } else {
-              localPlayer.socket.on("connect", doAuth);
-            }
+            localPlayer.socket.on("connect", doAuth);
+            localPlayer.socket.connect();
           }
         );
       }
@@ -131,6 +125,7 @@ const WordGamePage: NextPage = () => {
   }
 
   function finishVote() {
+    setVoted(true);
     localPlayer.sendVotes(votes);
   }
 
@@ -172,14 +167,17 @@ const WordGamePage: NextPage = () => {
         categoryVoteData={categoryVoteData!}
       />
     );
+  } else if (game.state == State.GAME_OVER) {
+    //TODO: game over page
   } else if (isLoading) {
     content = <Spinner />;
   } else {
-    content = <WordLobby nickname={nickname} />;
+    content = <WordLobby />;
   }
 
   const isOwner = game.owner == nickname;
 
+  //TODO: change start label to indicate player count
   return (
     <div className="wordgame-main h-screen flex justify-center items-center text-white">
       <Head>
@@ -228,14 +226,16 @@ const WordGamePage: NextPage = () => {
                       <span className="text-secondary">{votedCount}</span>
                     </p>
                   )}
-                  <button
-                    className="finish-button bg-[#1a8b90] hover:bg-[#12595c] text-white py-2 px-5 rounded-3xl ml-4"
-                    onClick={
-                      game.state == State.INGAME ? finishRound : finishVote
-                    }
-                  >
-                    !انتهيت
-                  </button>
+                  {(game.state == State.INGAME || !voted) && (
+                    <button
+                      className="finish-button bg-[#1a8b90] hover:bg-[#12595c] text-white py-2 px-5 rounded-3xl ml-4"
+                      onClick={
+                        game.state == State.INGAME ? finishRound : finishVote
+                      }
+                    >
+                      !انتهيت
+                    </button>
+                  )}
                 </div>
               )}
           </div>

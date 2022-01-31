@@ -3,4 +3,5 @@ export enum State {
   VOTING,
   INGAME,
   WAITING, //used in between rounds
+  GAME_OVER,
 }

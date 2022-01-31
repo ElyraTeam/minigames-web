@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import { FaMedal, FaTimes, FaCrown } from "react-icons/fa";
 import { kickPlayer } from "../../api/rooms";
+import useNickname from "../../helpers/hooks/useNickname";
 import { useAppSelector } from "../../state/hooks";
 import WordChat from "./WordChat";
-import WordSidebar from "./WordSidebar";
 
-interface LobbyProps {
-  nickname: string;
-}
+interface LobbyProps {}
 
-const Lobby: React.FC<LobbyProps> = ({ nickname }) => {
+const Lobby: React.FC<LobbyProps> = () => {
   const game = useAppSelector((state) => state.gameSlice);
   const room = useAppSelector((state) => state.roomSlice);
   const players = useAppSelector((state) => state.playersSlice.players);
 
   const [sortedPlayers, setSortedPlayers] = useState<Player[]>([]);
+  const nickname = useNickname();
 
   useEffect(() => {
     setSortedPlayers(

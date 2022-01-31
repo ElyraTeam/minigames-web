@@ -12,8 +12,8 @@ const generateRandomNickname = () =>
 const initialState: LocalState = {
   nickname:
     typeof window !== "undefined"
-      ? localStorage.getItem("nickname") || generateRandomNickname()
-      : generateRandomNickname(),
+      ? localStorage.getItem("nickname") || undefined
+      : undefined,
   categoryInputValues: {},
 };
 
@@ -32,6 +32,9 @@ const localSlice = createSlice({
     },
     setCategoryInputValues(state, action: PayloadAction<CategoryValues>) {
       state.categoryInputValues = action.payload;
+    },
+    setNextRoute(state, action: PayloadAction<string>) {
+      state.nextRoute = action.payload;
     },
   },
   extraReducers: {
@@ -68,7 +71,7 @@ export const resetData = (): AppThunk => async (dispatch: AppDispatch) => {
   dispatch(setChat([]));
 };
 
-export const { setToken, setNickname, setCategoryInputValues } =
+export const { setToken, setNickname, setCategoryInputValues, setNextRoute } =
   localSlice.actions;
 
 export default localSlice.reducer;
