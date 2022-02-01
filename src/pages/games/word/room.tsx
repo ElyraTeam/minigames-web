@@ -13,7 +13,7 @@ import {
   FaRedoAlt,
   FaCheck,
 } from 'react-icons/fa';
-import { createRoom, joinRoom } from '../../../api/rooms';
+import { changeRoomOptions, createRoom, joinRoom } from '../../../api/rooms';
 import { setRoom } from '../../../state/reducers/room';
 import { useRouter } from 'next/router';
 import { setToken } from '../../../state/reducers/local';
@@ -68,15 +68,28 @@ const charsArabic: string[] = [
 
 const WordCreate: NextPage = () => {
   const router = useRouter();
-  const [categoriesArabic, setCategories] = useState(DEFAULT_CATEGORIES_ARABIC);
+  const mode = (router.query || {}).mode || 'create';
+  const room = useAppSelector((state) => state.roomSlice);
+  const players = useAppSelector((state) => state.playersSlice.players);
+  const isInEditMode = mode == 'edit' && room && room.id;
+  const oldOptions = room.options;
+  const [categoriesArabic, setCategories] = useState(
+    oldOptions?.categories ?? DEFAULT_CATEGORIES_ARABIC
+  );
   const [charsSelected, setCharsSelected] = useState<string[]>(
-    charsArabic.slice(0, 8)
+    oldOptions?.letters ?? charsArabic.slice(0, 8)
   );
   const [newCategory, setNewCategory] = useState('');
   const [newCategoryError, setNewCategoryError] = useState<string | null>(null);
-  const [maxPlayers, setMaxPlayers] = useState<number>(8);
-  const [rounds, setRounds] = useState<number>(charsSelected.length);
+  const [maxPlayers, setMaxPlayers] = useState<number>(
+    oldOptions?.maxPlayers ?? 8
+  );
+  const [rounds, setRounds] = useState<number>(
+    oldOptions?.rounds ?? charsSelected.length
+  );
   const nickname = useNickname();
+  const oldRoomId = room && room.id!;
+  const minPlayers = players?.length || 0;
 
   function charClick(char: string) {
     if (charsSelected.includes(char)) {
@@ -116,14 +129,28 @@ const WordCreate: NextPage = () => {
     setNewCategoryError(null);
   }
 
-  async function makeRoom() {
+  const backToPrevPage = () => {
+    if (isInEditMode) {
+      router.push(`/games/word/${oldRoomId}`);
+    } else {
+      router.push('/games/word');
+    }
+  };
+
+  async function editRoom() {
     const options: RoomOptions = {
       letters: charsSelected,
       rounds,
       maxPlayers,
       categories: categoriesArabic,
     };
-    const { roomId } = await createRoom(nickname, options);
+    let roomId;
+    if (isInEditMode) {
+      await changeRoomOptions(nickname, oldRoomId, options);
+      roomId = oldRoomId;
+    } else {
+      roomId = await createRoom(nickname, options).then((res) => res.roomId);
+    }
     if (!roomId) return; // TODO: show error
     router.replace(`/games/word/${roomId}`);
   }
@@ -131,7 +158,7 @@ const WordCreate: NextPage = () => {
   return (
     <div className="word-create-main h-screen flex justify-center items-center">
       <Head>
-        <title>Word - Create</title>
+        <title>Word - {isInEditMode ? 'Edit' : 'Create'}</title>
       </Head>
 
       <div className="bg-[url('../../public/wordbackground.svg')] bg-cover z-0 fixed top-0 left-0 w-full h-full"></div>
@@ -245,17 +272,14 @@ const WordCreate: NextPage = () => {
                   onChange={(e) => setMaxPlayers(+e.target.value)}
                   value={maxPlayers}
                 >
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
+                  {Array.from(
+                    { length: 13 - minPlayers },
+                    (x, i) => i + minPlayers
+                  ).map((num) => (
+                    <option key={num} value={num}>
+                      {num}
+                    </option>
+                  ))}
                 </select>
                 <span className="text-lg font-[500]">عدد اللاعبين</span>
               </div>
@@ -263,17 +287,19 @@ const WordCreate: NextPage = () => {
           </div>
         </div>
 
-        <Link href="/games/word">
-          <h3 className="text-white mr-10 text-xl cursor-pointer float-right hover:text-[#1A8B90] font-bold transition-colors">
-            الرئيسية <FaArrowRight className="inline ml-2" />
-          </h3>
-        </Link>
+        <h3
+          className="text-white mr-10 text-xl cursor-pointer float-right hover:text-[#1A8B90] font-bold transition-colors"
+          onClick={backToPrevPage}
+        >
+          {isInEditMode ? 'رجوع للغرفة' : 'الرئيسية'}{' '}
+          <FaArrowRight className="inline ml-2" />
+        </h3>
         <h3
           className="text-white ml-10 text-xl cursor-pointer float-left hover:text-[#1A8B90] font-bold transition-colors"
-          onClick={makeRoom}
+          onClick={editRoom}
         >
           <FaArrowLeft className="inline mr-2" />
-          إنشاء غرفة
+          {isInEditMode ? 'حفظ الاعدادات ' : 'إنشاء غرفة'}
         </h3>
       </div>
 

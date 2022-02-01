@@ -8,12 +8,14 @@ interface WordVotingCardProps {
   value: string;
   onVoteChange: (nickname: string, vote: number) => void;
   activeVote: number;
+  votes: { [vote: number]: string[] };
   disableVotes?: boolean;
   locked?: boolean;
 }
 
 interface VotingCircleProps {
   vote: number;
+  votes: string[];
   onClick?: () => void;
   active?: boolean;
   canChangeVote?: boolean;
@@ -22,6 +24,7 @@ interface VotingCircleProps {
 
 const VotingCircle: React.FC<VotingCircleProps> = ({
   vote,
+  votes,
   onClick,
   active,
   canChangeVote,
@@ -30,7 +33,7 @@ const VotingCircle: React.FC<VotingCircleProps> = ({
   return (
     <div
       className={classNames(
-        'text-[0.92rem] font-semibold rounded-full w-7 h-7 bg-[#eee] bg-opacity-20 flex align-middle justify-center items-center font-[arial] cursor-pointer hover:bg-opacity-40 transition-colors ',
+        'relative group text-[0.92rem] font-semibold rounded-full w-7 h-7 bg-[#eee] bg-opacity-20 flex align-middle justify-center items-center font-[arial] cursor-pointer hover:bg-opacity-40 ',
         {
           'bg-secondary bg-opacity-100 border-2': active,
           'bg-secondary bg-opacity-60 border-2': active && locked,
@@ -39,6 +42,18 @@ const VotingCircle: React.FC<VotingCircleProps> = ({
       )}
       onClick={canChangeVote ? onClick : undefined}
     >
+      {votes.length > 0 && (
+        <div
+          className={classNames(
+            'absolute opacity-0 group-hover:opacity-100 top-8 bg-secondary p-2 rounded-md transition-opacity text-[#eee] font-[cairo] z-50',
+            { 'w-32 grid grid-cols-2': votes.length >= 2 }
+          )}
+        >
+          {votes.map((nickname: string, i) => (
+            <p>{nickname}</p>
+          ))}
+        </div>
+      )}
       {vote}
     </div>
   );
@@ -51,6 +66,7 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
   onVoteChange,
   disableVotes,
   locked,
+  votes,
 }) => {
   const playerNickname = useAppSelector((state) => state.localSlice.nickname);
 
@@ -62,17 +78,14 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
       <p className="font-thin">
         {nickname + (nickname == playerNickname ? ' (انت)' : '')}
       </p>
-      <p className="font-bold text-2xl">
-        {!value || value === ''
-          ? '------'
-          : value.length > 10
-          ? value.slice(0, 10) + '...'
-          : value}
+      <p className="font-bold text-2xl my-3 text-ellipsis overflow-hidden">
+        {!value || value === '' ? '------' : value}
       </p>
       <div className="flex justify-center gap-3" dir="ltr">
         {[0, 5, 10].map((vote) => {
           const isValueEmpty = value == undefined || value == '';
           const isActiveVote = activeVote == vote;
+          console.log(votes);
           return (
             <VotingCircle
               key={vote}
@@ -81,6 +94,7 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
               canChangeVote={!isValueEmpty && !disableVotes}
               locked={locked}
               onClick={() => onVoteChange(nickname, vote)}
+              votes={(votes || {})[vote] || []}
             />
           );
         })}

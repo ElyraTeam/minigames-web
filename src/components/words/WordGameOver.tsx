@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { FaMedal } from "react-icons/fa";
-import useNickname from "../../helpers/hooks/useNickname";
-import { useAppSelector } from "../../state/hooks";
+import classNames from 'classnames';
+import { useEffect, useState } from 'react';
+import { FaMedal } from 'react-icons/fa';
+import useNickname from '../../helpers/hooks/useNickname';
+import { useAppSelector } from '../../state/hooks';
 
 interface WordGameOverProps {}
 
@@ -17,28 +18,40 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
   }, [players]);
 
   const filter = (nickname: string, totalScore: number, order: number) => {
-    let color = "text-[#FFD700]";
-    let margin = "";
+    let color = 'text-[#FFD700]';
+    let margin = '';
     if (order == 1) {
-      color = "text-[#e7dede]";
-      margin = "my-14";
+      color = 'text-[#e7dede]';
+      margin = 'my-14';
     } else if (order == 2) {
-      color = "text-[#CD7F32]";
+      color = 'text-[#CD7F32]';
     }
     return (
       <div
-        className={
-          `rank rank-3 xs:text-center sm:text-right overflow-hidden xs:mx-5 my-2 flex flex-col items-center mx-5` +
-          (order == 0 ? " self-start mt-5" : "")
-        }
+        className={`rank rank-3 xs:text-center sm:text-right overflow-hidden xs:mx-5 my-2 flex flex-col items-center mx-5`}
         key={order}
       >
         <FaMedal
-          className={`sm:float-right text-5xl xs:mx-auto mb-2 drop-shadow-md ${color}`}
+          className={classNames(
+            `sm:float-right text-7xl xs:mx-auto mb-2 drop-shadow-md`,
+            { 'text-[6rem]': order == 0 },
+            color
+          )}
         />
-        <span className={"mb-2 name text-2xl " + color}>{nickname}</span>
+        <span
+          className={classNames(
+            'mb-2 name font-bold drop-shadow-md ',
+            {
+              'text-xl': order != 0,
+              'text-2xl': order == 0,
+            },
+            color
+          )}
+        >
+          {nickname}
+        </span>
         <p className="points-main text-[15px]" dir="rtl">
-          <span className="points">{totalScore}</span> نقطة{" "}
+          <span className="points">{totalScore}</span> نقطة{' '}
         </p>
       </div>
     );
@@ -51,7 +64,7 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
     >
       <p className="mt-5 font-bold text-3xl">انتهت اللعبة</p>
       <p className="my-3 text-xl">
-        المركز {sortedPlayers.findIndex((p) => p.nickname == nickname) + 1} -{" "}
+        المركز {sortedPlayers.findIndex((p) => p.nickname == nickname) + 1} -{' '}
         {players?.find((p) => p.nickname == nickname)?.totalScore} نقطة
       </p>
       <div className="bg-light rounded-2xl mx-20  mb-7 mt-7 flex-grow flex flex-row  w-[500px] justify-around align-center items-center">
@@ -68,7 +81,7 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
         {Array.from(
           { length: sortedPlayers.length < 3 ? 3 - sortedPlayers.length : 0 },
           (x, i) => i + 1
-        ).map((num) => filter("------", 0, 3 - num))}
+        ).map((num) => filter('------', 0, 3 - num))}
       </div>
     </div>
   );

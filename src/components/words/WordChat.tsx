@@ -51,7 +51,7 @@ const WordChat: React.FC<WordChatProps> = ({}) => {
             </p>
             <p
               className={classNames('message break-words', {
-                'text-white opacity-60': msg.type == 'system',
+                'text-white opacity-80': msg.type == 'system',
               })}
             >
               {msg.message}

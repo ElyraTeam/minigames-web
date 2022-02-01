@@ -1,9 +1,9 @@
-import Image from "next/image";
-import Link from "next/link";
-import Head from "next/head";
-import type { NextPage } from "next";
-import { APP_NAME } from "../../../config/constants";
-import { useAppSelector } from "../../../state/hooks";
+import Image from 'next/image';
+import Link from 'next/link';
+import Head from 'next/head';
+import type { NextPage } from 'next';
+import { APP_NAME } from '../../../config/constants';
+import { useAppSelector } from '../../../state/hooks';
 
 const Word: NextPage = () => {
   const nickname = useAppSelector((state) => state.localSlice.nickname);
@@ -47,7 +47,7 @@ const Word: NextPage = () => {
             </button>
           </Link>
 
-          <Link href="/games/word/create">
+          <Link href="/games/word/room?mode=create">
             <button className="start-new-main text-xl xs:block xs:mx-auto px-12 py-3 text-white rounded-2xl bg-gradient-to-r from-btngradient-from to-btngradient-to">
               ابدأ لعبة جديدة
             </button>
