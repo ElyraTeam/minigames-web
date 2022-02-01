@@ -1,39 +1,39 @@
-import { NextPage } from 'next';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { joinRoom } from '../../../api/rooms';
-import localPlayer from '../../../api/socket';
-import Spinner from '../../../components/shared/Spinner';
-import WordLobby from '../../../components/words/WordLobby';
-import WordBackground from '../../../components/words/shared/WordBackground';
-import { useAppDispatch, useAppSelector } from '../../../state/hooks';
+import { NextPage } from "next";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { joinRoom } from "../../../api/rooms";
+import localPlayer from "../../../api/socket";
+import Spinner from "../../../components/shared/Spinner";
+import WordLobby from "../../../components/words/WordLobby";
+import WordBackground from "../../../components/words/shared/WordBackground";
+import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import {
   resetData,
   setCategoryInputValues,
   setToken,
-} from '../../../state/reducers/local';
-import room, { setRoom } from '../../../state/reducers/room';
-import WordTimer from '../../../components/words/WordTimer';
-import WordBottomLink from '../../../components/words/shared/WordBottomLink';
-import WordTop from '../../../components/words/WordTop';
-import { State } from '../../../models/game';
-import { addChatMessage } from '../../../state/reducers/chat';
-import WordWaiting from '../../../components/words/WordWaiting';
-import WordChat from '../../../components/words/WordChat';
-import WordGameBoard from '../../../components/words/WordGameBoard';
-import useCountdown from '../../../helpers/hooks/useCountdown';
-import WordVoting from '../../../components/words/WordVoting';
-import { store } from '../../../state/store';
-import useNickname from '../../../helpers/hooks/useNickname';
-import Footer from '../../../components/shared/Footer';
-import WordGameOver from '../../../components/words/WordGameOver';
+} from "../../../state/reducers/local";
+import room, { setRoom } from "../../../state/reducers/room";
+import WordTimer from "../../../components/words/WordTimer";
+import WordBottomLink from "../../../components/words/shared/WordBottomLink";
+import WordTop from "../../../components/words/WordTop";
+import { State } from "../../../models/game";
+import { addChatMessage } from "../../../state/reducers/chat";
+import WordWaiting from "../../../components/words/WordWaiting";
+import WordChat from "../../../components/words/WordChat";
+import WordGameBoard from "../../../components/words/WordGameBoard";
+import useCountdown from "../../../helpers/hooks/useCountdown";
+import WordVoting from "../../../components/words/WordVoting";
+import { store } from "../../../state/store";
+import useNickname from "../../../helpers/hooks/useNickname";
+import Footer from "../../../components/shared/Footer";
+import WordGameOver from "../../../components/words/WordGameOver";
 
 const DUMMY_CATEGORY_DATA: CategoryVoteData = {
-  category: 'مدينة',
+  category: "مدينة",
   categoryIndex: 0,
   votes: { كريم: 5 },
-  values: { كريم: 'احمد', جاست: 'سوسن', حسام: 'محمد' },
+  values: { كريم: "احمد", جاست: "سوسن", حسام: "محمد" },
 };
 
 const WordGamePage: NextPage = () => {
@@ -45,7 +45,7 @@ const WordGamePage: NextPage = () => {
   const [isLoading, setLoading] = useState(true);
   const [isWaitingDone, setWaitingDone] = useState(true);
   const { countdown, setCountdown } = useCountdown(0);
-  const [lobbyMessage, setLobbyMessage] = useState<string>('');
+  const [lobbyMessage, setLobbyMessage] = useState<string>("");
   //const [categoryValues, setCategoryValues] = useState<CategoryValues>({});
   const [categoryVoteData, setCategoryVoteData] = useState<CategoryVoteData>();
   const [votes, setVotes] = useState<Votes>({});
@@ -60,9 +60,9 @@ const WordGamePage: NextPage = () => {
   }, [players]);
 
   //join room
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     useEffect(() => {
-      if (id && nickname && typeof window !== 'undefined') {
+      if (id && nickname && typeof window !== "undefined") {
         dispatch(resetData());
         joinRoom(nickname, id as string).then(
           ({ authToken, roomOptions, error }) => {
@@ -107,7 +107,7 @@ const WordGamePage: NextPage = () => {
             });
 
             localPlayer.onPlayerVotes((allVotes) => {
-              console.log(allVotes);
+              console.log("ALL VOTES", allVotes);
               setAllVotes(allVotes);
               if (allVotes[nickname]) {
                 delete allVotes[nickname][nickname];
@@ -123,7 +123,7 @@ const WordGamePage: NextPage = () => {
                   nickname,
                 },
                 (res) => {
-                  if (res === 'good') {
+                  if (res === "good") {
                     setLoading(false);
                   } else {
                     //TODO: show error
@@ -131,7 +131,7 @@ const WordGamePage: NextPage = () => {
                 }
               );
             };
-            localPlayer.socket.on('connect', doAuth);
+            localPlayer.socket.on("connect", doAuth);
             localPlayer.socket.connect();
           }
         );
@@ -144,14 +144,13 @@ const WordGamePage: NextPage = () => {
     localPlayer.finishRound();
   }
 
-  function finishVote() {
+  function confirmVote() {
     setVoted(true);
-    votes[nickname] = 999;
-    localPlayer.sendVotes(votes);
+    localPlayer.confirmVotes();
   }
 
   let content = <Spinner />;
-  const showLobbyMessage = lobbyMessage != '';
+  const showLobbyMessage = lobbyMessage != "";
   const isInLobby = !isTimerRunning && !isLoading && game.state == State.LOBBY;
 
   if (showLobbyMessage) {
@@ -183,9 +182,13 @@ const WordGamePage: NextPage = () => {
       <WordVoting
         localVotes={votes}
         allVotes={allVotes}
-        onVoteChange={(nickname, vote) =>
-          setVotes((oldVal) => ({ ...oldVal, [nickname]: vote }))
-        }
+        onVoteChange={(nickname, vote) => {
+          setVotes((oldVal) => {
+            const newVal = { ...oldVal, [nickname]: vote };
+            localPlayer.sendVotes(newVal);
+            return newVal;
+          });
+        }}
         categoryVoteData={categoryVoteData!}
         disableVotes={voted}
       />
@@ -199,13 +202,13 @@ const WordGamePage: NextPage = () => {
   }
   const isOwner = game.owner == nickname;
 
-  let bottomLinkText = '..في انتظار منشئ الغرفة';
+  let bottomLinkText = "..في انتظار منشئ الغرفة";
   let isBottomLinkDisabled = true;
   if (isOwner) {
     if ((players?.length || 0) < 2) {
-      bottomLinkText = '..في انتظار المزيد من اللاعبين';
+      bottomLinkText = "..في انتظار المزيد من اللاعبين";
     } else {
-      bottomLinkText = 'بدء جولة';
+      bottomLinkText = "بدء جولة";
       isBottomLinkDisabled = false;
     }
   }
@@ -229,12 +232,12 @@ const WordGamePage: NextPage = () => {
 
             <div
               className={
-                'content-box bg-dark relative rounded-2xl mb-5 mt-3 mx-5 h-[384px] lg:items-center lg:pb-0 ' +
-                (isInLobby || isTimerRunning ? '' : 'lg:flex') +
+                "content-box bg-dark relative rounded-2xl mb-5 mt-3 mx-5 h-[384px] lg:items-center lg:pb-0 " +
+                (isInLobby || isTimerRunning ? "" : "lg:flex") +
                 (game.state == State.INGAME || !showLobbyMessage
-                  ? ''
-                  : ' scrollbar overflow-y-scroll') +
-                (isTimerRunning ? 'justify-center align-center flex' : '')
+                  ? ""
+                  : " scrollbar overflow-y-scroll") +
+                (isTimerRunning ? "justify-center align-center flex" : "")
               }
             >
               {content}
@@ -251,7 +254,7 @@ const WordGamePage: NextPage = () => {
             {isOwner && game.state == State.GAME_OVER && (
               <WordBottomLink
                 onClick={() => localPlayer.resetGame()}
-                label={'اعادة اللعبة'}
+                label={"اعادة اللعبة"}
               />
             )}
 
@@ -269,7 +272,7 @@ const WordGamePage: NextPage = () => {
                     <button
                       className="finish-button bg-[#1a8b90] hover:bg-[#12595c] text-white py-2 px-5 rounded-3xl ml-4"
                       onClick={
-                        game.state == State.INGAME ? finishRound : finishVote
+                        game.state == State.INGAME ? finishRound : confirmVote
                       }
                     >
                       !انتهيت
