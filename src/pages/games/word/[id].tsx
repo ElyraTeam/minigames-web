@@ -31,6 +31,7 @@ import WordGameOver from "../../../components/words/WordGameOver";
 
 const DUMMY_CATEGORY_DATA: CategoryVoteData = {
   category: "مدينة",
+  categoryIndex: 0,
   votes: { كريم: 5 },
   values: { كريم: "احمد", جاست: "سوسن", حسام: "محمد" },
 };
@@ -60,7 +61,7 @@ const WordGamePage: NextPage = () => {
   //join room
   if (typeof window !== "undefined") {
     useEffect(() => {
-      if (id && typeof window !== "undefined") {
+      if (id && nickname && typeof window !== "undefined") {
         dispatch(resetData());
         joinRoom(nickname, id as string).then(
           ({ authToken, roomOptions, error }) => {
@@ -205,7 +206,6 @@ const WordGamePage: NextPage = () => {
     }
   }
 
-  //TODO: change start label to indicate player count
   return (
     <div className="wordgame-main h-screen flex justify-center items-center text-white">
       <Head>
@@ -244,7 +244,7 @@ const WordGamePage: NextPage = () => {
               />
             )}
 
-            {game.state == State.GAME_OVER && (
+            {isOwner && game.state == State.GAME_OVER && (
               <WordBottomLink
                 onClick={() => localPlayer.resetGame()}
                 label={"اعادة اللعبة"}

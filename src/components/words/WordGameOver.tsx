@@ -27,14 +27,16 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
     }
     return (
       <div
-        className={`rank rank-3 xs:text-center sm:text-right overflow-hidden xs:mx-5 my-2 flex flex-col items-center flex-sp mx-5`}
+        className={
+          `rank rank-3 xs:text-center sm:text-right overflow-hidden xs:mx-5 my-2 flex flex-col items-center mx-5` +
+          (order == 0 ? " self-start mt-5" : "")
+        }
         key={order}
       >
         <FaMedal
           className={`sm:float-right text-5xl xs:mx-auto mb-2 drop-shadow-md ${color}`}
         />
-        <span className={"name text-2xl " + color}>{nickname}</span>
-        <br />
+        <span className={"mb-2 name text-2xl " + color}>{nickname}</span>
         <p className="points-main text-[15px]" dir="rtl">
           <span className="points">{totalScore}</span> نقطة{" "}
         </p>
@@ -52,10 +54,21 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
         المركز {sortedPlayers.findIndex((p) => p.nickname == nickname) + 1} -{" "}
         {players?.find((p) => p.nickname == nickname)?.totalScore} نقطة
       </p>
-      <div className="bg-light rounded-2xl mx-20 my-20 flex flex-row h-[400px] w-[400px] justify-center align-center">
+      <div className="bg-light rounded-2xl mx-20  mb-7 mt-7 flex-grow flex flex-row  w-[500px] justify-around align-center items-center">
         {sortedPlayers
-          .slice(0, 3)
-          .map((plr, order) => filter(plr.nickname, plr.totalScore, order))}
+          .slice(2, 3)
+          .map((plr, order) => filter(plr.nickname, plr.totalScore, 2))}
+        {sortedPlayers
+          .slice(1, 2)
+          .map((plr, order) => filter(plr.nickname, plr.totalScore, 1))}
+        {sortedPlayers
+          .slice(0, 1)
+          .map((plr, order) => filter(plr.nickname, plr.totalScore, 0))}
+
+        {Array.from(
+          { length: sortedPlayers.length < 3 ? 3 - sortedPlayers.length : 0 },
+          (x, i) => i + 1
+        ).map((num) => filter("------", 0, 3 - num))}
       </div>
     </div>
   );

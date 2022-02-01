@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { setNextRoute } from "../../state/reducers/local";
 
@@ -9,7 +10,10 @@ const useNickname = (path?: string) => {
   if (!nickname && typeof window !== "undefined") {
     const router = useRouter();
     dispatch(setNextRoute(path || router.asPath));
-    router.replace("/games/getstarted");
+
+    useEffect(() => {
+      router.replace("/games/getstarted");
+    }, []);
   }
 
   return nickname!;

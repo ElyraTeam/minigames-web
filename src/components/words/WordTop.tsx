@@ -7,8 +7,11 @@ import {
   FaShareAlt,
   FaExclamationTriangle,
   FaCheck,
+  FaRedoAlt,
 } from "react-icons/fa";
+
 import { leaveRoom } from "../../api/rooms";
+import localPlayer from "../../api/socket";
 import { HOST_TEMP } from "../../config/constants";
 import { State } from "../../models/game";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
@@ -52,7 +55,9 @@ const WordTop: React.FC<WordTopProps> = ({
           onClick={() => setShowLeaveBox(true)}
           className="inline text-[38px] mr-6 text-[#f00] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#f00] hover:text-white"
         />
-        {game.owner == nickname && game.state == State.LOBBY ? (
+        {game.owner == nickname &&
+        game.state == State.LOBBY &&
+        game.currentRound == 1 ? (
           <FaCog className="inline text-[38px] mr-6 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white" />
         ) : null}
         {!hideShare && (
@@ -77,6 +82,12 @@ const WordTop: React.FC<WordTopProps> = ({
             )}
           </>
         )}
+        {game.currentRound == 1 && (
+          <FaRedoAlt
+            className="inline text-[38px] mr-6 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
+            onClick={() => localPlayer.resetGame()}
+          />
+        )}
       </div>
 
       {!hideRounds && (
@@ -84,7 +95,7 @@ const WordTop: React.FC<WordTopProps> = ({
           الجولة&nbsp;&nbsp;{" "}
           <span className="game-rounds">{room.options?.rounds}</span>/
           <span className="current-round text-secondary">
-            {(game.currentRound || 1) - 1}
+            {(game.currentRound || 1) - (game.state == State.LOBBY ? 1 : 0)}
           </span>
         </h2>
       )}

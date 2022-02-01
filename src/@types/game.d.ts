@@ -60,6 +60,7 @@ interface Player {
 
 interface CategoryVoteData {
   category: string;
+  categoryIndex: number;
   values: CategoryValues;
   votes: Votes;
 }
