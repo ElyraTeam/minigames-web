@@ -77,9 +77,6 @@ const WordVoting: React.FC<WordVotingProps> = ({
           {Object.entries(categoryVoteData.values).map(([nickname, value]) => {
             const isValueEmpty = value == undefined || value == "";
             const totalVotes = getTotalVotes();
-            console.log("allVotes", allVotes);
-            console.log("localVotes", localVotes);
-            console.log("totalVotes", totalVotes);
             return (
               <WordVotingCard
                 key={nickname}

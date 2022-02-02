@@ -10,14 +10,10 @@ import OutlineButton from "../../components/shared/OutlineButton";
 import SlideButton from "../../components/shared/SlideButton";
 import SocialLink from "../../components/shared/SocialLink";
 import WordLogo from "../../components/words/shared/WordLogo";
-import { APP_NAME, CREDITS, TEAM_NAME } from "../../config/constants";
+import { APP_NAME, CREDITS, TEAM_NAME_AR } from "../../config/constants";
 import { shuffle } from "../../helpers/utils";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
-import {
-  saveNickname,
-  setNextRoute,
-  setNickname,
-} from "../../state/reducers/local";
+import { saveNickname, setNextRoute } from "../../state/reducers/local";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -27,8 +23,11 @@ const Home: NextPage = () => {
   const nextRoute = useAppSelector((state) => state.localSlice.nextRoute);
   const [nickname, setName] = useState(stateNickname);
   const dispatch = useAppDispatch();
+
+  const shuffleCredits = () => setCreds(shuffle(CREDITS));
+
   useEffect(() => {
-    setCreds(shuffle(CREDITS));
+    shuffleCredits();
   }, []);
 
   function updateNickname() {
@@ -72,9 +71,17 @@ const Home: NextPage = () => {
           تطوير{" "}
           <span
             className="text-btngradient-from cursor-pointer"
-            onClick={() => setShowCreds(!showCreds)}
+            onClick={() => {
+              setShowCreds((oldShow) => {
+                const show = !oldShow;
+                if (show) {
+                  shuffleCredits();
+                }
+                return show;
+              });
+            }}
           >
-            فريق {TEAM_NAME}
+            فريق {TEAM_NAME_AR}
           </span>
         </div>
         <div className="flex justify-center mt-6">

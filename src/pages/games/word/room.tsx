@@ -1,9 +1,9 @@
-import { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   FaArrowLeft,
@@ -12,66 +12,66 @@ import {
   FaPlusSquare,
   FaRedoAlt,
   FaCheck,
-} from 'react-icons/fa';
-import { changeRoomOptions, createRoom, joinRoom } from '../../../api/rooms';
-import { setRoom } from '../../../state/reducers/room';
-import { useRouter } from 'next/router';
-import { setToken } from '../../../state/reducers/local';
-import localPlayer from '../../../api/socket';
-import { useAppSelector } from '../../../state/hooks';
-import Footer from '../../../components/shared/Footer';
-import useNickname from '../../../helpers/hooks/useNickname';
+} from "react-icons/fa";
+import { changeRoomOptions, createRoom, joinRoom } from "../../../api/rooms";
+import { setRoom } from "../../../state/reducers/room";
+import { useRouter } from "next/router";
+import { setToken } from "../../../state/reducers/local";
+import localPlayer from "../../../api/socket";
+import { useAppSelector } from "../../../state/hooks";
+import Footer from "../../../components/shared/Footer";
+import useNickname from "../../../helpers/hooks/useNickname";
 
 const DEFAULT_CATEGORIES_ARABIC = [
-  'ولد',
-  'بنت',
-  'حيوان',
-  'جماد',
-  'نبات',
-  'بلد',
-  'فيلم',
-  'حشرة',
-  'لون',
-  'مدينة',
+  "ولد",
+  "بنت",
+  "حيوان",
+  "جماد",
+  "نبات",
+  "بلد",
+  "فيلم",
+  "حشرة",
+  "لون",
+  "مدينة",
 ];
 
 const charsArabic: string[] = [
-  'أ',
-  'ب',
-  'ت',
-  'ث',
-  'ج',
-  'ح',
-  'خ',
-  'د',
-  'ذ',
-  'ر',
-  'ز',
-  'س',
-  'ش',
-  'ص',
-  'ض',
-  'ط',
-  'ظ',
-  'ع',
-  'غ',
-  'ف',
-  'ق',
-  'ك',
-  'ل',
-  'م',
-  'ن',
-  'هـ',
-  'و',
-  'ى',
+  "أ",
+  "ب",
+  "ت",
+  "ث",
+  "ج",
+  "ح",
+  "خ",
+  "د",
+  "ذ",
+  "ر",
+  "ز",
+  "س",
+  "ش",
+  "ص",
+  "ض",
+  "ط",
+  "ظ",
+  "ع",
+  "غ",
+  "ف",
+  "ق",
+  "ك",
+  "ل",
+  "م",
+  "ن",
+  "هـ",
+  "و",
+  "ى",
 ];
 
 const WordCreate: NextPage = () => {
   const router = useRouter();
-  const mode = (router.query || {}).mode || 'create';
+  const mode = (router.query || {}).mode || "create";
   const room = useAppSelector((state) => state.roomSlice);
   const players = useAppSelector((state) => state.playersSlice.players);
-  const isInEditMode = mode == 'edit' && room && room.id;
+  const isInEditMode = mode == "edit" && room && room.id;
   const oldOptions = room.options;
   const [categoriesArabic, setCategories] = useState(
     oldOptions?.categories ?? DEFAULT_CATEGORIES_ARABIC
@@ -79,7 +79,7 @@ const WordCreate: NextPage = () => {
   const [charsSelected, setCharsSelected] = useState<string[]>(
     oldOptions?.letters ?? charsArabic.slice(0, 8)
   );
-  const [newCategory, setNewCategory] = useState('');
+  const [newCategory, setNewCategory] = useState("");
   const [newCategoryError, setNewCategoryError] = useState<string | null>(null);
   const [maxPlayers, setMaxPlayers] = useState<number>(
     oldOptions?.maxPlayers ?? 8
@@ -119,13 +119,13 @@ const WordCreate: NextPage = () => {
   function addCategory(categoryName: string, key?: string) {
     if (categoryName.length == 0) return;
     if (key) {
-      if (key !== 'Enter') return;
+      if (key !== "Enter") return;
     }
     if (categoriesArabic.includes(categoryName))
-      return setNewCategoryError('لا يمكنك اضافة نفس الكلمة مرتين');
+      return setNewCategoryError("لا يمكنك اضافة نفس الكلمة مرتين");
 
     setCategories([...categoriesArabic, categoryName]);
-    setNewCategory('');
+    setNewCategory("");
     setNewCategoryError(null);
   }
 
@@ -133,7 +133,7 @@ const WordCreate: NextPage = () => {
     if (isInEditMode) {
       router.push(`/games/word/${oldRoomId}`);
     } else {
-      router.push('/games/word');
+      router.push("/games/word");
     }
   };
 
@@ -155,10 +155,19 @@ const WordCreate: NextPage = () => {
     router.replace(`/games/word/${roomId}`);
   }
 
+  function canProceed() {
+    return (
+      rounds > 0 &&
+      charsSelected.length >= 1 &&
+      maxPlayers >= 2 &&
+      categoriesArabic.length >= 1
+    );
+  }
+
   return (
     <div className="word-create-main h-screen flex justify-center items-center">
       <Head>
-        <title>Word - {isInEditMode ? 'Edit' : 'Create'}</title>
+        <title>Word - {isInEditMode ? "Edit" : "Create"}</title>
       </Head>
 
       <div className="bg-[url('../../public/wordbackground.svg')] bg-cover z-0 fixed top-0 left-0 w-full h-full"></div>
@@ -184,8 +193,8 @@ const WordCreate: NextPage = () => {
                     key={charsArabic.indexOf(char)}
                     onClick={() => charClick(char)}
                     className={
-                      'py-2 px-3 text-lg m-2 bg-white cursor-pointer rounded-full font-semibold flex justify-center items-center shadow-[0_4px_8px_0_rgba(0,0,0,0.3)] transition-colors w-10 ' +
-                      (charsSelected.includes(char) ? 'active' : '')
+                      "py-2 px-3 text-lg m-2 bg-white cursor-pointer rounded-full font-semibold flex justify-center items-center shadow-[0_4px_8px_0_rgba(0,0,0,0.3)] transition-colors w-10 " +
+                      (charsSelected.includes(char) ? "active" : "")
                     }
                   >
                     {char}
@@ -275,11 +284,14 @@ const WordCreate: NextPage = () => {
                   {Array.from(
                     { length: 13 - minPlayers },
                     (x, i) => i + minPlayers
-                  ).map((num) => (
-                    <option key={num} value={num}>
-                      {num}
-                    </option>
-                  ))}
+                  ).map(
+                    (num) =>
+                      num >= 2 && (
+                        <option key={num} value={num}>
+                          {num}
+                        </option>
+                      )
+                  )}
                 </select>
                 <span className="text-lg font-[500]">عدد اللاعبين</span>
               </div>
@@ -291,16 +303,18 @@ const WordCreate: NextPage = () => {
           className="text-white mr-10 text-xl cursor-pointer float-right hover:text-[#1A8B90] font-bold transition-colors"
           onClick={backToPrevPage}
         >
-          {isInEditMode ? 'رجوع للغرفة' : 'الرئيسية'}{' '}
+          {isInEditMode ? "رجوع للغرفة" : "الرئيسية"}{" "}
           <FaArrowRight className="inline ml-2" />
         </h3>
-        <h3
-          className="text-white ml-10 text-xl cursor-pointer float-left hover:text-[#1A8B90] font-bold transition-colors"
-          onClick={editRoom}
-        >
-          <FaArrowLeft className="inline mr-2" />
-          {isInEditMode ? 'حفظ الاعدادات ' : 'إنشاء غرفة'}
-        </h3>
+        {canProceed() && (
+          <h3
+            className="text-white ml-10 text-xl cursor-pointer float-left hover:text-[#1A8B90] font-bold transition-colors"
+            onClick={editRoom}
+          >
+            <FaArrowLeft className="inline mr-2" />
+            {isInEditMode ? "حفظ الاعدادات " : "إنشاء غرفة"}
+          </h3>
+        )}
       </div>
 
       <Footer />
