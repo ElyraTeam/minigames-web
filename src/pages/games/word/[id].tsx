@@ -28,6 +28,7 @@ import { store } from "../../../state/store";
 import useNickname from "../../../helpers/hooks/useNickname";
 import Footer from "../../../components/shared/Footer";
 import WordGameOver from "../../../components/words/WordGameOver";
+import AnimatedBackground from "../../../components/shared/AnimatedBackground";
 
 const DUMMY_CATEGORY_DATA: CategoryVoteData = {
   category: "مدينة",
@@ -219,7 +220,7 @@ const WordGamePage: NextPage = () => {
         <title>Word - Game</title>
       </Head>
 
-      {/* {isLoading && <div className="absolute w-full h-full top-0 left-0 bg-primary flex justify-center items-center z-40"><Spinner /></div>} */}
+      <AnimatedBackground />
 
       <WordBackground>
         <div className="main-content-box bg-light sm:px-8 pb-5 pt-3 sm:rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] w-[100%] sm:w-[630px] md:w-[770px] lg:w-[900px] self-center">

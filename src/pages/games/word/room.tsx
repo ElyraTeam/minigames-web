@@ -21,6 +21,7 @@ import localPlayer from "../../../api/socket";
 import { useAppSelector } from "../../../state/hooks";
 import Footer from "../../../components/shared/Footer";
 import useNickname from "../../../helpers/hooks/useNickname";
+import AnimatedBackground from "../../../components/shared/AnimatedBackground";
 
 const DEFAULT_CATEGORIES_ARABIC = [
   "ولد",
@@ -170,7 +171,9 @@ const WordCreate: NextPage = () => {
         <title>Word - {isInEditMode ? "Edit" : "Create"}</title>
       </Head>
 
-      <div className="bg-[url('../../public/wordbackground.svg')] bg-cover z-0 fixed top-0 left-0 w-full h-full"></div>
+      <AnimatedBackground />
+
+      <div className="bg-[url('../../public/wordbackground.svg')] bg-cover z-0 fixed top-0 left-0 w-full h-full hidden xs:block"></div>
 
       <div className="main-content-box relative z-20 bg-light sm:px-8 pb-5 pt-3 sm:rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] max-w-[900px] ">
         <Link href="/">

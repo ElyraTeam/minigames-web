@@ -32,7 +32,7 @@ const VotingCircle: React.FC<VotingCircleProps> = ({
   return (
     <div
       className={classNames(
-        "relative group text-[0.92rem] font-semibold rounded-full w-7 h-7 bg-[#eee] bg-opacity-20 flex align-middle justify-center items-center font-[arial] cursor-pointer hover:bg-opacity-40 ",
+        "relative group text-[0.92rem] font-semibold rounded-full w-7 h-7 bg-[#eee] bg-opacity-20 flex align-middle justify-center items-center font-[arial] hover:bg-opacity-40 ",
         {
           "bg-secondary bg-opacity-100 border-2": active,
           "bg-secondary bg-opacity-60 border-2": active && locked,
@@ -44,8 +44,8 @@ const VotingCircle: React.FC<VotingCircleProps> = ({
       {votes.length > 0 && (
         <div
           className={classNames(
-            "absolute opacity-0 group-hover:opacity-100 top-8 bg-secondary p-2 rounded-md transition-opacity text-[#eee] font-[cairo] z-50",
-            { "w-32 grid grid-cols-2": votes.length >= 2 }
+            "absolute hidden group-hover:grid top-8 bg-secondary p-2 rounded-md transition-opacity text-[#eee] font-[cairo] z-50",
+            { "w-32 grid-cols-2": votes.length >= 2 }
           )}
         >
           {votes.map((nickname: string, i) => (
@@ -53,7 +53,7 @@ const VotingCircle: React.FC<VotingCircleProps> = ({
           ))}
         </div>
       )}
-      {vote}
+      <span className="cursor-pointer">{vote}</span>
     </div>
   );
 };
