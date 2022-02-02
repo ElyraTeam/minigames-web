@@ -1,12 +1,13 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import Head from 'next/head';
-import type { NextPage } from 'next';
-import { APP_NAME } from '../../../config/constants';
-import { useAppSelector } from '../../../state/hooks';
+import Image from "next/image";
+import Link from "next/link";
+import Head from "next/head";
+import type { NextPage } from "next";
+import { APP_NAME } from "../../../config/constants";
+import AnimatedBackground from "../../../components/shared/AnimatedBackground";
+import useNickname from "../../../helpers/hooks/useNickname";
 
 const Word: NextPage = () => {
-  const nickname = useAppSelector((state) => state.localSlice.nickname);
+  const nickname = useNickname();
   return (
     <div className="word-main pt-8 h-screen text-white">
       <Head>
@@ -14,7 +15,8 @@ const Word: NextPage = () => {
         <title>{APP_NAME} - Word</title>
       </Head>
 
-      <div className="bg-[url('../../public/wordbackground.svg')] bg-cover fixed top-0 left-0 w-full h-full"></div>
+      <AnimatedBackground />
+      {/* <div className="bg-[url('../../public/wordbackground.svg')] bg-cover fixed top-0 left-0 w-full h-full"></div> */}
 
       <div className="content relative z-10 mx-auto">
         <div className="game-content text-center sm:text-right p-1 sm:pr-10">

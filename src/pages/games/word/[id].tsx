@@ -108,9 +108,11 @@ const WordGamePage: NextPage = () => {
             });
 
             localPlayer.onPlayerVotes((allVotes) => {
-              console.log("ALL VOTES", allVotes);
               setAllVotes(allVotes);
-              if (allVotes[nickname]) {
+              if (
+                allVotes[nickname] &&
+                Object.keys(allVotes[nickname]).length == 0
+              ) {
                 delete allVotes[nickname][nickname];
                 setVotes(allVotes[nickname]);
               }

@@ -6,7 +6,7 @@ interface WordVotingCardProps {
   nickname: string;
   value: string;
   onVoteChange: (nickname: string, vote: number) => void;
-  activeVote: number;
+  activeVote?: number;
   votes: { [vote: number]: string[] };
   disableVotes?: boolean;
   locked?: boolean;
@@ -32,7 +32,7 @@ const VotingCircle: React.FC<VotingCircleProps> = ({
   return (
     <div
       className={classNames(
-        "relative group text-[0.92rem] font-semibold rounded-full w-7 h-7 bg-[#eee] bg-opacity-20 flex align-middle justify-center items-center font-[arial] hover:bg-opacity-40 ",
+        "relative group text-[0.92rem] font-semibold cursor-pointer rounded-full w-7 h-7 bg-[#eee] bg-opacity-20 flex align-middle justify-center items-center font-[arial] hover:bg-opacity-40 ",
         {
           "bg-secondary bg-opacity-100 border-2": active,
           "bg-secondary bg-opacity-60 border-2": active && locked,
@@ -53,7 +53,9 @@ const VotingCircle: React.FC<VotingCircleProps> = ({
           ))}
         </div>
       )}
-      <span className="cursor-pointer">{vote}</span>
+      <span className={classNames({ "cursor-pointer": canChangeVote })}>
+        {vote}
+      </span>
     </div>
   );
 };

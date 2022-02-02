@@ -49,6 +49,11 @@ const WordTop: React.FC<WordTopProps> = ({
     dispatch(resetData());
   }
 
+  function resetGame() {
+    localPlayer.resetGame();
+    setShowResetBox(false);
+  }
+
   return (
     <div className="top-info relative">
       <WordLogo />
@@ -59,8 +64,8 @@ const WordTop: React.FC<WordTopProps> = ({
           className="inline text-[38px] mr-6 text-[#f00] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#f00] hover:text-white"
         />
         {game.owner == nickname &&
-          game.state == State.LOBBY &&
-          game.currentRound == 1 ? (
+        game.state == State.LOBBY &&
+        game.currentRound == 1 ? (
           <FaCog
             className="inline text-[38px] mr-6 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
             onClick={() => router.push("/games/word/room?mode=edit")}
@@ -91,7 +96,7 @@ const WordTop: React.FC<WordTopProps> = ({
 
         {game.state != State.GAME_OVER &&
           game.state != State.WAITING &&
-          (game.currentRound || 1) > 1 &&
+          (game.currentRound || 1) >= 1 &&
           isOwner && (
             <FaRedoAlt
               className="inline text-[38px] mr-6 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
@@ -130,7 +135,7 @@ const WordTop: React.FC<WordTopProps> = ({
             </button>
             <button
               className="bg-[#f00] text-white py-1 px-4 rounded-xl hover:bg-opacity-70 transition-colors"
-              onClick={showResetBox ? localPlayer.resetGame : pageLeaveRoom}
+              onClick={showResetBox ? resetGame : pageLeaveRoom}
             >
               تأكيد
             </button>
