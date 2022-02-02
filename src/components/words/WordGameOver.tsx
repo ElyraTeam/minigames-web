@@ -28,7 +28,7 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
     }
     return (
       <div
-        className={`rank rank-3 xs:text-center sm:text-right overflow-hidden xs:mx-5 my-2 flex flex-col items-center mx-5`}
+        className={`rank rank-3 xs:text-center sm:text-right overflow-hidden xs:mx-5 my-2 flex flex-col items-center mx-5 w-1/3 `}
         key={order}
       >
         <FaMedal
@@ -40,7 +40,7 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
         />
         <span
           className={classNames(
-            'mb-2 name font-bold drop-shadow-md ',
+            'mb-2 name font-bold drop-shadow-md text-xl ',
             {
               'text-xl': order != 0,
               'text-2xl': order == 0,
@@ -62,21 +62,21 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
       dir="rtl"
       className="flex flex-col text-center w-full h-full justify-start items-center"
     >
-      <p className="mt-5 font-bold text-3xl">انتهت اللعبة</p>
-      <p className="my-3 text-xl">
+      <p className="mt-5 font-bold text-4xl">انتهت اللعبة</p>
+      <p className="my-3 text-lg">
         المركز {sortedPlayers.findIndex((p) => p.nickname == nickname) + 1} -{' '}
         {players?.find((p) => p.nickname == nickname)?.totalScore} نقطة
       </p>
-      <div className="bg-light rounded-2xl mx-20  mb-7 mt-7 flex-grow flex flex-row  w-[500px] justify-around align-center items-center">
+      <div className="bg-[#58DE85] rounded-2xl mx-20  mb-7 mt-7 flex-grow flex flex-row  w-[500px] justify-around align-center items-center">
         {sortedPlayers
           .slice(2, 3)
           .map((plr, order) => filter(plr.nickname, plr.totalScore, 2))}
         {sortedPlayers
-          .slice(1, 2)
-          .map((plr, order) => filter(plr.nickname, plr.totalScore, 1))}
-        {sortedPlayers
           .slice(0, 1)
           .map((plr, order) => filter(plr.nickname, plr.totalScore, 0))}
+        {sortedPlayers
+          .slice(1, 2)
+          .map((plr, order) => filter(plr.nickname, plr.totalScore, 1))}
 
         {Array.from(
           { length: sortedPlayers.length < 3 ? 3 - sortedPlayers.length : 0 },

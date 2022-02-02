@@ -1,31 +1,31 @@
-import classNames from "classnames";
-import React, { useEffect, useRef, useState } from "react";
-import { MdSend } from "react-icons/md";
-import localPlayer from "../../api/socket";
-import { useAppSelector } from "../../state/hooks";
+import classNames from 'classnames';
+import React, { useEffect, useRef, useState } from 'react';
+import { MdSend } from 'react-icons/md';
+import localPlayer from '../../api/socket';
+import { useAppSelector } from '../../state/hooks';
 
 interface WordChatProps {}
 
 const WordChat: React.FC<WordChatProps> = ({}) => {
   const messages = useAppSelector((state) => state.chatSlice);
   const playerNickname = useAppSelector((state) => state.localSlice.nickname);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   function sendMessage(msg: string, key?: string) {
-    if (msg === "" || msg === " ") return;
+    if (msg === '' || msg === ' ') return;
     if (key) {
-      if (key !== "Enter") return;
+      if (key !== 'Enter') return;
     }
 
     localPlayer.chat(msg);
 
-    setMessage("");
+    setMessage('');
   }
 
   const scrollToBottom = () => {
     if (messagesEndRef.current)
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -36,22 +36,26 @@ const WordChat: React.FC<WordChatProps> = ({}) => {
     <div className="chat-main flex flex-col h-full">
       <div className="messages justify-end overflow-y-scroll overflow-x-hidden scrollbar-thin flex-grow rounded-tl-2xl bg-[#38b880] max-h-[320px] max-w-[197px]">
         {messages.map((msg, i) => (
-          <div className="message-cont text-right my-1 mx-2" key={i} dir="rtl">
-            {msg.type == "player" && (
+          <div
+            className="message-cont text-right my-1 mx-2 text-[0.93rem]"
+            key={i}
+            dir="rtl"
+          >
+            {msg.type == 'player' && (
               <p
                 className={classNames(
-                  "sender text-[#5ee494] font-semibold text-md",
+                  'sender text-[#5ee494] font-semibold text-md',
                   {
                     //'text-[#fff] opacity-60': msg.type == 'system',
                   }
                 )}
               >
-                {msg.sender + (msg.sender == playerNickname ? " (انت)" : "")}
+                {msg.sender + (msg.sender == playerNickname ? ' (انت)' : '')}
               </p>
             )}
             <p
-              className={classNames("message break-words", {
-                "text-white opacity-60": msg.type == "system",
+              className={classNames('message break-words', {
+                'text-white opacity-60': msg.type == 'system',
               })}
             >
               {msg.message}

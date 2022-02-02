@@ -1,10 +1,10 @@
-import Image from "next/image";
-import Link from "next/link";
-import Head from "next/head";
-import type { NextPage } from "next";
-import { APP_NAME } from "../../../config/constants";
-import AnimatedBackground from "../../../components/shared/AnimatedBackground";
-import useNickname from "../../../helpers/hooks/useNickname";
+import Image from 'next/image';
+import Link from 'next/link';
+import Head from 'next/head';
+import type { NextPage } from 'next';
+import { APP_NAME } from '../../../config/constants';
+import AnimatedBackground from '../../../components/shared/AnimatedBackground';
+import useNickname from '../../../helpers/hooks/useNickname';
 
 const Word: NextPage = () => {
   const nickname = useNickname();
@@ -43,7 +43,7 @@ const Word: NextPage = () => {
         </div>
 
         <div className="buttons text-center mt-16 sm:mt-28 pb-10">
-          <Link href="/">
+          <Link href="/games/getstarted">
             <button className="homepage text-xl xs:block xs:mx-auto mb-8 sm:mb-0 sm:mr-8 px-12 py-3 text-[#6fed37] rounded-2xl border-[#6fed37] border">
               الواجهة الرئيسية
             </button>
