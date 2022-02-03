@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import Image from 'next/image';
-import { FaFacebook, FaGithub, FaTwitter } from 'react-icons/fa';
+import { FaFacebook, FaGithub, FaLinkedin } from 'react-icons/fa';
 import SocialLink from '../shared/SocialLink';
 
 interface CreditProps {
@@ -9,7 +9,7 @@ interface CreditProps {
 }
 
 const Credit: React.FC<CreditProps> = ({ credit, className }) => {
-  const { name, facebookLink, twitterLink, githubLink } = credit;
+  const { name, facebookLink, linkedinLink, githubLink } = credit;
   return (
     <div className={classNames('flex justify-between', className)} dir="rtl">
       <p>{name}</p>
@@ -19,9 +19,9 @@ const Credit: React.FC<CreditProps> = ({ credit, className }) => {
             <FaGithub />
           </SocialLink>
         )}
-        {twitterLink && (
-          <SocialLink link={twitterLink}>
-            <FaTwitter />
+        {linkedinLink && (
+          <SocialLink link={linkedinLink}>
+            <FaLinkedin />
           </SocialLink>
         )}
         {facebookLink && (

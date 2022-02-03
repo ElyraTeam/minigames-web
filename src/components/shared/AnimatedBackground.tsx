@@ -3,11 +3,18 @@ import { useEffect, useRef } from "react";
 interface AnimatedBackground { }
 
 const AnimatedBackground: React.FC<AnimatedBackground> = ({ }) => {
+    const mainDiv = useRef<HTMLDivElement>(null);
     const topLine = useRef<HTMLDivElement>(null);
     const midLine = useRef<HTMLDivElement>(null);
     const bottomLine = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        if (typeof window !== "undefined") {
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                if (mainDiv.current) mainDiv.current.style.display = "none";
+            }
+        }
+
         let numRightTop = 1;
         let numRightMid = 1;
         let numRightBottom = 1;
@@ -47,7 +54,7 @@ const AnimatedBackground: React.FC<AnimatedBackground> = ({ }) => {
     }, []);
 
     return (
-        <div className="main-animatedbackground w-full h-full bg-[#4] text-center overflow-hidden fixed bottom-0 left-0 flex items-end flex-col flex-nowrap bg-[#2b87d3] xs:hidden" dir="rtl">
+        <div className="main-animatedbackground w-full h-full bg-[#4] text-center overflow-hidden fixed bottom-0 left-0 flex items-end flex-col flex-nowrap bg-[#2b87d3]" dir="rtl" ref={mainDiv}>
             <div className="top-line line w-full m-[5px] whitespace-nowrap" ref={topLine}>
                 <div className="box relative inline-block text-white w-[180px] h-[180px] text-[7em] text-center leading-[1.5] my-[2.5px] mx-[5px] shadow-[0 8px 16px 0 rgba(0,0,0,.3)] bg-[#F8F811]">ث</div>
                 <div className="box relative inline-block text-white w-[180px] h-[180px] text-[7em] text-center leading-[1.5] my-[2.5px] mx-[5px] shadow-[0 8px 16px 0 rgba(0,0,0,.3)] bg-[#11F820]">أ</div>

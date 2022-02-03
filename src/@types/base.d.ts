@@ -1,6 +1,6 @@
 interface UserCredit {
   name: string;
   facebookLink?: string;
-  twitterLink?: string;
+  linkedinLink?: string;
   githubLink?: string;
 }
