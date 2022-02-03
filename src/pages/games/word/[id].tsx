@@ -233,7 +233,7 @@ const WordGamePage: NextPage = () => {
       <AnimatedBackground />
 
       <WordBackground>
-        <div className="main-content-box bg-light sm:px-8 pb-5 pt-3 sm:rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] w-[100%] sm:w-[630px] md:w-[770px] lg:w-[900px] self-center relative">
+        <div className="main-content-box z-40 bg-light sm:px-8 pb-5 pt-3 sm:rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] w-[100%] sm:w-[630px] md:w-[770px] lg:w-[900px] self-center relative">
           <div>
             <WordTop
               nickname={nickname}
@@ -293,8 +293,9 @@ const WordGamePage: NextPage = () => {
               )}
           </div>
         </div>
+        <Footer />
+
       </WordBackground>
-      <Footer />
     </div>
   );
 };

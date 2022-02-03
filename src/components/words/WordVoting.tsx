@@ -26,7 +26,7 @@ const WordVoting: React.FC<WordVotingProps> = ({
 
   useEffect(() => {
     if (votingCardsRef.current)
-      votingCardsRef.current?.scrollTo({ behavior: 'smooth', top: 0 });
+      votingCardsRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [votingCardsRef, categoryVoteData]);
 
   const getTotalVotes = () => {
@@ -52,8 +52,9 @@ const WordVoting: React.FC<WordVotingProps> = ({
       <div className="chat-section">
         <WordChat />
       </div>
-      <div className="py-8 px-12 scrollbar-thin overflow-y-scroll" dir="ltr">
-        <h1 className="font-semibold text-2xl text-right mb-12" dir="rtl">
+      <div className="pb-8 px-12 scrollbar-thin overflow-y-scroll" dir="ltr">
+        <div ref={votingCardsRef} />
+        <h1 className="font-semibold text-2xl text-right mb-12 mt-8" dir="rtl">
           صوت للاجابة الصحيحة:{' '}
           <span className="mr-2 font-bold">
             {categoryVoteData.category}
@@ -72,7 +73,6 @@ const WordVoting: React.FC<WordVotingProps> = ({
         <div
           className="grid md:grid-cols-2 justify-items-center gap-y-8 sm:grid-cols-1"
           dir="rtl"
-          ref={votingCardsRef}
         >
           {Object.entries(categoryVoteData.values).map(([nickname, value]) => {
             const isValueEmpty = value == undefined || value == '';

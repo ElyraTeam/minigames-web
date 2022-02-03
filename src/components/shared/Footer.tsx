@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { CREDITS, TEAM_NAME_EN } from '../../config/constants';
 import { shuffle } from '../../helpers/utils';
@@ -12,6 +12,7 @@ interface FooterProps { }
 const Footer: React.FC<FooterProps> = ({ }) => {
   const [showCreds, setShowCreds] = useState(false);
   const [creds, setCreds] = useState<UserCredit[]>([]);
+  const [aboveElements, setAboveElements] = useState(false);
 
   const shuffleCredits = () => setCreds(shuffle(CREDITS));
 
@@ -20,11 +21,17 @@ const Footer: React.FC<FooterProps> = ({ }) => {
   }, []);
 
   return (
-    <div className="footer fixed flex items-end justify-between bottom-0 left-0 w-full h-full text-white p-2 z-60">
+    <div className={classNames(
+      "footer fixed flex items-end justify-between bottom-0 left-0 w-full h-full text-white p-2",
+      {
+        "z-40": aboveElements,
+      }
+    )}>
       <p className="">
         Made with <FaHeart className="inline text-[#f00]" /> by{' '}
         <span className="text-primary cursor-pointer hover:text-[#0f0]"
           onClick={() => {
+            setAboveElements(true);
             setShowCreds((oldShow) => {
               const show = !oldShow;
               if (show) {
@@ -60,7 +67,10 @@ const Footer: React.FC<FooterProps> = ({ }) => {
         ))}
         <OutlineButton
           className="w-28 self-center mt-8"
-          onClick={() => setShowCreds(false)}
+          onClick={() => {
+            setAboveElements(false);
+            setShowCreds(false);
+          }}
         >
           إغلاق
         </OutlineButton>
@@ -73,7 +83,10 @@ const Footer: React.FC<FooterProps> = ({ }) => {
             hidden: !showCreds,
           }
         )}
-        onClick={() => setShowCreds(false)}></div>
+        onClick={() => {
+          setAboveElements(false);
+          setShowCreds(false);
+        }}></div>
     </div>
   );
 };
