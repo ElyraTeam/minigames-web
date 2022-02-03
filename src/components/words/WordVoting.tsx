@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
-import { useAppSelector } from "../../state/hooks";
-import WordChat from "./WordChat";
-import WordVotingCard from "./WordVotingCard";
+import { useEffect, useRef } from 'react';
+import { useAppSelector } from '../../state/hooks';
+import WordChat from './WordChat';
+import WordVotingCard from './WordVotingCard';
 
 interface WordVotingProps {
   allVotes: AllPlayersVotes;
@@ -26,8 +26,8 @@ const WordVoting: React.FC<WordVotingProps> = ({
 
   useEffect(() => {
     if (votingCardsRef.current)
-      votingCardsRef.current?.scrollTo({ behavior: "smooth", top: 0 });
-  }, [votingCardsRef]);
+      votingCardsRef.current?.scrollTo({ behavior: 'smooth', top: 0 });
+  }, [votingCardsRef, categoryVoteData]);
 
   const getTotalVotes = () => {
     const totalVotes: { [votedTo: string]: { [vote: number]: string[] } } = {};
@@ -54,7 +54,7 @@ const WordVoting: React.FC<WordVotingProps> = ({
       </div>
       <div className="py-8 px-12 scrollbar-thin overflow-y-scroll" dir="ltr">
         <h1 className="font-semibold text-2xl text-right mb-12" dir="rtl">
-          صوت للاجابة الصحيحة:{" "}
+          صوت للاجابة الصحيحة:{' '}
           <span className="mr-2 font-bold">
             {categoryVoteData.category}
             <span className="mx-4 font-medium">
@@ -75,7 +75,7 @@ const WordVoting: React.FC<WordVotingProps> = ({
           ref={votingCardsRef}
         >
           {Object.entries(categoryVoteData.values).map(([nickname, value]) => {
-            const isValueEmpty = value == undefined || value == "";
+            const isValueEmpty = value == undefined || value == '';
             const totalVotes = getTotalVotes();
             return (
               <WordVotingCard

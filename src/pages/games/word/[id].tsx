@@ -29,6 +29,7 @@ import useNickname from '../../../helpers/hooks/useNickname';
 import Footer from '../../../components/shared/Footer';
 import WordGameOver from '../../../components/words/WordGameOver';
 import AnimatedBackground from '../../../components/shared/AnimatedBackground';
+import { CSSTransition } from 'react-transition-group';
 
 const DUMMY_CATEGORY_DATA: CategoryVoteData = {
   category: 'مدينة',
@@ -55,6 +56,7 @@ const WordGamePage: NextPage = () => {
   const isTimerRunning = countdown != 0;
   const nickname = useNickname(`/games/word/${id}`);
   const [voted, setVoted] = useState(false);
+  const [showVoting, setShowVoting] = useState(true);
 
   useEffect(() => {
     setVoted(players?.find((p) => p.nickname == nickname)?.voted ?? false);
@@ -98,9 +100,13 @@ const WordGamePage: NextPage = () => {
             });
 
             localPlayer.onStartVote((categoryData) => {
+              setShowVoting(false);
+              setTimeout(() => {
+                setShowVoting(true);
+                setCategoryVoteData(categoryData);
+              }, 1000);
               setVoted(false);
               setVotes({});
-              setCategoryVoteData(categoryData);
             });
 
             localPlayer.onUpdateVotedCount((count) => {
@@ -182,19 +188,21 @@ const WordGamePage: NextPage = () => {
     );
   } else if (game.state == State.VOTING && isWaitingDone) {
     content = (
-      <WordVoting
-        localVotes={votes}
-        allVotes={allVotes}
-        onVoteChange={(nickname, vote) => {
-          setVotes((oldVal) => {
-            const newVal = { ...oldVal, [nickname]: vote };
-            localPlayer.sendVotes(newVal);
-            return newVal;
-          });
-        }}
-        categoryVoteData={categoryVoteData!}
-        disableVotes={voted}
-      />
+      <CSSTransition timeout={1000} in={showVoting} classNames="fade">
+        <WordVoting
+          localVotes={votes}
+          allVotes={allVotes}
+          onVoteChange={(nickname, vote) => {
+            setVotes((oldVal) => {
+              const newVal = { ...oldVal, [nickname]: vote };
+              localPlayer.sendVotes(newVal);
+              return newVal;
+            });
+          }}
+          categoryVoteData={categoryVoteData!}
+          disableVotes={voted}
+        />
+      </CSSTransition>
     );
   } else if (game.state == State.GAME_OVER) {
     content = <WordGameOver />;

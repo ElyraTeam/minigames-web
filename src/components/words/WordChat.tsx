@@ -75,7 +75,7 @@ const WordChat: React.FC<WordChatProps> = ({}) => {
           value={message}
           onKeyPress={(e) => sendMessage(message, e.key)}
           onChange={(input) => setMessage(input.target.value)}
-          className="bg-transparent placeholder:text-white focus:outline-0 w-32 pb-2 border-b-[.5px] border-[#63BCA5]"
+          className="bg-transparent placeholder:text-white focus:outline-none w-32 pb-2 border-b-[.5px] border-[#63BCA5]"
           dir="rtl"
         />
       </div>

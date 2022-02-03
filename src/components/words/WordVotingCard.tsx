@@ -44,12 +44,12 @@ const VotingCircle: React.FC<VotingCircleProps> = ({
       {votes.length > 0 && (
         <div
           className={classNames(
-            'absolute hidden group-hover:grid top-8 bg-secondary p-2 rounded-md transition-opacity text-[#eee] font-[cairo] z-50',
-            { 'w-32 grid-cols-2': votes.length >= 2 }
+            'absolute scale-0 hover:scale-100 delay-75 group-hover:scale-100 top-8 bg-secondary py-2 px-3 rounded-md transition-[transform] text-[#eee] font-[cairo] z-50 w-auto min-w-min',
+            { 'grid grid-cols-[1fr_1fr] gap-4': votes.length >= 2 }
           )}
         >
           {votes.map((nickname: string, i) => (
-            <p>{nickname}</p>
+            <span className="whitespace-nowrap">{nickname}</span>
           ))}
         </div>
       )}
