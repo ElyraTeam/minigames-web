@@ -69,4 +69,5 @@ interface ChatMessage {
   type: "system" | "player";
   sender: string;
   message: string;
+  font: "normal" | "bold";
 }
