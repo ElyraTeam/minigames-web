@@ -6,9 +6,13 @@ import { APP_NAME } from '../../../config/constants';
 import AnimatedBackground from '../../../components/shared/AnimatedBackground';
 import useNickname from '../../../helpers/hooks/useNickname';
 import { WORD_GAME_NAME } from '../../../config/word';
+import WordLogo from '../../../components/words/shared/WordLogo';
+import { useRouter } from 'next/router';
 
 const Word: NextPage = () => {
   const nickname = useNickname();
+  const router = useRouter();
+
   return (
     <div className="word-main pt-8 h-screen text-white">
       <Head>
@@ -23,14 +27,11 @@ const Word: NextPage = () => {
 
       <div className="content relative z-10 mx-auto">
         <div className="game-content text-center sm:text-right p-1 sm:pr-10">
-          <Link href="/">
-            <Image
-              src="/wordlogo.svg"
-              width="100"
-              height="100"
-              className="cursor-pointer"
-            />
-          </Link>
+          <WordLogo
+            size="100"
+            onClick={() => router.push('/games/word')}
+            className="cursor-pointer"
+          />
           <h2 dir="rtl" className="text-5xl mb-10 mt-5">
             مرحبا <span className="text-[#6fed37]">{nickname}</span>!
           </h2>

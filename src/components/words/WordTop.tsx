@@ -58,7 +58,10 @@ const WordTop: React.FC<WordTopProps> = ({
 
   return (
     <div className="top-info relative">
-      <WordLogo />
+      <WordLogo
+        onClick={() => router.push('/games/word')}
+        className="cursor-pointer"
+      />
 
       <div className="icons xs:my-4 sm:absolute bottom-3 left-12">
         <FaSignOutAlt

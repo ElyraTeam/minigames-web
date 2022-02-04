@@ -140,7 +140,10 @@ const WordCreate: NextPage = () => {
       <AnimatedBackground />
 
       <div className="main-content-box relative z-20 bg-light sm:px-8 pb-5 pt-3 sm:rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] max-w-[900px] ">
-        <WordLogo onClick={() => router.push('/')} className="cursor-pointer" />
+        <WordLogo
+          onClick={() => router.push('/games/word')}
+          className="cursor-pointer"
+        />
 
         <div className="content-box bg-dark lg:px-8 md:px-8 py-8 rounded-2xl mb-5 mt-3 mx-5 scrollbar overflow-y-scroll max-h-96">
           <div className="choose-chars overflow-hidden">

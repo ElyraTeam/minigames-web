@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 interface WordLogoProps {
   size?: string;
-  onClick: () => void;
+  onClick?: () => void;
   className?: string;
 }
 

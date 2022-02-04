@@ -1,19 +1,19 @@
-import classNames from "classnames";
-import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import Credit from "../../components/about/Credit";
-import Card from "../../components/shared/Card";
-import OutlineButton from "../../components/shared/OutlineButton";
-import SlideButton from "../../components/shared/SlideButton";
-import SocialLink from "../../components/shared/SocialLink";
-import WordLogo from "../../components/words/shared/WordLogo";
-import { APP_NAME, CREDITS, TEAM_NAME_AR } from "../../config/constants";
-import { shuffle } from "../../helpers/utils";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
-import { saveNickname, setNextRoute } from "../../state/reducers/local";
+import classNames from 'classnames';
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import Credit from '../../components/about/Credit';
+import Card from '../../components/shared/Card';
+import OutlineButton from '../../components/shared/OutlineButton';
+import SlideButton from '../../components/shared/SlideButton';
+import SocialLink from '../../components/shared/SocialLink';
+import WordLogo from '../../components/words/shared/WordLogo';
+import { APP_NAME, CREDITS, TEAM_NAME_AR } from '../../config/constants';
+import { shuffle } from '../../helpers/utils';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { saveNickname, setNextRoute } from '../../state/reducers/local';
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -31,12 +31,12 @@ const Home: NextPage = () => {
   }, []);
 
   function updateNickname() {
-    if (nickname && nickname != "") {
+    if (nickname && nickname != '') {
       dispatch(saveNickname(nickname));
 
       if (nextRoute) {
         router.replace(nextRoute);
-        dispatch(setNextRoute(""));
+        dispatch(setNextRoute(''));
       } else {
         router.replace(`/games/word`);
       }
@@ -50,14 +50,18 @@ const Home: NextPage = () => {
       </Head>
 
       <div className="flex flex-col h-screen justify-center items-center text-center">
-        <WordLogo size="100" />
+        <WordLogo
+          size="100"
+          onClick={() => router.push('/games/word')} // TODO: change to / when home page complete
+          className="cursor-pointer"
+        />
         <h2 className="text-2xl font-semibold mt-6 mb-16">!مرحبا بك في كلمة</h2>
         <SlideButton
           onInputTextChange={setName}
           center
           label="ابدأ اللعب"
           initialValue={nickname}
-          onKeyPress={(k) => k == "Enter" && updateNickname()}
+          onKeyPress={(k) => k == 'Enter' && updateNickname()}
           placeholderLabel="اكتب اسمك"
         >
           <Image
@@ -68,7 +72,7 @@ const Home: NextPage = () => {
           />
         </SlideButton>
         <div className="mt-8 text-lg">
-          تطوير{" "}
+          تطوير{' '}
           <span
             className="text-btngradient-from cursor-pointer"
             onClick={() => {
@@ -98,9 +102,9 @@ const Home: NextPage = () => {
 
         <Card
           className={classNames(
-            "absolute w-[30rem] bg-white rounded-2xl transition-transform duration-500 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20",
+            'absolute w-[30rem] bg-white rounded-2xl transition-transform duration-500 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20',
             {
-              "scale-[0]": !showCreds,
+              'scale-[0]': !showCreds,
             }
           )}
         >
@@ -122,7 +126,7 @@ const Home: NextPage = () => {
 
         <div
           className={classNames(
-            "overlay absolute h-full w-full top-0 left-0 cursor-pointer bg-[rgba(0,0,0,0.4)] z-10",
+            'overlay absolute h-full w-full top-0 left-0 cursor-pointer bg-[rgba(0,0,0,0.4)] z-10',
             {
               hidden: !showCreds,
             }
