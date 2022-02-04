@@ -13,7 +13,7 @@ import {
   setCategoryInputValues,
   setToken,
 } from '../../../state/reducers/local';
-import room, { setRoom } from '../../../state/reducers/room';
+import { setRoom } from '../../../state/reducers/room';
 import WordTimer from '../../../components/words/WordTimer';
 import WordBottomLink from '../../../components/words/shared/WordBottomLink';
 import WordTop from '../../../components/words/WordTop';
@@ -30,13 +30,7 @@ import Footer from '../../../components/shared/Footer';
 import WordGameOver from '../../../components/words/WordGameOver';
 import AnimatedBackground from '../../../components/shared/AnimatedBackground';
 import { CSSTransition } from 'react-transition-group';
-
-const DUMMY_CATEGORY_DATA: CategoryVoteData = {
-  category: 'مدينة',
-  categoryIndex: 0,
-  votes: { كريم: 5 },
-  values: { كريم: 'احمد', جاست: 'سوسن', حسام: 'محمد' },
-};
+import { WORD_GAME_NAME } from '../../../config/word';
 
 const WordGamePage: NextPage = () => {
   const router = useRouter();
@@ -117,7 +111,7 @@ const WordGamePage: NextPage = () => {
               setAllVotes(allVotes);
               if (
                 allVotes[nickname] &&
-                Object.keys(allVotes[nickname]).length == 0
+                (!votes[nickname] || Object.keys(votes[nickname]).length == 0)
               ) {
                 delete allVotes[nickname][nickname];
                 setVotes(allVotes[nickname]);
@@ -186,7 +180,7 @@ const WordGamePage: NextPage = () => {
         onWaitingDone={() => setWaitingDone(true)}
       />
     );
-  } else if (game.state == State.VOTING && isWaitingDone) {
+  } else if (game.state == State.VOTING && isWaitingDone && categoryVoteData) {
     content = (
       <CSSTransition timeout={1000} in={showVoting} classNames="fade">
         <WordVoting
@@ -208,7 +202,7 @@ const WordGamePage: NextPage = () => {
     content = <WordGameOver />;
   } else if (isLoading) {
     content = <Spinner />;
-  } else {
+  } else if (game.state == State.LOBBY) {
     content = <WordLobby />;
   }
   const isOwner = game.owner == nickname;
@@ -227,7 +221,7 @@ const WordGamePage: NextPage = () => {
   return (
     <div className="wordgame-main h-screen flex justify-center items-center text-white">
       <Head>
-        <title>Word - Game</title>
+        <title>{WORD_GAME_NAME} - Game</title>
       </Head>
 
       <AnimatedBackground />
@@ -279,22 +273,22 @@ const WordGamePage: NextPage = () => {
                       <span className="text-secondary">{votedCount}</span>
                     </p>
                   )}
-                  {(game.state == State.INGAME || !voted) && (
-                    <button
-                      className="finish-button bg-[#1a8b90] hover:bg-[#12595c] text-white py-2 px-5 rounded-3xl ml-4"
-                      onClick={
-                        game.state == State.INGAME ? finishRound : confirmVote
-                      }
-                    >
-                      !انتهيت
-                    </button>
-                  )}
+                  {(game.state == State.INGAME || !voted) &&
+                    (game.state != State.VOTING || categoryVoteData) && (
+                      <button
+                        className="finish-button bg-[#1a8b90] hover:bg-[#12595c] text-white py-2 px-5 rounded-3xl ml-4"
+                        onClick={
+                          game.state == State.INGAME ? finishRound : confirmVote
+                        }
+                      >
+                        !انتهيت
+                      </button>
+                    )}
                 </div>
               )}
           </div>
         </div>
         <Footer />
-
       </WordBackground>
     </div>
   );

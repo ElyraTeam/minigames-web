@@ -49,7 +49,9 @@ const VotingCircle: React.FC<VotingCircleProps> = ({
           )}
         >
           {votes.map((nickname: string, i) => (
-            <span className="whitespace-nowrap">{nickname}</span>
+            <span key={nickname} className="whitespace-nowrap">
+              {nickname}
+            </span>
           ))}
         </div>
       )}

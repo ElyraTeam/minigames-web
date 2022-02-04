@@ -57,13 +57,13 @@ const WordVoting: React.FC<WordVotingProps> = ({
         <h1 className="font-semibold text-2xl text-right mb-12 mt-8" dir="rtl">
           صوت للاجابة الصحيحة:{' '}
           <span className="mr-2 font-bold">
-            {categoryVoteData.category}
+            {categoryVoteData?.category}
             <span className="mx-4 font-medium">
               (
               <span className="font-bold">
                 {`${catLength}/`}
                 <span className="text-secondary">
-                  {(categoryVoteData.categoryIndex ?? 0) + 1}
+                  {(categoryVoteData?.categoryIndex ?? 0) + 1}
                 </span>
               </span>
               )
@@ -74,22 +74,24 @@ const WordVoting: React.FC<WordVotingProps> = ({
           className="grid md:grid-cols-2 justify-items-center gap-y-8 sm:grid-cols-1"
           dir="rtl"
         >
-          {Object.entries(categoryVoteData.values).map(([nickname, value]) => {
-            const isValueEmpty = value == undefined || value == '';
-            const totalVotes = getTotalVotes();
-            return (
-              <WordVotingCard
-                key={nickname}
-                nickname={nickname}
-                value={value}
-                onVoteChange={onVoteChange}
-                activeVote={isValueEmpty ? 0 : localVotes[nickname]}
-                disableVotes={disableVotes || nickname == playerNickname}
-                locked={isValueEmpty}
-                votes={totalVotes[nickname]}
-              />
-            );
-          })}
+          {Object.entries(categoryVoteData?.values || []).map(
+            ([nickname, value]) => {
+              const isValueEmpty = value == undefined || value == '';
+              const totalVotes = getTotalVotes();
+              return (
+                <WordVotingCard
+                  key={nickname}
+                  nickname={nickname}
+                  value={value}
+                  onVoteChange={onVoteChange}
+                  activeVote={isValueEmpty ? 0 : localVotes[nickname]}
+                  disableVotes={disableVotes || nickname == playerNickname}
+                  locked={isValueEmpty}
+                  votes={totalVotes[nickname]}
+                />
+              );
+            }
+          )}
         </div>
       </div>
     </div>

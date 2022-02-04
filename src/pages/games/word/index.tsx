@@ -5,6 +5,7 @@ import type { NextPage } from 'next';
 import { APP_NAME } from '../../../config/constants';
 import AnimatedBackground from '../../../components/shared/AnimatedBackground';
 import useNickname from '../../../helpers/hooks/useNickname';
+import { WORD_GAME_NAME } from '../../../config/word';
 
 const Word: NextPage = () => {
   const nickname = useNickname();
@@ -12,7 +13,9 @@ const Word: NextPage = () => {
     <div className="word-main pt-8 h-screen text-white">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{APP_NAME} - Word</title>
+        <title>
+          {APP_NAME} - {WORD_GAME_NAME}
+        </title>
       </Head>
 
       <AnimatedBackground />
