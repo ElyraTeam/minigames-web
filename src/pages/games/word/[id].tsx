@@ -31,6 +31,7 @@ import { WORD_GAME_NAME } from '../../../config/word';
 import WordContent from '../../../components/words/shared/WordContent';
 import WordGame from '../../../components/words/WordGame';
 import useSound from 'use-sound';
+import useAudio from '../../../helpers/hooks/useAudio';
 
 const WordGamePage: NextPage = () => {
   const router = useRouter();
@@ -38,15 +39,17 @@ const WordGamePage: NextPage = () => {
   const { id } = router.query;
   const game = useAppSelector((state) => state.gameSlice);
   const players = useAppSelector((state) => state.playersSlice.players);
-  const [playCoin] = useSound('/assets/sounds/coin-drop-4.mp3');
-  const [playComplete] = useSound('/assets/sounds/page-flip-01a.mp3');
-  const [playJoin] = useSound('/assets/sounds/coin-drop-4.mp3');
-  const [playFlip] = useSound('/assets/sounds/page-flip-01a.mp3');
+  const [playTick] = useSound('/assets/sounds/tick.wav');
+  const [playLastTick] = useSound('/assets/sounds/last-tick.wav');
+  const { toggle: playComplete } = useAudio('/assets/sounds/complete.mp3');
+  const { toggle: playFlip } = useAudio('/assets/sounds/flip.mp3');
   const [isLoading, setLoading] = useState(true);
   const [isWaitingDone, setWaitingDone] = useState(true);
   const { countdown, setCountdown } = useCountdown({
     startFrom: 0,
-    onCountdownUpdate: () => playCoin(),
+    onCountdownUpdate: (s) => {
+      s == 0 ? playLastTick() : playTick();
+    },
   });
   const [lobbyMessage, setLobbyMessage] = useState<string>('');
   //const [categoryValues, setCategoryValues] = useState<CategoryValues>({});
@@ -58,11 +61,23 @@ const WordGamePage: NextPage = () => {
   const nickname = useNickname(`/games/word/${id}`);
   const [voted, setVoted] = useState(false);
   const [showVoting, setShowVoting] = useState(true);
+  let pingTimer: NodeJS.Timer;
 
   useEffect(() => {
     setVoted(players?.find((p) => p.nickname == nickname)?.voted ?? false);
-    playJoin();
   }, [players]);
+
+  useEffect(() => {
+    fetchPing();
+    return () => clearInterval(pingTimer);
+  }, []);
+
+  const fetchPing = async () => {
+    pingTimer = setInterval(async () => {
+      const ping = await localPlayer.getPing();
+      console.log(ping);
+    }, 5000);
+  };
 
   //join room
   if (typeof window !== 'undefined') {
@@ -92,7 +107,8 @@ const WordGamePage: NextPage = () => {
             });
 
             localPlayer.onStartTimer((countdown) => {
-              setCountdown(countdown);
+              playTick();
+              setTimeout(() => setCountdown(countdown), 0);
               dispatch(setCategoryInputValues({})); //To reset ingame values
             });
 
@@ -106,7 +122,9 @@ const WordGamePage: NextPage = () => {
               setShowVoting(false);
               setTimeout(() => {
                 setShowVoting(true);
-                playFlip();
+                if (categoryData.categoryIndex != 0) {
+                  playFlip();
+                }
                 setCategoryVoteData(categoryData);
               }, 1000);
               setVoted(false);
@@ -190,6 +208,7 @@ const WordGamePage: NextPage = () => {
         stopperNickname={game.stopClicker!}
         isWaitingDone={isWaitingDone}
         onWaitingStart={() => {
+          console.log('complete');
           setWaitingDone(false);
           playComplete();
         }}

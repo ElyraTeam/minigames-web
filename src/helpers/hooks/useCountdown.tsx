@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 interface UseCountdownProps {
   startFrom: number;
-  onCountdownUpdate?: () => void;
+  onCountdownUpdate?: (s: number) => void;
   onCountdownFinish?: () => void;
 }
 
@@ -17,13 +17,13 @@ const useCountdown = ({
     setTimeout(() => {
       const newCountdown = countdown! - 1;
       setCountdown(newCountdown);
+      onCountdownUpdate && onCountdownUpdate(newCountdown);
     }, 1000);
   }
 
   useEffect(() => {
     if (countdown != 0) {
       startLocalTimer();
-      onCountdownUpdate && onCountdownUpdate();
     } else {
       onCountdownFinish && onCountdownFinish();
     }

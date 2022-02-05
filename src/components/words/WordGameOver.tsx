@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { FaMedal } from 'react-icons/fa';
 import useSound from 'use-sound';
 import localPlayer from '../../api/socket';
+import useAudio from '../../helpers/hooks/useAudio';
 import useNickname from '../../helpers/hooks/useNickname';
 import { useAppSelector } from '../../state/hooks';
 import WordBottomLink from './shared/WordBottomLink';
@@ -21,7 +22,7 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
   const [sortedPlayers, setSortedPlayers] = useState<Player[]>([]);
   const nickname = useNickname();
   const isOwner = game.owner == nickname;
-  const [playGameover] = useSound('/assets/sounds/coin-drop-4.mp3');
+  const { toggle: playGameover } = useAudio('/assets/sounds/victory.mp3');
 
   useEffect(() => {
     playGameover();
