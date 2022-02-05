@@ -1,15 +1,25 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { FaMedal } from 'react-icons/fa';
+import localPlayer from '../../api/socket';
 import useNickname from '../../helpers/hooks/useNickname';
 import { useAppSelector } from '../../state/hooks';
+import WordBottomLink from './shared/WordBottomLink';
+import WordContent from './shared/WordContent';
+
+interface TopPlayer {
+  nickname: string;
+  totalScore: number;
+}
 
 interface WordGameOverProps {}
 
 const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
   const players = useAppSelector((state) => state.playersSlice.players);
+  const game = useAppSelector((state) => state.gameSlice);
   const [sortedPlayers, setSortedPlayers] = useState<Player[]>([]);
   const nickname = useNickname();
+  const isOwner = game.owner == nickname;
 
   useEffect(() => {
     setSortedPlayers(
@@ -18,10 +28,10 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
   }, [players]);
 
   const filter = (nickname: string, totalScore: number, order: number) => {
-    let color = 'text-[#FFD700]';
+    let color = 'text-[#e7dede]';
     let margin = '';
     if (order == 1) {
-      color = 'text-[#e7dede]';
+      color = 'text-[#FFD700]';
       margin = 'my-14';
     } else if (order == 2) {
       color = 'text-[#CD7F32]';
@@ -34,7 +44,7 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
         <FaMedal
           className={classNames(
             `sm:float-right text-7xl xs:mx-auto mb-2 drop-shadow-md`,
-            { 'text-[6rem]': order == 0 },
+            { 'text-[6rem]': order == 1 },
             color
           )}
         />
@@ -57,32 +67,48 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
     );
   };
 
-  return (
-    <div
-      dir="rtl"
-      className="flex flex-col text-center w-full h-full justify-start items-center"
-    >
-      <p className="mt-5 font-bold text-4xl">انتهت اللعبة</p>
-      <p className="my-3 text-lg">
-        المركز {sortedPlayers.findIndex((p) => p.nickname == nickname) + 1} -{' '}
-        {players?.find((p) => p.nickname == nickname)?.totalScore} نقطة
-      </p>
-      <div className="bg-[#58DE85] rounded-2xl mx-20  mb-7 mt-7 flex-grow flex flex-row  w-[500px] justify-around align-center items-center">
-        {sortedPlayers
-          .slice(2, 3)
-          .map((plr, order) => filter(plr.nickname, plr.totalScore, 2))}
-        {sortedPlayers
-          .slice(0, 1)
-          .map((plr, order) => filter(plr.nickname, plr.totalScore, 0))}
-        {sortedPlayers
-          .slice(1, 2)
-          .map((plr, order) => filter(plr.nickname, plr.totalScore, 1))}
+  const generateEmptyPlayer = (): TopPlayer => {
+    return { nickname: '----------', totalScore: 0 };
+  };
 
-        {Array.from(
-          { length: sortedPlayers.length < 3 ? 3 - sortedPlayers.length : 0 },
-          (x, i) => i + 1
-        ).map((num) => filter('------', 0, 3 - num))}
-      </div>
+  const getSortedPlayers = (): TopPlayer[] => {
+    return [
+      sortedPlayers[1] ?? generateEmptyPlayer(),
+      sortedPlayers[0] ?? generateEmptyPlayer(),
+      sortedPlayers[2] ?? generateEmptyPlayer(),
+    ];
+  };
+
+  const leaderboard: TopPlayer[] = getSortedPlayers();
+
+  return (
+    <div>
+      <WordContent>
+        <div
+          dir="rtl"
+          className="flex flex-col text-center w-full h-full justify-start items-center"
+        >
+          <p className="mt-5 font-bold text-4xl">انتهت اللعبة</p>
+          <p className="my-3 text-lg">
+            المركز {sortedPlayers.findIndex((p) => p.nickname == nickname) + 1}{' '}
+            - {players?.find((p) => p.nickname == nickname)?.totalScore} نقطة
+          </p>
+          <div
+            className="bg-[#58DE85] rounded-2xl mx-20  mb-7 mt-7 flex-grow flex flex-row  w-[500px] justify-around align-center items-center"
+            dir="ltr"
+          >
+            {leaderboard.map((plr, i) =>
+              filter(plr.nickname, plr.totalScore, i)
+            )}
+          </div>
+        </div>
+      </WordContent>
+      {isOwner && (
+        <WordBottomLink
+          onClick={() => localPlayer.resetGame()}
+          label={'اعادة اللعبة'}
+        />
+      )}
     </div>
   );
 };

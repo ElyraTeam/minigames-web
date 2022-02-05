@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import TabItem from '../shared/TabItem';
 import WordChat from './WordChat';
-import WordLeaderboard from './WordPlayers';
+import WordPlayers from './WordPlayers';
 
 interface WordSidebarProps {
   hideChat?: boolean;
@@ -13,7 +13,7 @@ const WordSidebar: React.FC<WordSidebarProps> = ({ hideChat, hideScores }) => {
 
   let content = <WordChat addClass="height334" />;
   if (tabIndex == 1) {
-    content = <WordLeaderboard />;
+    content = <WordPlayers />;
   }
 
   return (

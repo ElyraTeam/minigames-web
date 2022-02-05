@@ -15,13 +15,10 @@ import {
 } from '../../../state/reducers/local';
 import { setRoom } from '../../../state/reducers/room';
 import WordTimer from '../../../components/words/WordTimer';
-import WordBottomLink from '../../../components/words/shared/WordBottomLink';
 import WordTop from '../../../components/words/WordTop';
 import { State } from '../../../models/game';
 import { addChatMessage } from '../../../state/reducers/chat';
 import WordWaiting from '../../../components/words/WordWaiting';
-import WordChat from '../../../components/words/WordChat';
-import WordGameBoard from '../../../components/words/WordGameBoard';
 import useCountdown from '../../../helpers/hooks/useCountdown';
 import WordVoting from '../../../components/words/WordVoting';
 import { store } from '../../../state/store';
@@ -31,7 +28,8 @@ import WordGameOver from '../../../components/words/WordGameOver';
 import AnimatedBackground from '../../../components/shared/AnimatedBackground';
 import { CSSTransition } from 'react-transition-group';
 import { WORD_GAME_NAME } from '../../../config/word';
-import WordSidebar from '../../../components/words/WordSidebar';
+import WordContent from '../../../components/words/shared/WordContent';
+import WordGame from '../../../components/words/WordGame';
 
 const WordGamePage: NextPage = () => {
   const router = useRouter();
@@ -144,34 +142,37 @@ const WordGamePage: NextPage = () => {
     }, [id]);
   }
 
-  function finishRound() {
-    localPlayer.finishRound();
-  }
-
   function confirmVote() {
     setVoted(true);
     localPlayer.confirmVotes();
   }
 
-  let content = <Spinner />;
+  let content = (
+    <WordContent>
+      <Spinner />
+    </WordContent>
+  );
   const showLobbyMessage = lobbyMessage != '';
-  const isInLobby = !isTimerRunning && !isLoading && game.state == State.LOBBY;
 
   if (showLobbyMessage) {
     content = (
-      <p className="text-xl font-bold text-center p-12 h-full flex items-center justify-center w-full">
-        {lobbyMessage}
-      </p>
+      <WordContent>
+        <p
+          className="text-xl font-bold text-center p-12 h-full flex items-center justify-center w-full"
+          dir="rtl"
+        >
+          {lobbyMessage}
+        </p>
+      </WordContent>
     );
   } else if (isTimerRunning) {
-    content = <WordTimer countdown={countdown} />;
-  } else if (game.state == State.INGAME) {
     content = (
-      <div className="game-board-main h-[384px] flex relative">
-        <WordSidebar />
-        <WordGameBoard />
-      </div>
+      <WordContent className="flex justify-center items-center">
+        <WordTimer countdown={countdown} />
+      </WordContent>
     );
+  } else if (game.state == State.INGAME) {
+    content = <WordGame />;
   } else if (game.state == State.WAITING || !isWaitingDone) {
     content = (
       <WordWaiting
@@ -196,27 +197,22 @@ const WordGamePage: NextPage = () => {
           }}
           categoryVoteData={categoryVoteData!}
           disableVotes={voted}
+          voted={voted}
+          confirmVote={confirmVote}
+          votedCount={votedCount}
         />
       </CSSTransition>
     );
   } else if (game.state == State.GAME_OVER) {
     content = <WordGameOver />;
   } else if (isLoading) {
-    content = <Spinner />;
+    content = (
+      <WordContent>
+        <Spinner />
+      </WordContent>
+    );
   } else if (game.state == State.LOBBY) {
     content = <WordLobby />;
-  }
-  const isOwner = game.owner == nickname;
-
-  let bottomLinkText = '..في انتظار منشئ الغرفة';
-  let isBottomLinkDisabled = true;
-  if (isOwner) {
-    if ((players?.length || 0) < 2) {
-      bottomLinkText = '..في انتظار المزيد من اللاعبين';
-    } else {
-      bottomLinkText = 'بدء الجولة';
-      isBottomLinkDisabled = false;
-    }
   }
 
   return (
@@ -235,58 +231,7 @@ const WordGamePage: NextPage = () => {
               hideRounds={isLoading || showLobbyMessage}
               hideShare={showLobbyMessage}
             />
-
-            <div
-              className={
-                'content-box bg-dark relative rounded-2xl mb-5 mt-3 mx-5 h-[384px] lg:items-center lg:pb-0 ' +
-                (isInLobby || isTimerRunning ? '' : 'lg:flex') +
-                (game.state == State.INGAME || !showLobbyMessage
-                  ? ''
-                  : ' scrollbar overflow-y-scroll') +
-                (isTimerRunning ? 'justify-center align-center flex' : '')
-              }
-            >
-              {content}
-            </div>
-
-            {isInLobby && !showLobbyMessage && (
-              <WordBottomLink
-                onClick={() => localPlayer.startRound()}
-                disabled={isBottomLinkDisabled}
-                label={bottomLinkText}
-              />
-            )}
-
-            {isOwner && game.state == State.GAME_OVER && (
-              <WordBottomLink
-                onClick={() => localPlayer.resetGame()}
-                label={'اعادة اللعبة'}
-              />
-            )}
-
-            {(game.state == State.INGAME ||
-              (game.state == State.VOTING && isWaitingDone)) &&
-              !isTimerRunning && (
-                <div className="flex justify-center align-middle">
-                  {game.state == State.VOTING && voted && (
-                    <p className="align-middle self-center text-2xl font-bold">
-                      {players?.length ?? 0}/
-                      <span className="text-secondary">{votedCount}</span>
-                    </p>
-                  )}
-                  {(game.state == State.INGAME || !voted) &&
-                    (game.state != State.VOTING || categoryVoteData) && (
-                      <button
-                        className="finish-button bg-[#1a8b90] hover:bg-[#12595c] text-white py-2 px-5 rounded-3xl ml-4"
-                        onClick={
-                          game.state == State.INGAME ? finishRound : confirmVote
-                        }
-                      >
-                        !انتهيت
-                      </button>
-                    )}
-                </div>
-              )}
+            {content}
           </div>
         </div>
         <Footer />

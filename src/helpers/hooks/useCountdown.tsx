@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import useSound from 'use-sound';
 
 const useCountdown = (startFrom: number, onCountdownFinish?: () => void) => {
   const [countdown, setCountdown] = useState(startFrom);
+  const [play, { stop }] = useSound('/assets/sounds/coin-drop-4.mp3');
 
   function startLocalTimer() {
     setTimeout(() => {
@@ -13,6 +15,7 @@ const useCountdown = (startFrom: number, onCountdownFinish?: () => void) => {
   useEffect(() => {
     if (countdown != 0) {
       startLocalTimer();
+      play();
     } else {
       onCountdownFinish && onCountdownFinish();
     }

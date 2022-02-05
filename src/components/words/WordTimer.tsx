@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import WordContent from './shared/WordContent';
 
 interface WordTimerProps {
   countdown: number;
