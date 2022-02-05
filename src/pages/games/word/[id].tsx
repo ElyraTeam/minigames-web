@@ -30,6 +30,7 @@ import { CSSTransition } from 'react-transition-group';
 import { WORD_GAME_NAME } from '../../../config/word';
 import WordContent from '../../../components/words/shared/WordContent';
 import WordGame from '../../../components/words/WordGame';
+import useSound from 'use-sound';
 
 const WordGamePage: NextPage = () => {
   const router = useRouter();
@@ -37,9 +38,16 @@ const WordGamePage: NextPage = () => {
   const { id } = router.query;
   const game = useAppSelector((state) => state.gameSlice);
   const players = useAppSelector((state) => state.playersSlice.players);
+  const [playCoin] = useSound('/assets/sounds/coin-drop-4.mp3');
+  const [playComplete] = useSound('/assets/sounds/coin-drop-4.mp3');
+  const [playJoin] = useSound('/assets/sounds/coin-drop-4.mp3');
+  const [playFlip] = useSound('/assets/sounds/page-flip-01a.mp3');
   const [isLoading, setLoading] = useState(true);
   const [isWaitingDone, setWaitingDone] = useState(true);
-  const { countdown, setCountdown } = useCountdown(0);
+  const { countdown, setCountdown } = useCountdown({
+    startFrom: 0,
+    onCountdownUpdate: () => playCoin(),
+  });
   const [lobbyMessage, setLobbyMessage] = useState<string>('');
   //const [categoryValues, setCategoryValues] = useState<CategoryValues>({});
   const [categoryVoteData, setCategoryVoteData] = useState<CategoryVoteData>();
@@ -53,6 +61,7 @@ const WordGamePage: NextPage = () => {
 
   useEffect(() => {
     setVoted(players?.find((p) => p.nickname == nickname)?.voted ?? false);
+    playJoin();
   }, [players]);
 
   //join room
@@ -68,6 +77,7 @@ const WordGamePage: NextPage = () => {
             }
             dispatch(setToken(authToken!));
             dispatch(setRoom({ id: id as string, options: roomOptions }));
+            // playJoin();
 
             localPlayer.offAll();
             localPlayer.disconnect();
@@ -96,6 +106,7 @@ const WordGamePage: NextPage = () => {
               setShowVoting(false);
               setTimeout(() => {
                 setShowVoting(true);
+                playFlip();
                 setCategoryVoteData(categoryData);
               }, 1000);
               setVoted(false);
@@ -178,7 +189,10 @@ const WordGamePage: NextPage = () => {
       <WordWaiting
         stopperNickname={game.stopClicker!}
         isWaitingDone={isWaitingDone}
-        onWaitingStart={() => setWaitingDone(false)}
+        onWaitingStart={() => {
+          setWaitingDone(false);
+          playComplete();
+        }}
         onWaitingDone={() => setWaitingDone(true)}
       />
     );

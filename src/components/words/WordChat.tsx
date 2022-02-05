@@ -1,41 +1,45 @@
-import classNames from "classnames";
-import React, { useEffect, useRef, useState } from "react";
-import { MdSend } from "react-icons/md";
-import localPlayer from "../../api/socket";
-import { useAppSelector } from "../../state/hooks";
+import classNames from 'classnames';
+import React, { useEffect, useRef, useState } from 'react';
+import { MdSend } from 'react-icons/md';
+import localPlayer from '../../api/socket';
+import { useAppSelector } from '../../state/hooks';
 
 interface WordChatProps {
-  addClass?: string
+  addClass?: string;
 }
 
 const WordChat: React.FC<WordChatProps> = ({ addClass }) => {
   const messages = useAppSelector((state) => state.chatSlice);
   const playerNickname = useAppSelector((state) => state.localSlice.nickname);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   function sendMessage(msg: string, key?: string) {
-    if (msg === "" || msg === " ") return;
+    if (msg === '' || msg === ' ') return;
     if (key) {
-      if (key !== "Enter") return;
+      if (key !== 'Enter') return;
     }
 
     localPlayer.chat(msg);
 
-    setMessage("");
+    setMessage('');
   }
 
   const scrollToBottom = () => {
     if (messagesEndRef.current)
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
+  useEffect(() => {
+    scrollToBottom();
+  }, []);
+
   return (
-    <div className={"chat-main flex flex-col h-full " + addClass}>
+    <div className={'chat-main flex flex-col h-full ' + addClass}>
       <div className="messages justify-end overflow-y-scroll overflow-x-hidden scrollbar-thin flex-grow rounded-tl-2xl bg-[#38b880] max-h-[320px] max-w-[197px]">
         {messages.map((msg, i) => (
           <div
@@ -43,22 +47,22 @@ const WordChat: React.FC<WordChatProps> = ({ addClass }) => {
             key={i}
             dir="rtl"
           >
-            {msg.type == "player" && (
+            {msg.type == 'player' && (
               <p
                 className={classNames(
-                  "sender text-[#5ee494] font-semibold text-md",
+                  'sender text-[#5ee494] font-semibold text-md',
                   {
                     //'text-[#fff] opacity-60': msg.type == 'system',
                   }
                 )}
               >
-                {msg.sender + (msg.sender == playerNickname ? " (انت)" : "")}
+                {msg.sender + (msg.sender == playerNickname ? ' (انت)' : '')}
               </p>
             )}
             <p
-              className={classNames("message break-words", {
-                "text-white opacity-60": msg.type == "system",
-                "font-bold": msg.font === "bold",
+              className={classNames('message break-words', {
+                'text-white opacity-60': msg.type == 'system',
+                'font-bold': msg.font === 'bold',
               })}
             >
               {msg.message}

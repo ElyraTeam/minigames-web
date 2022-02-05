@@ -89,13 +89,13 @@ const Home: NextPage = () => {
           </span>
         </div>
         <div className="flex justify-center mt-6">
-          <SocialLink link="">
+          <SocialLink link="" className="hover:opacity-75">
             <Image src="/assets/svg/facebook.svg" width="25" height="25" />
           </SocialLink>
-          <SocialLink link="">
+          <SocialLink link="" className="hover:opacity-75">
             <Image src="/assets/svg/twitter.svg" width="25" height="25" />
           </SocialLink>
-          <SocialLink link="">
+          <SocialLink link="" className="hover:opacity-75">
             <Image src="/assets/svg/github.svg" width="25" height="25" />
           </SocialLink>
         </div>

@@ -16,7 +16,10 @@ const WordWaiting: React.FC<WordWaitingProps> = ({
   onWaitingStart,
   onWaitingDone,
 }) => {
-  const { countdown } = useCountdown(3, onWaitingDone);
+  const { countdown } = useCountdown({
+    startFrom: 3,
+    onCountdownFinish: onWaitingDone,
+  });
 
   useEffect(() => {
     onWaitingStart();
