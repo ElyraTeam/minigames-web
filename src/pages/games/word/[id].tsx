@@ -39,7 +39,7 @@ const WordGamePage: NextPage = () => {
   const game = useAppSelector((state) => state.gameSlice);
   const players = useAppSelector((state) => state.playersSlice.players);
   const [playCoin] = useSound('/assets/sounds/coin-drop-4.mp3');
-  const [playComplete] = useSound('/assets/sounds/coin-drop-4.mp3');
+  const [playComplete] = useSound('/assets/sounds/page-flip-01a.mp3');
   const [playJoin] = useSound('/assets/sounds/coin-drop-4.mp3');
   const [playFlip] = useSound('/assets/sounds/page-flip-01a.mp3');
   const [isLoading, setLoading] = useState(true);

@@ -18,6 +18,7 @@ import { State } from '../../models/game';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { resetData } from '../../state/reducers/local';
 import Alert from '../shared/Alert';
+import WordTooltipIcon from './shared/WordTooltipIcon';
 import WordLogo from './shared/WordLogo';
 
 interface WordTopProps {
@@ -64,33 +65,39 @@ const WordTop: React.FC<WordTopProps> = ({
       />
 
       <div className="icons xs:my-4 sm:absolute bottom-3 left-12">
-        <FaSignOutAlt
-          onClick={() => !showResetBox && setShowLeaveBox(true)}
-          className="inline text-[38px] mr-6 text-[#f00] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#f00] hover:text-white"
-        />
-        {game.owner == nickname &&
-        game.state == State.LOBBY &&
-        game.currentRound == 1 ? (
-          <FaCog
-            className="inline text-[38px] mr-6 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
-            onClick={() => router.push('/games/word/room?mode=edit')}
+        <WordTooltipIcon text="خروج" className="left-[-5px]" addMargin={true}>
+          <FaSignOutAlt
+            onClick={() => !showResetBox && setShowLeaveBox(true)}
+            className="inline text-[38px] text-[#f00] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#f00] hover:text-white"
           />
+        </WordTooltipIcon>
+        {game.owner == nickname &&
+          game.state == State.LOBBY &&
+          game.currentRound == 1 ? (
+          <WordTooltipIcon text="الإعدادات" className="left-[-20px]" addMargin={true}>
+            <FaCog
+              className="inline text-[38px] text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
+              onClick={() => router.push('/games/word/room?mode=edit')}
+            />
+          </WordTooltipIcon>
         ) : null}
         {!hideShare && (
           <>
             {!showCheckIcon && (
-              <FaShareAlt
-                className="inline text-[38px] mr-6 text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
-                onClick={() => {
-                  navigator.clipboard.writeText(
-                    `${HOST_TEMP}/games/word/${roomId}`
-                  );
-                  setShowCheckIcon(true);
-                  setTimeout(() => {
-                    setShowCheckIcon(false);
-                  }, 1000);
-                }}
-              />
+              <WordTooltipIcon text="مشاركة" className="left-[-15px]" addMargin={true}>
+                <FaShareAlt
+                  className="inline text-[38px] text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
+                  onClick={() => {
+                    navigator.clipboard.writeText(
+                      `${HOST_TEMP}/games/word/${roomId}`
+                    );
+                    setShowCheckIcon(true);
+                    setTimeout(() => {
+                      setShowCheckIcon(false);
+                    }, 1000);
+                  }}
+                />
+              </WordTooltipIcon>
             )}
 
             {showCheckIcon && (
@@ -106,10 +113,12 @@ const WordTop: React.FC<WordTopProps> = ({
             game.state != State.WAITING &&
             (game.currentRound || 1) >= 1 &&
             isOwner && (
-              <FaRedoAlt
-                className="inline text-[32px] mr-6 text-[#00cc89] -translate-y-[1px] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
-                onClick={() => !showLeaveBox && setShowResetBox(true)}
-              />
+              <WordTooltipIcon text="إعادة اللعبة" className="left-[-30px] py-1" addMargin={true}>
+                <FaRedoAlt
+                  className="inline text-[32px] text-[#00cc89] -translate-y-[1px] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
+                  onClick={() => !showLeaveBox && setShowResetBox(true)}
+                />
+              </WordTooltipIcon>
             )}
           الجولة&nbsp;&nbsp;{' '}
           <span className="game-rounds">{room.options?.rounds}</span>/

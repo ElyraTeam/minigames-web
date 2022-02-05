@@ -17,14 +17,15 @@ const Word: NextPage = () => {
   return (
     <div className="word-main pt-8 h-screen text-white">
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {/* <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
         <title>
           {APP_NAME} - {WORD_GAME_NAME}
         </title>
       </Head>
 
+      <div className="bg-[url('../../public/wordbackground.svg')] bg-cover fixed top-0 left-0 w-full h-full"></div>
+
       <AnimatedBackground />
-      {/* <div className="bg-[url('../../public/wordbackground.svg')] bg-cover fixed top-0 left-0 w-full h-full"></div> */}
 
       <div className="content relative z-10 mx-auto">
         <div className="game-content text-center sm:text-right p-1 sm:pr-10">

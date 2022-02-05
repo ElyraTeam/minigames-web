@@ -22,6 +22,7 @@ import WordChooseCategories from '../../../components/words/room/WordChooseCateg
 import WordAddCategory from '../../../components/words/room/WordAddCategory';
 import WordDropdown from '../../../components/words/room/WordDropdown';
 import WordBottomLink from '../../../components/words/shared/WordBottomLink';
+import WordTooltipIcon from '../../../components/words/shared/WordTooltipIcon';
 
 const WordCreate: NextPage = () => {
   const router = useRouter();
