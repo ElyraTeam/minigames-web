@@ -65,7 +65,7 @@ const WordVoting: React.FC<WordVotingProps> = ({
             <WordSidebar />
           </div>
           <div
-            className="pb-8 px-12 scrollbar-thin overflow-y-scroll"
+            className="pb-12 px-12 scrollbar-thin overflow-y-scroll"
             dir="ltr"
           >
             <div ref={votingCardsRef} />
