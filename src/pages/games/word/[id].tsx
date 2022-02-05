@@ -47,9 +47,8 @@ const WordGamePage: NextPage = () => {
   const [isWaitingDone, setWaitingDone] = useState(true);
   const { countdown, setCountdown } = useCountdown({
     startFrom: 0,
-    onCountdownUpdate: (s) => {
-      s == 0 ? playLastTick() : playTick();
-    },
+    onCountdownUpdate: (s) => playTick(),
+    onCountdownFinish: () => playLastTick(),
   });
   const [lobbyMessage, setLobbyMessage] = useState<string>('');
   //const [categoryValues, setCategoryValues] = useState<CategoryValues>({});
@@ -107,8 +106,7 @@ const WordGamePage: NextPage = () => {
             });
 
             localPlayer.onStartTimer((countdown) => {
-              playTick();
-              setTimeout(() => setCountdown(countdown), 0);
+              setCountdown(countdown);
               dispatch(setCategoryInputValues({})); //To reset ingame values
             });
 

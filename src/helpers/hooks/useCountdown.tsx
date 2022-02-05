@@ -12,20 +12,22 @@ const useCountdown = ({
   onCountdownFinish,
 }: UseCountdownProps) => {
   const [countdown, setCountdown] = useState(startFrom);
+  const [started, setStarted] = useState(false);
 
   function startLocalTimer() {
     setTimeout(() => {
       const newCountdown = countdown! - 1;
       setCountdown(newCountdown);
-      onCountdownUpdate && onCountdownUpdate(newCountdown);
     }, 1000);
   }
 
   useEffect(() => {
     if (countdown != 0) {
+      onCountdownUpdate && onCountdownUpdate(countdown);
       startLocalTimer();
     } else {
       onCountdownFinish && onCountdownFinish();
+      setStarted(false);
     }
   }, [countdown]);
 

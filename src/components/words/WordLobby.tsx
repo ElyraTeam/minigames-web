@@ -117,7 +117,7 @@ const Lobby: React.FC<LobbyProps> = () => {
           <div className="stats col-span-4 sm:text-center py-8">
             <h3 className="text-2xl">المتصدرون</h3>
 
-            <div className="leaderboard bg-[#58de85] grid grid-cols-3 my-5 py-5 px-[20px] mx-5 rounded-3xl">
+            <div className="leaderboard bg-[#58de85] grid grid-cols-3 my-5 py-5 px-[20px] mx-5 rounded-3xl text-[0.94rem]">
               <div className="1st text-center order-2">
                 <FaMedal className="mx-auto text-6xl text-[#ffd700] drop-shadow-lg mb-2" />
                 <p className="1st-name">
