@@ -31,6 +31,7 @@ import WordGameOver from '../../../components/words/WordGameOver';
 import AnimatedBackground from '../../../components/shared/AnimatedBackground';
 import { CSSTransition } from 'react-transition-group';
 import { WORD_GAME_NAME } from '../../../config/word';
+import WordSidebar from '../../../components/words/WordSidebar';
 
 const WordGamePage: NextPage = () => {
   const router = useRouter();
@@ -167,7 +168,7 @@ const WordGamePage: NextPage = () => {
   } else if (game.state == State.INGAME) {
     content = (
       <div className="game-board-main h-[384px] flex relative">
-        <WordChat />
+        <WordSidebar />
         <WordGameBoard />
       </div>
     );

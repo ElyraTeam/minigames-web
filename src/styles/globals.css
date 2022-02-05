@@ -93,6 +93,11 @@
       transform: rotate(1800deg);
     }
   }
+
+  .height334 {
+    height: 334px;
+    max-height:334px;
+  }
 }
 
 html,

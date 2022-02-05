@@ -6,7 +6,7 @@ import useNickname from '../../helpers/hooks/useNickname';
 import { useAppSelector } from '../../state/hooks';
 import WordChat from './WordChat';
 
-interface LobbyProps {}
+interface LobbyProps { }
 
 const Lobby: React.FC<LobbyProps> = () => {
   const game = useAppSelector((state) => state.gameSlice);
@@ -56,10 +56,9 @@ const Lobby: React.FC<LobbyProps> = () => {
           <div className="whitespace-nowrap overflow-hidden" dir="rtl">
             <span
               className={classNames(
-                `name text-lg inline-block ${
-                  nickname === pNick
-                    ? 'drop-shadow-[0_4px_3px_rgba(0,0,0,0.1)] text-[#70FF75]'
-                    : ''
+                `name text-lg inline-block ${nickname === pNick
+                  ? 'drop-shadow-[0_4px_3px_rgba(0,0,0,0.1)] text-[#70FF75]'
+                  : ''
                 }`,
                 { 'opacity-40': !isOnline }
               )}

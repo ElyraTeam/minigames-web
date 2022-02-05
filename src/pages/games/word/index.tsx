@@ -8,6 +8,7 @@ import useNickname from '../../../helpers/hooks/useNickname';
 import { WORD_GAME_NAME } from '../../../config/word';
 import WordLogo from '../../../components/words/shared/WordLogo';
 import { useRouter } from 'next/router';
+import Footer from '../../../components/shared/Footer';
 
 const Word: NextPage = () => {
   const nickname = useNickname();
@@ -48,18 +49,20 @@ const Word: NextPage = () => {
 
         <div className="buttons text-center mt-16 sm:mt-28 pb-10">
           <Link href="/games/getstarted">
-            <button className="homepage text-xl xs:block xs:mx-auto mb-8 sm:mb-0 sm:mr-8 px-12 py-3 text-[#6fed37] rounded-2xl border-[#6fed37] border">
+            <button className="homepage text-xl xs:block xs:mx-auto mb-8 sm:mb-0 sm:mr-8 px-12 py-3 text-[#6fed37] rounded-2xl border-[#6fed37] border hover:bg-[rgba(109,255,0,.2)] hover:text-[#0f0] transition-all">
               الواجهة الرئيسية
             </button>
           </Link>
 
           <Link href="/games/word/room?mode=create">
-            <button className="start-new-main text-xl xs:block xs:mx-auto px-12 py-3 text-white rounded-2xl bg-gradient-to-r from-btngradient-from to-btngradient-to">
+            <button className="start-new-main text-xl xs:block xs:mx-auto px-12 py-3 text-white rounded-2xl bg-gradient-to-r from-btngradient-from to-btngradient-to border-0 border-transparent relative active:top-[2px] shadow-[0px_4px_0px_0px_rgba(0,0,0,.3)] active:shadow-[0px_2px_0px_0px_rgba(0,0,0,.3)]">
               ابدأ لعبة جديدة
             </button>
           </Link>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useAppSelector } from '../../state/hooks';
-import WordChat from './WordChat';
+import WordSidebar from './WordSidebar';
 import WordVotingCard from './WordVotingCard';
 
 interface WordVotingProps {
@@ -49,8 +49,8 @@ const WordVoting: React.FC<WordVotingProps> = ({
 
   return (
     <div className="grid grid-cols-[auto_1fr] h-full w-full sm:overflow-hidden">
-      <div className="chat-section">
-        <WordChat />
+      <div className="chat-section scrollbar-thin overflow-y-scroll">
+        <WordSidebar />
       </div>
       <div className="pb-8 px-12 scrollbar-thin overflow-y-scroll" dir="ltr">
         <div ref={votingCardsRef} />

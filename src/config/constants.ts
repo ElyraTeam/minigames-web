@@ -1,7 +1,7 @@
 export const IS_TESTING = false;
-export const APP_NAME = "BianMinis";
-export const TEAM_NAME_AR = "بيان";
-export const TEAM_NAME_EN = "Bian";
+export const APP_NAME = "ElyraMinis";
+export const TEAM_NAME_AR = "إليرا";
+export const TEAM_NAME_EN = "Elyra";
 export const DOMAIN = "minigames-backend.herokuapp.com";
 // export const DOMAIN = "c312-102-191-185-88.ngrok.io";
 export const HOST = IS_TESTING ? "http://localhost:3000" : `https://${DOMAIN}`;

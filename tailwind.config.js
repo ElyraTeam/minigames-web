@@ -24,6 +24,9 @@ module.exports = {
       backgroundImage: {
         'animatedbackground-overlay': "linear-gradient(#0f9fbd, #1726a2)",
       },
+      spacing: {
+        '340': '340px',
+      },
     },
   },
   plugins: [],

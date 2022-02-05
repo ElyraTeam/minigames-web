@@ -23,7 +23,7 @@ const WordGameBoard: React.FC<WordGameBoardProps> = (
     <div className="game-board pt-10 sm:w-[65%] md:w-[70%] lg:w-[78%] overflow-y-scroll scrollbar">
       <h2 className="text-2xl text-right pr-10 mb-5 flex" dir="rtl">
         <p className="float-right">اكتب كلمات تبدأ بحرف:&nbsp; </p>
-        <p className="char text-3xl bg-[#7adf99] w-12 h-12 relative -top-2 -left-2 rounded-full flex justify-center font-semibold float-right">
+        <p className="char text-3xl bg-[#7adf99] w-12 h-12 relative -top-2 -left-2 rounded-full flex justify-center leading-[1.8] font-semibold float-right">
           {game.currentLetter}
         </p>
       </h2>
