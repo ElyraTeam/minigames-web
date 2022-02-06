@@ -256,7 +256,7 @@ const WordGamePage: NextPage = () => {
       <NextSeo
         description="Join this game of Word!"
         openGraph={{
-          title: "Joing Word Game",
+          title: "Join Word Game",
           description: "You're invited to join this Word game!",
           url: `${HOST_TEMP}/games/word/${game.id}`,
         }}

@@ -45,7 +45,7 @@ export const seoTags: DefaultSeoProps = {
     description: "Minigames Website by Team Elyra",
     images: [
       {
-        url: `${HOST_TEMP}/wordlogo.svg`,
+        url: `${HOST_TEMP}/logo.png`,
         width: 800,
         height: 600,
         alt: "Word Logo",
