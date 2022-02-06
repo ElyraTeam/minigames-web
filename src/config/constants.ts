@@ -46,8 +46,8 @@ export const seoTags: DefaultSeoProps = {
     images: [
       {
         url: `${HOST_TEMP}/logo.png`,
-        width: 800,
-        height: 600,
+        width: 512,
+        height: 512,
         alt: "Word Logo",
       },
     ],

@@ -4,6 +4,7 @@ import wrapper from "../state/store";
 import Head from "next/head";
 import { HOST_TEMP, seoTags } from "../config/constants";
 import { DefaultSeo } from "next-seo";
+import { AudioContext, defaultAudioValue } from "../audio/audio";
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -37,7 +38,9 @@ function App({ Component, pageProps }: AppProps) {
         <meta name="application-name" content="ElyraMinis" />
       </Head>
       <DefaultSeo {...seoTags} />
-      <Component {...pageProps} />
+      <AudioContext.Provider value={defaultAudioValue}>
+        <Component {...pageProps} />
+      </AudioContext.Provider>
     </>
   );
 }

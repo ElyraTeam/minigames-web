@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { joinRoom } from "../../../api/rooms";
 import localPlayer from "../../../api/socket";
 import Spinner from "../../../components/shared/Spinner";
@@ -34,6 +34,7 @@ import useSound from "use-sound";
 import useAudio from "../../../helpers/hooks/useAudio";
 import { NextSeo } from "next-seo";
 import { HOST_TEMP } from "../../../config/constants";
+import { AudioContext } from "../../../audio/audio";
 
 const WordGamePage: NextPage = () => {
   const router = useRouter();
@@ -41,10 +42,10 @@ const WordGamePage: NextPage = () => {
   const { id } = router.query;
   const game = useAppSelector((state) => state.gameSlice);
   const players = useAppSelector((state) => state.playersSlice.players);
-  const [playTick] = useSound("/assets/sounds/tick.ogg");
-  const [playLastTick] = useSound("/assets/sounds/last-tick.ogg");
-  const { toggle: playComplete } = useAudio("/assets/sounds/complete.ogg");
-  const { toggle: playFlip } = useAudio("/assets/sounds/flip.ogg");
+  const { toggle: playTick } = useAudio("tick");
+  const { toggle: playLastTick } = useAudio("last-tick");
+  const { toggle: playComplete } = useAudio("complete");
+  const { toggle: playFlip } = useAudio("flip");
   const [isLoading, setLoading] = useState(true);
   const [isWaitingDone, setWaitingDone] = useState(true);
   const { countdown, setCountdown } = useCountdown({
@@ -208,7 +209,6 @@ const WordGamePage: NextPage = () => {
         stopperNickname={game.stopClicker!}
         isWaitingDone={isWaitingDone}
         onWaitingStart={() => {
-          console.log("complete");
           setWaitingDone(false);
           playComplete();
         }}

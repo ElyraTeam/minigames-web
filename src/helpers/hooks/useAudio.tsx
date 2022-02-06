@@ -1,26 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from "react";
+import { AudioContext } from "../../audio/audio";
 
-const useAudio = (url: string) => {
-  const [audio] = useState(
-    typeof window != 'undefined' ? new Audio(url) : undefined
-  );
+const useAudio = (key: string) => {
+  const audioCtx = useContext(AudioContext);
   const [playing, setPlaying] = useState(false);
 
   const toggle = () => {
-    setPlaying(!playing);
+    setPlaying((wasPlaying) => {
+      !wasPlaying
+        ? audioCtx?.play(key, () => {
+            setPlaying(false);
+          })
+        : audioCtx?.pause();
+      return !wasPlaying;
+    });
   };
-
-  useEffect(() => {
-    playing ? audio?.play() : audio?.pause();
-  }, [playing]);
-
-  useEffect(() => {
-    audio?.addEventListener('ended', () => setPlaying(false));
-    return () => {
-      audio?.removeEventListener('ended', () => setPlaying(false));
-    };
-  }, []);
-
   return { playing, toggle };
 };
 

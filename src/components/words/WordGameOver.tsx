@@ -22,7 +22,7 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
   const [sortedPlayers, setSortedPlayers] = useState<Player[]>([]);
   const nickname = useNickname();
   const isOwner = game.owner == nickname;
-  const { toggle: playGameover } = useAudio("/assets/sounds/victory.ogg");
+  const { toggle: playGameover } = useAudio("victory");
 
   useEffect(() => {
     playGameover();
