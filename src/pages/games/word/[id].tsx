@@ -34,7 +34,6 @@ import useSound from "use-sound";
 import useAudio from "../../../helpers/hooks/useAudio";
 import { NextSeo } from "next-seo";
 import { HOST_TEMP } from "../../../config/constants";
-import { AudioContext } from "../../../audio/audio";
 
 const WordGamePage: NextPage = () => {
   const router = useRouter();

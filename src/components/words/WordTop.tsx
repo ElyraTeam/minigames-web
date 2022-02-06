@@ -20,6 +20,7 @@ import { resetData } from "../../state/reducers/local";
 import Alert from "../shared/Alert";
 import WordTooltipIcon from "./shared/WordTooltipIcon";
 import WordLogo from "./shared/WordLogo";
+import classNames from "classnames";
 
 interface WordTopProps {
   nickname: string;
@@ -60,10 +61,7 @@ const WordTop: React.FC<WordTopProps> = ({
 
   return (
     <div className="top-info relative">
-      <WordLogo
-        onClick={() => router.push("/games/word")}
-        className="cursor-pointer"
-      />
+      <WordLogo />
 
       <div className="icons xs:my-4 sm:absolute bottom-3 left-12">
         <WordTooltipIcon text="خروج" className="left-[-5px]" addMargin={true}>
