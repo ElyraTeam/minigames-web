@@ -1,13 +1,13 @@
-import classNames from 'classnames';
-import { useEffect, useState } from 'react';
-import { FaMedal, FaTimes, FaCrown } from 'react-icons/fa';
-import { kickPlayer } from '../../api/rooms';
-import localPlayer from '../../api/socket';
-import useNickname from '../../helpers/hooks/useNickname';
-import { useAppSelector } from '../../state/hooks';
-import WordBottomLink from './shared/WordBottomLink';
-import WordContent from './shared/WordContent';
-import WordChat from './WordChat';
+import classNames from "classnames";
+import { useEffect, useState } from "react";
+import { FaMedal, FaTimes, FaCrown } from "react-icons/fa";
+import { kickPlayer } from "../../api/rooms";
+import localPlayer from "../../api/socket";
+import useNickname from "../../helpers/hooks/useNickname";
+import { useAppSelector } from "../../state/hooks";
+import WordBottomLink from "./shared/WordBottomLink";
+import WordContent from "./shared/WordContent";
+import WordChat from "./WordChat";
 
 interface LobbyProps {}
 
@@ -20,13 +20,13 @@ const Lobby: React.FC<LobbyProps> = () => {
   const nickname = useNickname();
   const isOwner = game.owner == nickname;
 
-  let bottomLinkText = '..في انتظار منشئ الغرفة';
+  let bottomLinkText = "..في انتظار منشئ الغرفة";
   let isBottomLinkDisabled = true;
   if (isOwner) {
     if ((players?.length || 0) < 2) {
-      bottomLinkText = '..في انتظار المزيد من اللاعبين';
+      bottomLinkText = "..في انتظار المزيد من اللاعبين";
     } else {
-      bottomLinkText = 'بدء الجولة';
+      bottomLinkText = "بدء الجولة";
       isBottomLinkDisabled = false;
     }
   }
@@ -73,22 +73,22 @@ const Lobby: React.FC<LobbyProps> = () => {
               className={classNames(
                 `name text-lg inline-block ${
                   nickname === pNick
-                    ? 'drop-shadow-[0_4px_3px_rgba(0,0,0,0.1)] text-[#70FF75]'
-                    : ''
+                    ? "drop-shadow-[0_4px_3px_rgba(0,0,0,0.1)] text-[#70FF75]"
+                    : ""
                 }`,
-                { 'opacity-40': !isOnline }
+                { "opacity-40": !isOnline }
               )}
             >
               {pNick}
             </span>
             <br />
             <p
-              className={classNames('points-main text-[12px]', {
-                'opacity-40': !isOnline,
+              className={classNames("points-main text-[12px]", {
+                "opacity-40": !isOnline,
               })}
               dir="rtl"
             >
-              <span className="points">{score}</span> نقطة{' '}
+              <span className="points">{score}</span> نقطة{" "}
             </p>
           </div>
         </div>
@@ -103,13 +103,12 @@ const Lobby: React.FC<LobbyProps> = () => {
   const firstP = topPlayers[0];
   const secondP = topPlayers[1];
   const thirdP = topPlayers[2];
-
+  //TODO: fix this mess
   return (
     <div>
       <WordContent>
         <div className="game-stats grid grid-cols-8 h-full sm:overflow-hidden">
           {/* <WordSidebar /> */}
-
           <div className="chat-section col-span-2">
             <WordChat />
           </div>
@@ -120,43 +119,43 @@ const Lobby: React.FC<LobbyProps> = () => {
             <div className="leaderboard bg-[#58de85] grid grid-cols-3 my-5 py-5 px-[20px] mx-5 rounded-3xl text-[0.94rem]">
               <div className="1st text-center order-2">
                 <FaMedal className="mx-auto text-6xl text-[#ffd700] drop-shadow-lg mb-2" />
-                <p className="1st-name">
+                <p className="1st-name text-[#ffd700] drop-shadow-md font-[700]">
                   {!firstP || firstP.totalScore == 0
-                    ? '------'
+                    ? "------"
                     : firstP.nickname}
                 </p>
-                <p className="1st-points" dir="rtl">
+                <p className="1st-points text-[12px]" dir="rtl">
                   <span className="1st-points">
                     {firstP ? firstP.totalScore : 0}
-                  </span>{' '}
+                  </span>{" "}
                   نقطة
                 </p>
               </div>
               <div className="2st text-center order-1">
                 <FaMedal className="mx-auto text-5xl text-[#d5f7ef] drop-shadow-lg mb-2" />
-                <p className="2nd-name">
+                <p className="2nd-name text-[#d5f7ef] drop-shadow-md font-[700]">
                   {!secondP || secondP.totalScore == 0
-                    ? '------'
+                    ? "------"
                     : secondP.nickname}
                 </p>
-                <p className="2nd-points" dir="rtl">
+                <p className="2nd-points text-[12px]" dir="rtl">
                   <span className="2nd-points">
                     {secondP ? secondP.totalScore : 0}
-                  </span>{' '}
+                  </span>{" "}
                   نقطة
                 </p>
               </div>
               <div className="3rd text-center order-3">
                 <FaMedal className="mx-auto text-5xl text-[#b28812] drop-shadow-lg mb-2" />
-                <p className="3rd-name">
+                <p className="3rd-name text-[#b28812] drop-shadow-md font-[700]">
                   {!thirdP || thirdP.totalScore == 0
-                    ? '------'
+                    ? "------"
                     : thirdP.nickname}
                 </p>
-                <p className="3rd-points" dir="rtl">
+                <p className="3rd-points text-[12px]" dir="rtl">
                   <span className="3rd-points">
                     {thirdP ? thirdP.totalScore : 0}
-                  </span>{' '}
+                  </span>{" "}
                   نقطة
                 </p>
               </div>
@@ -168,21 +167,20 @@ const Lobby: React.FC<LobbyProps> = () => {
             <p dir="rtl">
               <span className="your-points text-[#1a8b90] font-bold">
                 {players?.find((p) => p.nickname == nickname)?.totalScore ?? 0}
-              </span>{' '}
+              </span>{" "}
               نقطة
             </p>
           </div>
-
           <div className="players-list gird grid-cols col-span-2 rounded-r-2xl scrollbar-thin overflow-y-scroll text-right px-[11px] pt-[30px] pb-[20px] bg-[#38b880]">
             {sortedPlayers.map((p, num) => {
-              let color = 'bg-[#fff]';
+              let color = "bg-[#fff]";
               if (num == 0) {
-                color = 'bg-[#ebb10f]';
+                color = "bg-[#ebb10f]";
               }
               if (num == 1) {
-                color = 'bg-[#E6EDF5]';
+                color = "bg-[#E6EDF5]";
               } else if (num == 2) {
-                color = 'bg-[#ca7d31]';
+                color = "bg-[#ca7d31]";
               }
               return playerCircle(
                 num,
@@ -200,8 +198,8 @@ const Lobby: React.FC<LobbyProps> = () => {
               ).map((num) =>
                 playerCircle(
                   num + sortedPlayers.length - 1,
-                  'bg-white',
-                  '------',
+                  "bg-white",
+                  "------",
                   0,
                   true,
                   true

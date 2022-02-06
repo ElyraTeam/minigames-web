@@ -1,13 +1,13 @@
-import classNames from 'classnames';
-import { useEffect, useState } from 'react';
-import { FaMedal } from 'react-icons/fa';
-import useSound from 'use-sound';
-import localPlayer from '../../api/socket';
-import useAudio from '../../helpers/hooks/useAudio';
-import useNickname from '../../helpers/hooks/useNickname';
-import { useAppSelector } from '../../state/hooks';
-import WordBottomLink from './shared/WordBottomLink';
-import WordContent from './shared/WordContent';
+import classNames from "classnames";
+import { useEffect, useState } from "react";
+import { FaMedal } from "react-icons/fa";
+import useSound from "use-sound";
+import localPlayer from "../../api/socket";
+import useAudio from "../../helpers/hooks/useAudio";
+import useNickname from "../../helpers/hooks/useNickname";
+import { useAppSelector } from "../../state/hooks";
+import WordBottomLink from "./shared/WordBottomLink";
+import WordContent from "./shared/WordContent";
 
 interface TopPlayer {
   nickname: string;
@@ -22,7 +22,7 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
   const [sortedPlayers, setSortedPlayers] = useState<Player[]>([]);
   const nickname = useNickname();
   const isOwner = game.owner == nickname;
-  const { toggle: playGameover } = useAudio('/assets/sounds/victory.mp3');
+  const { toggle: playGameover } = useAudio("/assets/sounds/victory.ogg");
 
   useEffect(() => {
     playGameover();
@@ -35,13 +35,13 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
   }, [players]);
 
   const filter = (nickname: string, totalScore: number, order: number) => {
-    let color = 'text-[#e7dede]';
-    let margin = '';
+    let color = "text-[#e7dede]";
+    let margin = "";
     if (order == 1) {
-      color = 'text-[#FFD700]';
-      margin = 'my-14';
+      color = "text-[#FFD700]";
+      margin = "my-14";
     } else if (order == 2) {
-      color = 'text-[#CD7F32]';
+      color = "text-[#CD7F32]";
     }
     return (
       <div
@@ -51,16 +51,16 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
         <FaMedal
           className={classNames(
             `sm:float-right text-7xl xs:mx-auto mb-2 drop-shadow-md`,
-            { 'text-[6rem]': order == 1 },
+            { "text-[6rem]": order == 1 },
             color
           )}
         />
         <span
           className={classNames(
-            'mb-2 name font-bold drop-shadow-md text-xl ',
+            "mb-2 name font-bold drop-shadow-md text-xl ",
             {
-              'text-xl': order != 1,
-              'text-2xl': order == 1,
+              "text-xl": order != 1,
+              "text-2xl": order == 1,
             },
             color
           )}
@@ -68,14 +68,14 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
           {nickname}
         </span>
         <p className="points-main text-[15px]" dir="rtl">
-          <span className="points">{totalScore}</span> نقطة{' '}
+          <span className="points">{totalScore}</span> نقطة{" "}
         </p>
       </div>
     );
   };
 
   const generateEmptyPlayer = (): TopPlayer => {
-    return { nickname: '----------', totalScore: 0 };
+    return { nickname: "----------", totalScore: 0 };
   };
 
   const getSortedPlayers = (): TopPlayer[] => {
@@ -97,7 +97,7 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
         >
           <p className="mt-5 font-bold text-4xl">انتهت اللعبة</p>
           <p className="my-3 text-lg">
-            المركز {sortedPlayers.findIndex((p) => p.nickname == nickname) + 1}{' '}
+            المركز {sortedPlayers.findIndex((p) => p.nickname == nickname) + 1}{" "}
             - {players?.find((p) => p.nickname == nickname)?.totalScore} نقطة
           </p>
           <div
@@ -113,7 +113,7 @@ const WordGameOver: React.FC<WordGameOverProps> = ({}) => {
       {isOwner && (
         <WordBottomLink
           onClick={() => localPlayer.resetGame()}
-          label={'اعادة اللعبة'}
+          label={"اعادة اللعبة"}
         />
       )}
     </div>

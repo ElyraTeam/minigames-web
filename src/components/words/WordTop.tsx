@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import router, { useRouter } from 'next/router';
-import { useState } from 'react';
+import Image from "next/image";
+import router, { useRouter } from "next/router";
+import { useState } from "react";
 import {
   FaSignOutAlt,
   FaCog,
@@ -8,18 +8,18 @@ import {
   FaExclamationTriangle,
   FaCheck,
   FaRedoAlt,
-} from 'react-icons/fa';
-import { CSSTransition } from 'react-transition-group';
+} from "react-icons/fa";
+import { CSSTransition } from "react-transition-group";
 
-import { leaveRoom } from '../../api/rooms';
-import localPlayer from '../../api/socket';
-import { HOST_TEMP } from '../../config/constants';
-import { State } from '../../models/game';
-import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import { resetData } from '../../state/reducers/local';
-import Alert from '../shared/Alert';
-import WordTooltipIcon from './shared/WordTooltipIcon';
-import WordLogo from './shared/WordLogo';
+import { leaveRoom } from "../../api/rooms";
+import localPlayer from "../../api/socket";
+import { HOST_TEMP } from "../../config/constants";
+import { State } from "../../models/game";
+import { useAppDispatch, useAppSelector } from "../../state/hooks";
+import { resetData } from "../../state/reducers/local";
+import Alert from "../shared/Alert";
+import WordTooltipIcon from "./shared/WordTooltipIcon";
+import WordLogo from "./shared/WordLogo";
 
 interface WordTopProps {
   nickname: string;
@@ -47,6 +47,7 @@ const WordTop: React.FC<WordTopProps> = ({
   async function pageLeaveRoom() {
     if (game.id) {
       await leaveRoom(nickname, roomId);
+      localPlayer.disconnect();
     }
     router.replace(`/games/word`);
     dispatch(resetData());
@@ -60,7 +61,7 @@ const WordTop: React.FC<WordTopProps> = ({
   return (
     <div className="top-info relative">
       <WordLogo
-        onClick={() => router.push('/games/word')}
+        onClick={() => router.push("/games/word")}
         className="cursor-pointer"
       />
 
@@ -72,19 +73,30 @@ const WordTop: React.FC<WordTopProps> = ({
           />
         </WordTooltipIcon>
         {game.owner == nickname &&
-          game.state == State.LOBBY &&
-          game.currentRound == 1 ? (
-          <WordTooltipIcon text="الإعدادات" className="left-[-20px]" addMargin={true}>
+        game.state == State.LOBBY &&
+        game.currentRound == 1 ? (
+          <WordTooltipIcon
+            text="الإعدادات"
+            className="left-[-20px]"
+            addMargin={true}
+          >
             <FaCog
               className="inline text-[38px] text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
-              onClick={() => router.push('/games/word/room?mode=edit')}
+              onClick={() => {
+                localPlayer.disconnect();
+                router.push("/games/word/room?mode=edit");
+              }}
             />
           </WordTooltipIcon>
         ) : null}
         {!hideShare && (
           <>
             {!showCheckIcon && (
-              <WordTooltipIcon text="مشاركة" className="left-[-15px]" addMargin={true}>
+              <WordTooltipIcon
+                text="مشاركة"
+                className="left-[-15px]"
+                addMargin={true}
+              >
                 <FaShareAlt
                   className="inline text-[38px] text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
                   onClick={() => {
@@ -113,14 +125,18 @@ const WordTop: React.FC<WordTopProps> = ({
             game.state != State.WAITING &&
             (game.currentRound || 1) >= 1 &&
             isOwner && (
-              <WordTooltipIcon text="إعادة اللعبة" className="left-[-30px] py-1" addMargin={true}>
+              <WordTooltipIcon
+                text="إعادة اللعبة"
+                className="left-[-30px] py-1"
+                addMargin={true}
+              >
                 <FaRedoAlt
                   className="inline text-[32px] text-[#00cc89] -translate-y-[1px] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
                   onClick={() => !showLeaveBox && setShowResetBox(true)}
                 />
               </WordTooltipIcon>
             )}
-          الجولة&nbsp;&nbsp;{' '}
+          الجولة&nbsp;&nbsp;{" "}
           <span className="game-rounds">{room.options?.rounds}</span>/
           <span className="current-round text-secondary">
             {(game.currentRound || 1) - (game.state == State.LOBBY ? 1 : 0)}

@@ -1,0 +1,19 @@
+{
+    "name": "Word | \u0643\u0644\u0645\u0629",
+    "short_name": "Word | \u0643\u0644\u0645\u0629",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#54ec99",
+    "background_color": "#54ec99",
+    "display": "standalone"
+}

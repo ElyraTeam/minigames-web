@@ -1,37 +1,39 @@
-import { NextPage } from 'next';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { joinRoom } from '../../../api/rooms';
-import localPlayer from '../../../api/socket';
-import Spinner from '../../../components/shared/Spinner';
-import WordLobby from '../../../components/words/WordLobby';
-import WordBackground from '../../../components/words/shared/WordBackground';
-import { useAppDispatch, useAppSelector } from '../../../state/hooks';
+import { NextPage } from "next";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { joinRoom } from "../../../api/rooms";
+import localPlayer from "../../../api/socket";
+import Spinner from "../../../components/shared/Spinner";
+import WordLobby from "../../../components/words/WordLobby";
+import WordBackground from "../../../components/words/shared/WordBackground";
+import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import {
   resetData,
   setCategoryInputValues,
   setToken,
-} from '../../../state/reducers/local';
-import { setRoom } from '../../../state/reducers/room';
-import WordTimer from '../../../components/words/WordTimer';
-import WordTop from '../../../components/words/WordTop';
-import { State } from '../../../models/game';
-import { addChatMessage } from '../../../state/reducers/chat';
-import WordWaiting from '../../../components/words/WordWaiting';
-import useCountdown from '../../../helpers/hooks/useCountdown';
-import WordVoting from '../../../components/words/WordVoting';
-import { store } from '../../../state/store';
-import useNickname from '../../../helpers/hooks/useNickname';
-import Footer from '../../../components/shared/Footer';
-import WordGameOver from '../../../components/words/WordGameOver';
-import AnimatedBackground from '../../../components/shared/AnimatedBackground';
-import { CSSTransition } from 'react-transition-group';
-import { WORD_GAME_NAME } from '../../../config/word';
-import WordContent from '../../../components/words/shared/WordContent';
-import WordGame from '../../../components/words/WordGame';
-import useSound from 'use-sound';
-import useAudio from '../../../helpers/hooks/useAudio';
+} from "../../../state/reducers/local";
+import { setRoom } from "../../../state/reducers/room";
+import WordTimer from "../../../components/words/WordTimer";
+import WordTop from "../../../components/words/WordTop";
+import { State } from "../../../models/game";
+import { addChatMessage } from "../../../state/reducers/chat";
+import WordWaiting from "../../../components/words/WordWaiting";
+import useCountdown from "../../../helpers/hooks/useCountdown";
+import WordVoting from "../../../components/words/WordVoting";
+import { store } from "../../../state/store";
+import useNickname from "../../../helpers/hooks/useNickname";
+import Footer from "../../../components/shared/Footer";
+import WordGameOver from "../../../components/words/WordGameOver";
+import AnimatedBackground from "../../../components/shared/AnimatedBackground";
+import { CSSTransition } from "react-transition-group";
+import { WORD_GAME_NAME } from "../../../config/word";
+import WordContent from "../../../components/words/shared/WordContent";
+import WordGame from "../../../components/words/WordGame";
+import useSound from "use-sound";
+import useAudio from "../../../helpers/hooks/useAudio";
+import { NextSeo } from "next-seo";
+import { HOST_TEMP } from "../../../config/constants";
 
 const WordGamePage: NextPage = () => {
   const router = useRouter();
@@ -39,10 +41,10 @@ const WordGamePage: NextPage = () => {
   const { id } = router.query;
   const game = useAppSelector((state) => state.gameSlice);
   const players = useAppSelector((state) => state.playersSlice.players);
-  const [playTick] = useSound('/assets/sounds/tick.wav');
-  const [playLastTick] = useSound('/assets/sounds/last-tick.wav');
-  const { toggle: playComplete } = useAudio('/assets/sounds/complete.mp3');
-  const { toggle: playFlip } = useAudio('/assets/sounds/flip.mp3');
+  const [playTick] = useSound("/assets/sounds/tick.ogg");
+  const [playLastTick] = useSound("/assets/sounds/last-tick.ogg");
+  const { toggle: playComplete } = useAudio("/assets/sounds/complete.ogg");
+  const { toggle: playFlip } = useAudio("/assets/sounds/flip.ogg");
   const [isLoading, setLoading] = useState(true);
   const [isWaitingDone, setWaitingDone] = useState(true);
   const { countdown, setCountdown } = useCountdown({
@@ -50,7 +52,7 @@ const WordGamePage: NextPage = () => {
     onCountdownUpdate: (s) => playTick(),
     onCountdownFinish: () => playLastTick(),
   });
-  const [lobbyMessage, setLobbyMessage] = useState<string>('');
+  const [lobbyMessage, setLobbyMessage] = useState<string>("");
   //const [categoryValues, setCategoryValues] = useState<CategoryValues>({});
   const [categoryVoteData, setCategoryVoteData] = useState<CategoryVoteData>();
   const [votes, setVotes] = useState<Votes>({});
@@ -79,9 +81,9 @@ const WordGamePage: NextPage = () => {
   };
 
   //join room
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     useEffect(() => {
-      if (id && nickname && typeof window !== 'undefined') {
+      if (id && nickname && typeof window !== "undefined") {
         dispatch(resetData());
         joinRoom(nickname, id as string).then(
           ({ authToken, roomOptions, error }) => {
@@ -152,7 +154,7 @@ const WordGamePage: NextPage = () => {
                   nickname,
                 },
                 (res) => {
-                  if (res === 'good') {
+                  if (res === "good") {
                     setLoading(false);
                   } else {
                     //TODO: show error
@@ -160,7 +162,7 @@ const WordGamePage: NextPage = () => {
                 }
               );
             };
-            localPlayer.socket.on('connect', doAuth);
+            localPlayer.socket.on("connect", doAuth);
             localPlayer.socket.connect();
           }
         );
@@ -179,7 +181,7 @@ const WordGamePage: NextPage = () => {
       <Spinner />
     </WordContent>
   );
-  const showLobbyMessage = lobbyMessage != '';
+  const showLobbyMessage = lobbyMessage != "";
 
   if (showLobbyMessage) {
     content = (
@@ -206,7 +208,7 @@ const WordGamePage: NextPage = () => {
         stopperNickname={game.stopClicker!}
         isWaitingDone={isWaitingDone}
         onWaitingStart={() => {
-          console.log('complete');
+          console.log("complete");
           setWaitingDone(false);
           playComplete();
         }}
@@ -251,6 +253,14 @@ const WordGamePage: NextPage = () => {
       <Head>
         <title>{WORD_GAME_NAME} - Game</title>
       </Head>
+      <NextSeo
+        description="Join this game of Word!"
+        openGraph={{
+          title: "Joing Word Game",
+          description: "You're invited to join this Word game!",
+          url: `${HOST_TEMP}/games/word/${game.id}`,
+        }}
+      />
 
       <AnimatedBackground />
 
