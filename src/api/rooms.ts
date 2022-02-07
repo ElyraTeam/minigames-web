@@ -1,9 +1,9 @@
-import { HOST } from "./../config/constants";
-import axios from "axios";
+import { API_HOST } from './../config/constants';
+import axios from 'axios';
 
 const client = axios.create({
-  baseURL: HOST,
-  responseType: "json",
+  baseURL: API_HOST,
+  responseType: 'json',
   withCredentials: true,
   validateStatus: (s) => true,
 });
@@ -12,7 +12,7 @@ export const createRoom = async (
   nickname: string,
   roomOptions: RoomOptions
 ) => {
-  const res = await client.post("/word/room/create", {
+  const res = await client.post('/word/room/create', {
     nickname,
     options: roomOptions,
   });

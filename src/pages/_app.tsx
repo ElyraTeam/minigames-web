@@ -1,10 +1,10 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
-import wrapper from "../state/store";
-import Head from "next/head";
-import { HOST_TEMP, seoTags } from "../config/constants";
-import { DefaultSeo } from "next-seo";
-import { AudioContext, defaultAudioValue } from "../audio/audio";
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import wrapper from '../state/store';
+import Head from 'next/head';
+import { HOST, seoTags } from '../config/constants';
+import { DefaultSeo } from 'next-seo';
+import { AudioContext, defaultAudioValue } from '../audio/audio';
 
 function App({ Component, pageProps }: AppProps) {
   return (

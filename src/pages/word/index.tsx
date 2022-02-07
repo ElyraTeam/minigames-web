@@ -2,13 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 import type { NextPage } from 'next';
-import { APP_NAME } from '../../../config/constants';
-import AnimatedBackground from '../../../components/shared/AnimatedBackground';
-import useNickname from '../../../helpers/hooks/useNickname';
-import { WORD_GAME_NAME } from '../../../config/word';
-import WordLogo from '../../../components/words/shared/WordLogo';
+import { APP_NAME } from '../../config/constants';
+import AnimatedBackground from '../../components/shared/AnimatedBackground';
+import useNickname from '../../helpers/hooks/useNickname';
+import { WORD_GAME_NAME } from '../../config/word';
+import WordLogo from '../../components/words/shared/WordLogo';
 import { useRouter } from 'next/router';
-import Footer from '../../../components/shared/Footer';
+import Footer from '../../components/shared/Footer';
 
 const Word: NextPage = () => {
   const nickname = useNickname();
@@ -31,7 +31,7 @@ const Word: NextPage = () => {
         <div className="game-content text-center sm:text-right p-1 sm:pr-10">
           <WordLogo
             size="100"
-            onClick={() => router.push('/games/word')}
+            onClick={() => router.push('/word')}
             className="cursor-pointer"
           />
           <h2 dir="rtl" className="text-5xl mb-10 mt-5">
@@ -49,13 +49,13 @@ const Word: NextPage = () => {
         </div>
 
         <div className="buttons text-center mt-16 sm:mt-28 pb-10">
-          <Link href="/games/getstarted">
+          <Link href="/getstarted">
             <button className="homepage text-xl xs:block xs:mx-auto mb-8 sm:mb-0 sm:mr-8 px-12 py-3 text-[#6fed37] rounded-2xl border-[#6fed37] border hover:bg-[rgba(109,255,0,.2)] hover:text-[#0f0] transition-all">
               الواجهة الرئيسية
             </button>
           </Link>
 
-          <Link href="/games/word/room?mode=create">
+          <Link href="/word/room?mode=create">
             <button className="start-new-main text-xl xs:block xs:mx-auto px-12 py-3 text-white rounded-2xl bg-gradient-to-r from-btngradient-from to-btngradient-to border-0 border-transparent relative active:top-[2px] shadow-[0px_4px_0px_0px_rgba(0,0,0,.3)] active:shadow-[0px_2px_0px_0px_rgba(0,0,0,.3)]">
               ابدأ لعبة جديدة
             </button>

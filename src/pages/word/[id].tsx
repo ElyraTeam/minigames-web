@@ -1,39 +1,39 @@
-import { NextPage } from "next";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
-import { joinRoom } from "../../../api/rooms";
-import localPlayer from "../../../api/socket";
-import Spinner from "../../../components/shared/Spinner";
-import WordLobby from "../../../components/words/WordLobby";
-import WordBackground from "../../../components/words/shared/WordBackground";
-import { useAppDispatch, useAppSelector } from "../../../state/hooks";
+import { NextPage } from 'next';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useContext, useEffect, useState } from 'react';
+import { joinRoom } from '../../api/rooms';
+import localPlayer from '../../api/socket';
+import Spinner from '../../components/shared/Spinner';
+import WordLobby from '../../components/words/WordLobby';
+import WordBackground from '../../components/words/shared/WordBackground';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import {
   resetData,
   setCategoryInputValues,
   setToken,
-} from "../../../state/reducers/local";
-import { setRoom } from "../../../state/reducers/room";
-import WordTimer from "../../../components/words/WordTimer";
-import WordTop from "../../../components/words/WordTop";
-import { State } from "../../../models/game";
-import { addChatMessage } from "../../../state/reducers/chat";
-import WordWaiting from "../../../components/words/WordWaiting";
-import useCountdown from "../../../helpers/hooks/useCountdown";
-import WordVoting from "../../../components/words/WordVoting";
-import { store } from "../../../state/store";
-import useNickname from "../../../helpers/hooks/useNickname";
-import Footer from "../../../components/shared/Footer";
-import WordGameOver from "../../../components/words/WordGameOver";
-import AnimatedBackground from "../../../components/shared/AnimatedBackground";
-import { CSSTransition } from "react-transition-group";
-import { WORD_GAME_NAME } from "../../../config/word";
-import WordContent from "../../../components/words/shared/WordContent";
-import WordGame from "../../../components/words/WordGame";
-import useSound from "use-sound";
-import useAudio from "../../../helpers/hooks/useAudio";
-import { NextSeo } from "next-seo";
-import { HOST_TEMP } from "../../../config/constants";
+} from '../../state/reducers/local';
+import { setRoom } from '../../state/reducers/room';
+import WordTimer from '../../components/words/WordTimer';
+import WordTop from '../../components/words/WordTop';
+import { State } from '../../models/game';
+import { addChatMessage } from '../../state/reducers/chat';
+import WordWaiting from '../../components/words/WordWaiting';
+import useCountdown from '../../helpers/hooks/useCountdown';
+import WordVoting from '../../components/words/WordVoting';
+import { store } from '../../state/store';
+import useNickname from '../../helpers/hooks/useNickname';
+import Footer from '../../components/shared/Footer';
+import WordGameOver from '../../components/words/WordGameOver';
+import AnimatedBackground from '../../components/shared/AnimatedBackground';
+import { CSSTransition } from 'react-transition-group';
+import { WORD_GAME_NAME } from '../../config/word';
+import WordContent from '../../components/words/shared/WordContent';
+import WordGame from '../../components/words/WordGame';
+import useSound from 'use-sound';
+import useAudio from '../../helpers/hooks/useAudio';
+import { NextSeo } from 'next-seo';
+import { HOST } from '../../config/constants';
 
 const WordGamePage: NextPage = () => {
   const router = useRouter();
@@ -41,10 +41,10 @@ const WordGamePage: NextPage = () => {
   const { id } = router.query;
   const game = useAppSelector((state) => state.gameSlice);
   const players = useAppSelector((state) => state.playersSlice.players);
-  const { toggle: playTick } = useAudio("tick");
-  const { toggle: playLastTick } = useAudio("last-tick");
-  const { toggle: playComplete } = useAudio("complete");
-  const { toggle: playFlip } = useAudio("flip");
+  const { toggle: playTick } = useAudio('tick');
+  const { toggle: playLastTick } = useAudio('last-tick');
+  const { toggle: playComplete } = useAudio('complete');
+  const { toggle: playFlip } = useAudio('flip');
   const [isLoading, setLoading] = useState(true);
   const [isWaitingDone, setWaitingDone] = useState(true);
   const { countdown, setCountdown } = useCountdown({
@@ -52,14 +52,14 @@ const WordGamePage: NextPage = () => {
     onCountdownUpdate: (s) => playTick(),
     onCountdownFinish: () => playLastTick(),
   });
-  const [lobbyMessage, setLobbyMessage] = useState<string>("");
+  const [lobbyMessage, setLobbyMessage] = useState<string>('');
   //const [categoryValues, setCategoryValues] = useState<CategoryValues>({});
   const [categoryVoteData, setCategoryVoteData] = useState<CategoryVoteData>();
   const [votes, setVotes] = useState<Votes>({});
   const [allVotes, setAllVotes] = useState<AllPlayersVotes>({});
   const [votedCount, setVotedCount] = useState(0);
   const isTimerRunning = countdown != 0;
-  const nickname = useNickname(`/games/word/${id}`);
+  const nickname = useNickname(`/word/${id}`);
   const [voted, setVoted] = useState(false);
   const [showVoting, setShowVoting] = useState(true);
   let pingTimer: NodeJS.Timer;
@@ -80,10 +80,30 @@ const WordGamePage: NextPage = () => {
     }, 5000);
   };
 
+  const optimizeVotes = (voteData: CategoryVoteData) => {
+    const votes: Votes = {};
+    const duplicateVotes: { [name: string]: string[] } = {};
+    for (const name in voteData.values) {
+      const value = voteData.values[name];
+      duplicateVotes[value] = [...(duplicateVotes[value] || []), name];
+    }
+    for (const value in duplicateVotes) {
+      const nicknames = duplicateVotes[value];
+      if (nicknames.length > 1) {
+        nicknames.forEach((name) => {
+          if (name != nickname) {
+            votes[name] = 5;
+          }
+        });
+      }
+    }
+    return votes;
+  };
+
   //join room
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     useEffect(() => {
-      if (id && nickname && typeof window !== "undefined") {
+      if (id && nickname && typeof window !== 'undefined') {
         dispatch(resetData());
         joinRoom(nickname, id as string).then(
           ({ authToken, roomOptions, error }) => {
@@ -120,15 +140,20 @@ const WordGamePage: NextPage = () => {
 
             localPlayer.onStartVote((categoryData) => {
               setShowVoting(false);
+              setVotes({});
               setTimeout(() => {
                 setShowVoting(true);
                 if (categoryData.categoryIndex != 0) {
                   playFlip();
                 }
                 setCategoryVoteData(categoryData);
+                setVotes((oldVal) => {
+                  const newVal = { ...oldVal, ...optimizeVotes(categoryData) };
+                  localPlayer.sendVotes(newVal);
+                  return newVal;
+                });
               }, 1000);
               setVoted(false);
-              setVotes({});
             });
 
             localPlayer.onUpdateVotedCount((count) => {
@@ -154,7 +179,7 @@ const WordGamePage: NextPage = () => {
                   nickname,
                 },
                 (res) => {
-                  if (res === "good") {
+                  if (res === 'good') {
                     setLoading(false);
                   } else {
                     //TODO: show error
@@ -162,7 +187,7 @@ const WordGamePage: NextPage = () => {
                 }
               );
             };
-            localPlayer.socket.on("connect", doAuth);
+            localPlayer.socket.on('connect', doAuth);
             localPlayer.socket.connect();
           }
         );
@@ -181,7 +206,7 @@ const WordGamePage: NextPage = () => {
       <Spinner />
     </WordContent>
   );
-  const showLobbyMessage = lobbyMessage != "";
+  const showLobbyMessage = lobbyMessage != '';
 
   if (showLobbyMessage) {
     content = (
@@ -255,9 +280,9 @@ const WordGamePage: NextPage = () => {
       <NextSeo
         description="Join this game of Word!"
         openGraph={{
-          title: "Join Word Game",
+          title: 'Join Word Game',
           description: "You're invited to join this Word game!",
-          url: `${HOST_TEMP}/games/word/${game.id}`,
+          url: `${HOST}/word/${game.id}`,
         }}
       />
 

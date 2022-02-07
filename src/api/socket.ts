@@ -1,4 +1,4 @@
-import { HOST } from './../config/constants';
+import { API_HOST } from './../config/constants';
 import io, { Socket } from 'socket.io-client';
 import { store } from '../state/store';
 import { setGame } from '../state/reducers/game';
@@ -9,7 +9,7 @@ class LocalPlayer {
   socket: Socket;
 
   constructor() {
-    this.socket = io(HOST, { autoConnect: false });
+    this.socket = io(API_HOST, { autoConnect: false });
     this.sync();
   }
 

@@ -1,6 +1,6 @@
-import Image from "next/image";
-import router, { useRouter } from "next/router";
-import { useState } from "react";
+import Image from 'next/image';
+import router, { useRouter } from 'next/router';
+import { useState } from 'react';
 import {
   FaSignOutAlt,
   FaCog,
@@ -8,19 +8,20 @@ import {
   FaExclamationTriangle,
   FaCheck,
   FaRedoAlt,
-} from "react-icons/fa";
-import { CSSTransition } from "react-transition-group";
+} from 'react-icons/fa';
+import { CSSTransition } from 'react-transition-group';
 
-import { leaveRoom } from "../../api/rooms";
-import localPlayer from "../../api/socket";
-import { HOST_TEMP } from "../../config/constants";
-import { State } from "../../models/game";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
-import { resetData } from "../../state/reducers/local";
-import Alert from "../shared/Alert";
-import WordTooltipIcon from "./shared/WordTooltipIcon";
-import WordLogo from "./shared/WordLogo";
-import classNames from "classnames";
+import { leaveRoom } from '../../api/rooms';
+import localPlayer from '../../api/socket';
+import { HOST } from '../../config/constants';
+import { State } from '../../models/game';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { resetData } from '../../state/reducers/local';
+import Alert from '../shared/Alert';
+import WordTooltipIcon from './shared/WordTooltipIcon';
+import WordLogo from './shared/WordLogo';
+import classNames from 'classnames';
+import usePlatform from '../../helpers/hooks/usePlatform';
 
 interface WordTopProps {
   hideRounds?: boolean;
@@ -36,6 +37,7 @@ const WordTop: React.FC<WordTopProps> = ({ hideRounds, hideShare }) => {
   const [showLeaveBox, setShowLeaveBox] = useState(false);
   const [showResetBox, setShowResetBox] = useState(false);
   const [showCheckIcon, setShowCheckIcon] = useState(false);
+  const { isMobile } = usePlatform();
 
   const roomId = game.id!;
   const isOwner = game.owner == nickname;
@@ -45,7 +47,7 @@ const WordTop: React.FC<WordTopProps> = ({ hideRounds, hideShare }) => {
       await leaveRoom(nickname!, roomId);
       localPlayer.disconnect();
     }
-    router.replace(`/games/word`);
+    router.replace(`/word`);
     dispatch(resetData());
   }
 
@@ -77,7 +79,7 @@ const WordTop: React.FC<WordTopProps> = ({ hideRounds, hideShare }) => {
               className="inline text-[38px] text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
               onClick={() => {
                 localPlayer.disconnect();
-                router.push("/games/word/room?mode=edit");
+                router.push('/word/room?mode=edit');
               }}
             />
           </WordTooltipIcon>
@@ -94,16 +96,14 @@ const WordTop: React.FC<WordTopProps> = ({ hideRounds, hideShare }) => {
                   className="inline text-[38px] text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
                   onClick={async () => {
                     const shareData: ShareData = {
-                      title: "Word | كلمة",
+                      title: 'Word | كلمة',
                       text: `Join this game of Word by ${nickname}!`,
-                      url: `${HOST_TEMP}/games/word/${roomId}`,
+                      url: `${HOST}/word/${roomId}`,
                     };
-                    if (navigator.canShare(shareData)) {
+                    if (navigator.canShare(shareData) && isMobile) {
                       await navigator.share(shareData);
                     } else {
-                      navigator.clipboard.writeText(
-                        `${HOST_TEMP}/games/word/${roomId}`
-                      );
+                      navigator.clipboard.writeText(`${HOST}/word/${roomId}`);
                     }
 
                     setShowCheckIcon(true);
@@ -139,7 +139,7 @@ const WordTop: React.FC<WordTopProps> = ({ hideRounds, hideShare }) => {
                 />
               </WordTooltipIcon>
             )}
-          الجولة&nbsp;&nbsp;{" "}
+          الجولة&nbsp;&nbsp;{' '}
           <span className="game-rounds">{room.options?.rounds}</span>/
           <span className="current-round text-secondary">
             {(game.currentRound || 1) - (game.state == State.LOBBY ? 1 : 0)}

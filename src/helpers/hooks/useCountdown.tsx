@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 interface UseCountdownProps {
   startFrom: number;
@@ -12,7 +12,6 @@ const useCountdown = ({
   onCountdownFinish,
 }: UseCountdownProps) => {
   const [countdown, setCountdown] = useState(startFrom);
-  const [started, setStarted] = useState(false);
 
   function startLocalTimer() {
     setTimeout(() => {
@@ -20,7 +19,6 @@ const useCountdown = ({
       setCountdown(newCountdown);
       if (newCountdown == 0) {
         onCountdownFinish && onCountdownFinish();
-        setStarted(false);
       }
     }, 1000);
   }

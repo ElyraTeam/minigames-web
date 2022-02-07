@@ -1,19 +1,19 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { APP_NAME } from "../config/constants";
-import useNickname from "../helpers/hooks/useNickname";
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { APP_NAME } from '../config/constants';
+import useNickname from '../helpers/hooks/useNickname';
 
 const Home: NextPage = () => {
   const router = useRouter();
   const nickname = useNickname();
   useEffect(() => {
     if (nickname) {
-      router.replace("/games/word");
+      router.replace('/word');
     } else {
-      router.replace("/games/getstarted");
+      router.replace('/getstarted');
     }
   }, []);
   return (
@@ -23,7 +23,7 @@ const Home: NextPage = () => {
       </Head>
 
       <h2>Homepage</h2>
-      <Link href="/games/getstarted">
+      <Link href="/getstarted">
         <p className="text-primary cursor-pointer">Word Game</p>
       </Link>
     </div>

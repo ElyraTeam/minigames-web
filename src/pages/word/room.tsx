@@ -3,26 +3,26 @@ import Head from 'next/head';
 import { useState } from 'react';
 
 import { FaRedoAlt, FaCheck } from 'react-icons/fa';
-import { changeRoomOptions, createRoom, joinRoom } from '../../../api/rooms';
+import { changeRoomOptions, createRoom, joinRoom } from '../../api/rooms';
 import { useRouter } from 'next/router';
-import { useAppSelector } from '../../../state/hooks';
-import Footer from '../../../components/shared/Footer';
-import useNickname from '../../../helpers/hooks/useNickname';
-import AnimatedBackground from '../../../components/shared/AnimatedBackground';
-import { getFromLocalStorage } from '../../../helpers/utils';
-import WordLogo from '../../../components/words/shared/WordLogo';
-import WordCreateTitle from '../../../components/words/room/WordCreateTitle';
+import { useAppSelector } from '../../state/hooks';
+import Footer from '../../components/shared/Footer';
+import useNickname from '../../helpers/hooks/useNickname';
+import AnimatedBackground from '../../components/shared/AnimatedBackground';
+import { getFromLocalStorage } from '../../helpers/utils';
+import WordLogo from '../../components/words/shared/WordLogo';
+import WordCreateTitle from '../../components/words/room/WordCreateTitle';
 import {
   DEFAULT_CATEGORIES_ARABIC,
   CHARS_ARABIC,
   WORD_GAME_NAME,
-} from '../../../config/word';
-import WordChooseLetters from '../../../components/words/room/WordChooseLetters';
-import WordChooseCategories from '../../../components/words/room/WordChooseCategories';
-import WordAddCategory from '../../../components/words/room/WordAddCategory';
-import WordDropdown from '../../../components/words/room/WordDropdown';
-import WordBottomLink from '../../../components/words/shared/WordBottomLink';
-import WordTooltipIcon from '../../../components/words/shared/WordTooltipIcon';
+} from '../../config/word';
+import WordChooseLetters from '../../components/words/room/WordChooseLetters';
+import WordChooseCategories from '../../components/words/room/WordChooseCategories';
+import WordAddCategory from '../../components/words/room/WordAddCategory';
+import WordDropdown from '../../components/words/room/WordDropdown';
+import WordBottomLink from '../../components/words/shared/WordBottomLink';
+import WordTooltipIcon from '../../components/words/shared/WordTooltipIcon';
 
 const WordCreate: NextPage = () => {
   const router = useRouter();
@@ -94,9 +94,9 @@ const WordCreate: NextPage = () => {
 
   const backToPrevPage = () => {
     if (isInEditMode) {
-      router.push(`/games/word/${oldRoomId}`);
+      router.push(`/word/${oldRoomId}`);
     } else {
-      router.push('/games/word');
+      router.push('/word');
     }
   };
 
@@ -116,7 +116,7 @@ const WordCreate: NextPage = () => {
       localStorage.setItem('options', JSON.stringify(options));
     }
     if (!roomId) return; // TODO: show error
-    router.replace(`/games/word/${roomId}`);
+    router.replace(`/word/${roomId}`);
   }
 
   function canProceed() {
@@ -142,7 +142,7 @@ const WordCreate: NextPage = () => {
 
       <div className="main-content-box relative z-20 bg-light sm:px-8 pb-5 pt-3 sm:rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] max-w-[900px] ">
         <WordLogo
-          onClick={() => router.push('/games/word')}
+          onClick={() => router.push('/word')}
           className="cursor-pointer"
         />
 

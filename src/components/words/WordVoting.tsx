@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { useEffect, useRef } from 'react';
 import { useAppSelector } from '../../state/hooks';
+import Alert from '../shared/Alert';
 import WordContent from './shared/WordContent';
 import WordSidebar from './WordSidebar';
 import WordVotingCard from './WordVotingCard';
@@ -33,6 +35,25 @@ const WordVoting: React.FC<WordVotingProps> = ({
   );
   const playerNickname = useAppSelector((state) => state.localSlice.nickname);
   const votingCardsRef = useRef<HTMLDivElement>(null);
+
+  const hasVotedAny = () => {
+    const votes = Object.entries(localVotes || []);
+    const plrsNumber = playersLength || 1;
+    const emptyValues = Object.entries(categoryVoteData?.values || []).reduce(
+      (n, [nickname, value]) => {
+        const isValueEmpty = value == undefined || value == '';
+        if (nickname == playerNickname) {
+          return n;
+        }
+        return n + +isValueEmpty;
+      },
+      0
+    );
+    if (plrsNumber == 1 || emptyValues >= plrsNumber - 1) {
+      return true;
+    }
+    return votes.length >= plrsNumber - emptyValues - 1;
+  };
 
   useEffect(() => {
     if (votingCardsRef.current)
@@ -121,14 +142,18 @@ const WordVoting: React.FC<WordVotingProps> = ({
             <span className="text-secondary">{votedCount}</span>
           </p>
         )}
-        {categoryVoteData && !voted && (
-          <button
-            className="finish-button bg-[#1a8b90] hover:bg-[#12595c] text-white py-2 px-5 rounded-3xl ml-4"
-            onClick={confirmVote}
-          >
-            !انتهيت
-          </button>
-        )}
+        {categoryVoteData &&
+          !voted &&
+          (hasVotedAny() ? (
+            <button
+              className="finish-button bg-[#1a8b90] hover:bg-[#12595c] text-white py-2 px-5 rounded-3xl ml-4"
+              onClick={confirmVote}
+            >
+              !انتهيت
+            </button>
+          ) : (
+            <p>قم بالتصويت لجميع اللاعبين للانتهاء</p>
+          ))}
       </div>
     </div>
   );

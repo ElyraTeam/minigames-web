@@ -4,16 +4,16 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import Credit from '../../components/about/Credit';
-import Card from '../../components/shared/Card';
-import OutlineButton from '../../components/shared/OutlineButton';
-import SlideButton from '../../components/shared/SlideButton';
-import SocialLink from '../../components/shared/SocialLink';
-import WordLogo from '../../components/words/shared/WordLogo';
-import { APP_NAME, CREDITS, TEAM_NAME_AR } from '../../config/constants';
-import { shuffle } from '../../helpers/utils';
-import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import { saveNickname, setNextRoute } from '../../state/reducers/local';
+import Credit from '../components/about/Credit';
+import Card from '../components/shared/Card';
+import OutlineButton from '../components/shared/OutlineButton';
+import SlideButton from '../components/shared/SlideButton';
+import SocialLink from '../components/shared/SocialLink';
+import WordLogo from '../components/words/shared/WordLogo';
+import { APP_NAME, CREDITS, TEAM_NAME_AR } from '../config/constants';
+import { shuffle } from '../helpers/utils';
+import { useAppDispatch, useAppSelector } from '../state/hooks';
+import { saveNickname, setNextRoute } from '../state/reducers/local';
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -38,7 +38,7 @@ const Home: NextPage = () => {
         router.replace(nextRoute);
         dispatch(setNextRoute(''));
       } else {
-        router.replace(`/games/word`);
+        router.replace(`/word`);
       }
     }
   }
@@ -52,7 +52,7 @@ const Home: NextPage = () => {
       <div className="flex flex-col h-screen justify-center items-center text-center">
         <WordLogo
           size="100"
-          onClick={() => router.push('/games/word')} // TODO: change to / when home page complete
+          onClick={() => router.push('/word')} // TODO: change to / when home page complete
           className="cursor-pointer"
         />
         <h2 className="text-2xl font-semibold mt-6 mb-16">!مرحبا بك في كلمة</h2>
