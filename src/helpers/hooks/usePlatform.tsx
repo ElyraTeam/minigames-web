@@ -1,27 +1,9 @@
-import { useState, useEffect } from "react";
-
 const usePlatform = () => {
-  const [width, setWidth] = useState<number>(
-    (typeof window != "undefined" && window.innerWidth) || 0
-  );
+  const screenWidth = typeof screen !== "undefined" && screen.width;
 
-  function handleWindowSizeChange() {
-    setWidth(window.innerWidth);
-  }
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []);
+  const isMobile = screenWidth <= 768;
 
-  const isMobile =
-    typeof window !== "undefined" &&
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
-
-  return { isMobile };
+  return { screenWidth, isMobile };
 };
 
 export default usePlatform;

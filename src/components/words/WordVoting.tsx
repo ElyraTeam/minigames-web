@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useEffect, useRef } from "react";
 import { useAppSelector } from "../../state/hooks";
 import Alert from "../shared/Alert";
+import QuestionPopup from "../shared/QuestionPopup";
 import WordContent from "./shared/WordContent";
 import WordSidebar from "./WordSidebar";
 import WordVotingCard from "./WordVotingCard";
@@ -86,7 +87,7 @@ const WordVoting: React.FC<WordVotingProps> = ({
             <WordSidebar />
           </div>
           <div
-            className="pb-12 px-12 scrollbar-thin overflow-y-scroll"
+            className="pb-12 px-12 scrollbar-thin overflow-y-scroll relative"
             dir="ltr"
           >
             <div ref={votingCardsRef} />
@@ -108,6 +109,13 @@ const WordVoting: React.FC<WordVotingProps> = ({
                   )
                 </span>
               </span>
+
+              <QuestionPopup mainDivClass="top-[4px]">
+                <h3 className="text-center font-bold mb-3">طريقة التصويت</h3>
+                <p className="leading-[1.8]">صوت بـ<span className="text-[#1e8893] font-bold">10</span> للكلمة الصحيحة الغير مكررة</p>
+                <p className="leading-[1.8]">صوت بـ<span className="text-[#1e8893] font-bold">5</span> للكلمة الصحيحة المكررة</p>
+                <p className="leading-[1.8]">صوت بـ<span className="text-[#1e8893] font-bold">0</span> للكلمة الغير صحيحة</p>
+              </QuestionPopup>
             </h1>
             <div
               className="grid md:grid-cols-2 justify-items-center gap-y-8 sm:grid-cols-1"
@@ -134,7 +142,7 @@ const WordVoting: React.FC<WordVotingProps> = ({
             </div>
           </div>
         </div>
-      </WordContent>
+      </WordContent >
       <div className="flex justify-center align-middle">
         {voted && (
           <p className="align-middle self-center text-2xl font-bold">
@@ -153,11 +161,11 @@ const WordVoting: React.FC<WordVotingProps> = ({
             </button>
           ) : (
             <p className="text-center font-bold">
-              قم بالتصويت لجميع اللاعبين للانتهاء
+              صوت لجميع اللاعبين للانتهاء
             </p>
           ))}
       </div>
-    </div>
+    </div >
   );
 };
 

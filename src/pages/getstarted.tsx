@@ -71,7 +71,7 @@ const Home: NextPage = () => {
             height="25"
           />
         </SlideButton>
-        <div className="mt-8 text-lg">
+        <div className="mt-20 text-lg">
           تطوير{' '}
           <span
             className="text-btngradient-from cursor-pointer"

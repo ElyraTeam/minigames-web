@@ -26,10 +26,10 @@ const Footer: React.FC<FooterProps> = ({ }) => {
       {
         "z-40": aboveElements,
       }
-    )}>
+    )} dir="rtl">
       <p className="">
-        Made with <FaHeart className="inline text-[#f00]" /> by{' '}
-        <span className="text-primary cursor-pointer hover:text-[#0f0]"
+        صنع بالـ<FaHeart className="inline text-[#f00]" /> بواسطة{' '}فريق{' '}
+        <span className="text-[#0f0] cursor-pointer hover:text-[#78ff78] font-bold"
           onClick={() => {
             setAboveElements(true);
             setShowCreds((oldShow) => {
@@ -42,11 +42,10 @@ const Footer: React.FC<FooterProps> = ({ }) => {
           }}
         >
           {TEAM_NAME_EN}
-        </span>{' '}
-        Team
+        </span>
       </p>
       <p className="">
-        All rights reserved &copy; {new Date().getFullYear()}
+        جميع الحقوق محفوظة &copy; {new Date().getFullYear()}
       </p>
 
       <Card

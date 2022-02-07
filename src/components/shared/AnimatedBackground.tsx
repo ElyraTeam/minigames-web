@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import usePlatform from "../../helpers/hooks/usePlatform";
 
 interface AnimatedBackground { }
 
@@ -7,12 +8,11 @@ const AnimatedBackground: React.FC<AnimatedBackground> = ({ }) => {
     const topLine = useRef<HTMLDivElement>(null);
     const midLine = useRef<HTMLDivElement>(null);
     const bottomLine = useRef<HTMLDivElement>(null);
+    const { isMobile } = usePlatform();
 
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                if (mainDiv.current) mainDiv.current.style.display = "none";
-            }
+        if (isMobile) {
+            if (mainDiv.current) mainDiv.current.style.display = "none";
         }
 
         let numRightTop = 1;
