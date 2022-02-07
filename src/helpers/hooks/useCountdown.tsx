@@ -18,6 +18,10 @@ const useCountdown = ({
     setTimeout(() => {
       const newCountdown = countdown! - 1;
       setCountdown(newCountdown);
+      if (newCountdown == 0) {
+        onCountdownFinish && onCountdownFinish();
+        setStarted(false);
+      }
     }, 1000);
   }
 
@@ -25,9 +29,6 @@ const useCountdown = ({
     if (countdown != 0) {
       onCountdownUpdate && onCountdownUpdate(countdown);
       startLocalTimer();
-    } else {
-      onCountdownFinish && onCountdownFinish();
-      setStarted(false);
     }
   }, [countdown]);
 

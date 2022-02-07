@@ -23,19 +23,14 @@ import WordLogo from "./shared/WordLogo";
 import classNames from "classnames";
 
 interface WordTopProps {
-  nickname: string;
   hideRounds?: boolean;
   hideShare?: boolean;
 }
 
-const WordTop: React.FC<WordTopProps> = ({
-  nickname,
-  hideRounds,
-  hideShare,
-}) => {
+const WordTop: React.FC<WordTopProps> = ({ hideRounds, hideShare }) => {
   const game = useAppSelector((state) => state.gameSlice);
   const room = useAppSelector((state) => state.roomSlice);
-  const playerNickname = useAppSelector((state) => state.localSlice.nickname);
+  const nickname = useAppSelector((state) => state.localSlice.nickname);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [showLeaveBox, setShowLeaveBox] = useState(false);
@@ -43,11 +38,11 @@ const WordTop: React.FC<WordTopProps> = ({
   const [showCheckIcon, setShowCheckIcon] = useState(false);
 
   const roomId = game.id!;
-  const isOwner = game.owner == playerNickname;
+  const isOwner = game.owner == nickname;
 
   async function pageLeaveRoom() {
     if (game.id) {
-      await leaveRoom(nickname, roomId);
+      await leaveRoom(nickname!, roomId);
       localPlayer.disconnect();
     }
     router.replace(`/games/word`);
@@ -97,10 +92,20 @@ const WordTop: React.FC<WordTopProps> = ({
               >
                 <FaShareAlt
                   className="inline text-[38px] text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
-                  onClick={() => {
-                    navigator.clipboard.writeText(
-                      `${HOST_TEMP}/games/word/${roomId}`
-                    );
+                  onClick={async () => {
+                    if (navigator.canShare()) {
+                      const shareData: ShareData = {
+                        title: "Word | كلمة",
+                        text: `Join this game of Word by ${nickname}!`,
+                        url: `${HOST_TEMP}/games/word/${roomId}`,
+                      };
+                      await navigator.share(shareData);
+                    } else {
+                      navigator.clipboard.writeText(
+                        `${HOST_TEMP}/games/word/${roomId}`
+                      );
+                    }
+
                     setShowCheckIcon(true);
                     setTimeout(() => {
                       setShowCheckIcon(false);

@@ -44,12 +44,9 @@ const WordChat: React.FC<WordChatProps> = ({ addClass }) => {
   };
 
   useEffect(() => {
+    setTimeout(() => scrollToBottom(), 400);
     scrollToBottom();
-  }, [messages]);
-
-  useEffect(() => {
-    scrollToBottom();
-  }, []);
+  }, [messagesEndRef, messages]);
 
   return (
     <div className={"chat-main flex flex-col h-full " + addClass}>
@@ -92,6 +89,7 @@ const WordChat: React.FC<WordChatProps> = ({ addClass }) => {
         <input
           type="text"
           placeholder="اكتب رسالة"
+          enterKeyHint="send"
           value={message}
           onKeyPress={(e) => sendMessage(message, e.key)}
           onChange={(input) => setMessage(input.target.value)}
