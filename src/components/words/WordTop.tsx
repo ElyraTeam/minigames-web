@@ -93,12 +93,12 @@ const WordTop: React.FC<WordTopProps> = ({ hideRounds, hideShare }) => {
                 <FaShareAlt
                   className="inline text-[38px] text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
                   onClick={async () => {
-                    if (navigator.canShare()) {
-                      const shareData: ShareData = {
-                        title: "Word | كلمة",
-                        text: `Join this game of Word by ${nickname}!`,
-                        url: `${HOST_TEMP}/games/word/${roomId}`,
-                      };
+                    const shareData: ShareData = {
+                      title: "Word | كلمة",
+                      text: `Join this game of Word by ${nickname}!`,
+                      url: `${HOST_TEMP}/games/word/${roomId}`,
+                    };
+                    if (navigator.canShare(shareData)) {
                       await navigator.share(shareData);
                     } else {
                       navigator.clipboard.writeText(
