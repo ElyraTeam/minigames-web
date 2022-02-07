@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { useEffect, useRef } from 'react';
-import { useAppSelector } from '../../state/hooks';
-import Alert from '../shared/Alert';
-import WordContent from './shared/WordContent';
-import WordSidebar from './WordSidebar';
-import WordVotingCard from './WordVotingCard';
+import { useState } from "react";
+import { useEffect, useRef } from "react";
+import { useAppSelector } from "../../state/hooks";
+import Alert from "../shared/Alert";
+import WordContent from "./shared/WordContent";
+import WordSidebar from "./WordSidebar";
+import WordVotingCard from "./WordVotingCard";
 
 interface WordVotingProps {
   allVotes: AllPlayersVotes;
@@ -41,7 +41,7 @@ const WordVoting: React.FC<WordVotingProps> = ({
     const plrsNumber = playersLength || 1;
     const emptyValues = Object.entries(categoryVoteData?.values || []).reduce(
       (n, [nickname, value]) => {
-        const isValueEmpty = value == undefined || value == '';
+        const isValueEmpty = value == undefined || value == "";
         if (nickname == playerNickname) {
           return n;
         }
@@ -57,7 +57,7 @@ const WordVoting: React.FC<WordVotingProps> = ({
 
   useEffect(() => {
     if (votingCardsRef.current)
-      votingCardsRef.current?.scrollIntoView({ behavior: 'smooth' });
+      votingCardsRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [votingCardsRef, categoryVoteData]);
 
   const getTotalVotes = () => {
@@ -94,7 +94,7 @@ const WordVoting: React.FC<WordVotingProps> = ({
               className="font-semibold text-2xl text-right mb-12 mt-8"
               dir="rtl"
             >
-              صوت للاجابة الصحيحة:{' '}
+              صوت للاجابة الصحيحة:{" "}
               <span className="mr-2 font-bold">
                 {categoryVoteData?.category}
                 <span className="mx-4 font-medium">
@@ -115,7 +115,7 @@ const WordVoting: React.FC<WordVotingProps> = ({
             >
               {Object.entries(categoryVoteData?.values || []).map(
                 ([nickname, value]) => {
-                  const isValueEmpty = value == undefined || value == '';
+                  const isValueEmpty = value == undefined || value == "";
                   const totalVotes = getTotalVotes();
                   return (
                     <WordVotingCard
@@ -152,7 +152,9 @@ const WordVoting: React.FC<WordVotingProps> = ({
               !انتهيت
             </button>
           ) : (
-            <p>قم بالتصويت لجميع اللاعبين للانتهاء</p>
+            <p className="text-center font-bold">
+              قم بالتصويت لجميع اللاعبين للانتهاء
+            </p>
           ))}
       </div>
     </div>
