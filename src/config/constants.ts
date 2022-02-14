@@ -19,7 +19,7 @@ export const CREDITS: UserCredit[] = [
   },
   {
     name: 'حسام محسن',
-    facebookLink: 'https://www.facebook.com/7ossam.mo7sen',
+    facebookLink: 'https://www.facebook.com/profile.php?id=100078325080840',
     linkedinLink: 'https://www.linkedin.com/in/hossammohsen',
     githubLink: 'https://github.com/7osCraft',
   },
