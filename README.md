@@ -1,11 +1,12 @@
-<p align="center"><img src="https://imgur.com/izizC42.gif" width="100" height="100" align="center"/></p>
+<p align="center"><img src="https://imgur.com/D2Lwfyz.gif" width="100" height="100" align="center"/></p>
 
 <h1 align="center">Elyra Games Web</h1>
 
 Online party minigames you can play with friends. Visit our [website](https://elyra.games) (only Arabic for now and doesn't fully support mobile yet) for more information.
 
-![word](https://imgur.com/i4YkFnU.gif)
-![word-2](https://imgur.com/V2x9sMq.gif)
+![word-1](https://imgur.com/1tbobfr.gif)
+![word-2](https://imgur.com/oMQxUja.gif)
+![word-3](https://imgur.com/ZyXjJ5Y.gif)
 
 ## Games
 
