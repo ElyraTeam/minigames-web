@@ -1,6 +1,6 @@
 <p align="center"><img src="https://imgur.com/D2Lwfyz.gif" width="100" height="100" align="center"/></p>
 
-<h1 align="center">Elyra Games Web</h1>
+<h1 align="center">Elyra Games Website</h1>
 
 Online party minigames you can play with friends. Visit our [website](https://elyra.games) (only Arabic for now and doesn't fully support mobile yet) for more information.
 
