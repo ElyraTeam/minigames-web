@@ -2,8 +2,8 @@
   viewBox="0 0 36 29.239">
   <defs>
     <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
-      <stop offset="0" stop-color="#73f12f" />
-      <stop offset="1" stop-color="#3eb691" />
+      <stop offset="0" stop-color="#95aff3" />
+      <stop offset="1" stop-color="#aa69cb" />
     </linearGradient>
   </defs>
   <path id="Icon_awesome-twitter" data-name="Icon awesome-twitter"

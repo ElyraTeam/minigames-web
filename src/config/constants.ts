@@ -1,6 +1,6 @@
 import { DefaultSeoProps } from 'next-seo';
 export const IS_TESTING = false;
-export const APP_NAME = 'ElyraMinis';
+export const APP_NAME = 'ElyraGames';
 export const TEAM_NAME_AR = 'إليرا';
 export const TEAM_NAME_EN = 'Elyra';
 export const DOMAIN = 'elyra.games';

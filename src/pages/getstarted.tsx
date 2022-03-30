@@ -74,7 +74,7 @@ const Home: NextPage = () => {
         <div className="mt-20 text-lg">
           تطوير{' '}
           <span
-            className="text-btngradient-from cursor-pointer"
+            className="text-transparent bg-clip-text bg-gradient-to-tr from-teamgradient-from to-teamgradient-to gradient cursor-pointer"
             onClick={() => {
               setShowCreds((oldShow) => {
                 const show = !oldShow;

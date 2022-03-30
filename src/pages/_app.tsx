@@ -2,7 +2,7 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import wrapper from '../state/store';
 import Head from 'next/head';
-import { HOST, seoTags } from '../config/constants';
+import { APP_NAME, seoTags, TEAM_NAME_EN } from '../config/constants';
 import { DefaultSeo } from 'next-seo';
 import { AudioContext, defaultAudioValue } from '../audio/audio';
 
@@ -33,9 +33,12 @@ function App({ Component, pageProps }: AppProps) {
         <meta name="msapplication-TileColor" content="#54ec99" />
         <meta name="theme-color" content="#54ec99" />
 
-        <meta name="description" content="Minigames Website by Team Elyra" />
-        <meta name="apple-mobile-web-app-title" content="ElyraMinis" />
-        <meta name="application-name" content="ElyraMinis" />
+        <meta
+          name="description"
+          content={`Minigames Website by Team ${TEAM_NAME_EN}`}
+        />
+        <meta name="apple-mobile-web-app-title" content={APP_NAME} />
+        <meta name="application-name" content={APP_NAME} />
       </Head>
       <DefaultSeo {...seoTags} />
       <AudioContext.Provider value={defaultAudioValue}>

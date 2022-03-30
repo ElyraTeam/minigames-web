@@ -12,6 +12,8 @@ module.exports = {
         secondary: '#1A8C90',
         'btngradient-from': '#73f12f',
         'btngradient-to': '#3eb691',
+        'teamgradient-from': '#aa69cb',
+        'teamgradient-to': '#95aff3',
       },
       screens: {
         xs: { max: '639px' },
@@ -22,10 +24,10 @@ module.exports = {
         '2xl': '1536px',
       },
       backgroundImage: {
-        'animatedbackground-overlay': "linear-gradient(#0f9fbd, #1726a2)",
+        'animatedbackground-overlay': 'linear-gradient(#0f9fbd, #1726a2)',
       },
       spacing: {
-        '340': '340px',
+        340: '340px',
       },
     },
   },
