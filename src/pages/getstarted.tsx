@@ -38,10 +38,12 @@ const Home: NextPage = () => {
         router.replace(nextRoute);
         dispatch(setNextRoute(''));
       } else {
-        router.replace(`/word`);
+        router.replace(`/`);
       }
     }
   }
+
+  console.log(nextRoute);
 
   return (
     <div className="getstarted-main">

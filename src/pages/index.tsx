@@ -10,21 +10,20 @@ const Home: NextPage = () => {
   const router = useRouter();
   const nickname = useNickname();
   useEffect(() => {
-    if (nickname) {
-      router.replace('/word');
-    } else {
+    if (!nickname) {
       router.replace('/getstarted');
     }
   }, []);
   return (
-    <div className="home-main">
+    <div className="home-main text-center">
       <Head>
         <title>{APP_NAME}</title>
       </Head>
 
-      <h2>Homepage</h2>
-      <Link href="/getstarted">
-        <p className="text-primary cursor-pointer">Word Game</p>
+      <h2 className="text-3xl mt-8">ElyraGames Homepage</h2>
+      <p className="text-3xl mb-4">Hello <span className="text-primary">{nickname}</span></p>
+      <Link href="/word">
+        <p className="text-primary cursor-pointer underline text-xl">Word Game</p>
       </Link>
     </div>
   );

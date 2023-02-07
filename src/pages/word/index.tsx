@@ -36,6 +36,7 @@ const Word: NextPage = () => {
           />
           <h2 dir="rtl" className="text-5xl mb-10 mt-5">
             مرحبا <span className="text-[#6fed37]">{nickname}</span>!
+            <Link href="/getstarted"><span className="text-[17px] cursor-pointer hover:text-primary">(تغيير)</span></Link>
           </h2>
           <p className="text-2xl leading-10">
             لعبة "كلمة" هي نسخة الكترونية للعبة القديمة والممتعة التي لعبناها
@@ -49,7 +50,7 @@ const Word: NextPage = () => {
         </div>
 
         <div className="buttons text-center mt-16 sm:mt-28 pb-10">
-          <Link href="/getstarted">
+          <Link href="/">
             <button className="homepage text-xl xs:block xs:mx-auto mb-8 sm:mb-0 sm:mr-8 px-12 py-3 text-[#6fed37] rounded-2xl border-[#6fed37] border hover:bg-[rgba(109,255,0,.2)] hover:text-[#0f0] transition-all">
               الواجهة الرئيسية
             </button>
