@@ -34,6 +34,7 @@ import useSound from 'use-sound';
 import useAudio from '../../helpers/hooks/useAudio';
 import { NextSeo } from 'next-seo';
 import { HOST } from '../../config/constants';
+import WordRoomSettings from '../../components/words/room/WordRoomSettings';
 
 const WordGamePage: NextPage = () => {
   const router = useRouter();
@@ -62,6 +63,7 @@ const WordGamePage: NextPage = () => {
   const nickname = useNickname(`/word/${id}`);
   const [voted, setVoted] = useState(false);
   const [showVoting, setShowVoting] = useState(true);
+  const [settingsInLobby, setSettingsInLobby] = useState(false);
   let pingTimer: NodeJS.Timer;
 
   useEffect(() => {
@@ -225,6 +227,8 @@ const WordGamePage: NextPage = () => {
         <WordTimer countdown={countdown} />
       </WordContent>
     );
+  } else if (settingsInLobby) {
+    content = <WordRoomSettings setSettingsInLobby={setSettingsInLobby} settingsInLobby={settingsInLobby} />
   } else if (game.state == State.INGAME) {
     content = <WordGame />;
   } else if (game.state == State.WAITING || !isWaitingDone) {
@@ -286,15 +290,16 @@ const WordGamePage: NextPage = () => {
         }}
       />
 
-      <AnimatedBackground />
+      <div className="bg-[url('../../public/wordbackground.svg')] bg-cover z-0 fixed top-0 left-0 w-full h-full"></div>
 
       <WordBackground>
         <div className="main-content-box z-40 bg-light sm:px-8 pb-5 pt-3 sm:rounded-2xl text-center border-4 border-white shadow-[0_16px_32px_0_rgba(0,0,0,0.4)] w-[100%] sm:w-[630px] md:w-[770px] lg:w-[900px] self-center relative">
           <div>
-            <WordTop
+            {!settingsInLobby && (<WordTop
               hideRounds={isLoading || showLobbyMessage}
               hideShare={showLobbyMessage}
-            />
+              setSettingsInLobby={setSettingsInLobby}
+            />)}
             {content}
           </div>
         </div>

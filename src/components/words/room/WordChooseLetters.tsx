@@ -17,7 +17,7 @@ const WordChooseLetters: React.FC<WordChooseLettersProps> = ({
             key={CHARS_ARABIC.indexOf(char)}
             onClick={() => charClick(char)}
             className={
-              'py-2 px-3 text-lg m-2 bg-white cursor-pointer rounded-full font-semibold flex justify-center items-center shadow-[0_4px_8px_0_rgba(0,0,0,0.3)] transition-colors w-10 ' +
+              'py-2 px-3 text-lg m-2 bg-white text-[#000] cursor-pointer rounded-full font-semibold flex justify-center items-center shadow-[0_4px_8px_0_rgba(0,0,0,0.3)] transition-colors w-10 ' +
               (charsSelected.includes(char) ? 'active' : '')
             }
           >

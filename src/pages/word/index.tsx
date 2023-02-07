@@ -25,7 +25,7 @@ const Word: NextPage = () => {
 
       <div className="bg-[url('../../public/wordbackground.svg')] bg-cover fixed top-0 left-0 w-full h-full"></div>
 
-      <AnimatedBackground />
+      {/* <AnimatedBackground /> */}
 
       <div className="content relative z-10 mx-auto">
         <div className="game-content text-center sm:text-right p-1 sm:pr-10">

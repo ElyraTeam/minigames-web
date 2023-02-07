@@ -24,11 +24,12 @@ import classNames from "classnames";
 import usePlatform from "../../helpers/hooks/usePlatform";
 
 interface WordTopProps {
+  setSettingsInLobby: Function;
   hideRounds?: boolean;
   hideShare?: boolean;
 }
 
-const WordTop: React.FC<WordTopProps> = ({ hideRounds, hideShare }) => {
+const WordTop: React.FC<WordTopProps> = ({ hideRounds, hideShare, setSettingsInLobby }) => {
   const game = useAppSelector((state) => state.gameSlice);
   const room = useAppSelector((state) => state.roomSlice);
   const nickname = useAppSelector((state) => state.localSlice.nickname);
@@ -68,8 +69,8 @@ const WordTop: React.FC<WordTopProps> = ({ hideRounds, hideShare }) => {
           />
         </WordTooltipIcon>
         {game.owner == nickname &&
-        game.state == State.LOBBY &&
-        game.currentRound == 1 ? (
+          game.state == State.LOBBY &&
+          game.currentRound == 1 ? (
           <WordTooltipIcon
             text="الإعدادات"
             className="left-[-20px]"
@@ -78,8 +79,9 @@ const WordTop: React.FC<WordTopProps> = ({ hideRounds, hideShare }) => {
             <FaCog
               className="inline text-[38px] text-[#00cc89] bg-[#a0f3c0] rounded-full p-2 cursor-pointer transition-colors hover:bg-[#1a8c90] hover:text-white"
               onClick={() => {
-                localPlayer.disconnect();
-                router.push("/word/room?mode=edit");
+                // localPlayer.disconnect();
+                // router.push("/word/room?mode=edit");
+                setSettingsInLobby(true);
               }}
             />
           </WordTooltipIcon>
