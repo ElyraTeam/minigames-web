@@ -49,7 +49,7 @@ const WordChat: React.FC<WordChatProps> = ({ addClass }) => {
   }, [messagesEndRef, messages]);
 
   return (
-    <div className={"chat-main flex flex-col h-full " + addClass}>
+    <div className={"chat-main flex flex-col h-full select-text " + addClass}>
       <div className="messages justify-end overflow-y-scroll overflow-x-hidden scrollbar-thin flex-grow rounded-tl-2xl bg-[#38b880] max-h-[320px] max-w-[197px]">
         {messages.map((msg, i) => (
           <div

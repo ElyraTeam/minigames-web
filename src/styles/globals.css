@@ -12,6 +12,7 @@
 
   .scrollbar {
     scrollbar-color: #1a8b90 transparent;
+
     &::-webkit-scrollbar {
       width: 15px;
     }
@@ -39,6 +40,7 @@
   .scrollbar-thin {
     scrollbar-color: #1a8b90 transparent;
     scrollbar-width: thin;
+
     &::-webkit-scrollbar {
       width: 8px;
     }
@@ -68,6 +70,7 @@
     width: 80px;
     height: 80px;
   }
+
   .loader:after {
     content: ' ';
     display: block;
@@ -80,15 +83,18 @@
     border-color: #fff transparent #fff transparent;
     animation: lds-hourglass 1.2s infinite;
   }
+
   @keyframes lds-hourglass {
     0% {
       transform: rotate(0);
       animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
     }
+
     50% {
       transform: rotate(900deg);
       animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
     }
+
     100% {
       transform: rotate(1800deg);
     }
@@ -96,7 +102,7 @@
 
   .height334 {
     height: 334px;
-    max-height:334px;
+    max-height: 334px;
   }
 }
 
@@ -106,6 +112,7 @@ body {
   margin: 0;
   font-family: 'cairo', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  user-select: none;
 }
 
 a {

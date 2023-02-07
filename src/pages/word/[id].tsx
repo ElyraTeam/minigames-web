@@ -78,7 +78,6 @@ const WordGamePage: NextPage = () => {
   const fetchPing = async () => {
     pingTimer = setInterval(async () => {
       const ping = await localPlayer.getPing();
-      console.log(ping);
     }, 5000);
   };
 
