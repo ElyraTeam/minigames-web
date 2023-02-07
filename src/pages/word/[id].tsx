@@ -220,14 +220,14 @@ const WordGamePage: NextPage = () => {
         </p>
       </WordContent>
     );
+  } else if (settingsInLobby) {
+    content = <WordRoomSettings setSettingsInLobby={setSettingsInLobby} settingsInLobby={settingsInLobby} />
   } else if (isTimerRunning) {
     content = (
       <WordContent className="flex justify-center items-center">
         <WordTimer countdown={countdown} />
       </WordContent>
     );
-  } else if (settingsInLobby) {
-    content = <WordRoomSettings setSettingsInLobby={setSettingsInLobby} settingsInLobby={settingsInLobby} />
   } else if (game.state == State.INGAME) {
     content = <WordGame />;
   } else if (game.state == State.WAITING || !isWaitingDone) {
