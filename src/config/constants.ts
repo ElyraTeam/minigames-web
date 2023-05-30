@@ -7,8 +7,8 @@ export const DOMAIN = 'elyra.games';
 // export const DOMAIN = "c312-102-191-185-88.ngrok.io";
 export const API_HOST = IS_TESTING
   ? 'http://localhost:3000'
-  : `https://api.${DOMAIN}`;
-export const HOST = `https://${DOMAIN}`;
+  : `https://minigames-backend.onrender.com/`;
+export const HOST = `https://elyragames.netlify.app`;
 
 export const CREDITS: UserCredit[] = [
   {
