@@ -1,15 +1,14 @@
+import { APP_NAME_AR, APP_NAME_EN, TEAM_NAME_EN } from '@/config/constants';
 import '@/styles/globals.css';
 
 import type { Metadata } from 'next';
 import { Cairo } from 'next/font/google';
 
-import Footer from '@/components/ui/footer';
-
 const font = Cairo({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'ElyraMinis | العاب إليرا',
-  description: 'Minigames Website by Team Elyra',
+  title: `${APP_NAME_EN} | ${APP_NAME_AR}`,
+  description: `Minigames Website by ${TEAM_NAME_EN}`,
 };
 
 export default function RootLayout({
@@ -19,10 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" dir="rtl">
-      <body className={font.className}>
-        {children}
-        <Footer />
-      </body>
+      <body className={font.className}>{children}</body>
     </html>
   );
 }
