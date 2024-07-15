@@ -1,17 +1,19 @@
 'use client';
 
-import { FaHeart } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 
-import { shuffle } from '@/lib/utils';
+import { cn, shuffle } from '@/lib/utils';
 import { CREDITS } from '@/config/constants';
 import Overlay from '@/components/ui/overlay';
 import AuthorText from '@/components/about/author-text';
 import CreditsCard from '@/components/about/credits-card';
 
-interface AuthorModalProps {}
+interface AuthorModalProps {
+  className?: string;
+  children?: React.ReactNode;
+}
 
-const AuthorModal: React.FC<AuthorModalProps> = ({}) => {
+const AuthorModal: React.FC<AuthorModalProps> = ({ className, children }) => {
   const [showCreds, setShowCreds] = useState(false);
   const [creds, setCredits] = useState<UserCredit[]>([]);
 
@@ -23,9 +25,8 @@ const AuthorModal: React.FC<AuthorModalProps> = ({}) => {
 
   return (
     <>
-      <p>
-        صنع بالـ
-        <FaHeart className="inline text-red-500" /> بواسطة فريق{' '}
+      <p className={cn(className)}>
+        {children}
         <AuthorText
           onClick={() => {
             setShowCreds((oldShow) => {
