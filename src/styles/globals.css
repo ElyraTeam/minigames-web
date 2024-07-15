@@ -1,0 +1,173 @@
+@import './animations.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-5xl
+  }
+
+  h2 {
+    @apply text-4xl
+  }
+
+  h3 {
+    @apply text-3xl
+  }
+
+  h4 {
+    @apply text-2xl
+  }
+
+  h5 {
+    @apply text-xl
+  }
+
+  h6 {
+    @apply text-lg
+  }
+}
+
+@layer utilities {
+  .border-gradient {
+    position: relative;
+  }
+
+  .border-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 3px;
+    background: linear-gradient(90deg, theme('colors.primary.300'), theme('colors.secondary.500'));
+    -webkit-mask:
+       linear-gradient(#fff 0 0) content-box,
+       linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+  }
+
+  .active {
+    background-color: #00cc89;
+    color: #fff;
+  }
+
+  .scrollbar {
+    scrollbar-color: #1a8b90 transparent;
+
+    &::-webkit-scrollbar {
+      width: 15px;
+    }
+
+    @media (max-width: 639px) {
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+    }
+
+    &::-webkit-scrollbar-track {
+      background: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #1a8b90;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #146b6e;
+    }
+  }
+
+  .scrollbar-thin {
+    scrollbar-color: #1a8b90 transparent;
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    @media (max-width: 639px) {
+      &::-webkit-scrollbar {
+        width: 2px;
+      }
+    }
+
+    &::-webkit-scrollbar-track {
+      background: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #1a8b90;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #146b6e;
+    }
+  }
+
+  .loader {
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+
+  .loader:after {
+    content: ' ';
+    display: block;
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    margin: 8px;
+    box-sizing: border-box;
+    border: 32px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-hourglass 1.2s infinite;
+  }
+
+  @keyframes lds-hourglass {
+    0% {
+      transform: rotate(0);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    50% {
+      transform: rotate(900deg);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    100% {
+      transform: rotate(1800deg);
+    }
+  }
+
+  .height334 {
+    height: 334px;
+    max-height: 334px;
+  }
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'cairo', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  user-select: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+option {
+  color: black;
+}
