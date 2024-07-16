@@ -5,9 +5,9 @@ import { WORD_GAME_NAME } from '@/config/word';
 
 import { APP_NAME_EN } from '@/config/constants';
 import WordLogo from '@/components/word/word-logo';
+import WordBackground from '@/components/word/word-background';
 import WelcomeUserText from '@/components/user/welcome-user-text';
 
-import WordBackground from './_components/word-background';
 import WordDescription from './_components/word-description';
 import WordHomeButtons from './_components/word-home-buttons';
 
