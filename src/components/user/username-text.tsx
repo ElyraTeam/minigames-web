@@ -1,9 +1,12 @@
 'use client';
 
+import useLocalStore from '@/state/local';
+
 interface UsernameTextProps {}
 
 const UsernameText: React.FC<UsernameTextProps> = ({}) => {
-  return <span className="text-primary">{'username'}</span>;
+  const nickname = useLocalStore((state) => state.nickname);
+  return <span className="text-primary">{nickname}</span>;
 };
 
 export default UsernameText;
