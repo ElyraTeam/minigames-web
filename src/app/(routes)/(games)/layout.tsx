@@ -1,8 +1,6 @@
-import '@/styles/globals.css';
-
 import Footer from '@/components/ui/footer';
 
-export default function GamesLayout({
+export default async function GamesLayout({
   children,
 }: {
   children: React.ReactNode;
