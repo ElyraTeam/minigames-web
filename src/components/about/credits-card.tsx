@@ -18,14 +18,14 @@ const CreditsCard: React.FC<CreditsCardProps> = ({
   return (
     <Card
       className={cn(
-        'fixed w-[30rem] bg-white text-black rounded-2xl transition-transform duration-500 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 space-y-4',
+        'fixed w-[25rem] sm:w-[30rem] bg-white text-black rounded-2xl transition-transform duration-500 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 space-y-4',
         !showCredits && 'scale-0'
       )}
     >
       <CreditsList credits={credits} />
       <Button
-        variant="outline"
-        className="px-8 py-2 text-md self-center"
+        variant="text"
+        className="py-2 text-md self-center w-fit"
         onClick={onClose}
       >
         إغلاق
