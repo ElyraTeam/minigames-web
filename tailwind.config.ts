@@ -33,6 +33,15 @@ const config: Config = {
         'teamgradient-to': '#95aff3',
       },
     },
+    keyframes: {
+      'blurry-move': {
+        '0%': { translate: '-300%' },
+        '50%, 100%': { translate: '300%' },
+      },
+    },
+    animation: {
+      'blurry-move': 'blurry-move 2.5s ease-out infinite',
+    },
   },
   plugins: [],
 };
