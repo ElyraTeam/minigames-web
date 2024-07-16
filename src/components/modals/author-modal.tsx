@@ -26,7 +26,7 @@ const AuthorModal: React.FC<AuthorModalProps> = ({ className, children }) => {
   return (
     <>
       <p className={cn(className)}>
-        {children}
+        {children}{' '}
         <AuthorText
           onClick={() => {
             setShowCreds((oldShow) => {
