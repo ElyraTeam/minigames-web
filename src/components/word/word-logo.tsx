@@ -13,7 +13,7 @@ const WordLogo: React.FC<WordLogoProps> = ({
 }) => {
   return (
     <Image
-      src="/wordlogo.svg"
+      src="/svg/wordlogo.svg"
       width={size}
       height={size}
       alt="logo"
