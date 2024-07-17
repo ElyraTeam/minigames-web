@@ -3,6 +3,7 @@ import '@/styles/globals.css';
 
 import type { Metadata } from 'next';
 import { Cairo } from 'next/font/google';
+import { Toaster } from 'react-hot-toast';
 
 const font = Cairo({ subsets: ['latin'] });
 
@@ -18,7 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" dir="rtl">
-      <body className={font.className}>{children}</body>
+      <body className={font.className}>
+        <Toaster position="top-center" />
+        {children}
+      </body>
     </html>
   );
 }
