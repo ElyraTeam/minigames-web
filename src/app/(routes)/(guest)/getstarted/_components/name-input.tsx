@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 import useLocalStore from '@/state/local';
 import { saveSession } from '@/services/local';
@@ -11,8 +10,7 @@ import SlideButton from '@/components/ui/slide-button';
 interface NameInputProps {}
 
 const NameInput: React.FC<NameInputProps> = ({}) => {
-  const router = useRouter();
-  const [newName, setNewName] = useState<string>('');
+  const [newName, setNewName] = useState<string | null | undefined>(null);
   const { nickname, setNickname } = useLocalStore();
   const [loading, setLoading] = useState(false);
 
@@ -39,7 +37,7 @@ const NameInput: React.FC<NameInputProps> = ({}) => {
       onInputTextChange={setNewName}
       center
       label="ابدأ اللعب"
-      initialValue={nickname}
+      initialValue={nickname || ''}
       onKeyPress={(k) => k == 'Enter' && updateNickname()}
       placeholderLabel="اكتب اسمك"
     >
