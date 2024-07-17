@@ -39,6 +39,7 @@ const config: Config = {
             DEFAULT: '#64EB97',
           },
         },
+        danger: '#DC3545',
         light: '#64EB97',
         dark: '#4CD375',
         'teamgradient-from': '#aa69cb',
