@@ -11,7 +11,7 @@ export default function Home() {
           اهلا <UsernameText />
         </h3>
       </div>
-      <Link href="/word" className="text-primary text-2xl underline">
+      <Link href="/word" className="text-word-primary text-2xl underline">
         Word Game
       </Link>
     </main>

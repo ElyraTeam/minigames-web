@@ -14,7 +14,7 @@ const SocialLink: React.FC<SocialLinkProps> = ({
   return (
     <a
       className={cn(
-        'cursor-pointer mx-4 hover:text-primary transition-colors',
+        'cursor-pointer mx-4 hover:text-word-primary transition-colors',
         className
       )}
       href={link}
