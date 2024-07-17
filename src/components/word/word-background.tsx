@@ -1,18 +1,18 @@
-import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
-interface WordBackgroundProps {}
+interface WordBackgroundProps extends React.ComponentProps<'div'> {
+  children?: React.ReactNode;
+}
 
-const WordBackground: React.FC<WordBackgroundProps> = ({}) => {
+const WordBackground: React.FC<WordBackgroundProps> = ({
+  children,
+  className,
+  ...props
+}) => {
   return (
-    <div className="fixed w-full h-full top-0 left-0 -z-10">
-      <Image
-        src="/svg/wordbackground.svg"
-        alt="word-background"
-        className="object-cover -z-10"
-        fill
-      />
-      <div className="bg-black w-full h-full opacity-30" />
-    </div>
+    <main className={cn('word-background', className)} {...props}>
+      {children}
+    </main>
   );
 };
 
