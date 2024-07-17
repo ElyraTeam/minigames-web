@@ -23,8 +23,8 @@ const NameInput: React.FC<NameInputProps> = ({}) => {
     setLoading(true);
     if (!newName || newName.trim().length == 0) return setLoading(false);
     try {
-      setNickname(newName);
-      await saveSession(newName);
+      setNickname(newName.trim());
+      await saveSession(newName.trim());
       window.location.href = '/word';
     } catch (err) {
       console.error(err);
