@@ -5,7 +5,7 @@ export const TEAM_NAME_AR = 'إليرا';
 export const TEAM_NAME_EN = 'Elyra';
 export const API_HOST = IS_TESTING
   ? 'http://localhost:3000'
-  : `https://elyra-minis.hossamohsen.me/`;
+  : `https://elyra-minis.hossamohsen.me`;
 export const HOST = `https://elyragames.netlify.app`;
 
 export const CREDITS: UserCredit[] = [
