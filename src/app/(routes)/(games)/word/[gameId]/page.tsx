@@ -5,6 +5,7 @@ import { HOST } from '@/config/constants';
 import checkRoomId from '@/actions/check-room';
 
 import WordMainCard from './_components/word-main-card';
+import getNicknameFromCookies from '@/actions/get-nickname';
 
 interface WordRoomPageProps {
   params: {
@@ -28,9 +29,17 @@ export async function generateMetadata({
 const WordRoomPage: React.FC<WordRoomPageProps> = async ({
   params: { gameId },
 }) => {
-  const isRoomValid = await checkRoomId(gameId);
+  const nickname = getNicknameFromCookies();
+  const res = await checkRoomId(gameId, nickname);
 
-  if (!isRoomValid) redirect('/word/not-found');
+  if (!res.success)
+    throw new Error(
+      res.errorCode == 403
+        ? 'Nickname is taken'
+        : res.errorCode == 404
+        ? 'Room not found'
+        : 'Internal server error.'
+    );
 
   return <WordMainCard roomId={gameId} />;
 };
