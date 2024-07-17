@@ -18,7 +18,7 @@ const WordChatMessage: React.FC<WordChatMessageProps> = ({
       )}
       <p
         className={cn(
-          'rounded-b-2xl rounded-tl-2xl px-4 py-2 bg-word-secondary w-fit text-wrap break-words max-w-full text-[14px]',
+          'rounded-b-2xl rounded-tl-2xl px-4 py-2 bg-word-secondary w-fit text-wrap break-words max-w-full text-[14px] select-text',
           !self && 'bg-word-side-400 rounded-tl-none rounded-tr-2xl'
         )}
       >
