@@ -31,58 +31,19 @@
 }
 
 @layer utilities {
-  .border-gradient {
-    position: relative;
-  }
-
-  .border-gradient::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 16px;
-    padding: 3px;
-    background: linear-gradient(90deg, theme('colors.primary.300'), theme('colors.secondary.500'));
-    -webkit-mask:
-       linear-gradient(#fff 0 0) content-box,
-       linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-  }
-
-  .active {
-    background-color: #00cc89;
-    color: #fff;
-  }
-
-  .scrollbar {
-    scrollbar-color: #1a8b90 transparent;
-
-    &::-webkit-scrollbar {
-      width: 15px;
-    }
-
-    @media (max-width: 639px) {
-      &::-webkit-scrollbar {
-        width: 4px;
-      }
-    }
-
-    &::-webkit-scrollbar-track {
-      background: none;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #1a8b90;
-      border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: #146b6e;
-    }
+  .word-background {
+    background: 
+    url(/svg/word-background.svg),
+    rgba(0, 0, 0, 0.3);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
   }
 
   .scrollbar-thin {
-    scrollbar-color: #1a8b90 transparent;
+    scrollbar-color: theme("colors.word.secondary.500") transparent;
     scrollbar-width: thin;
 
     &::-webkit-scrollbar {
@@ -100,12 +61,8 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background: #1a8b90;
+      background: theme("colors.word.secondary.500");
       border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: #146b6e;
     }
   }
 
