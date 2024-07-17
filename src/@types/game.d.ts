@@ -66,8 +66,9 @@ interface CategoryVoteData {
 }
 
 interface ChatMessage {
-  type: "system" | "player";
+  id: string;
+  type: 'system' | 'player';
   sender: string;
   message: string;
-  font: "normal" | "bold";
+  font: 'normal' | 'bold';
 }
