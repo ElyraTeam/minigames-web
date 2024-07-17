@@ -1,7 +1,7 @@
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 import Footer from '@/components/ui/footer';
+import getNicknameFromCookies from '@/actions/get-nickname';
 import NicknameProvider from '@/components/providers/nickname-provider';
 
 export default async function GamesLayout({
@@ -9,12 +9,12 @@ export default async function GamesLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = cookies();
-  const nickname = cookieStore.get('nextjs.session');
+  const nickname = getNicknameFromCookies();
+
   if (!nickname) redirect('/getstarted');
 
   return (
-    <NicknameProvider nickname={nickname.value}>
+    <NicknameProvider nickname={nickname}>
       {children}
       <Footer />
     </NicknameProvider>
