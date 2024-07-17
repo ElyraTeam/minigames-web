@@ -1,4 +1,5 @@
 export const WORD_GAME_NAME = 'Word';
+
 export const DEFAULT_CATEGORIES_ARABIC = [
   'ولد',
   'بنت',
@@ -8,6 +9,7 @@ export const DEFAULT_CATEGORIES_ARABIC = [
   'نبات',
   'بلد',
 ];
+
 export const CHARS_ARABIC: string[] = [
   'أ',
   'ب',
@@ -38,3 +40,14 @@ export const CHARS_ARABIC: string[] = [
   'و',
   'ى',
 ];
+
+export const DEFAULT_ROUNDS = 6;
+export const DEFAULT_MAX_PLAYERS = 8;
+export const DEFAULT_CHARS_NUMBER = 10;
+
+export const DEFAULT_ROOM_OPTIONS: RoomOptions = {
+  categories: DEFAULT_CATEGORIES_ARABIC,
+  rounds: DEFAULT_ROUNDS,
+  maxPlayers: DEFAULT_MAX_PLAYERS,
+  letters: CHARS_ARABIC.slice(0, DEFAULT_CHARS_NUMBER),
+};
