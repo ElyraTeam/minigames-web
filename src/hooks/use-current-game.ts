@@ -5,13 +5,17 @@ import { joinRoom } from '@/api/rooms';
 import localPlayer from '@/api/socket';
 import useChatStore from '@/state/chat';
 import useRoomStore from '@/state/room';
+import useGameStore from '@/state/game';
 import useLocalStore from '@/state/local';
+import usePlayersStore from '@/state/players';
 
 const useCurrentGame = (roomId: string) => {
   const nickname = useLocalStore((state) => state.nickname);
-  const addChatMessage = useChatStore((state) => state.addChatMessage);
   const setRoom = useRoomStore((state) => state.setRoom);
+  const setGame = useGameStore((state) => state.setGame);
   const setToken = useLocalStore((state) => state.setToken);
+  const setPlayers = usePlayersStore((state) => state.setPlayers);
+  const addChatMessage = useChatStore((state) => state.addChatMessage);
 
   useEffect(() => {
     if (!nickname || !roomId) return;
@@ -36,16 +40,14 @@ const useCurrentGame = (roomId: string) => {
           );
         };
 
-        // Sync - TODO: UNCOMMENT
-        // localPlayer.socket.on('sync', (sync: GameSync) =>
-        //   store.dispatch(setGame(sync))
-        // );
+        // Sync
+        localPlayer.socket.on('sync', (sync: GameSync) => setGame(sync));
         localPlayer.socket.on('options', (options: GameOptionsSync) =>
           setRoom(options)
         );
-        // localPlayer.socket.on('players', (players: GamePlayersSync) =>
-        //   store.dispatch(setPlayers(players))
-        // );
+        localPlayer.socket.on('players', (players: GamePlayersSync) =>
+          setPlayers(players)
+        );
 
         // Chat
         localPlayer.onChat((msg) => addChatMessage(msg));
@@ -60,7 +62,15 @@ const useCurrentGame = (roomId: string) => {
       localPlayer.offAll();
       localPlayer.disconnect();
     };
-  }, [nickname, roomId, addChatMessage, setToken, setRoom]);
+  }, [
+    nickname,
+    roomId,
+    addChatMessage,
+    setToken,
+    setRoom,
+    setGame,
+    setPlayers,
+  ]);
 };
 
 export default useCurrentGame;
