@@ -5,7 +5,8 @@ import { API_HOST } from '@/config/constants';
 const checkRoomId = async (roomId: string, nickname?: string) => {
   try {
     const res = await fetch(
-      `${API_HOST}/word/room/check/${roomId}?nickname=${nickname?.trim()}`
+      `${API_HOST}/word/room/check/${roomId}?nickname=${nickname?.trim()}`,
+      { cache: 'no-cache' }
     );
     return {
       success: res.status == 200,
