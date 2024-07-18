@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 interface GamePlayersState {
-  players: GamePlayersSync | null | undefined;
+  players?: GamePlayersSync | null;
   setPlayers: (players: GamePlayersSync) => void;
 }
 

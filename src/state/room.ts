@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 interface RoomState {
-  options: GameOptionsSync | null | undefined;
+  options?: GameOptionsSync | null;
   setRoom: (options: GameOptionsSync) => void;
 }
 
