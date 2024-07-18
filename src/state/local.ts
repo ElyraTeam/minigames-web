@@ -2,8 +2,10 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
 interface LocalState {
-  nickname: string | undefined | null;
-  token: string | undefined | null;
+  nickname?: string | null;
+  token?: string | null;
+  categoryInputValues: CategoryValues;
+  nextRoute?: string;
   setNickname: (nickname: string) => void;
   setToken: (token: string) => void;
 }
@@ -14,6 +16,7 @@ const useLocalStore = create<LocalState>()(
       (set) => ({
         nickname: null,
         token: null,
+        categoryInputValues: {},
         setNickname: (nickname) => set(() => ({ nickname })),
         setToken: (token) => set(() => ({ token })),
       }),
