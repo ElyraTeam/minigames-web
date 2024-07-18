@@ -29,8 +29,8 @@ export async function generateMetadata({
 const WordRoomPage: React.FC<WordRoomPageProps> = async ({
   params: { gameId },
 }) => {
-  const nickname = getNicknameFromCookies();
-  const res = await checkRoomId(gameId, nickname);
+  // const nickname = getNicknameFromCookies();
+  const res = await checkRoomId(gameId);
 
   if (!res.success)
     throw new Error(
