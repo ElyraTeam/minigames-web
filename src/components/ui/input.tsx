@@ -15,7 +15,7 @@ const Input: React.FC<InputProps> = ({
     <div className="relative">
       <input
         className={cn(
-          'rounded-lg bg-transparent outline-none border-2 border-word-side-200 w-full p-[8px] focus:border-word-secondary-300 transition-colors rtl:pe-10',
+          'rounded-lg bg-transparent outline-none border-2 border-word-side-200 w-full p-[12px] focus:border-word-secondary-300 transition-colors rtl:pe-10 text-sm',
           className
         )}
         {...props}
