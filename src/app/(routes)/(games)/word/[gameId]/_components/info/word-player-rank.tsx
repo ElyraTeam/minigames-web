@@ -24,7 +24,7 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
   return (
     <div
       className={cn(
-        'py-6 px-4 flex items-center',
+        'py-5 px-4 flex items-center',
         isOdd && 'bg-word-secondary-700/15',
         isLocalPlayer && 'text-word-game',
         !isOnline && 'text-white/20'
