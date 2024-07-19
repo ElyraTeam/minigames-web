@@ -1,7 +1,12 @@
 'use client';
 
-import WordCard from './word-card';
 import useCurrentGame from '@/hooks/use-current-game';
+
+import WordCard from './word-card';
+import WordGameHeader from './word-game-header';
+import WordGameContent from './word-game-content';
+import WordReadyButton from './lobby/word-ready-button';
+import WordGameSettings from './lobby/word-game-settings';
 
 interface WordMainCardProps {
   roomId: string;
@@ -11,7 +16,13 @@ const WordMainCard: React.FC<WordMainCardProps> = ({ roomId }) => {
   useCurrentGame(roomId);
 
   return (
-    <WordCard className="bg-word-game text-center">Game Id: {roomId}</WordCard>
+    <WordCard className="flex flex-col bg-word-game text-center py-3 px-6 gap-3">
+      <WordGameHeader />
+      <WordGameContent>
+        <WordGameSettings />
+      </WordGameContent>
+      <WordReadyButton />
+    </WordCard>
   );
 };
 
