@@ -8,6 +8,8 @@ export const API_HOST = IS_TESTING
   : `https://elyra-minis.hossamohsen.me`;
 export const HOST = `https://elyragames.netlify.app`;
 
+export const NEXTJS_SESSION_KEY = 'nextjs.session';
+
 export const CREDITS: UserCredit[] = [
   {
     name: 'كريم وائل',
