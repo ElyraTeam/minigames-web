@@ -3,11 +3,11 @@
 import toast from 'react-hot-toast';
 import { MdRefresh } from 'react-icons/md';
 
+import localPlayer from '@/api/socket';
 import useGameStore from '@/state/game';
 import useRoomStore from '@/state/room';
+import useLocalStore from '@/state/local';
 import IconButton from '@/components/ui/icon-button';
-
-import localPlayer from '@/api/socket';
 
 import WordSideCardHeader from '../word-side-card-header';
 
@@ -16,6 +16,7 @@ interface WordCurrentRoundProps {}
 const WordCurrentRound: React.FC<WordCurrentRoundProps> = ({}) => {
   const gameState = useGameStore((state) => state.game);
   const roomOptions = useRoomStore((state) => state.options);
+  const nickname = useLocalStore((state) => state.nickname);
 
   const handleReset = () => {
     localPlayer.resetGame();
@@ -31,9 +32,11 @@ const WordCurrentRound: React.FC<WordCurrentRoundProps> = ({}) => {
         </span>
         {gameState?.currentRound || '?'}
       </span>
-      <IconButton tooltip="اعادة اللعبة" onClick={handleReset}>
-        <MdRefresh className="inline text-2xl" />
-      </IconButton>
+      {gameState && gameState.owner && gameState.owner === nickname && (
+        <IconButton tooltip="اعادة اللعبة" onClick={handleReset}>
+          <MdRefresh className="inline text-2xl" />
+        </IconButton>
+      )}
     </WordSideCardHeader>
   );
 };
