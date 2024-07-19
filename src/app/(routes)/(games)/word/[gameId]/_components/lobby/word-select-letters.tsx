@@ -1,6 +1,7 @@
 import { CHARS_ARABIC } from '@/config/word';
 
 import WordLetter from './word-letter';
+import useOwner from '@/hooks/use-owner';
 
 interface WordSelectLettersProps {
   chosenLetters: string[];
@@ -11,6 +12,7 @@ const WordSelectLetters: React.FC<WordSelectLettersProps> = ({
   chosenLetters,
   onLetterUpdate,
 }) => {
+  const isOwner = useOwner();
   const isChecked = (letter: string) => chosenLetters.includes(letter);
 
   return (
@@ -21,6 +23,7 @@ const WordSelectLetters: React.FC<WordSelectLettersProps> = ({
           letter={letter}
           checked={isChecked(letter)}
           onChange={(e) => onLetterUpdate(letter, e.target.checked)}
+          disabled={!isOwner}
         />
       ))}
     </div>
