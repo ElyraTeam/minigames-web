@@ -6,7 +6,7 @@ interface FooterProps {}
 
 const Footer: React.FC<FooterProps> = ({}) => {
   return (
-    <footer className="fixed flex items-end justify-between bottom-0 left-0 text-white p-2 w-full">
+    <footer className="fixed flex items-end justify-between bottom-0 left-0 text-white py-2 px-8 w-full">
       <AuthorModal>
         صنع بالـ
         <FaHeart className="inline text-red-500" /> بواسطة فريق{' '}
