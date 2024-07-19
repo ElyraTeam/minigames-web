@@ -11,9 +11,7 @@ const WordGameHeader: React.FC<WordGameHeaderProps> = ({}) => {
     <div className="flex justify-center items-center gap-3 py-5 relative">
       <WordGameIcons />
       <div className="absolute right-0">
-        <Link href="/word">
-          <WordLogo />
-        </Link>
+        <WordLogo />
       </div>
     </div>
   );
