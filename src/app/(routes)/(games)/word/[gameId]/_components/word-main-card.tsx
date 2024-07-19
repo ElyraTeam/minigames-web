@@ -16,7 +16,7 @@ const WordMainCard: React.FC<WordMainCardProps> = ({ roomId }) => {
   useCurrentGame(roomId);
 
   return (
-    <WordCard className="flex flex-col bg-word-game text-center py-3 px-6 gap-3">
+    <WordCard className="flex flex-col bg-word-game py-3 px-6 gap-3 overflow-y-auto scrollbar-thin">
       <WordGameHeader />
       <WordGameContent>
         <WordGameSettings />
