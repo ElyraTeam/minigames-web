@@ -45,7 +45,7 @@ const WordGameIcons: React.FC<WordGameIconsProps> = ({}) => {
   };
 
   return (
-    <div className="flex gap-6">
+    <div className="flex items-center gap-6">
       <WordGameIcon
         onClick={toggleMute}
         tooltip={isMuted ? 'الغاء الكتم' : 'كتم الصوت'}
@@ -58,6 +58,7 @@ const WordGameIcons: React.FC<WordGameIconsProps> = ({}) => {
       <WordGameIcon>
         <FaInfoCircle className="w-6 h-6" />
       </WordGameIcon>
+      <div className="w-[2px] bg-word-secondary/40 h-6" />
       <WordGameIcon
         onClick={handleLeave}
         className="hover:bg-danger"
