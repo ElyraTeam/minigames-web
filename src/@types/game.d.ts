@@ -12,6 +12,7 @@ interface RoomOptions {
   letters: string[];
   categories: string[];
   maxPlayers: number;
+  isPrivate: boolean;
 }
 
 interface CreateRoomResponse extends ErrorResponse {
