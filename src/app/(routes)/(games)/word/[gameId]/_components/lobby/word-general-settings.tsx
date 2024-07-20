@@ -46,6 +46,9 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
           value={maxPlayers}
           disabled={!isOwner}
           onChange={(e) => handleMaxPlayers(e.target.value)}
+          tooltip={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
+          tooltipClassName="text-sm"
+          tooltipPosition="top"
         >
           {Array.from(new Array(15), (_, index) => (
             <option
@@ -68,6 +71,9 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
           value={rounds}
           disabled={!isOwner}
           onChange={(e) => handleRounds(e.target.value)}
+          tooltip={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
+          tooltipClassName="text-sm"
+          tooltipPosition="top"
         >
           {Array.from(new Array(16), (_, index) => (
             <option
@@ -90,6 +96,9 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
           disabled={!isOwner}
           checked={isPrivate}
           onChange={(e) => handlePrivacy(e.target.checked)}
+          tooltip={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
+          tooltipClassName="text-sm"
+          tooltipPosition="top"
         />
       </WordGeneralOption>
     </>
