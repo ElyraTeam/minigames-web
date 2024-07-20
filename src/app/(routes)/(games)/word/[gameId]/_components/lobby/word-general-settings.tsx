@@ -43,7 +43,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
         icon={<FaUserGroup className="text-4xl" />}
       >
         <Select
-          className="bg-word-secondary/50"
+          className="bg-word-secondary/50 w-20 scrollbar-track-word-secondary/20"
           value={maxPlayers}
           disabled={!isOwner}
           onChange={(e) => handleMaxPlayers(e.target.value)}
@@ -54,7 +54,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
           {Array.from(new Array(15), (_, index) => (
             <option
               key={`round-key-${index}`}
-              className="bg-word-secondary"
+              className="bg-word-secondary/80"
               value={index + 2}
             >
               {index + 2}
@@ -68,7 +68,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
         icon={<IoGameController className="text-4xl" />}
       >
         <Select
-          className="bg-word-secondary/50"
+          className="bg-word-secondary/50 w-20 scrollbar-thin scrollbar-track-word-secondary/20"
           value={rounds}
           disabled={!isOwner}
           onChange={(e) => handleRounds(e.target.value)}
@@ -79,7 +79,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
           {Array.from(new Array(lettersNumber), (_, index) => (
             <option
               key={`round-key-${index}`}
-              className="bg-word-secondary"
+              className="bg-word-secondary/80"
               value={index + 1}
             >
               {index + 1}
