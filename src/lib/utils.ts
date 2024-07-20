@@ -29,6 +29,6 @@ export const uid = () =>
   Date.now().toString(36) + Math.random().toString(36).substring(2);
 
 export const randomN = <T>(arr: T[], n: number) => {
-  const shuffledArr = arr.sort(() => 0.5 - Math.random());
+  const shuffledArr = [...arr].sort(() => 0.5 - Math.random());
   return shuffledArr.slice(0, n);
 };
