@@ -8,11 +8,31 @@ import Select from '@/components/ui/select';
 import { DEFAULT_MAX_PLAYERS, DEFAULT_ROUNDS } from '@/config/word';
 
 import WordGeneralOption from './word-general-option';
+import useRoomOptions from '@/hooks/use-room-options';
 
 interface WordGeneralSettingsProps {}
 
 const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
+  const { currentOptions, updateRoomOptions } = useRoomOptions();
+  const maxPlayers = currentOptions?.maxPlayers || DEFAULT_MAX_PLAYERS;
+  const rounds = currentOptions?.rounds || DEFAULT_ROUNDS;
+  const isPrivate = currentOptions?.isPrivate || false;
   const isOwner = useOwner();
+
+  const handlePrivacy = (privacy: boolean) => {
+    if (!currentOptions) return;
+    updateRoomOptions({ ...currentOptions, isPrivate: privacy });
+  };
+
+  const handleMaxPlayers = (newMaxPlayers: string) => {
+    if (!currentOptions || Number.isNaN(+newMaxPlayers)) return;
+    updateRoomOptions({ ...currentOptions, maxPlayers: +newMaxPlayers });
+  };
+
+  const handleRounds = (newRounds: string) => {
+    if (!currentOptions || Number.isNaN(+newRounds)) return;
+    updateRoomOptions({ ...currentOptions, rounds: +newRounds });
+  };
 
   return (
     <>
@@ -23,8 +43,9 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
       >
         <Select
           className="bg-word-secondary/50"
-          defaultValue={DEFAULT_MAX_PLAYERS}
+          value={maxPlayers}
           disabled={!isOwner}
+          onChange={(e) => handleMaxPlayers(e.target.value)}
         >
           {Array.from(new Array(8), (_, index) => (
             <option
@@ -44,8 +65,9 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
       >
         <Select
           className="bg-word-secondary/50"
-          defaultValue={DEFAULT_ROUNDS}
+          value={rounds}
           disabled={!isOwner}
+          onChange={(e) => handleRounds(e.target.value)}
         >
           {Array.from(new Array(8), (_, index) => (
             <option
@@ -64,8 +86,10 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
         icon={<FaLock className="text-4xl" />}
       >
         <Switch
-          className="peer-checked:bg-word-secondary/40 peer-checked:before:bg-word-secondary"
+          className="peer-checked:bg-word-secondary/80"
           disabled={!isOwner}
+          checked={isPrivate}
+          onChange={(e) => handlePrivacy(e.target.checked)}
         />
       </WordGeneralOption>
     </>
