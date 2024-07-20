@@ -6,6 +6,7 @@ interface WordGameIconProps {
   className?: string;
   onClick?: () => void;
   tooltip?: string;
+  active?: boolean;
 }
 
 const WordGameIcon: React.FC<WordGameIconProps> = ({
@@ -13,11 +14,13 @@ const WordGameIcon: React.FC<WordGameIconProps> = ({
   className,
   onClick,
   tooltip,
+  active,
 }) => {
   return (
     <IconButton
       className={cn(
         'text-word-secondary w-10 h-10 text-xl bg-white/40 hover:bg-word-secondary hover:text-white transition-all group',
+        active && 'bg-word-secondary text-white',
         className
       )}
       onClick={onClick}
