@@ -32,6 +32,7 @@ const WordChatSend: React.FC<WordChatSendProps> = ({}) => {
 
   return (
     <Input
+      className="border-word-side-200 focus:border-word-secondary-300"
       placeholder="اكتب رسالة..."
       icon={<MdSend className="text-xl rotate-180" />}
       onIconClick={sendMessage}
