@@ -1,3 +1,4 @@
+import WordClassSettings from './word-class-settings';
 import WordGameContainer from '../word-game-container';
 import WordCategoryHeader from './word-category-header';
 import WordLetterSettings from './word-letter-settings';
@@ -12,6 +13,7 @@ const WordGameSettings: React.FC<WordGameSettingsProps> = ({}) => {
       <WordGeneralSettings />
       <WordCategoryHeader>تخصيص اللعبة</WordCategoryHeader>
       <WordLetterSettings />
+      <WordClassSettings />
     </WordGameContainer>
   );
 };
