@@ -50,4 +50,5 @@ export const DEFAULT_ROOM_OPTIONS: RoomOptions = {
   rounds: DEFAULT_ROUNDS,
   maxPlayers: DEFAULT_MAX_PLAYERS,
   letters: CHARS_ARABIC.slice(0, DEFAULT_CHARS_NUMBER),
+  isPrivate: false,
 };
