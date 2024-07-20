@@ -35,7 +35,7 @@ const WordLetterSettings: React.FC<WordLetterSettingsProps> = ({}) => {
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-8">
       <WordSettingHeader title="اختر الحروف">
         <div className="flex items-center gap-3">
           <p>كل الحروف</p>
@@ -44,6 +44,9 @@ const WordLetterSettings: React.FC<WordLetterSettingsProps> = ({}) => {
             disabled={!isOwner}
             onChange={(e) => handleCheckAll(e.target.checked)}
             checked={chosenLetters.length === CHARS_ARABIC.length}
+            tooltip={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
+            tooltipClassName="text-sm"
+            tooltipPosition="top"
           />
         </div>
       </WordSettingHeader>
