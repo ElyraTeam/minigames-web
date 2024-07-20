@@ -9,6 +9,7 @@ import WordSettingHeader from './word-setting-header';
 import WordSelectClasses from './word-select-classes';
 import { cn } from '@/lib/utils';
 import useOwner from '@/hooks/use-owner';
+import Tooltip from '@/components/ui/tooltip';
 
 interface WordClassSettingsProps {}
 
@@ -44,19 +45,25 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
   return (
     <div className="space-y-8">
       <WordSettingHeader title="اختر الفئات">
-        <div
-          className={cn(
-            'space-x-2 rtl:space-x-reverse cursor-pointer',
-            !isOwner && 'opacity-70'
-          )}
-          onClick={resetClasses}
+        <Tooltip
+          position="top"
+          text={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
+          className="text-sm"
         >
-          <span>استرجاع</span>
-          <FiRefreshCcw className="inline" />
-        </div>
+          <div
+            className={cn(
+              'space-x-2 rtl:space-x-reverse cursor-pointer',
+              !isOwner && 'opacity-70 cursor-not-allowed'
+            )}
+            onClick={() => isOwner && resetClasses()}
+          >
+            <span>استرجاع</span>
+            <FiRefreshCcw className="inline" />
+          </div>
+        </Tooltip>
       </WordSettingHeader>
       <WordSelectClasses classes={classes} onDelete={deleteClass} />
-      <WordAddClass onClassAdd={addClass} />
+      {isOwner && <WordAddClass onClassAdd={addClass} />}
     </div>
   );
 };
