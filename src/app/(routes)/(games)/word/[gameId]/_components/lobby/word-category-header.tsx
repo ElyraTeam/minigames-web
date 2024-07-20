@@ -10,7 +10,7 @@ const WordCategoryHeader: React.FC<WordCategoryHeaderProps> = ({
     <div className="flex items-center justify-center">
       <p
         className={cn(
-          'bg-word-game rounded-xl p-4 shadow-xl text-xl font-bold',
+          'bg-word-game/40 rounded-xl p-4 shadow-xl text-xl font-bold',
           className
         )}
         {...props}
