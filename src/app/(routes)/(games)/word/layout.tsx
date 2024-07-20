@@ -5,5 +5,9 @@ export default async function WordLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <WordBackground className="text-white">{children}</WordBackground>;
+  return (
+    <WordBackground className="text-white scrollbar-thumb-word-secondary scrollbar-track-transparent scrollbar-thumb-rounded-lg">
+      {children}
+    </WordBackground>
+  );
 }
