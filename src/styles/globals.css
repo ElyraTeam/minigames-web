@@ -39,30 +39,6 @@
     background-blend-mode: overlay;
     background-repeat: no-repeat;
   }
-
-  .scrollbar-thin {
-    scrollbar-color: theme("colors.word.secondary.500") transparent;
-    scrollbar-width: thin;
-
-    &::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    @media (max-width: 639px) {
-      &::-webkit-scrollbar {
-        width: 2px;
-      }
-    }
-
-    &::-webkit-scrollbar-track {
-      background: none;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: theme("colors.word.secondary.500");
-      border-radius: 10px;
-    }
-  }
 }
 
 html,
