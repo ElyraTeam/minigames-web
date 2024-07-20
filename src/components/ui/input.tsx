@@ -11,6 +11,7 @@ const Input: React.FC<InputProps> = ({
   parentClassName,
   icon,
   onIconClick,
+  disabled,
   ...props
 }) => {
   return (
@@ -20,12 +21,14 @@ const Input: React.FC<InputProps> = ({
           'rounded-lg bg-transparent outline-none border-2 w-full p-[12px] transition-colors rtl:pe-10 text-sm',
           className
         )}
+        disabled={disabled}
         {...props}
       />
       <div
         className={cn(
           'absolute inset-y-0 end-0 pe-3 flex items-center z-10',
-          onIconClick && 'cursor-pointer'
+          onIconClick && !disabled && 'cursor-pointer',
+          disabled && 'cursor-not-allowed'
         )}
         onClick={onIconClick}
       >
