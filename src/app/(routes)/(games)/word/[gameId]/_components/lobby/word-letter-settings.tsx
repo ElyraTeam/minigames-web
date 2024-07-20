@@ -16,14 +16,16 @@ const WordLetterSettings: React.FC<WordLetterSettingsProps> = ({}) => {
   const isOwner = useOwner();
 
   const handleLetterClick = (letter: string, checked: boolean) => {
-    if (!checked)
+    if (!checked) {
+      if (chosenLetters.length <= 1) return;
       return setRoomLetters(chosenLetters.filter((l) => l !== letter));
+    }
     setRoomLetters([...chosenLetters, letter]);
   };
 
   const handleCheckAll = (checked: boolean) => {
     if (checked) return setRoomLetters(CHARS_ARABIC);
-    return setRoomLetters([]);
+    return setRoomLetters([CHARS_ARABIC[0]]);
   };
 
   const setRoomLetters = async (letters: string[]) => {

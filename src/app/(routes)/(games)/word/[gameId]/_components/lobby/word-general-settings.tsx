@@ -5,10 +5,10 @@ import { IoGameController } from 'react-icons/io5';
 import useOwner from '@/hooks/use-owner';
 import Switch from '@/components/ui/switch';
 import Select from '@/components/ui/select';
+import useRoomOptions from '@/hooks/use-room-options';
 import { DEFAULT_MAX_PLAYERS, DEFAULT_ROUNDS } from '@/config/word';
 
 import WordGeneralOption from './word-general-option';
-import useRoomOptions from '@/hooks/use-room-options';
 
 interface WordGeneralSettingsProps {}
 
@@ -17,6 +17,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
   const maxPlayers = currentOptions?.maxPlayers || DEFAULT_MAX_PLAYERS;
   const rounds = currentOptions?.rounds || DEFAULT_ROUNDS;
   const isPrivate = currentOptions?.isPrivate || false;
+  const lettersNumber = currentOptions?.letters.length || 0;
   const isOwner = useOwner();
 
   const handlePrivacy = (privacy: boolean) => {
@@ -75,7 +76,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
           tooltipClassName="text-sm"
           tooltipPosition="top"
         >
-          {Array.from(new Array(16), (_, index) => (
+          {Array.from(new Array(lettersNumber), (_, index) => (
             <option
               key={`round-key-${index}`}
               className="bg-word-secondary"
