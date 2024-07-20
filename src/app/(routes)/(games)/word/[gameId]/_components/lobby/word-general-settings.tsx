@@ -47,13 +47,13 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
           disabled={!isOwner}
           onChange={(e) => handleMaxPlayers(e.target.value)}
         >
-          {Array.from(new Array(8), (_, index) => (
+          {Array.from(new Array(15), (_, index) => (
             <option
               key={`round-key-${index}`}
               className="bg-word-secondary"
-              value={index + 1}
+              value={index + 2}
             >
-              {index + 1}
+              {index + 2}
             </option>
           ))}
         </Select>
@@ -69,7 +69,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
           disabled={!isOwner}
           onChange={(e) => handleRounds(e.target.value)}
         >
-          {Array.from(new Array(8), (_, index) => (
+          {Array.from(new Array(16), (_, index) => (
             <option
               key={`round-key-${index}`}
               className="bg-word-secondary"
