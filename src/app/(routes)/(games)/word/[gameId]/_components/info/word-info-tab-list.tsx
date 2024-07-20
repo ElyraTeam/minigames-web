@@ -15,10 +15,10 @@ const WordInfoTabList: React.FC<WordInfoTabListProps> = ({}) => {
       activeClassName="bg-word-side-200/80 rounded-xl shadow-md"
       tabSwitchClassName="p-3"
     >
-      <TabItem label="الحالية" className="overflow-y-auto scrollbar-thin">
+      <TabItem label="الحالية" className="overflow-y-auto scrollbar-none">
         <WordLeaderboard lastRound />
       </TabItem>
-      <TabItem label="المتصدرون" className="overflow-y-auto scrollbar-thin">
+      <TabItem label="المتصدرون" className="overflow-y-auto scrollbar-none">
         <WordLeaderboard />
       </TabItem>
     </TabList>
