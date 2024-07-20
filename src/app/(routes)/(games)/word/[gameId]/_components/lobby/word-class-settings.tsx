@@ -7,12 +7,15 @@ import { DEFAULT_CATEGORIES_ARABIC } from '@/config/word';
 import WordAddClass from './word-class-add';
 import WordSettingHeader from './word-setting-header';
 import WordSelectClasses from './word-select-classes';
+import { cn } from '@/lib/utils';
+import useOwner from '@/hooks/use-owner';
 
 interface WordClassSettingsProps {}
 
 const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
   const { currentOptions, updateRoomOptions } = useRoomOptions();
   const classes = currentOptions?.categories || [];
+  const isOwner = useOwner();
 
   const deleteClass = (className: string) => {
     if (!classes.includes(className)) return;
@@ -42,7 +45,10 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
     <div className="space-y-8">
       <WordSettingHeader title="اختر الفئات">
         <div
-          className="space-x-2 rtl:space-x-reverse cursor-pointer"
+          className={cn(
+            'space-x-2 rtl:space-x-reverse cursor-pointer',
+            !isOwner && 'opacity-70'
+          )}
           onClick={resetClasses}
         >
           <span>استرجاع</span>
