@@ -1,7 +1,7 @@
 import { IoClose } from 'react-icons/io5';
 
-import useOwner from '@/hooks/use-owner';
 import { cn } from '@/lib/utils';
+import useOwner from '@/hooks/use-owner';
 
 interface WordClassProps {
   name: string;
@@ -16,15 +16,16 @@ const WordClass: React.FC<WordClassProps> = ({ name, onDelete }) => {
       <p className="overflow-hidden overflow-ellipsis whitespace-nowrap text-lg">
         {name}
       </p>
-      <span
-        className={cn(
-          'flex flex-col items-center justify-center absolute rounded-full -top-2 -right-2 w-5 h-5 bg-danger cursor-pointer',
-          !isOwner && 'bg-danger/70 cursor-default'
-        )}
-        onClick={() => isOwner && onDelete()}
-      >
-        <IoClose className="text-lg" />
-      </span>
+      {isOwner && (
+        <span
+          className={cn(
+            'flex flex-col items-center justify-center absolute rounded-full -top-2 -right-2 w-5 h-5 bg-danger cursor-pointer'
+          )}
+          onClick={onDelete}
+        >
+          <IoClose className="text-lg" />
+        </span>
+      )}
     </div>
   );
 };
