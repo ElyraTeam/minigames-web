@@ -1,16 +1,34 @@
 import { cn } from '@/lib/utils';
 
-interface SelectProps extends React.ComponentProps<'select'> {}
+import Tooltip from './tooltip';
 
-const Select: React.FC<SelectProps> = ({ className, ...props }) => {
+interface SelectProps extends React.ComponentProps<'select'> {
+  tooltip?: string;
+  tooltipClassName?: string;
+  tooltipPosition?: TooltipPosition;
+}
+
+const Select: React.FC<SelectProps> = ({
+  className,
+  tooltip,
+  tooltipClassName,
+  tooltipPosition,
+  ...props
+}) => {
   return (
-    <select
-      className={cn(
-        'rounded-xl px-3 border-l-8 border-l-transparent',
-        className
-      )}
-      {...props}
-    />
+    <Tooltip
+      text={tooltip}
+      className={tooltipClassName}
+      position={tooltipPosition}
+    >
+      <select
+        className={cn(
+          'rounded-xl px-3 border-l-8 border-l-transparent disabled:cursor-not-allowed outline-none',
+          className
+        )}
+        {...props}
+      />
+    </Tooltip>
   );
 };
 
