@@ -4,9 +4,15 @@ interface TooltipProps {
   children?: React.ReactNode;
   className?: string;
   text?: string;
+  position?: TooltipPosition;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({ children, className, text }) => {
+const Tooltip: React.FC<TooltipProps> = ({
+  children,
+  className,
+  text,
+  position,
+}) => {
   return (
     <div className={cn('relative inline-block z-40')}>
       <div className="group">
@@ -14,7 +20,9 @@ const Tooltip: React.FC<TooltipProps> = ({ children, className, text }) => {
         {text && (
           <div
             className={cn(
-              'absolute bg-gray-700 hidden group-hover:block whitespace-nowrap py-2 px-4 rounded-xl text-white bottom-[-50px] -left-[30px] z-90 text-base font-normal',
+              'absolute bg-gray-700 hidden group-hover:block whitespace-nowrap py-2 px-4 rounded-xl text-white -left-[30px] z-90 text-base font-normal',
+              position === 'top' && 'top-[-50px]',
+              position == 'bottom' && 'bottom-[-50px]',
               className
             )}
           >

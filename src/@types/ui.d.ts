@@ -1,0 +1,1 @@
+type TooltipPosition = 'top' | 'bottom';
