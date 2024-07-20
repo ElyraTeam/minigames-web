@@ -34,9 +34,12 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
         <p
           className={cn(
             'w-6 h-6 rounded-full text-center text-white/80',
-            rank == 1 && 'bg-yellow-600 text-black',
-            rank == 2 && 'bg-white text-black',
-            rank == 3 && 'bg-yellow-700 text-black'
+            rank == 1 &&
+              'bg-gradient-to-r from-yellow-600 to-white to-[200%] text-white',
+            rank == 2 &&
+              'bg-gradient-to-r from-gray-500 to-white to-[200%] text-white',
+            rank == 3 &&
+              'bg-gradient-to-r from-yellow-800 to-white to-[200%] text-white'
           )}
         >
           {rank}
