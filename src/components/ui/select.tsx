@@ -23,7 +23,7 @@ const Select: React.FC<SelectProps> = ({
     >
       <select
         className={cn(
-          'rounded-xl px-3 border-l-8 border-l-transparent disabled:cursor-not-allowed outline-none',
+          'rounded-xl px-3 border-l-8 border-l-transparent disabled:cursor-not-allowed outline-none scrollbar-thin',
           className
         )}
         {...props}
