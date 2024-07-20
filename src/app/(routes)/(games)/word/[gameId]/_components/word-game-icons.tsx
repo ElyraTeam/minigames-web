@@ -48,6 +48,7 @@ const WordGameIcons: React.FC<WordGameIconsProps> = ({}) => {
     <div className="flex items-center gap-6">
       <WordGameIcon
         onClick={toggleMute}
+        active={isMuted}
         tooltip={isMuted ? 'الغاء الكتم' : 'كتم الصوت'}
       >
         {isMuted ? <IoVolumeMute /> : <IoVolumeHigh />}
