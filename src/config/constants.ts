@@ -1,4 +1,4 @@
-export const IS_TESTING = true;
+export const IS_TESTING = false;
 export const APP_NAME_EN = "ElyraGames";
 export const APP_NAME_AR = "العاب إليرا";
 export const TEAM_NAME_AR = "إليرا";
