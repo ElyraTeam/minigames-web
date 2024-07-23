@@ -14,7 +14,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   position,
 }) => {
   return (
-    <div className={cn('relative inline-block z-40')}>
+    <div className={'relative inline-block'}>
       <div className="group">
         {children}
         {text && (
