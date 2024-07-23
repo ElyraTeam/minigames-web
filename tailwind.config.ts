@@ -46,6 +46,7 @@ const config: Config = {
           },
         },
         danger: '#FF0000',
+        warning: '#FFCC00',
         'teamgradient-from': '#aa69cb',
         'teamgradient-to': '#95aff3',
       },
