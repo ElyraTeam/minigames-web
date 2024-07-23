@@ -3,8 +3,7 @@
 import { useState } from 'react';
 
 import { cn } from '@/lib/utils';
-
-import Button from './button';
+import WordButton from '@/components/word/word-button';
 
 interface SlideButtonProps {
   label: string;
@@ -68,14 +67,14 @@ const SlideButton: React.FC<SlideButtonProps> = ({
           </div>
         )}
       </div>
-      <Button
+      <WordButton
         className={cn(
           'text-2xl translate-x-0 w-full h-full cursor-text transition-all duration-500 group-hover:translate-x-full group-hover:text-lg',
           isFocus && 'translate-x-full'
         )}
       >
         {label}
-      </Button>
+      </WordButton>
     </div>
   );
 };
