@@ -1,18 +1,19 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { ImExit } from "react-icons/im";
-import { FaInfoCircle, FaShareAlt } from "react-icons/fa";
-import { useRouter } from "next/navigation";
-import { IoVolumeMute, IoVolumeHigh } from "react-icons/io5";
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { ImExit } from 'react-icons/im';
+import { useRouter } from 'next/navigation';
+import { FaInfoCircle, FaShareAlt } from 'react-icons/fa';
+import { IoVolumeMute, IoVolumeHigh } from 'react-icons/io5';
 
-import useGameStore from "@/state/game";
-import { leaveRoom } from "@/api/rooms";
-import useLocalStore from "@/state/local";
-import { HOST } from "@/config/constants";
+import useGameStore from '@/state/game';
+import { leaveRoom } from '@/api/rooms';
+import useLocalStore from '@/state/local';
+import { HOST } from '@/config/constants';
+import ConfirmModal from '@/components/modals/confirm-modal';
 
-import WordGameIcon from "./word-game-icon";
+import WordGameIcon from './word-game-icon';
 
 interface WordGameIconsProps {}
 
@@ -23,33 +24,42 @@ const WordGameIcons: React.FC<WordGameIconsProps> = ({}) => {
   const toggleMute = useLocalStore((state) => state.toggleMute);
   const roomId = useGameStore((state) => state.game?.id);
   const [loading, setLoading] = useState(false);
+  const [leaveModalShow, setLeaveModalShow] = useState(false);
 
   const handleLeave = async () => {
     if (loading) return;
-    if (!nickname) return toast.error("Nickname is not found.");
-    if (!roomId) return toast.error("Room ID is not found.");
+    if (!nickname) return toast.error('Nickname is not found.');
+    if (!roomId) return toast.error('Room ID is not found.');
     setLoading(true);
     try {
       await leaveRoom(roomId);
-      router.push("/word");
+      router.push('/word');
     } catch (err) {
       console.error(err);
       toast.error("Couldn't leave this room.");
     }
     setLoading(false);
+    setLeaveModalShow(false);
   };
 
   const handleShare = () => {
     navigator.clipboard.writeText(`${HOST}/word/${roomId}`);
-    toast.success("تم نسخ رابط الغرفة.", { id: "word-copy-game" });
+    toast.success('تم نسخ رابط الغرفة.', { id: 'word-copy-game' });
   };
 
   return (
     <div className="flex items-center gap-6">
+      <ConfirmModal
+        subtitle="هل انت متأكد من رغبتك بالمغادرة؟"
+        isOpen={leaveModalShow}
+        onClose={() => setLeaveModalShow(false)}
+        onConfirm={handleLeave}
+        loading={loading}
+      />
       <WordGameIcon
         onClick={toggleMute}
         active={isMuted}
-        tooltip={isMuted ? "الغاء الكتم" : "كتم الصوت"}
+        tooltip={isMuted ? 'الغاء الكتم' : 'كتم الصوت'}
       >
         {isMuted ? <IoVolumeMute /> : <IoVolumeHigh />}
       </WordGameIcon>
@@ -61,7 +71,7 @@ const WordGameIcons: React.FC<WordGameIconsProps> = ({}) => {
       </WordGameIcon>
       <div className="w-[2px] bg-word-secondary/40 h-6" />
       <WordGameIcon
-        onClick={handleLeave}
+        onClick={() => setLeaveModalShow(true)}
         className="hover:bg-danger"
         tooltip="خروج"
       >
