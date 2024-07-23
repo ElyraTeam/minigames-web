@@ -20,7 +20,9 @@ const buttonVariants = cva('text-xl px-8 py-3 rounded-xl w-full', {
 
 interface ButtonProps
   extends React.ComponentProps<'button'>,
-    VariantProps<typeof buttonVariants> {}
+    VariantProps<typeof buttonVariants> {
+  loading?: boolean;
+}
 
 const Button: React.FC<ButtonProps> = ({ variant, className, ...props }) => {
   return (
