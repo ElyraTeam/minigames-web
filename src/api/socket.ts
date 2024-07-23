@@ -1,5 +1,5 @@
-import { API_HOST } from '@/config/constants';
-import io, { Socket } from 'socket.io-client';
+import { API_HOST } from "@/config/constants";
+import io, { Socket } from "socket.io-client";
 // import { store } from '../state/store';
 // import { setGame } from '../state/reducers/game';
 // import { setPlayers } from '../state/reducers/players';
@@ -9,7 +9,7 @@ class LocalPlayer {
   socket: Socket;
 
   constructor() {
-    this.socket = io(API_HOST, { autoConnect: false });
+    this.socket = io(API_HOST, { autoConnect: false, withCredentials: true });
     // this.sync();
   }
 
@@ -22,7 +22,7 @@ class LocalPlayer {
     });
 
     const start = new Date().getTime();
-    this.socket.volatile.emit('ping', () => {
+    this.socket.volatile.emit("ping", () => {
       const diff = new Date().getTime() - start;
       if (resolveF) {
         resolveF(diff);
@@ -47,73 +47,81 @@ class LocalPlayer {
     authReqOptions: AuthenticateRequest,
     ack: (res: string) => void
   ) {
-    this.socket.emit('authenticate', authReqOptions, (result: any) => {
+    this.socket.emit("authenticate", authReqOptions, (result: any) => {
       ack(result);
     });
   }
 
   chat(msg: string) {
-    this.socket.emit('chat', msg);
+    this.socket.emit("chat", msg);
+  }
+
+  setOptions(options: RoomOptions) {
+    this.socket.emit("options", options);
   }
 
   startRound() {
-    this.socket.emit('start-game');
+    this.socket.emit("start-game");
   }
 
   finishRound() {
-    this.socket.emit('stop-game');
+    this.socket.emit("stop-game");
   }
 
   resetGame() {
-    this.socket.emit('reset-game');
+    this.socket.emit("reset-game");
+  }
+
+  ready() {
+    this.socket.emit("ready");
   }
 
   onRequestValues(
     ack: (callback: (values: { [name: string]: string }) => void) => void
   ) {
-    this.socket.on('request-values', ack);
+    this.socket.on("request-values", ack);
   }
 
   onStartVote(ack: (categoryData: CategoryVoteData) => void) {
-    this.socket.on('start-vote', ack);
+    this.socket.on("start-vote", ack);
   }
 
   sendVotes(voteData: Votes) {
-    this.socket.emit('vote', voteData);
+    this.socket.emit("vote", voteData);
   }
 
   confirmVotes() {
-    this.socket.emit('confirm-vote');
+    this.socket.emit("confirm-vote");
   }
 
   onStartTimer(ack: (countdown: number) => void) {
-    this.socket.on('start-timer', ack);
+    this.socket.on("start-timer", ack);
   }
 
   onKick(ack: (kickMsg: string) => void) {
-    this.socket.on('kick', ack);
+    this.socket.on("kick", ack);
   }
 
   onChat(ack: (msg: ChatMessage) => void) {
-    this.socket.on('chat', ack);
+    this.socket.on("chat", ack);
   }
 
   onUpdateVotedCount(ack: (count: number) => void) {
-    this.socket.on('update-vote-count', ack);
+    this.socket.on("update-vote-count", ack);
   }
 
   onPlayerVotes(ack: (votes: AllPlayersVotes) => void) {
-    this.socket.on('player-votes', ack);
+    this.socket.on("player-votes", ack);
   }
 
   offAll() {
-    this.socket.removeAllListeners('start-timer');
-    this.socket.removeAllListeners('kick');
-    this.socket.removeAllListeners('chat');
-    this.socket.removeAllListeners('update-vote-count');
-    this.socket.removeAllListeners('start-vote');
-    this.socket.removeAllListeners('request-values');
-    this.socket.removeAllListeners('player-votes');
+    this.socket.removeAllListeners("start-timer");
+    this.socket.removeAllListeners("kick");
+    this.socket.removeAllListeners("chat");
+    this.socket.removeAllListeners("update-vote-count");
+    this.socket.removeAllListeners("start-vote");
+    this.socket.removeAllListeners("request-values");
+    this.socket.removeAllListeners("player-votes");
   }
 
   disconnect() {

@@ -20,12 +20,14 @@ interface CreateRoomResponse extends ErrorResponse {
 }
 
 interface JoinRoomResponse extends ErrorResponse {
-  roomId?: string;
-  roomOptions?: RoomOptions;
-  authToken?: string;
+  roomId: string;
+  roomOptions: RoomOptions;
+  authToken: string;
+  playerId: string;
 }
 
 interface AuthenticateRequest {
+  game: "word";
   roomId: string;
   nickname: string;
   authToken: string;
@@ -33,8 +35,8 @@ interface AuthenticateRequest {
 
 interface GameSync {
   id?: string;
-  owner?: string;
   state?: State;
+  ownerId?: string;
   currentRound?: number;
   currentLetter?: string;
   stopClicker?: string;
@@ -51,6 +53,7 @@ interface GamePlayersSync {
 }
 
 interface Player {
+  id: string;
   nickname: string;
   online: boolean;
   owner: boolean;
@@ -68,8 +71,8 @@ interface CategoryVoteData {
 
 interface ChatMessage {
   id: string;
-  type: 'system' | 'player';
+  type: "system" | "player";
   sender: string;
   message: string;
-  font: 'normal' | 'bold';
+  font: "normal" | "bold";
 }

@@ -1,21 +1,17 @@
-import axios from 'axios';
+import axios from "axios";
 
-import { API_HOST } from '@/config/constants';
+import { API_HOST } from "@/config/constants";
 
 const client = axios.create({
   baseURL: API_HOST,
-  responseType: 'json',
+  responseType: "json",
   withCredentials: true,
   validateStatus: (s) => true,
 });
 
-export const createRoom = async (
-  nickname: string,
-  roomOptions: RoomOptions
-) => {
-  const res = await client.post('/word/room/create', {
+export const createRoom = async (nickname: string) => {
+  const res = await client.post("/word/room/create", {
     nickname,
-    options: roomOptions,
   });
   return res.data as CreateRoomResponse;
 };
@@ -27,33 +23,26 @@ export const joinRoom = async (nickname: string, roomId: string) => {
   return res.data as JoinRoomResponse;
 };
 
-export const leaveRoom = async (nickname: string, roomId: string) => {
-  const res = await client.post(`/word/room/leave/${roomId}`, {
-    nickname,
-  });
+export const leaveRoom = async (roomId: string) => {
+  const res = await client.post(`/word/room/leave/${roomId}`, {});
   return res.data;
 };
 
-export const kickPlayer = async (
-  ownerNickname: string,
-  roomId: string,
-  toKickNickname: string
-) => {
+export const kickPlayer = async (roomId: string, toKickId: string) => {
   const res = await client.post(`/word/room/kick/${roomId}`, {
-    ownerNickname,
-    toKickNickname,
+    toKickId,
   });
   return res.data;
 };
 
-export const changeRoomOptions = async (
-  nickname: string,
-  roomId: string,
-  newOptions: RoomOptions
-) => {
-  const res = await client.post(`/word/room/options/${roomId}`, {
-    nickname,
-    options: newOptions,
-  });
-  return res.data;
-};
+// export const changeRoomOptions = async (
+//   nickname: string,
+//   roomId: string,
+//   newOptions: RoomOptions
+// ) => {
+//   const res = await client.post(`/word/room/options/${roomId}`, {
+//     nickname,
+//     options: newOptions,
+//   });
+//   return res.data;
+// };

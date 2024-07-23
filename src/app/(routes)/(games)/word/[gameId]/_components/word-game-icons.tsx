@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import toast from 'react-hot-toast';
-import { ImExit } from 'react-icons/im';
-import { FaInfoCircle, FaShareAlt } from 'react-icons/fa';
-import { useRouter } from 'next/navigation';
-import { IoVolumeMute, IoVolumeHigh } from 'react-icons/io5';
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { ImExit } from "react-icons/im";
+import { FaInfoCircle, FaShareAlt } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import { IoVolumeMute, IoVolumeHigh } from "react-icons/io5";
 
-import useGameStore from '@/state/game';
-import { leaveRoom } from '@/api/rooms';
-import useLocalStore from '@/state/local';
-import { HOST } from '@/config/constants';
+import useGameStore from "@/state/game";
+import { leaveRoom } from "@/api/rooms";
+import useLocalStore from "@/state/local";
+import { HOST } from "@/config/constants";
 
-import WordGameIcon from './word-game-icon';
+import WordGameIcon from "./word-game-icon";
 
 interface WordGameIconsProps {}
 
@@ -26,12 +26,12 @@ const WordGameIcons: React.FC<WordGameIconsProps> = ({}) => {
 
   const handleLeave = async () => {
     if (loading) return;
-    if (!nickname) return toast.error('Nickname is not found.');
-    if (!roomId) return toast.error('Room ID is not found.');
+    if (!nickname) return toast.error("Nickname is not found.");
+    if (!roomId) return toast.error("Room ID is not found.");
     setLoading(true);
     try {
-      await leaveRoom(nickname, roomId);
-      router.push('/word');
+      await leaveRoom(roomId);
+      router.push("/word");
     } catch (err) {
       console.error(err);
       toast.error("Couldn't leave this room.");
@@ -41,7 +41,7 @@ const WordGameIcons: React.FC<WordGameIconsProps> = ({}) => {
 
   const handleShare = () => {
     navigator.clipboard.writeText(`${HOST}/word/${roomId}`);
-    toast.success('تم نسخ رابط الغرفة.', { id: 'word-copy-game' });
+    toast.success("تم نسخ رابط الغرفة.", { id: "word-copy-game" });
   };
 
   return (
@@ -49,7 +49,7 @@ const WordGameIcons: React.FC<WordGameIconsProps> = ({}) => {
       <WordGameIcon
         onClick={toggleMute}
         active={isMuted}
-        tooltip={isMuted ? 'الغاء الكتم' : 'كتم الصوت'}
+        tooltip={isMuted ? "الغاء الكتم" : "كتم الصوت"}
       >
         {isMuted ? <IoVolumeMute /> : <IoVolumeHigh />}
       </WordGameIcon>
