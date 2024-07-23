@@ -27,7 +27,7 @@ interface JoinRoomResponse extends ErrorResponse {
 }
 
 interface AuthenticateRequest {
-  game: "word";
+  game: 'word';
   roomId: string;
   nickname: string;
   authToken: string;
@@ -60,6 +60,7 @@ interface Player {
   totalScore: number;
   lastRoundScore: number;
   voted: boolean;
+  ready: boolean;
 }
 
 interface CategoryVoteData {
@@ -71,8 +72,8 @@ interface CategoryVoteData {
 
 interface ChatMessage {
   id: string;
-  type: "system" | "player";
+  type: 'system' | 'player';
   sender: string;
   message: string;
-  font: "normal" | "bold";
+  font: 'normal' | 'bold';
 }
