@@ -23,14 +23,14 @@ const WordReadyButton: React.FC<WordReadyButtonProps> = ({}) => {
   };
 
   const renderPlayersReady = () => {
-    if (allReady) return 'بانتظار صاحب الغرفة..';
+    if (allReady) return 'بانتظار المنشئ..';
     return (
       <div>
-        <p>
-          <span className="text-lg">{`${numberOfReadyPlayers}`}</span>
-          <span className="opacity-70">{`/${players?.length}`}</span>
+        <p className="leading-none font-bold text-lg mb-1">
+          <span className="leading-5">{`${numberOfReadyPlayers}`}</span>
+          <span className="opacity-50">{`/${players?.length}`}</span>
         </p>
-        <p>مستعدون</p>
+        <p className="text-xs leading-none">مستعدون</p>
       </div>
     );
   };
@@ -47,8 +47,8 @@ const WordReadyButton: React.FC<WordReadyButtonProps> = ({}) => {
 
   return (
     <Button3D
-      className="w-fit self-center bg-word-game-700 rounded-3xl"
-      frontClassName="from-word-game-600 to-word-game-700 to-[200%] text-base rounded-3xl -translate-y-[8px] group-active:-translate-y-[3px] group-disabled:-translate-y-[5px]"
+      className="w-fit self-center bg-word-game-700 rounded-2xl disabled:bg-word-game-950"
+      frontClassName="from-word-game-600 to-word-game-700 to-[200%] text-base rounded-2xl -translate-y-[8px] group-active:-translate-y-[3px] group-disabled:-translate-y-[5px] h-[50px] py-2 group-disabled:from-word-game-800 group-disabled:to-word-game-900 group-disabled:to-[800%] px-4 w-[150px] content-center"
       onClick={isOwner ? handleStart : handleReady}
       disabled={localReady && (!allReady || !isOwner || players?.length == 1)}
     >
