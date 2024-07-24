@@ -1,18 +1,12 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
-import { createRoom } from "@/api/rooms";
-import useLocalStore from "@/state/local";
-import Button3D from "@/components/ui/button-3d";
-import {
-  CHARS_ARABIC,
-  DEFAULT_CHARS_NUMBER,
-  DEFAULT_ROOM_OPTIONS,
-} from "@/config/word";
-import { randomN } from "@/lib/utils";
+import { createRoom } from '@/api/rooms';
+import useLocalStore from '@/state/local';
+import Button3D from '@/components/ui/button-3d';
 
 interface WordCreateGameProps {}
 
@@ -23,7 +17,7 @@ const WordCreateGame: React.FC<WordCreateGameProps> = ({}) => {
 
   const createGame = async () => {
     if (!nickname) {
-      return toast.error("اكتب اسمك يا شطور");
+      return toast.error('اكتب اسمك يا شطور');
     }
     setLoading(true);
     try {
@@ -34,7 +28,7 @@ const WordCreateGame: React.FC<WordCreateGameProps> = ({}) => {
         return;
       }
       if (!res.roomId) {
-        toast.error("Room ID not found.");
+        toast.error('Room ID not found.');
         setLoading(false);
         return;
       }
@@ -46,7 +40,13 @@ const WordCreateGame: React.FC<WordCreateGameProps> = ({}) => {
   };
 
   return (
-    <Button3D onClick={createGame} loading={loading} loadingText={"جاري البدأ"}>
+    <Button3D
+      onClick={createGame}
+      loading={loading}
+      loadingText={'جاري البدأ'}
+      className=" bg-word-primary-900"
+      frontClassName="from-word-primary-800 to-word-primary-600"
+    >
       ابدأ اللعبة
     </Button3D>
   );

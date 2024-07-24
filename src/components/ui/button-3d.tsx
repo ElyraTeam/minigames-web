@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+
 import Spinner from './spinner';
 
 interface Button3DProps extends React.ComponentProps<'button'> {
@@ -13,24 +14,30 @@ const Button3D: React.FC<Button3DProps> = ({
   loading,
   loadingText,
   children,
+  disabled,
   ...props
 }) => {
+  const diasbled = disabled || loading;
+
   return (
     <button
       className={cn(
-        'rounded-xl border-none padding-0 cursor-pointer group bg-word-primary-900 font-semibold w-full relative overflow-x-clip disabled:cursor-default',
+        'rounded-xl border-none padding-0 cursor-pointer group font-semibold w-full relative overflow-x-clip disabled:cursor-default transition-all',
         className
       )}
-      disabled={loading}
+      disabled={diasbled}
       {...props}
     >
       <span
         className={cn(
-          'block py-3 px-12 rounded-lg text-xl -translate-y-[12px] group-active:-translate-y-[3px] bg-gradient-to-r from-word-primary-800 to-word-primary-600 transition-transform w-full relative overflow-hidden',
+          'block py-3 px-12 rounded-lg text-xl -translate-y-[12px] group-active:-translate-y-[5px] bg-gradient-to-r transition-all w-full relative overflow-hidden',
+          disabled && '-translate-y-[5px]',
           frontClassName
         )}
       >
-        <span className="absolute bg-gradient-to-tr from-white/50 blur-md to-transparent w-20 h-96 left-0 -top-20 rounded-lg animate-blurry-move rotate-45" />
+        {!diasbled && (
+          <span className="absolute bg-gradient-to-tr from-white/50 blur-md to-transparent w-20 h-96 left-0 -top-20 rounded-lg animate-blurry-move rotate-45" />
+        )}
         {loading ? (
           <span className="space-x-2 rtl:space-x-reverse">
             <Spinner />

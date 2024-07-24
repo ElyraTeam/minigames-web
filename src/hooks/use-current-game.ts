@@ -1,13 +1,13 @@
-import { useEffect } from "react";
-import toast from "react-hot-toast";
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
-import { joinRoom } from "@/api/rooms";
-import localPlayer from "@/api/socket";
-import useChatStore from "@/state/chat";
-import useRoomStore from "@/state/room";
-import useGameStore from "@/state/game";
-import useLocalStore from "@/state/local";
-import usePlayersStore from "@/state/players";
+import { joinRoom } from '@/api/rooms';
+import localPlayer from '@/api/socket';
+import useChatStore from '@/state/chat';
+import useRoomStore from '@/state/room';
+import useGameStore from '@/state/game';
+import useLocalStore from '@/state/local';
+import usePlayersStore from '@/state/players';
 
 const useCurrentGame = (roomId: string) => {
   const nickname = useLocalStore((state) => state.nickname);
@@ -17,13 +17,15 @@ const useCurrentGame = (roomId: string) => {
   const setToken = useLocalStore((state) => state.setToken);
   const setPlayers = usePlayersStore((state) => state.setPlayers);
   const addChatMessage = useChatStore((state) => state.addChatMessage);
+  const resetChatMessages = useChatStore((state) => state.resetChatMessages);
 
   useEffect(() => {
     if (!nickname || !roomId) return;
     joinRoom(nickname, roomId).then(
       ({ playerId, authToken, error, roomOptions, errorCode }) => {
         if (error) return toast.error(`Error #${errorCode}: ${error}`);
-        if (!authToken) return toast.error("Unable to find auth token.");
+        if (!authToken) return toast.error('Unable to find auth token.');
+        resetChatMessages();
         setToken(authToken);
         setRoom({ id: roomId, options: roomOptions });
         setPlayerId(playerId);
@@ -33,7 +35,7 @@ const useCurrentGame = (roomId: string) => {
 
         const doAuth = () => {
           localPlayer.authenticate(
-            { authToken, nickname, roomId: roomId, game: "word" },
+            { authToken, nickname, roomId: roomId, game: 'word' },
             (res) => {
               // if (res == 'good') {
               // }
@@ -42,11 +44,11 @@ const useCurrentGame = (roomId: string) => {
         };
 
         // Sync
-        localPlayer.socket.on("sync", (sync: GameSync) => setGame(sync));
-        localPlayer.socket.on("options", (options: GameOptionsSync) =>
+        localPlayer.socket.on('sync', (sync: GameSync) => setGame(sync));
+        localPlayer.socket.on('options', (options: GameOptionsSync) =>
           setRoom(options)
         );
-        localPlayer.socket.on("players", (players: GamePlayersSync) =>
+        localPlayer.socket.on('players', (players: GamePlayersSync) =>
           setPlayers(players)
         );
 
@@ -54,7 +56,7 @@ const useCurrentGame = (roomId: string) => {
         localPlayer.onChat((msg) => addChatMessage(msg));
 
         // Connect
-        localPlayer.socket.on("connect", doAuth);
+        localPlayer.socket.on('connect', doAuth);
         localPlayer.socket.connect();
       }
     );
@@ -72,6 +74,7 @@ const useCurrentGame = (roomId: string) => {
     setGame,
     setPlayers,
     setPlayerId,
+    resetChatMessages,
   ]);
 };
 

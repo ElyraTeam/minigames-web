@@ -4,9 +4,11 @@ import { useState, useEffect } from 'react';
 
 import { cn, shuffle } from '@/lib/utils';
 import { CREDITS } from '@/config/constants';
-import Overlay from '@/components/ui/overlay';
+import WordButton from '@/components/word/word-button';
 import AuthorText from '@/components/about/author-text';
-import CreditsCard from '@/components/about/credits-card';
+import CreditsList from '@/components/about/credits-list';
+
+import Modal from './modal';
 
 interface AuthorModalProps {
   className?: string;
@@ -39,18 +41,20 @@ const AuthorModal: React.FC<AuthorModalProps> = ({ className, children }) => {
           }}
         />
       </p>
-      <CreditsCard
-        showCredits={showCreds}
-        credits={creds}
+      <Modal
+        className="w-[25rem] sm:w-[30rem]"
+        isOpen={showCreds}
         onClose={() => setShowCreds(false)}
-      />
-      {showCreds && (
-        <Overlay
-          onClick={() => {
-            setShowCreds(false);
-          }}
-        />
-      )}
+      >
+        <CreditsList credits={creds} />
+        <WordButton
+          variant="text"
+          className="py-2 text-md self-center w-fit"
+          onClick={() => setShowCreds(false)}
+        >
+          إغلاق
+        </WordButton>
+      </Modal>
     </>
   );
 };

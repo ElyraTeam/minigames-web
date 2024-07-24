@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import Button from '@/components/ui/button';
+import WordButton from '@/components/word/word-button';
 
 import WordCreateGame from './word-create-game';
 
@@ -12,7 +12,7 @@ const WordHomeButtons: React.FC<WordHomeButtonsProps> = ({}) => {
       <div className="flex flex-col gap-4 w-56">
         <WordCreateGame />
         <Link href="/">
-          <Button variant="outline">الواجهة الرئيسية</Button>
+          <WordButton variant="outline">الواجهة الرئيسية</WordButton>
         </Link>
       </div>
     </div>
