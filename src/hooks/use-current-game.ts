@@ -9,6 +9,8 @@ import useGameStore from '@/state/game';
 import useLocalStore from '@/state/local';
 import usePlayersStore from '@/state/players';
 
+import useCountdown from './use-countdown';
+
 const useCurrentGame = (roomId: string) => {
   const nickname = useLocalStore((state) => state.nickname);
   const setPlayerId = useLocalStore((state) => state.setPlayerId);
@@ -18,6 +20,11 @@ const useCurrentGame = (roomId: string) => {
   const setPlayers = usePlayersStore((state) => state.setPlayers);
   const addChatMessage = useChatStore((state) => state.addChatMessage);
   const resetChatMessages = useChatStore((state) => state.resetChatMessages);
+  const { countdown, setCountdown } = useCountdown({
+    startFrom: 0,
+    // onCountdownUpdate: (s) => playTick(),
+    // onCountdownFinish: () => playLastTick(),
+  });
 
   useEffect(() => {
     if (!nickname || !roomId) return;
@@ -55,6 +62,11 @@ const useCurrentGame = (roomId: string) => {
         // Chat
         localPlayer.onChat((msg) => addChatMessage(msg));
 
+        // Timer
+        localPlayer.onStartTimer((newCountdown) => {
+          setCountdown(newCountdown);
+        });
+
         // Connect
         localPlayer.socket.on('connect', doAuth);
         localPlayer.socket.connect();
@@ -75,7 +87,10 @@ const useCurrentGame = (roomId: string) => {
     setPlayers,
     setPlayerId,
     resetChatMessages,
+    setCountdown,
   ]);
+
+  return { countdown };
 };
 
 export default useCurrentGame;
