@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
 
 interface LocalState {
   playerId?: string | null;
@@ -12,6 +12,7 @@ interface LocalState {
   setNickname: (nickname: string) => void;
   setToken: (token: string) => void;
   toggleMute: () => void;
+  setCategoryInputValues: (values: CategoryValues) => void;
 }
 
 const useLocalStore = create<LocalState>()(
@@ -27,13 +28,15 @@ const useLocalStore = create<LocalState>()(
         setToken: (token) => set(() => ({ token })),
         toggleMute: () => set((state) => ({ isMuted: !state.isMuted })),
         setPlayerId: (playerId) => set(() => ({ playerId })),
+        setCategoryInputValues: (categoryInputValues) =>
+          set(() => ({ categoryInputValues })),
       }),
       {
-        name: "local-player-storage",
+        name: 'local-player-storage',
         partialize: (state) =>
           Object.fromEntries(
             Object.entries(state).filter(
-              ([key]) => !["categoryInputValues"].includes(key)
+              ([key]) => !['categoryInputValues'].includes(key)
             )
           ),
       }
