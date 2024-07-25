@@ -11,7 +11,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   children,
   className,
   text,
-  position,
+  position = 'bottom',
 }) => {
   return (
     <div className={'relative inline-block'}>
