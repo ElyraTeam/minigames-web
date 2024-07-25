@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 
 import Spinner from './spinner';
 
-interface Button3DProps extends React.ComponentProps<'button'> {
+export interface Button3DProps extends React.ComponentProps<'button'> {
   frontClassName?: string;
   loading?: boolean;
   loadingText?: string;
