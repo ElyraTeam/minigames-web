@@ -20,7 +20,7 @@ const Tooltip: React.FC<TooltipProps> = ({
         {text && (
           <div
             className={cn(
-              'absolute bg-gray-700 hidden group-hover:block whitespace-nowrap py-2 px-4 rounded-xl text-white -left-[30px] z-90 text-base font-normal',
+              'absolute bg-gray-700 hidden group-hover:block whitespace-nowrap py-2 px-4 rounded-xl text-white -left-[30px] text-base font-normal',
               position === 'top' && 'top-[-50px]',
               position == 'bottom' && 'bottom-[-50px]',
               className
