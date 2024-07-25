@@ -36,6 +36,8 @@ const WordChatMessages: React.FC<WordChatMessagesProps> = ({}) => {
         content={msg.message}
         self={nickname === msg.sender}
         sender={sender}
+        rounded={!!sender}
+        spacing={!!sender ? 16 : 8}
       />
     );
   };
@@ -43,7 +45,7 @@ const WordChatMessages: React.FC<WordChatMessagesProps> = ({}) => {
   return (
     <>
       {messages.length !== 0 && (
-        <div className="space-y-4 flex flex-col justify-end flex-grow">
+        <div className="flex flex-col justify-end flex-grow">
           {messages.map((chatMsg, i) =>
             chatMsg.type !== 'system' ? (
               renderMessage(chatMsg, i)
