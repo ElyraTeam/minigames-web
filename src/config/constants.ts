@@ -1,9 +1,9 @@
-export const IS_TESTING = false;
+export const isDev = process.env.NODE_ENV === 'development';
 export const APP_NAME_EN = 'ElyraGames';
 export const APP_NAME_AR = 'العاب إليرا';
 export const TEAM_NAME_AR = 'إليرا';
 export const TEAM_NAME_EN = 'Elyra';
-export const API_HOST = IS_TESTING
+export const API_HOST = isDev
   ? 'http://localhost:5000'
   : `https://elyra-minis-dev.hossamohsen.me`;
 export const HOST = `https://next14-migration--elyragames.netlify.app`;
