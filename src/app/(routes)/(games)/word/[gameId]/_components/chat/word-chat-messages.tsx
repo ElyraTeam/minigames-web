@@ -50,7 +50,7 @@ const WordChatMessages: React.FC<WordChatMessagesProps> = ({}) => {
             chatMsg.type !== 'system' ? (
               renderMessage(chatMsg, i)
             ) : (
-              <p key={i} className="text-center text-sm text-white/30">
+              <p key={i} className="text-center text-sm text-white/30 mt-4">
                 {chatMsg.message}
               </p>
             )
