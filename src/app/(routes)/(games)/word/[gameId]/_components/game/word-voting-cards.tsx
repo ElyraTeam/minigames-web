@@ -14,15 +14,12 @@ const WordVotingCards: React.FC<WordVotingCardsProps> = ({}) => {
   const currentPlayer = useCurrentPlayer();
   const categoryData = useVoteStore((state) => state.categoryVoteData);
   const myVotes = useVoteStore((state) => state.myVotes);
-  const setMyVotes = useVoteStore((state) => state.setMyVotes);
 
   const handleChangeVote = (playerId: string, vote: Vote) => {
     const value = categoryData?.values[playerId];
     if (!value || !currentPlayer || playerId === currentPlayer.id) return;
     const newVotes = { ...myVotes, [playerId]: vote };
-    setMyVotes(newVotes);
     localPlayer.sendVotes(newVotes);
-    console.log('sendVotes', newVotes);
   };
 
   const getVote = (playerId: string): Vote | undefined => {

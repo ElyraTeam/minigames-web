@@ -117,6 +117,9 @@ const useCurrentGame = (roomId: string) => {
 
         localPlayer.onPlayerVotes((votes) => {
           setAllPlayerVotes(votes);
+          if (currentPlayerId && votes[currentPlayerId]) {
+            setMyVotes(votes[currentPlayerId]);
+          }
         });
 
         // Timer
