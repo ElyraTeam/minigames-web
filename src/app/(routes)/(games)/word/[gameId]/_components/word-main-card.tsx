@@ -10,6 +10,7 @@ import WordCard from './word-card';
 import WordGame from './game/word-game';
 import WordVoting from './game/word-voting';
 import WordCountdown from './word-countdown';
+import WordGameButton from './word-game-button';
 import WordGameHeader from './word-game-header';
 import WordGameContent from './word-game-content';
 import WordDoneButton from './game/word-done-button';
@@ -60,11 +61,11 @@ const WordMainCard: React.FC<WordMainCardProps> = ({ roomId }) => {
   };
 
   const renderButtonFromState = () => {
-    if (countdown) return null;
+    if (countdown) return <WordGameButton className="invisible" />;
     if (!game || game.state === State.LOBBY) return <WordReadyButton />;
     if (game.state === State.VOTING || game.state === State.INGAME)
       return <WordDoneButton state={game.state} />;
-    return null;
+    return <WordGameButton className="invisible" />;
   };
 
   return (
