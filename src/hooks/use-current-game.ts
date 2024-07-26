@@ -6,12 +6,14 @@ import localPlayer from '@/api/socket';
 import useChatStore from '@/state/chat';
 import useRoomStore from '@/state/room';
 import useGameStore from '@/state/game';
+import useVoteStore from '@/state/vote';
 import useLocalStore from '@/state/local';
 import usePlayersStore from '@/state/players';
 
 import useCountdown from './use-countdown';
 
 const useCurrentGame = (roomId: string) => {
+  const currentPlayerId = useLocalStore((state) => state.playerId);
   const nickname = useLocalStore((state) => state.nickname);
   const setPlayerId = useLocalStore((state) => state.setPlayerId);
   const setRoom = useRoomStore((state) => state.setRoom);
@@ -20,6 +22,16 @@ const useCurrentGame = (roomId: string) => {
   const setPlayers = usePlayersStore((state) => state.setPlayers);
   const addChatMessage = useChatStore((state) => state.addChatMessage);
   const resetChatMessages = useChatStore((state) => state.resetChatMessages);
+  // const players = usePlayersStore((state) => state.players?.players) || [];
+  const setCategoryVoteData = useVoteStore(
+    (state) => state.setCategoryVoteData
+  );
+  const setAllPlayerVotes = useVoteStore((state) => state.setAllPlayerVotes);
+  const setVoteCount = useVoteStore((state) => state.setVoteCount);
+  const setMyVotes = useVoteStore((state) => state.setMyVotes);
+  const setCategoryValues = useLocalStore(
+    (state) => state.setCategoryInputValues
+  );
   const { countdown, setCountdown } = useCountdown({
     startFrom: 0,
     // onCountdownUpdate: (s) => playTick(),
@@ -28,6 +40,28 @@ const useCurrentGame = (roomId: string) => {
 
   useEffect(() => {
     if (!nickname || !roomId) return;
+
+    // Check for duplicates and pre-vote 5 for them
+    const optimizeVotes = (voteData: CategoryVoteData) => {
+      const votes: Votes = {};
+      const duplicateVotes: { [name: string]: string[] } = {};
+      for (const name in voteData.values) {
+        const value = voteData.values[name];
+        duplicateVotes[value] = [...(duplicateVotes[value] || []), name];
+      }
+      for (const value in duplicateVotes) {
+        const players = duplicateVotes[value];
+        if (players.length > 1) {
+          players.forEach((playerId) => {
+            if (playerId !== currentPlayerId) {
+              votes[playerId] = '5';
+            }
+          });
+        }
+      }
+      return votes;
+    };
+
     joinRoom(nickname, roomId).then(
       ({ playerId, authToken, error, roomOptions, errorCode }) => {
         if (error) return toast.error(`Error #${errorCode}: ${error}`);
@@ -62,9 +96,33 @@ const useCurrentGame = (roomId: string) => {
         // Chat
         localPlayer.onChat((msg) => addChatMessage(msg));
 
+        // When server requests category values
+        localPlayer.onRequestValues((callback) => {
+          const categoryValues = useLocalStore.getState().categoryInputValues;
+          callback(categoryValues);
+          setCountdown(3);
+        });
+
+        // Votes
+        localPlayer.onStartVote((categoryData) => {
+          setCategoryVoteData(categoryData);
+          setVoteCount(0);
+          setAllPlayerVotes(null);
+          setMyVotes(optimizeVotes(categoryData));
+        });
+
+        localPlayer.onUpdateVotedCount((voteCount) => {
+          setVoteCount(voteCount);
+        });
+
+        localPlayer.onPlayerVotes((votes) => {
+          setAllPlayerVotes(votes);
+        });
+
         // Timer
         localPlayer.onStartTimer((newCountdown) => {
           setCountdown(newCountdown);
+          setCategoryValues({});
         });
 
         // Connect
@@ -88,6 +146,12 @@ const useCurrentGame = (roomId: string) => {
     setPlayerId,
     resetChatMessages,
     setCountdown,
+    setCategoryValues,
+    setCategoryVoteData,
+    setVoteCount,
+    setAllPlayerVotes,
+    setMyVotes,
+    currentPlayerId,
   ]);
 
   return { countdown };
