@@ -1,5 +1,5 @@
 type CategoryValues = { [name: string]: string };
-type Votes = { [name: string]: number };
+type Votes = { [name: string]: Vote };
 type AllPlayersVotes = { [key: string]: { [k: string]: number } };
 
 interface ErrorResponse {

@@ -52,3 +52,6 @@ export const DEFAULT_ROOM_OPTIONS: RoomOptions = {
   letters: CHARS_ARABIC.slice(0, DEFAULT_CHARS_NUMBER),
   isPrivate: false,
 };
+
+export const availableVotes = [0, 5, 10] as const;
+export type Vote = (typeof availableVotes)[number];
