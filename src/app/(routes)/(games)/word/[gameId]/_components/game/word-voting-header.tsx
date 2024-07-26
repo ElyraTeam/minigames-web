@@ -13,7 +13,7 @@ const WordVotingHeader: React.FC<WordVotingHeaderProps> = ({}) => {
 
   return (
     <WordContentHeader className="flex flex-col p-0">
-      <div className="flex justify-center items-center gap-3 pt-8 pb-5">
+      <div className="flex justify-center items-center gap-3 pt-6 pb-5">
         <p className="text-2xl">صوت للإجابات الصحيحة </p>
         <Tooltip
           text={
