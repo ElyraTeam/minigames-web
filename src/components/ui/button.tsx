@@ -21,7 +21,12 @@ interface ButtonProps
   loading?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ variant, className, ...props }) => {
+const Button: React.FC<ButtonProps> = ({
+  variant,
+  className,
+  loading,
+  ...props
+}) => {
   return (
     <button className={cn(buttonVariants({ variant, className }))} {...props} />
   );
