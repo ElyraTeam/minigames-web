@@ -3,12 +3,14 @@ import Input from '@/components/ui/input';
 interface WordCategoryBoxProps {
   label: string;
   letter: string;
+  value: string;
   onChange?: (value: string) => void;
 }
 
 const WordCategoryBox: React.FC<WordCategoryBoxProps> = ({
   label,
   letter,
+  value,
   onChange,
 }) => {
   return (
@@ -17,6 +19,7 @@ const WordCategoryBox: React.FC<WordCategoryBoxProps> = ({
       <Input
         className="placeholder:text-white/60 bg-white/[0.275] text-white border-transparent focus:border-word-primary-900 overflow-y-hidden px-4"
         placeholder={`${letter}ـ..`}
+        value={value}
         onChange={(e) => onChange?.(e.target.value)}
       />
     </div>

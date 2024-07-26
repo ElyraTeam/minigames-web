@@ -26,6 +26,7 @@ const WordCategoryBoxes: React.FC<WordCategoryBoxesProps> = ({}) => {
           key={`word-category-box-${category}`}
           label={category}
           letter={letter}
+          value={categoryValues[category] || ''}
           onChange={(value) => handleChangeCategory(category, value)}
         />
       ))}
