@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 import { Vote } from '@/config/word';
 import localPlayer from '@/api/socket';
 import useVoteStore from '@/state/vote';
@@ -14,6 +16,7 @@ const WordVotingCards: React.FC<WordVotingCardsProps> = ({}) => {
   const currentPlayer = useCurrentPlayer();
   const categoryData = useVoteStore((state) => state.categoryVoteData);
   const myVotes = useVoteStore((state) => state.myVotes);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   const handleChangeVote = (playerId: string, vote: Vote) => {
     const value = categoryData?.values[playerId];
@@ -29,8 +32,15 @@ const WordVotingCards: React.FC<WordVotingCardsProps> = ({}) => {
     return myVotes[playerId];
   };
 
+  useEffect(() => {
+    cardsRef.current?.scrollTo({ top: 0 });
+  }, [categoryData]);
+
   return (
-    <div className="flex flex-wrap gap-12 p-12 overflow-y-auto scrollbar-thin">
+    <div
+      className="flex flex-wrap gap-12 p-12 overflow-y-auto scrollbar-thin"
+      ref={cardsRef}
+    >
       {Object.keys(categoryData?.values || {}).map((playerId) => (
         <WordVotingCard
           key={`word-voting-card-player-${playerId}-${categoryData?.category}`}
