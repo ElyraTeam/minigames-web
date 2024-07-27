@@ -111,10 +111,12 @@ const useCurrentGame = (roomId: string) => {
 
         // Votes
         localPlayer.onStartVote((categoryData) => {
+          const optimizedVotes = optimizeVotes(categoryData);
           setCategoryVoteData(categoryData);
           setVoteCount(0);
           setAllPlayerVotes(null);
-          setMyVotes(optimizeVotes(categoryData));
+          setMyVotes(optimizedVotes);
+          localPlayer.sendVotes(optimizedVotes);
         });
 
         localPlayer.onUpdateVotedCount((voteCount) => {
