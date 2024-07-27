@@ -4,12 +4,15 @@ import WordChatSend from './word-chat-send';
 import WordSideCard from '../word-side-card';
 import WordChatMessages from './word-chat-messages';
 import WordSideCardHeader from '../word-side-card-header';
+import { cn } from '@/lib/utils';
 
-interface WordChatContainerProps {}
+interface WordChatContainerProps {
+  className?: string;
+}
 
-const WordChatContainer: React.FC<WordChatContainerProps> = ({}) => {
+const WordChatContainer: React.FC<WordChatContainerProps> = ({ className }) => {
   return (
-    <WordSideCard className="flex flex-col">
+    <WordSideCard className={cn('flex flex-col', className)}>
       <WordSideCardHeader className="space-x-1 rtl:space-x-reverse">
         <span>المحادثة</span> <MdMessage className="text-2xl inline" />
       </WordSideCardHeader>
