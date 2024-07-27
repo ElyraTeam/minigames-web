@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 import { joinRoom } from '@/api/rooms';
 import localPlayer from '@/api/socket';
@@ -37,6 +38,7 @@ const useCurrentGame = (roomId: string) => {
     // onCountdownUpdate: (s) => playTick(),
     // onCountdownFinish: () => playLastTick(),
   });
+  const router = useRouter();
 
   useEffect(() => {
     if (!nickname || !roomId) return;
@@ -132,6 +134,12 @@ const useCurrentGame = (roomId: string) => {
           setCategoryValues({});
         });
 
+        // Local player kicked
+        localPlayer.onKick((kickMsg) => {
+          toast.error(kickMsg);
+          router.push('/word');
+        });
+
         // Connect
         localPlayer.socket.on('connect', doAuth);
         localPlayer.socket.connect();
@@ -159,6 +167,7 @@ const useCurrentGame = (roomId: string) => {
     setAllPlayerVotes,
     setMyVotes,
     currentPlayerId,
+    router,
   ]);
 
   return { countdown };
