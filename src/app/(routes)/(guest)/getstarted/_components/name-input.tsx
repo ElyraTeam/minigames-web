@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 import useLocalStore from '@/state/local';
 import { saveSession } from '@/services/local';
@@ -13,6 +14,7 @@ const NameInput: React.FC<NameInputProps> = ({}) => {
   const [newName, setNewName] = useState<string | null | undefined>(null);
   const { nickname, setNickname } = useLocalStore();
   const [loading, setLoading] = useState(false);
+  const params = useSearchParams();
 
   useEffect(() => {
     setNewName(nickname);
@@ -25,7 +27,12 @@ const NameInput: React.FC<NameInputProps> = ({}) => {
     try {
       setNickname(newName.trim());
       await saveSession(newName.trim());
-      window.location.href = '/word';
+      const nextUrl = params.get('next');
+      if (nextUrl && nextUrl.trim().length !== 0) {
+        window.location.href = nextUrl;
+      } else {
+        window.location.href = '/word';
+      }
     } catch (err) {
       console.error(err);
     }
