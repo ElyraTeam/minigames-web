@@ -1,9 +1,9 @@
-import { cn } from "@/lib/utils";
-import useVoteStore from "@/state/vote";
-import { getPlayerById } from "@/lib/word";
-import Tooltip from "@/components/ui/tooltip";
-import usePlayersStore from "@/state/players";
-import { availableVotes, Vote } from "@/config/word";
+import { cn } from '@/lib/utils';
+import useVoteStore from '@/state/vote';
+import { getPlayerById } from '@/lib/word';
+import Tooltip from '@/components/ui/tooltip';
+import usePlayersStore from '@/state/players';
+import { availableVotes, Vote } from '@/config/word';
 
 interface WordVotingCardProps {
   playerId: string;
@@ -45,8 +45,8 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
   return (
     <div
       className={cn(
-        "bg-word-game/70 py-4 px-12 rounded-2xl space-y-8 text-center shadow-lg",
-        selectedCard && "bg-word-secondary/70"
+        'bg-word-game/70 py-4 px-12 rounded-2xl space-y-8 text-center shadow-lg',
+        selectedCard && 'bg-word-secondary/70'
       )}
     >
       <p className="font-light text-white/70 leading-none">{name}</p>
@@ -54,19 +54,22 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
       <div className="flex flex-row rtl:flex-row-reverse justify-center items-center gap-6">
         {availableVotes.map((voteNumber) => (
           <Tooltip
+            className="py-2 px-3"
             text={
               votesToPlayers[voteNumber]
-                ? votesToPlayers[voteNumber].join("\n")
-                : undefined
+                ? votesToPlayers[voteNumber].map((plr) => (
+                    <p key={`word-vote-name-${plr}`}>{plr}</p>
+                  ))
+                : null
             }
             key={`word-voting-card-${name}-${voteNumber}`}
           >
             <div
               className={cn(
-                "flex items-center justify-center bg-white/20 rounded-full w-8 h-8 hover:bg-white/30 transition-colors font-semibold cursor-pointer",
+                'flex items-center justify-center bg-white/20 rounded-full w-8 h-8 hover:bg-white/30 transition-colors font-semibold cursor-pointer',
                 !selectedCard &&
                   vote === voteNumber &&
-                  "border-2 bg-word-secondary hover:bg-word-secondary/80"
+                  'border-2 bg-word-secondary hover:bg-word-secondary/80'
               )}
               onClick={() => onChangeVote(voteNumber)}
             >
