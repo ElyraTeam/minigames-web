@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 
 import useRoomStore from '@/state/room';
+import { kickPlayer } from '@/api/rooms';
 import useLocalStore from '@/state/local';
 import usePlayersStore from '@/state/players';
+import ConfirmModal from '@/components/modals/confirm-modal';
 
 import WordPlayerRank from './word-player-rank';
 
@@ -17,6 +19,13 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
   const [sortedPlayers, setSortedPlayers] = useState<Player[]>([]);
   const remaining =
     (roomOptions?.options?.maxPlayers || 0) - sortedPlayers.length;
+  const [kickingPlayer, setKickingPlayer] = useState<Player | null>(null);
+
+  const handleKick = async () => {
+    if (!roomOptions?.id || !kickingPlayer || kickingPlayer.owner) return;
+    kickPlayer(roomOptions.id, kickingPlayer.id);
+    setKickingPlayer(null);
+  };
 
   useEffect(() => {
     if (!gamePlayers || !gamePlayers.players) return;
@@ -31,6 +40,12 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
 
   return (
     <>
+      <ConfirmModal
+        subtitle={`هل انت متأكد من رغبتك في طرد ${kickingPlayer?.nickname}؟`}
+        isOpen={!!kickingPlayer}
+        onClose={() => setKickingPlayer(null)}
+        onConfirm={handleKick}
+      />
       {sortedPlayers.map((plr, index) => (
         <WordPlayerRank
           key={plr.nickname}
@@ -40,6 +55,7 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
           isOwner={plr.owner}
           isLocalPlayer={plr.nickname === currentPlayer}
           isOnline={plr.online}
+          onKick={() => setKickingPlayer(plr)}
         />
       ))}
       {remaining > 0 &&
@@ -48,6 +64,7 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
             key={`word-leaderboard-remaining-${index}`}
             score={0}
             rank={sortedPlayers.length + (index + 1)}
+            isPlayer={false}
           />
         ))}
     </>
