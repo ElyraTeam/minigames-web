@@ -38,7 +38,7 @@ const WordVotingCards: React.FC<WordVotingCardsProps> = ({}) => {
 
   return (
     <div
-      className="flex flex-wrap gap-12 p-12 overflow-y-auto scrollbar-thin"
+      className="flex justify-center items-center flex-wrap gap-6 py-8 px-3 overflow-y-auto scrollbar-thin"
       ref={cardsRef}
     >
       {Object.keys(categoryData?.values || {}).map((playerId) => (
