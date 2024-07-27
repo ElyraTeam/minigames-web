@@ -111,12 +111,10 @@ const useCurrentGame = (roomId: string) => {
 
         // Votes
         localPlayer.onStartVote((categoryData) => {
-          const optimizedVotes = optimizeVotes(categoryData);
           setCategoryVoteData(categoryData);
           setVoteCount(0);
           setAllPlayerVotes(null);
-          setMyVotes(optimizedVotes);
-          localPlayer.sendVotes(optimizedVotes);
+          setMyVotes(optimizeVotes(categoryData));
         });
 
         localPlayer.onUpdateVotedCount((voteCount) => {
@@ -124,9 +122,10 @@ const useCurrentGame = (roomId: string) => {
         });
 
         localPlayer.onPlayerVotes((votes) => {
+          const myVotes = useVoteStore.getState().myVotes;
           setAllPlayerVotes(votes);
           if (currentPlayerId && votes[currentPlayerId]) {
-            setMyVotes(votes[currentPlayerId]);
+            setMyVotes({ ...myVotes, ...votes[currentPlayerId] });
           }
         });
 
