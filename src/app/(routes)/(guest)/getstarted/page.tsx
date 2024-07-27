@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 
 import { APP_NAME_EN } from '@/config/constants';
 import WordLogo from '@/components/word/word-logo';
@@ -21,7 +22,9 @@ export default function GetStarted() {
         </Link>
         <h2 className="text-2xl font-semibold">مرحبا بك في كلمة!</h2>
       </div>
-      <NameInput />
+      <Suspense>
+        <NameInput />
+      </Suspense>
       <div className="flex flex-col items-center">
         <AuthorModal className="text-lg">تطوير</AuthorModal>
         <AuthorLinks />
