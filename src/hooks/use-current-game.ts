@@ -54,7 +54,7 @@ const useCurrentGame = (roomId: string) => {
         if (players.length > 1) {
           players.forEach((playerId) => {
             if (playerId !== currentPlayerId) {
-              votes[playerId] = '5';
+              votes[playerId] = 5;
             }
           });
         }
