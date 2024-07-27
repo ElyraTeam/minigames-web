@@ -40,7 +40,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
       <WordGeneralOption
         title="عدد اللاعبين"
         description="أقصي عدد من اللاعبين مسموح في الغرفة"
-        icon={<FaUserGroup className="text-4xl" />}
+        icon={<FaUserGroup className="text-3xl lg:text-4xl" />}
       >
         <Select
           className="bg-word-secondary/50 w-20 scrollbar-track-word-secondary/20"
@@ -65,7 +65,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
       <WordGeneralOption
         title="عدد الجولات"
         description="عدد الجولات التي تلعب قبل تحديد الفائز"
-        icon={<IoGameController className="text-4xl" />}
+        icon={<IoGameController className="text-3xl lg:text-4xl" />}
       >
         <Select
           className="bg-word-secondary/50 w-20 scrollbar-thin scrollbar-track-word-secondary/20"
@@ -90,7 +90,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
       <WordGeneralOption
         title="غرفة خاصة"
         description="لن يتمكن أحد بدون رابط الغرفة من الدخول لها"
-        icon={<FaLock className="text-4xl" />}
+        icon={<FaLock className="text-3xl lg:text-4xl" />}
       >
         <Switch
           className="peer-checked:bg-word-secondary/80"

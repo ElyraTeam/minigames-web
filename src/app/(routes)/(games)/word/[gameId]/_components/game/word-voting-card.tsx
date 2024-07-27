@@ -49,8 +49,12 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
         selectedCard && 'bg-word-secondary/70'
       )}
     >
-      <p className="font-light text-white/70 leading-none">{name}</p>
-      <h3 className="font-semibold leading-none">{value}</h3>
+      <p className="text-sm lg:text-base font-light text-white/70 leading-none">
+        {name}
+      </p>
+      <h3 className="text-2xl lg:text-3xl font-semibold leading-none">
+        {value}
+      </h3>
       <div className="flex flex-row rtl:flex-row-reverse justify-center items-center gap-6">
         {availableVotes.map((voteNumber) => (
           <Tooltip
@@ -66,7 +70,7 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
           >
             <div
               className={cn(
-                'flex items-center justify-center bg-white/20 rounded-full w-8 h-8 hover:bg-white/30 transition-colors font-semibold cursor-pointer',
+                'text-sm lg:text-base flex items-center justify-center bg-white/20 rounded-full w-8 h-8 hover:bg-white/30 transition-colors font-semibold cursor-pointer',
                 !selectedCard &&
                   vote === voteNumber &&
                   'border-2 bg-word-secondary hover:bg-word-secondary/80'

@@ -13,12 +13,12 @@ const WordSettingHeader: React.FC<WordSettingHeaderProps> = ({
   return (
     <div
       className={cn(
-        'flex items-center justify-between py-3 px-14 rounded-full shadow-inner bg-word-game-700/40',
+        'flex items-center justify-between py-3 px-5 lg:px-14 rounded-full shadow-inner bg-word-game-700/40',
         className
       )}
       {...props}
     >
-      <p className="text-lg font-semibold">{title}</p>
+      <p className="lg:text-lg font-semibold">{title}</p>
       {children}
     </div>
   );

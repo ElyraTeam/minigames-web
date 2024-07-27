@@ -69,7 +69,7 @@ const WordMainCard: React.FC<WordMainCardProps> = ({ roomId }) => {
   };
 
   return (
-    <WordCard className="flex flex-col bg-word-game py-3 px-6 gap-3 overflow-y-auto scrollbar-thin">
+    <WordCard className="flex flex-col bg-word-game py-3 px-3 lg:px-6 gap-3 overflow-y-auto scrollbar-thin">
       <WordGameHeader />
       <WordGameContent>{renderContentFromState()}</WordGameContent>
       {renderButtonFromState()}

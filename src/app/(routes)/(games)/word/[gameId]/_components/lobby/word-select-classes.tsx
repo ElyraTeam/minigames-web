@@ -10,7 +10,7 @@ const WordSelectClasses: React.FC<WordSelectClassesProps> = ({
   onDelete,
 }) => {
   return (
-    <div className="flex justify-center flex-wrap gap-5 px-4">
+    <div className="flex justify-center flex-wrap gap-5 lg:px-4">
       {classes.map((className) => (
         <WordClass
           key={`word-class-${className}`}

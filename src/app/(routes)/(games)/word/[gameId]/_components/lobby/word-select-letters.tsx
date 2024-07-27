@@ -16,7 +16,7 @@ const WordSelectLetters: React.FC<WordSelectLettersProps> = ({
   const isChecked = (letter: string) => chosenLetters.includes(letter);
 
   return (
-    <div className="flex flex-wrap justify-center items-end gap-4 px-12">
+    <div className="flex flex-wrap justify-center items-end gap-4 lg:px-12">
       {CHARS_ARABIC.map((letter) => (
         <WordLetter
           key={`word-letter-${letter}`}

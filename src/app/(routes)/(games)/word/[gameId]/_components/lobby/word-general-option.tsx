@@ -12,12 +12,12 @@ const WordGeneralOption: React.FC<WordGeneralOptionProps> = ({
   children,
 }) => {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between gap-8">
       <div className="flex items-center gap-4">
         {icon}
         <div>
-          <h5 className="font-semibold">{title}</h5>
-          <p className="text-sm text-white/65">{description}</p>
+          <h5 className="text-lg lg:text-xl font-semibold">{title}</h5>
+          <p className="text-xs lg:text-sm text-white/65">{description}</p>
         </div>
       </div>
       {children}
