@@ -10,7 +10,7 @@ const WordGameHeader: React.FC<WordGameHeaderProps> = ({}) => {
   return (
     <div className="flex justify-center items-center gap-3 py-5 relative">
       <WordGameIcons />
-      <div className="absolute right-0">
+      <div className="absolute right-0 hidden lg:block">
         <WordLogo />
       </div>
     </div>
