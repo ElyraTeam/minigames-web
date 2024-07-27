@@ -18,7 +18,8 @@ const Input: React.FC<InputProps> = ({
     <div className={cn('relative', parentClassName)}>
       <input
         className={cn(
-          'rounded-lg bg-transparent outline-none border-2 w-full p-[12px] transition-colors rtl:pe-10 text-sm',
+          'rounded-lg bg-transparent outline-none border-2 w-full p-[12px] transition-colors text-sm',
+          icon && 'rtl:pe-10',
           className
         )}
         disabled={disabled}
