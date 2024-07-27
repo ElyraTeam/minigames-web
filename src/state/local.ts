@@ -6,7 +6,6 @@ interface LocalState {
   nickname?: string | null;
   token?: string | null;
   categoryInputValues: CategoryValues;
-  nextRoute?: string;
   isMuted: boolean;
   setPlayerId: (playerId: string) => void;
   setNickname: (nickname: string) => void;
