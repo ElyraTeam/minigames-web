@@ -44,10 +44,14 @@ const useCurrentGame = (roomId: string) => {
     // Check for duplicates and pre-vote 5 for them
     const optimizeVotes = (voteData: CategoryVoteData) => {
       const votes: Votes = {};
-      const duplicateVotes: { [name: string]: string[] } = {};
-      for (const name in voteData.values) {
-        const value = voteData.values[name];
-        duplicateVotes[value] = [...(duplicateVotes[value] || []), name];
+      const duplicateVotes: { [playerId: string]: string[] } = {};
+      for (const playerId in voteData.values) {
+        const value = voteData.values[playerId];
+        if (value.trim().length !== 0) {
+          duplicateVotes[value] = [...(duplicateVotes[value] || []), playerId];
+        } else if (playerId !== currentPlayerId) {
+          votes[playerId] = 0;
+        }
       }
       for (const value in duplicateVotes) {
         const players = duplicateVotes[value];
