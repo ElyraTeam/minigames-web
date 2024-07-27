@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { IoIosAddCircle } from 'react-icons/io';
 
 import { cn } from '@/lib/utils';
@@ -7,11 +6,16 @@ import Input from '@/components/ui/input';
 import Tooltip from '@/components/ui/tooltip';
 
 interface WordClassAddProps {
+  value: string;
+  setValue: (value: string) => void;
   onClassAdd: (className: string) => void;
 }
 
-const WordClassAdd: React.FC<WordClassAddProps> = ({ onClassAdd }) => {
-  const [className, setClassName] = useState('');
+const WordClassAdd: React.FC<WordClassAddProps> = ({
+  value,
+  setValue,
+  onClassAdd,
+}) => {
   const isOwner = useOwner();
 
   return (
@@ -32,10 +36,10 @@ const WordClassAdd: React.FC<WordClassAddProps> = ({ onClassAdd }) => {
             )}
           />
         }
-        value={className}
-        onChange={(e) => setClassName(e.target.value)}
-        onIconClick={() => isOwner && onClassAdd(className)}
-        onKeyUp={(e) => e.key === 'Enter' && onClassAdd(className)}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onIconClick={() => isOwner && onClassAdd(value)}
+        onKeyUp={(e) => e.key === 'Enter' && onClassAdd(value)}
         disabled={!isOwner}
       />
     </Tooltip>

@@ -1,19 +1,21 @@
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FiRefreshCcw } from 'react-icons/fi';
 
+import { cn } from '@/lib/utils';
+import useOwner from '@/hooks/use-owner';
+import Tooltip from '@/components/ui/tooltip';
 import useRoomOptions from '@/hooks/use-room-options';
 import { DEFAULT_CATEGORIES_ARABIC } from '@/config/word';
 
 import WordAddClass from './word-class-add';
 import WordSettingHeader from './word-setting-header';
 import WordSelectClasses from './word-select-classes';
-import { cn } from '@/lib/utils';
-import useOwner from '@/hooks/use-owner';
-import Tooltip from '@/components/ui/tooltip';
 
 interface WordClassSettingsProps {}
 
 const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
+  const [className, setClassName] = useState('');
   const { currentOptions, updateRoomOptions } = useRoomOptions();
   const classes = currentOptions?.categories || [];
   const isOwner = useOwner();
@@ -40,6 +42,7 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
     if (classes.includes(className))
       return toast.error('لا يمكن تكرار نفس الفئة');
     setRoomCategories([...classes, className]);
+    setClassName('');
   };
 
   return (
@@ -63,7 +66,13 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
         </Tooltip>
       </WordSettingHeader>
       <WordSelectClasses classes={classes} onDelete={deleteClass} />
-      {isOwner && <WordAddClass onClassAdd={addClass} />}
+      {isOwner && (
+        <WordAddClass
+          value={className}
+          setValue={(newValue) => setClassName(newValue)}
+          onClassAdd={addClass}
+        />
+      )}
     </div>
   );
 };
