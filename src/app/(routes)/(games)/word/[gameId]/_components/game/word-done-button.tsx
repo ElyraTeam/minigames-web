@@ -33,7 +33,6 @@ const WordDoneButton: React.FC<WordDoneButtonProps> = ({ state }) => {
   };
 
   const renderButtonText = () => {
-    console.log(myVotesLength, playersLength, myVotes);
     if (state === State.VOTING) {
       if (myVotesLength !== playersLength - 1) return 'صوت أولًا';
       if (currentPlayer?.voted)
