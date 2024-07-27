@@ -19,6 +19,7 @@ const WordVotingCards: React.FC<WordVotingCardsProps> = ({}) => {
   const cardsRef = useRef<HTMLDivElement>(null);
 
   const handleChangeVote = (playerId: string, vote: Vote) => {
+    if (currentPlayer?.voted) return;
     const value = categoryData?.values[playerId];
     if (!value || !currentPlayer || playerId === currentPlayer.id) return;
     const newVotes = { ...myVotes, [playerId]: vote };
