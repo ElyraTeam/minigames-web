@@ -22,19 +22,19 @@ const WordDoneButton: React.FC<WordDoneButtonProps> = ({ state }) => {
 
   const handleDoneButton = () => {
     if (state === State.INGAME) return localPlayer.finishRound();
-    if (myVotesLength === playersLength - 1) {
+    if (myVotesLength >= playersLength - 1) {
       return localPlayer.confirmVotes();
     }
   };
 
   const isDisabled = () => {
     if (state === State.INGAME) return false;
-    return myVotesLength !== playersLength - 1 || currentPlayer?.voted;
+    return myVotesLength < playersLength - 1 || currentPlayer?.voted;
   };
 
   const renderButtonText = () => {
     if (state === State.VOTING) {
-      if (myVotesLength !== playersLength - 1) return 'صوت أولًا';
+      if (myVotesLength < playersLength - 1) return 'صوت أولًا';
       if (currentPlayer?.voted)
         return (
           <div>
