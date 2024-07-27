@@ -1,14 +1,18 @@
 import { FaCrown } from 'react-icons/fa';
+import { RxCross2 } from 'react-icons/rx';
 
 import { cn } from '@/lib/utils';
+import useOwner from '@/hooks/use-owner';
 
 interface WordPlayerRankProps {
   rank: number;
+  isPlayer?: boolean;
   name?: string;
   score?: number;
   isOwner?: boolean;
   isLocalPlayer?: boolean;
   isOnline?: boolean;
+  onKick?: () => void;
 }
 
 const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
@@ -18,7 +22,10 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
   isOwner,
   isLocalPlayer,
   isOnline,
+  onKick,
+  isPlayer = true,
 }) => {
+  const isMeOwner = useOwner();
   const isOdd = rank % 2 == 1;
 
   return (
@@ -44,7 +51,7 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
         >
           {rank}
         </p>
-        <p className="text-lg overflow-hidden overflow-ellipsis max-w-[6.8rem] whitespace-nowrap font-semibold">
+        <p className="text-lg overflow-hidden overflow-ellipsis max-w-[6.5rem] whitespace-nowrap font-semibold">
           {name || '------'}
         </p>
         {isOwner && (
@@ -53,6 +60,14 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
           </span>
         )}
       </div>
+      {isMeOwner && !isOwner && isPlayer && (
+        <div
+          className="p-[2px] text-sm bg-white/15 hover:bg-white/20 transition-colors rounded-full text-word-game-500 cursor-pointer mx-2"
+          onClick={onKick}
+        >
+          <RxCross2 />
+        </div>
+      )}
       <div className="border-r-2 border-white/20 w-12 text-center" dir="ltr">
         <p className="font-semibold text-sm">{score || 0}</p>
       </div>
