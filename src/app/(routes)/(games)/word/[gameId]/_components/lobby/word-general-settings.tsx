@@ -2,6 +2,7 @@ import { FaLock } from 'react-icons/fa';
 import { FaUserGroup } from 'react-icons/fa6';
 import { IoGameController } from 'react-icons/io5';
 
+import useGameStore from '@/state/game';
 import useOwner from '@/hooks/use-owner';
 import Switch from '@/components/ui/switch';
 import Select from '@/components/ui/select';
@@ -14,6 +15,7 @@ interface WordGeneralSettingsProps {}
 
 const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
   const { currentOptions, updateRoomOptions } = useRoomOptions();
+  const currentRound = useGameStore((state) => state.game?.currentRound) || 1;
   const maxPlayers = currentOptions?.maxPlayers || DEFAULT_MAX_PLAYERS;
   const rounds = currentOptions?.rounds || DEFAULT_ROUNDS;
   const isPrivate = currentOptions?.isPrivate || false;
@@ -45,7 +47,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
         <Select
           className="bg-word-secondary/50 w-20 scrollbar-track-word-secondary/20"
           value={maxPlayers}
-          disabled={!isOwner}
+          disabled={!isOwner || currentRound !== 1}
           onChange={(e) => handleMaxPlayers(e.target.value)}
           tooltip={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
           tooltipClassName="text-sm"
@@ -70,7 +72,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
         <Select
           className="bg-word-secondary/50 w-20 scrollbar-thin scrollbar-track-word-secondary/20"
           value={rounds}
-          disabled={!isOwner}
+          disabled={!isOwner || currentRound !== 1}
           onChange={(e) => handleRounds(e.target.value)}
           tooltip={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
           tooltipClassName="text-sm"
@@ -94,7 +96,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
       >
         <Switch
           className="peer-checked:bg-word-secondary/80"
-          disabled={!isOwner}
+          disabled={!isOwner || currentRound !== 1}
           checked={isPrivate}
           onChange={(e) => handlePrivacy(e.target.checked)}
           tooltip={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
