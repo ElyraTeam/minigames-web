@@ -6,6 +6,7 @@ import { MdOutlineChat } from 'react-icons/md';
 import { cn } from '@/lib/utils';
 
 import WordChatContainer from './word-chat-container';
+import { RxCross2 } from 'react-icons/rx';
 
 interface WordMobileChatProps {
   className?: string;
@@ -27,7 +28,11 @@ const WordMobileChat: React.FC<WordMobileChatProps> = ({ className }) => {
         className="flex self-end items-center justify-center w-14 h-14 p-4 bg-word-game-950 rounded-full cursor-pointer"
         onClick={() => setChatOpen(!isChatOpen)}
       >
-        <MdOutlineChat className="text-3xl" />
+        {isChatOpen ? (
+          <RxCross2 className="text-3xl" />
+        ) : (
+          <MdOutlineChat className="text-3xl" />
+        )}
       </div>
     </div>
   );
