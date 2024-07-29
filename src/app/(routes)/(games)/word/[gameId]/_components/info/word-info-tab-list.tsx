@@ -17,13 +17,13 @@ const WordInfoTabList: React.FC<WordInfoTabListProps> = ({}) => {
     >
       <TabItem
         label="الحالية"
-        className="overflow-y-auto scrollbar-none animate-in slide-in-from-left-full duration-300"
+        className="overflow-y-auto scrollbar-none animate-in slide-in-from-right-full duration-300"
       >
         <WordLeaderboard lastRound />
       </TabItem>
       <TabItem
         label="المتصدرون"
-        className="overflow-y-auto scrollbar-none animate-in slide-in-from-right-full duration-300"
+        className="overflow-y-auto scrollbar-none animate-in slide-in-from-left-full duration-300"
       >
         <WordLeaderboard />
       </TabItem>
