@@ -34,6 +34,7 @@ const WordCountdown: React.FC<WordCountdownProps> = ({
             src="/svg/word-waves.svg"
             alt="word-waves"
             className="object-cover"
+            priority={true}
             fill
           />
         </div>
