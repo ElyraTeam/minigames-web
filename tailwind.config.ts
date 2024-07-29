@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import tailwindAnimate from 'tailwindcss-animate';
 import tailwindScrollbar from 'tailwind-scrollbar';
 
 const config: Config = {
@@ -68,6 +69,7 @@ const config: Config = {
       nocompatible: true,
       preferredStrategy: 'pseudoelements',
     }),
+    tailwindAnimate,
   ],
 };
 export default config;
