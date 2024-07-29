@@ -13,7 +13,7 @@ const WordCountdown: React.FC<WordCountdownProps> = ({
   countdown,
 }) => {
   return (
-    <div className="relative h-full flex flex-col">
+    <div className="relative h-full flex flex-col overflow-hidden">
       <div className="relative px-12 py-20 h-fit">
         <div className="absolute top-12 bg-word-game-600 -translate-x-1/2 left-1/2 p-1 rounded-full">
           <MdCrisisAlert className="text-5xl" />
@@ -28,12 +28,12 @@ const WordCountdown: React.FC<WordCountdownProps> = ({
           </p>
         </div>
       </div>
-      <div className="absolute w-full h-24 bottom-0">
+      <div className="absolute w-full h-36 -bottom-6">
         <div className="relative h-full">
           <Image
             src="/svg/word-waves.svg"
             alt="word-waves"
-            objectFit="cover"
+            className="object-cover"
             fill
           />
         </div>
