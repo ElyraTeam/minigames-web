@@ -1,11 +1,14 @@
 'use client';
 
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, createContext } from 'react';
 
 import { cn } from '@/lib/utils';
 
 import TabItem, { TabItemProps } from './tab-item';
+
+export const TabProvider = createContext<{
+  activeTab: number;
+}>({ activeTab: 0 });
 
 interface TabListProps {
   children: React.ReactNode;
@@ -35,46 +38,48 @@ const TabList: React.FC<TabListProps> = ({
   );
 
   return (
-    <div className={cn(parentClassName)}>
-      <nav>
-        <ul
-          className={cn(
-            'flex justify-center relative transition-transform',
-            className
-          )}
-          role="tablist"
-          aria-orientation="horizontal"
-        >
-          {tabs.map((tab, index) => (
-            <li className="w-full z-10" key={`tab-${index}`}>
-              <button
-                role="tab"
-                aria-selected={activeTab === index}
-                onClick={() => handleTabClick(index)}
-                className={cn(
-                  'text-sm w-full transition-opacity duration-200',
-                  tabSwitchClassName,
-                  activeTab !== index && 'opacity-30'
-                )}
-              >
-                {tab.props.label}
-              </button>
-            </li>
-          ))}
-          <span
+    <TabProvider.Provider value={{ activeTab }}>
+      <div className={cn(parentClassName)}>
+        <nav>
+          <ul
             className={cn(
-              'absolute h-full left-0 transition-all duration-500',
-              activeClassName
+              'flex justify-center relative transition-transform',
+              className
             )}
-            style={{
-              width: `${(1 / tabs.length) * 100}%`,
-              translate: `${(tabs.length - 1 - activeTab) * 100}%`,
-            }}
-          />
-        </ul>
-      </nav>
-      {tabs[activeTab]}
-    </div>
+            role="tablist"
+            aria-orientation="horizontal"
+          >
+            {tabs.map((tab, index) => (
+              <li className="w-full z-10" key={`tab-${index}`}>
+                <button
+                  role="tab"
+                  aria-selected={activeTab === index}
+                  onClick={() => handleTabClick(index)}
+                  className={cn(
+                    'text-sm w-full transition-opacity duration-200',
+                    tabSwitchClassName,
+                    activeTab !== index && 'opacity-30'
+                  )}
+                >
+                  {tab.props.label}
+                </button>
+              </li>
+            ))}
+            <span
+              className={cn(
+                'absolute h-full left-0 transition-all duration-500',
+                activeClassName
+              )}
+              style={{
+                width: `${(1 / tabs.length) * 100}%`,
+                translate: `${(tabs.length - 1 - activeTab) * 100}%`,
+              }}
+            />
+          </ul>
+        </nav>
+        {tabs[activeTab]}
+      </div>
+    </TabProvider.Provider>
   );
 };
 
