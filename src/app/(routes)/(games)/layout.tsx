@@ -14,7 +14,8 @@ export default async function GamesLayout({
   const nickname = getNicknameFromCookies();
   const pathname = headersList.get('x-current-path')!;
 
-  if (!nickname) redirect(`/getstarted?next=${encodeURIComponent(pathname)}`);
+  if (!nickname)
+    redirect(`/getstarted?next=${encodeURIComponent(pathname) ?? ''}`);
 
   return (
     <NicknameProvider nickname={nickname}>
