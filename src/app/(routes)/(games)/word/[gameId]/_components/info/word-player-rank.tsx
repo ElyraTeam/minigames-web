@@ -1,5 +1,5 @@
 import { FaCrown } from 'react-icons/fa';
-import { RxCross2 } from 'react-icons/rx';
+import { IoIosCloseCircle } from 'react-icons/io';
 
 import { cn } from '@/lib/utils';
 import useOwner from '@/hooks/use-owner';
@@ -61,12 +61,10 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
         )}
       </div>
       {isMeOwner && !isOwner && isPlayer && (
-        <div
-          className="p-[2px] text-sm bg-white/15 hover:bg-white/20 transition-colors rounded-full text-word-game-500 cursor-pointer mx-2"
+        <IoIosCloseCircle
+          className="mx-4 text-white/15 hover:text-white/20 cursor-pointer transition-colors text-2xl"
           onClick={onKick}
-        >
-          <RxCross2 />
-        </div>
+        />
       )}
       <div className="border-r-2 border-white/20 w-12 text-center" dir="ltr">
         <p className="font-semibold text-sm">{score || 0}</p>
