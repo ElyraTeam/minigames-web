@@ -15,6 +15,14 @@ interface WordMobileChatProps {
 const WordMobileChat: React.FC<WordMobileChatProps> = ({ className }) => {
   const [isChatOpen, setChatOpen] = useState(false);
 
+  const handleClickOutside = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    if (e.target === e.currentTarget) {
+      setChatOpen(false);
+    }
+  };
+
   return (
     <div
       className={cn(
@@ -23,6 +31,7 @@ const WordMobileChat: React.FC<WordMobileChatProps> = ({ className }) => {
         isChatOpen && 'bg-black/50',
         className
       )}
+      onClick={handleClickOutside}
     >
       {isChatOpen && (
         <WordChatContainer
