@@ -1,1 +1,1 @@
-type TooltipPosition = 'top' | 'bottom';
+type TooltipPosition = 'top' | 'bottom' | 'right' | 'left';
