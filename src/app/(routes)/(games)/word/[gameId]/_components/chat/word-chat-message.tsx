@@ -17,7 +17,10 @@ const WordChatMessage: React.FC<WordChatMessageProps> = ({
 }) => {
   return (
     <div
-      className={cn('flex flex-col gap-2', !self && 'items-end')}
+      className={cn(
+        'flex flex-col gap-2 animate-in slide-in-from-bottom-1/2',
+        !self && 'items-end'
+      )}
       style={{ marginTop: spacing }}
     >
       {!self && sender && (
