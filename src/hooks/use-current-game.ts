@@ -1,17 +1,17 @@
-import { useEffect } from 'react';
-import toast from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
+import { useEffect } from "react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
-import { joinRoom } from '@/api/rooms';
-import localPlayer from '@/api/socket';
-import useChatStore from '@/state/chat';
-import useRoomStore from '@/state/room';
-import useGameStore from '@/state/game';
-import useVoteStore from '@/state/vote';
-import useLocalStore from '@/state/local';
-import usePlayersStore from '@/state/players';
+import { joinRoom } from "@/api/rooms";
+import localPlayer from "@/api/socket";
+import useChatStore from "@/state/chat";
+import useRoomStore from "@/state/room";
+import useGameStore from "@/state/game";
+import useVoteStore from "@/state/vote";
+import useLocalStore from "@/state/local";
+import usePlayersStore from "@/state/players";
 
-import useCountdown from './use-countdown';
+import useCountdown from "./use-countdown";
 
 const useCurrentGame = (roomId: string) => {
   const currentPlayerId = useLocalStore((state) => state.playerId);
@@ -43,35 +43,10 @@ const useCurrentGame = (roomId: string) => {
   useEffect(() => {
     if (!nickname || !roomId) return;
 
-    // Check for duplicates and pre-vote 5 for them
-    const optimizeVotes = (voteData: CategoryVoteData) => {
-      const votes: Votes = {};
-      const duplicateVotes: { [playerId: string]: string[] } = {};
-      for (const playerId in voteData.values) {
-        const value = voteData.values[playerId];
-        if (value.trim().length !== 0) {
-          duplicateVotes[value] = [...(duplicateVotes[value] || []), playerId];
-        } else if (playerId !== currentPlayerId) {
-          votes[playerId] = 0;
-        }
-      }
-      for (const value in duplicateVotes) {
-        const players = duplicateVotes[value];
-        if (players.length > 1) {
-          players.forEach((playerId) => {
-            if (playerId !== currentPlayerId) {
-              votes[playerId] = 5;
-            }
-          });
-        }
-      }
-      return votes;
-    };
-
     joinRoom(nickname, roomId).then(
       ({ playerId, authToken, error, roomOptions, errorCode }) => {
         if (error) return toast.error(`Error #${errorCode}: ${error}`);
-        if (!authToken) return toast.error('Unable to find auth token.');
+        if (!authToken) return toast.error("Unable to find auth token.");
         resetChatMessages();
         setToken(authToken);
         setRoom({ id: roomId, options: roomOptions });
@@ -82,7 +57,7 @@ const useCurrentGame = (roomId: string) => {
 
         const doAuth = () => {
           localPlayer.authenticate(
-            { authToken, nickname, roomId: roomId, game: 'word' },
+            { authToken, nickname, roomId: roomId, game: "word" },
             (res) => {
               // if (res == 'good') {
               // }
@@ -91,11 +66,11 @@ const useCurrentGame = (roomId: string) => {
         };
 
         // Sync
-        localPlayer.socket.on('sync', (sync: GameSync) => setGame(sync));
-        localPlayer.socket.on('options', (options: GameOptionsSync) =>
+        localPlayer.socket.on("sync", (sync: GameSync) => setGame(sync));
+        localPlayer.socket.on("options", (options: GameOptionsSync) =>
           setRoom(options)
         );
-        localPlayer.socket.on('players', (players: GamePlayersSync) =>
+        localPlayer.socket.on("players", (players: GamePlayersSync) =>
           setPlayers(players)
         );
 
@@ -113,8 +88,13 @@ const useCurrentGame = (roomId: string) => {
         localPlayer.onStartVote((categoryData) => {
           setCategoryVoteData(categoryData);
           setVoteCount(0);
-          setAllPlayerVotes(null);
-          setMyVotes(optimizeVotes(categoryData));
+
+          const votes = categoryData.votes;
+          const myVotes = useVoteStore.getState().myVotes;
+          setAllPlayerVotes(votes);
+          if (currentPlayerId && votes[currentPlayerId]) {
+            setMyVotes({ ...myVotes, ...votes[currentPlayerId] });
+          }
         });
 
         localPlayer.onUpdateVotedCount((voteCount) => {
@@ -138,11 +118,11 @@ const useCurrentGame = (roomId: string) => {
         // Local player kicked
         localPlayer.onKick((kickMsg) => {
           toast.error(kickMsg);
-          router.push('/word');
+          router.push("/word");
         });
 
         // Connect
-        localPlayer.socket.on('connect', doAuth);
+        localPlayer.socket.on("connect", doAuth);
         localPlayer.socket.connect();
       }
     );
