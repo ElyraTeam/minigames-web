@@ -29,7 +29,7 @@ const WordVotingCards: React.FC<WordVotingCardsProps> = ({}) => {
   const getVote = (playerId: string): Vote | undefined => {
     if (playerId === currentPlayer?.id) return;
     const value = categoryData?.values[playerId];
-    if (!value) return 0;
+    if (!value || value.length <= 1) return 0;
     return myVotes[playerId];
   };
 
