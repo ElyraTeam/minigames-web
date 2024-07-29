@@ -37,13 +37,10 @@ const WordDoneButton: React.FC<WordDoneButtonProps> = ({ state }) => {
       if (myVotesLength < playersLength - 1) return 'صوت أولًا';
       if (currentPlayer?.voted)
         return (
-          <div>
-            <p className="leading-none font-bold text-lg mb-1">
-              <span className="leading-5">{`${votedCount}`}</span>
-              <span className="opacity-50">{`/${playersLength}`}</span>
-            </p>
-            <p className="text-xs leading-none">تم التصويت</p>
-          </div>
+          <p className="leading-none font-bold text-xl">
+            <span className="leading-5">{`${votedCount}`}</span>
+            <span className="opacity-50">{`/${playersLength}`}</span>
+          </p>
         );
     }
     return 'انتهيت';
