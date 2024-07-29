@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { RxCross2 } from 'react-icons/rx';
 import { MdOutlineChat } from 'react-icons/md';
 
 import { cn } from '@/lib/utils';
 
 import WordChatContainer from './word-chat-container';
-import { RxCross2 } from 'react-icons/rx';
 
 interface WordMobileChatProps {
   className?: string;
@@ -20,12 +20,19 @@ const WordMobileChat: React.FC<WordMobileChatProps> = ({ className }) => {
       className={cn(
         'fixed justify-end gap-3 flex flex-col bottom-0 left-0 p-6 z-50',
         isChatOpen && 'w-full h-full',
+        isChatOpen && 'bg-black/50',
         className
       )}
     >
-      {isChatOpen && <WordChatContainer className="flex-grow" />}
+      {isChatOpen && (
+        <WordChatContainer
+          className={cn(
+            'flex-grow animate-in slide-in-from-bottom-1/2 duration-300'
+          )}
+        />
+      )}
       <div
-        className="flex self-end items-center justify-center w-14 h-14 p-4 bg-word-game-950 rounded-full cursor-pointer"
+        className="flex self-end items-center justify-center w-14 h-14 p-4 bg-word-game-950 rounded-full cursor-pointer shadow-xl"
         onClick={() => setChatOpen(!isChatOpen)}
       >
         {isChatOpen ? (
