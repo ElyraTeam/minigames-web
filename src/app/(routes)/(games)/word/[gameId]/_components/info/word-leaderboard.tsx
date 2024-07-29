@@ -20,11 +20,15 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
   const remaining =
     (roomOptions?.options?.maxPlayers || 0) - sortedPlayers.length;
   const [kickingPlayer, setKickingPlayer] = useState<Player | null>(null);
+  const [kickModalOpen, setKickModalOpen] = useState(false);
 
   const handleKick = async () => {
     if (!roomOptions?.id || !kickingPlayer || kickingPlayer.owner) return;
     kickPlayer(roomOptions.id, kickingPlayer.id);
-    setKickingPlayer(null);
+    setKickModalOpen(false);
+    setTimeout(() => {
+      setKickingPlayer(null);
+    }, 200);
   };
 
   useEffect(() => {
@@ -41,9 +45,19 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
   return (
     <>
       <ConfirmModal
-        subtitle={`هل انت متأكد من رغبتك في طرد ${kickingPlayer?.nickname}؟`}
-        isOpen={!!kickingPlayer}
-        onClose={() => setKickingPlayer(null)}
+        subtitle={
+          <>
+            هل انت متأكد من رغبتك في طرد{' '}
+            <span className="font-bold">{kickingPlayer?.nickname}</span>؟
+          </>
+        }
+        isOpen={kickModalOpen}
+        onClose={() => {
+          setKickModalOpen(false);
+          setTimeout(() => {
+            setKickingPlayer(null);
+          }, 200);
+        }}
         onConfirm={handleKick}
       />
       {sortedPlayers.map((plr, index) => (
@@ -55,7 +69,10 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
           isOwner={plr.owner}
           isLocalPlayer={plr.nickname === currentPlayer}
           isOnline={plr.online}
-          onKick={() => setKickingPlayer(plr)}
+          onKick={() => {
+            setKickModalOpen(true);
+            setKickingPlayer(plr);
+          }}
         />
       ))}
       {remaining > 0 &&
