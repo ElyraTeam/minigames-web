@@ -4,7 +4,7 @@ import Modal from './modal';
 
 interface ConfirmModalProps {
   title?: string;
-  subtitle?: string;
+  subtitle?: React.ReactNode;
   icon?: React.ReactNode;
   isOpen?: boolean;
   loading?: boolean;
