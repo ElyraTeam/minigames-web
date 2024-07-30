@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useTransition } from '@react-spring/web';
 
+import { State } from '@/types/word';
+import useGameStore from '@/state/game';
 import useRoomStore from '@/state/room';
 import { kickPlayer } from '@/api/rooms';
 import useLocalStore from '@/state/local';
@@ -18,6 +20,7 @@ const PLAYER_RANK_HEIGHT = 68;
 const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
   const gamePlayers = usePlayersStore((state) => state.players);
   const roomOptions = useRoomStore((state) => state.options);
+  const gameStatus = useGameStore((state) => state.game?.state);
   const currentPlayer = useLocalStore((state) => state.nickname);
   const [sortedPlayers, setSortedPlayers] = useState<Player[]>([]);
   const remaining =
@@ -94,6 +97,9 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
             isOwner={plr.owner}
             isLocalPlayer={plr.nickname === currentPlayer}
             isOnline={plr.online}
+            checkmark={
+              gameStatus === State.LOBBY ? !plr.owner && plr.ready : plr.voted
+            }
             onKick={() => {
               setKickModalOpen(true);
               setKickingPlayer(plr);
