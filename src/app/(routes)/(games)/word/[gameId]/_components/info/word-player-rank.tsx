@@ -1,6 +1,6 @@
 import { FaCrown } from 'react-icons/fa';
 import { animated } from '@react-spring/web';
-import { IoIosCloseCircle } from 'react-icons/io';
+import { IoIosCloseCircle, IoIosCheckmarkCircle } from 'react-icons/io';
 
 import { cn } from '@/lib/utils';
 import useOwner from '@/hooks/use-owner';
@@ -13,6 +13,7 @@ interface WordPlayerRankProps {
   isOwner?: boolean;
   isLocalPlayer?: boolean;
   isOnline?: boolean;
+  checkmark?: boolean;
   style?: React.ComponentProps<typeof animated.div>['style'];
   onKick?: () => void;
 }
@@ -26,6 +27,7 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
   isOnline,
   onKick,
   style,
+  checkmark,
   isPlayer = true,
 }) => {
   const isMeOwner = useOwner();
@@ -61,6 +63,11 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
         {isOwner && (
           <span className="flex flex-col justify-center items-center bg-white w-5 h-5 rounded-full">
             <FaCrown className="text-sm text-yellow-500" />
+          </span>
+        )}
+        {checkmark && (
+          <span className="text-word-game text-2xl">
+            <IoIosCheckmarkCircle />
           </span>
         )}
       </div>
