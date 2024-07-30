@@ -32,6 +32,7 @@ interface TooltipProps {
   className?: string;
   text?: React.ReactNode;
   position?: TooltipPosition;
+  delayDuration?: number;
 }
 
 const Tooltip: React.FC<TooltipProps> = ({
@@ -39,10 +40,11 @@ const Tooltip: React.FC<TooltipProps> = ({
   className,
   text,
   position = 'bottom',
+  delayDuration,
 }) => {
   return (
     <TooltipProvider>
-      <TooltipRoot delayDuration={500}>
+      <TooltipRoot delayDuration={delayDuration}>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
         {text && (
           <TooltipContent
