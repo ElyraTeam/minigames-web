@@ -4,6 +4,7 @@ import { IoIosCloseCircle, IoIosCheckmarkCircle } from 'react-icons/io';
 
 import { cn } from '@/lib/utils';
 import useOwner from '@/hooks/use-owner';
+import Tooltip from '@/components/ui/tooltip';
 
 interface WordPlayerRankProps {
   rank: number;
@@ -14,6 +15,7 @@ interface WordPlayerRankProps {
   isLocalPlayer?: boolean;
   isOnline?: boolean;
   checkmark?: boolean;
+  checkmarkText?: string;
   style?: React.ComponentProps<typeof animated.div>['style'];
   onKick?: () => void;
 }
@@ -28,6 +30,7 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
   onKick,
   style,
   checkmark,
+  checkmarkText,
   isPlayer = true,
 }) => {
   const isMeOwner = useOwner();
@@ -66,9 +69,11 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
           </span>
         )}
         {checkmark && (
-          <span className="text-word-game text-2xl animate-in fade-in duration-500">
-            <IoIosCheckmarkCircle />
-          </span>
+          <Tooltip text={checkmarkText} position="top">
+            <span className="text-word-game text-2xl animate-in fade-in duration-500">
+              <IoIosCheckmarkCircle />
+            </span>
+          </Tooltip>
         )}
       </div>
       {isMeOwner && !isOwner && isPlayer && (
