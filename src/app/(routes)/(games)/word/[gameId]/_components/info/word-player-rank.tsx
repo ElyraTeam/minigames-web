@@ -66,7 +66,7 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
           </span>
         )}
         {checkmark && (
-          <span className="text-word-game text-2xl">
+          <span className="text-word-game text-2xl animate-in fade-in duration-500">
             <IoIosCheckmarkCircle />
           </span>
         )}
