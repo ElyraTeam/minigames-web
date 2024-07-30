@@ -27,7 +27,7 @@ interface JoinRoomResponse extends ErrorResponse {
 }
 
 interface AuthenticateRequest {
-  game: "word";
+  game: 'word';
   roomId: string;
   nickname: string;
   authToken: string;
@@ -70,10 +70,24 @@ interface CategoryVoteData {
   votes: AllPlayersVotes;
 }
 
+interface ChatMessagePart {
+  id: string;
+  text: string;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  color?: string; //Hex
+}
+
+interface ChatMessagePartServer extends Omit<ChatMessagePart, 'id'> {}
+
 interface ChatMessage {
   id: string;
-  type: "system" | "player";
+  type: 'system' | 'player';
   sender: string;
-  message: string;
-  font: "normal" | "bold";
+  parts: ChatMessagePart[];
+}
+
+interface ChatMessageServer extends ChatMessage {
+  parts: ChatMessagePartServer[];
 }
