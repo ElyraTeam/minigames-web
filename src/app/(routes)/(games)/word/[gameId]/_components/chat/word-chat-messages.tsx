@@ -6,6 +6,7 @@ import { LuMessageCircle } from 'react-icons/lu';
 import useChatStore from '@/state/chat';
 import useLocalStore from '@/state/local';
 
+import ChatParts from './word-chat-parts';
 import WordChatMessage from './word-chat-message';
 
 interface WordChatMessagesProps {}
@@ -33,7 +34,7 @@ const WordChatMessages: React.FC<WordChatMessagesProps> = ({}) => {
     return (
       <WordChatMessage
         key={msg.id}
-        content={msg.message}
+        content={msg.parts}
         self={nickname === msg.sender}
         sender={sender}
         rounded={!!sender}
@@ -51,7 +52,7 @@ const WordChatMessages: React.FC<WordChatMessagesProps> = ({}) => {
               renderMessage(chatMsg, i)
             ) : (
               <p key={i} className="text-center text-sm text-white/30 mt-4">
-                {chatMsg.message}
+                <ChatParts parts={chatMsg.parts} />
               </p>
             )
           )}

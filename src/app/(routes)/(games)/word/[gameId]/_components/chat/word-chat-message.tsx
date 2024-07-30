@@ -1,8 +1,10 @@
 import { cn } from '@/lib/utils';
 
+import WordChatParts from './word-chat-parts';
+
 interface WordChatMessageProps {
   sender?: string;
-  content: string;
+  content: ChatMessagePart[];
   self?: boolean;
   rounded?: boolean;
   spacing?: number;
@@ -33,7 +35,7 @@ const WordChatMessage: React.FC<WordChatMessageProps> = ({
           !rounded && 'rounded-tr-2xl rounded-tl-2xl'
         )}
       >
-        {content}
+        <WordChatParts parts={content} />
       </p>
     </div>
   );
