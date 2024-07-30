@@ -20,7 +20,7 @@ const WordCategoryBoxes: React.FC<WordCategoryBoxesProps> = ({}) => {
   };
 
   return (
-    <div className="grid grid-cols-2 py-6 px-6 lg:px-16 gap-x-6 lg:gap-x-12 gap-y-6 overflow-y-auto scrollbar-thin">
+    <div className="grid grid-cols-2 py-6 px-6 lg:px-16 gap-x-6 lg:gap-x-12 gap-y-6 overflow-y-auto scrollbar-thin animate-in fade-in duration-500">
       {categories.map((category) => (
         <WordCategoryBox
           key={`word-category-box-${category}`}
