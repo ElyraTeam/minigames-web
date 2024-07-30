@@ -4,6 +4,7 @@ import { getPlayerById } from '@/lib/word';
 import Tooltip from '@/components/ui/tooltip';
 import usePlayersStore from '@/state/players';
 import { availableVotes, Vote } from '@/config/word';
+import WordButton from '@/components/word/word-button';
 
 interface WordVotingCardProps {
   playerId: string;
@@ -45,41 +46,53 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
   return (
     <div
       className={cn(
-        'bg-word-game/70 py-4 px-12 rounded-2xl space-y-8 text-center shadow-lg',
+        'grid grid-cols-[min(150px,100%)_2fr_min(200px,100%)] justify-between items-center bg-word-game/50 rounded-2xl text-center w-full overflow-hidden border-2',
         selectedCard && 'bg-word-secondary/70'
       )}
     >
-      <p className="text-sm lg:text-base font-light text-white/70 leading-none">
+      <p className="text-lg lg:text-xl font-light text-white/80 leading-none border-l-2 border-white/20">
         {name}
       </p>
-      <h3 className="text-2xl lg:text-3xl font-semibold leading-none">
-        {value}
-      </h3>
-      <div className="flex flex-row rtl:flex-row-reverse justify-center items-center gap-6">
+      <h3 className="text-3xl lg:text-4xl font-black leading-none">{value}</h3>
+      <div className="flex flex-col bg-black/5 py-8 px-9 h-full rtl:flex-col-reverse justify-center items-center gap-4 rounded-2xl self-end">
         {availableVotes.map((voteNumber) => (
-          <Tooltip
-            className="py-2 px-3"
-            text={
-              votesToPlayers[voteNumber]
-                ? votesToPlayers[voteNumber].map((plr) => (
-                    <p key={`word-vote-name-${plr}`}>{plr}</p>
-                  ))
-                : null
-            }
+          <div
+            className="flex w-full items-center justify-between gap-7"
             key={`word-voting-card-${name}-${voteNumber}`}
           >
-            <div
+            <Tooltip
+              className="py-2 px-3"
+              text={
+                votesToPlayers[voteNumber]
+                  ? votesToPlayers[voteNumber].map((plr) => (
+                      <p key={`word-vote-name-${plr}`}>{plr}</p>
+                    ))
+                  : null
+              }
+            >
+              <div
+                className={cn(
+                  'text-xs flex items-center justify-center bg-white/10 rounded-full p-[10px] w-5 h-5 hover:bg-white/20 transition-colors font-semibold border-[1px] border-white/50'
+                )}
+              >
+                <p>{votesToPlayers[voteNumber]?.length || 0}</p>
+              </div>
+            </Tooltip>
+            <WordButton
+              variant="solid"
+              dir="ltr"
+              onClick={() => onChangeVote(voteNumber)}
               className={cn(
-                'text-sm lg:text-base flex items-center justify-center bg-white/20 rounded-full w-8 h-8 hover:bg-white/30 transition-colors font-semibold cursor-pointer',
+                'w-20',
                 !selectedCard &&
                   vote === voteNumber &&
-                  'border-2 bg-word-secondary hover:bg-word-secondary/80'
+                  'bg-word-secondary hover:bg-word-secondary/80 transition-colors',
+                selectedCard && 'cursor-default opacity-40 hover:bg-white/20'
               )}
-              onClick={() => onChangeVote(voteNumber)}
             >
-              <p>{voteNumber}</p>
-            </div>
-          </Tooltip>
+              {voteNumber == 0 ? voteNumber : `+${voteNumber}`}
+            </WordButton>
+          </div>
         ))}
       </div>
     </div>
