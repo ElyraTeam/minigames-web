@@ -17,12 +17,16 @@ const WordChatSend: React.FC<WordChatSendProps> = ({}) => {
   const sendMessage = async () => {
     if (!msg || msg.trim().length == 0) return;
     if (msg === '/ping') {
+      const ping = await localPlayer.getPing();
       addChatMessage({
         id: uid(),
         sender: 'system',
         type: 'system',
-        message: `Your ping is: ${await localPlayer.getPing()} ms`,
-        font: 'normal',
+        parts: [
+          { text: 'Your ping is: ' },
+          { text: ping.toString(), bold: true },
+          { text: ' ms' },
+        ],
       });
     } else {
       localPlayer.chat(msg);
