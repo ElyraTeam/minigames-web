@@ -11,6 +11,8 @@ const buttonVariants = cva('text-xl px-8 py-3 rounded-xl w-full', {
       outline:
         'text-word-primary transition-all border-2 border-word-primary hover:bg-word-primary-100/10',
       text: 'text-word-primary hover:text-word-primary/70 transition-all p-0',
+      solid:
+        'border-2 bg-white/20 py-1 px-1 text-sm hover:bg-white/30 transition-colors',
     },
   },
   defaultVariants: {
