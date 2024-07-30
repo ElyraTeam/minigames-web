@@ -12,6 +12,7 @@ interface WordVotingCardProps {
   value: string;
   vote?: Vote;
   selectedCard?: boolean;
+  voted?: boolean;
   onChangeVote: (vote: Vote) => any;
 }
 
@@ -21,6 +22,7 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
   value,
   vote,
   selectedCard,
+  voted = false,
   onChangeVote,
 }) => {
   const playerVotes = useVoteStore((state) => state.votes);
@@ -50,7 +52,7 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
         selectedCard && 'bg-word-secondary/70'
       )}
     >
-      <p className="text-lg lg:text-xl font-light text-white/80 leading-none border-l-2 border-white/20">
+      <p className="text-lg lg:text-xl text-white leading-none border-l-2 border-white/20">
         {name}
       </p>
       <h3 className="text-3xl lg:text-4xl font-black leading-none">{value}</h3>
@@ -61,6 +63,7 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
             key={`word-voting-card-${name}-${voteNumber}`}
           >
             <Tooltip
+              delayDuration={0}
               className="py-2 px-3"
               text={
                 votesToPlayers[voteNumber]
@@ -86,9 +89,9 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
                 'w-20',
                 !selectedCard &&
                   vote === voteNumber &&
-                  'bg-word-secondary hover:bg-word-secondary/80 transition-colors',
-                selectedCard && 'cursor-default opacity-40 hover:bg-white/20'
+                  'bg-word-secondary hover:bg-word-secondary/80 transition-colors disabled:hover:bg-word-secondary'
               )}
+              disabled={selectedCard || value.trim().length <= 1 || voted}
             >
               {voteNumber == 0 ? voteNumber : `+${voteNumber}`}
             </WordButton>
