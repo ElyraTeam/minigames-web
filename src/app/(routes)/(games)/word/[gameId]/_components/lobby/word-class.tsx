@@ -1,18 +1,23 @@
 import { IoClose } from 'react-icons/io5';
+import { animated } from '@react-spring/web';
 
 import { cn } from '@/lib/utils';
 import useOwner from '@/hooks/use-owner';
 
 interface WordClassProps {
   name: string;
+  style?: React.ComponentProps<typeof animated.div>['style'];
   onDelete: () => void;
 }
 
-const WordClass: React.FC<WordClassProps> = ({ name, onDelete }) => {
+const WordClass: React.FC<WordClassProps> = ({ name, style, onDelete }) => {
   const isOwner = useOwner();
 
   return (
-    <div className="relative bg-white/10 border-2 border-white rounded-lg w-28 text-center px-2 py-1">
+    <animated.div
+      className="relative bg-white/10 border-2 border-white rounded-lg w-28 text-center px-2 py-1"
+      style={style}
+    >
       <p className="overflow-hidden overflow-ellipsis whitespace-nowrap text-lg">
         {name}
       </p>
@@ -26,7 +31,7 @@ const WordClass: React.FC<WordClassProps> = ({ name, onDelete }) => {
           <IoClose className="text-lg" />
         </span>
       )}
-    </div>
+    </animated.div>
   );
 };
 
