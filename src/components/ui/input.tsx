@@ -18,7 +18,7 @@ const Input: React.FC<InputProps> = ({
     <div className={cn('relative', parentClassName)}>
       <input
         className={cn(
-          'rounded-lg bg-transparent outline-none border-2 w-full p-[12px] transition-colors text-sm',
+          'rounded-lg bg-transparent outline-none border-2 w-full p-[8px] transition-colors text-sm leading-7',
           icon && 'rtl:pe-10',
           className
         )}
