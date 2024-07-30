@@ -1,4 +1,5 @@
 import { FaCrown } from 'react-icons/fa';
+import { animated } from '@react-spring/web';
 import { IoIosCloseCircle } from 'react-icons/io';
 
 import { cn } from '@/lib/utils';
@@ -12,6 +13,7 @@ interface WordPlayerRankProps {
   isOwner?: boolean;
   isLocalPlayer?: boolean;
   isOnline?: boolean;
+  style?: React.ComponentProps<typeof animated.div>['style'];
   onKick?: () => void;
 }
 
@@ -23,19 +25,21 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
   isLocalPlayer,
   isOnline,
   onKick,
+  style,
   isPlayer = true,
 }) => {
   const isMeOwner = useOwner();
   const isOdd = rank % 2 == 1;
 
   return (
-    <div
+    <animated.div
       className={cn(
-        'py-5 px-4 flex items-center',
+        'py-5 px-4 flex items-center w-full absolute',
         isOdd && 'bg-word-secondary-700/15',
         isLocalPlayer && 'text-word-game',
         !isOnline && 'text-white/20'
       )}
+      style={style}
     >
       <div className="flex items-center gap-3 flex-grow">
         <p
@@ -69,7 +73,7 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
       <div className="border-r-2 border-white/20 w-12 text-center" dir="ltr">
         <p className="font-semibold text-sm">{score || 0}</p>
       </div>
-    </div>
+    </animated.div>
   );
 };
 

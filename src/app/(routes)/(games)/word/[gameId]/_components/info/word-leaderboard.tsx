@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTransition } from '@react-spring/web';
 
 import useRoomStore from '@/state/room';
 import { kickPlayer } from '@/api/rooms';
@@ -12,6 +13,8 @@ interface WordLeaderboardProps {
   lastRound?: boolean;
 }
 
+const PLAYER_RANK_HEIGHT = 68;
+
 const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
   const gamePlayers = usePlayersStore((state) => state.players);
   const roomOptions = useRoomStore((state) => state.options);
@@ -21,6 +24,22 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
     (roomOptions?.options?.maxPlayers || 0) - sortedPlayers.length;
   const [kickingPlayer, setKickingPlayer] = useState<Player | null>(null);
   const [kickModalOpen, setKickModalOpen] = useState(false);
+
+  let totalHeight = 0;
+  const transitions = useTransition(
+    sortedPlayers.map((data) => ({
+      ...data,
+      height: PLAYER_RANK_HEIGHT,
+      y: (totalHeight += PLAYER_RANK_HEIGHT) - PLAYER_RANK_HEIGHT,
+    })),
+    {
+      key: (item: Player) => item.id,
+      from: { height: 0, opacity: 0 },
+      leave: { height: 0, opacity: 0 },
+      enter: ({ height, y }) => ({ y, height, opacity: 1 }),
+      update: ({ height, y }) => ({ y, height }),
+    }
+  );
 
   const handleKick = async () => {
     if (!roomOptions?.id || !kickingPlayer || kickingPlayer.owner) return;
@@ -60,30 +79,44 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
         }}
         onConfirm={handleKick}
       />
-      {sortedPlayers.map((plr, index) => (
-        <WordPlayerRank
-          key={plr.nickname}
-          rank={index + 1}
-          name={plr.nickname}
-          score={lastRound ? plr.lastRoundScore : plr.totalScore}
-          isOwner={plr.owner}
-          isLocalPlayer={plr.nickname === currentPlayer}
-          isOnline={plr.online}
-          onKick={() => {
-            setKickModalOpen(true);
-            setKickingPlayer(plr);
-          }}
-        />
-      ))}
-      {remaining > 0 &&
-        Array.from(new Array(remaining), (_, index) => (
+      <div
+        className="flex flex-col flex-grow relative overflow-y-auto scrollbar-none"
+        style={{
+          height: PLAYER_RANK_HEIGHT * (roomOptions?.options?.maxPlayers || 0),
+        }}
+      >
+        {transitions((style, plr, _, index) => (
           <WordPlayerRank
-            key={`word-leaderboard-remaining-${index}`}
-            score={0}
-            rank={sortedPlayers.length + (index + 1)}
-            isPlayer={false}
+            key={plr.id}
+            rank={index + 1}
+            name={plr.nickname}
+            score={lastRound ? plr.lastRoundScore : plr.totalScore}
+            isOwner={plr.owner}
+            isLocalPlayer={plr.nickname === currentPlayer}
+            isOnline={plr.online}
+            onKick={() => {
+              setKickModalOpen(true);
+              setKickingPlayer(plr);
+            }}
+            style={{
+              zIndex: sortedPlayers.length - index,
+              ...style,
+            }}
           />
         ))}
+        {remaining > 0 &&
+          Array.from(new Array(remaining), (_, index) => (
+            <WordPlayerRank
+              key={`word-leaderboard-remaining-${index}`}
+              score={0}
+              rank={sortedPlayers.length + (index + 1)}
+              isPlayer={false}
+              style={{
+                top: (totalHeight += PLAYER_RANK_HEIGHT) - PLAYER_RANK_HEIGHT,
+              }}
+            />
+          ))}
+      </div>
     </>
   );
 };
