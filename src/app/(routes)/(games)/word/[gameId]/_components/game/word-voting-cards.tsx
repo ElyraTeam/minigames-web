@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+import { cn } from '@/lib/utils';
 import { Vote } from '@/config/word';
 import localPlayer from '@/api/socket';
 import useVoteStore from '@/state/vote';
@@ -16,7 +17,9 @@ const WordVotingCards: React.FC<WordVotingCardsProps> = ({}) => {
   const currentPlayer = useCurrentPlayer();
   const categoryData = useVoteStore((state) => state.categoryVoteData);
   const myVotes = useVoteStore((state) => state.myVotes);
+  const [fade, setFade] = useState(false);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const currentCategoryIndex = useRef(categoryData?.categoryIndex ?? 0);
 
   const handleChangeVote = (playerId: string, vote: Vote) => {
     if (currentPlayer?.voted) return;
@@ -35,11 +38,27 @@ const WordVotingCards: React.FC<WordVotingCardsProps> = ({}) => {
 
   useEffect(() => {
     cardsRef.current?.scrollTo({ top: 0 });
+    if (
+      !categoryData ||
+      categoryData.categoryIndex === 0 ||
+      currentCategoryIndex.current === categoryData.categoryIndex
+    )
+      return;
+    currentCategoryIndex.current = categoryData.categoryIndex;
+    // Fade when new category is being voted on
+    setFade(true);
+    const timeout = setTimeout(() => {
+      setFade(false);
+    }, 300);
+    return () => clearTimeout(timeout);
   }, [categoryData]);
 
   return (
     <div
-      className="flex justify-center items-center flex-wrap gap-6 py-8 px-3 overflow-y-auto scrollbar-thin"
+      className={cn(
+        'flex flex-wrap justify-center gap-6 py-8 px-8 overflow-y-auto scrollbar-thin animate-in fade-in duration-500',
+        fade && 'animate-out fade-out'
+      )}
       ref={cardsRef}
     >
       {Object.keys(categoryData?.values || {}).map((playerId) => (
