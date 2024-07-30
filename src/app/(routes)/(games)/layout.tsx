@@ -13,6 +13,7 @@ export default async function GamesLayout({
   const headersList = headers();
   const nickname = getNicknameFromCookies();
   const pathname = headersList.get('x-current-path')!;
+  console.log('layout', pathname, headersList);
 
   if (!nickname)
     redirect(`/getstarted?next=${encodeURIComponent(pathname) ?? ''}`);
