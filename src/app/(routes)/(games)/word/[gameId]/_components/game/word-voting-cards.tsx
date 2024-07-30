@@ -20,6 +20,11 @@ const WordVotingCards: React.FC<WordVotingCardsProps> = ({}) => {
   const [fade, setFade] = useState(false);
   const cardsRef = useRef<HTMLDivElement>(null);
   const currentCategoryIndex = useRef(categoryData?.categoryIndex ?? 0);
+  const allVotes = Object.keys(categoryData?.values || {}).sort((a, b) => {
+    if (a === currentPlayer?.id) return 1;
+    if (b === currentPlayer?.id) return -1;
+    else return 0;
+  });
 
   const handleChangeVote = (playerId: string, vote: Vote) => {
     if (currentPlayer?.voted) return;
@@ -61,7 +66,7 @@ const WordVotingCards: React.FC<WordVotingCardsProps> = ({}) => {
       )}
       ref={cardsRef}
     >
-      {Object.keys(categoryData?.values || {}).map((playerId) => (
+      {allVotes.map((playerId) => (
         <WordVotingCard
           key={`word-voting-card-player-${playerId}-${categoryData?.category}`}
           playerId={playerId}
@@ -70,6 +75,7 @@ const WordVotingCards: React.FC<WordVotingCardsProps> = ({}) => {
           onChangeVote={(vote) => handleChangeVote(playerId, vote)}
           vote={getVote(playerId)}
           selectedCard={currentPlayer?.id === playerId}
+          voted={currentPlayer?.voted}
         />
       ))}
     </div>
