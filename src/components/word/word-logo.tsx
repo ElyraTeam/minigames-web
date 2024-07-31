@@ -16,7 +16,7 @@ const WordLogo: React.FC<WordLogoProps> = ({
       src="/svg/wordlogo.svg"
       width={size}
       height={size}
-      alt="logo"
+      alt="word-logo"
       className={className}
       onClick={onClick}
     />
