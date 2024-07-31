@@ -47,6 +47,7 @@ const config: Config = {
             950: '#43A277',
             DEFAULT: '#64EB97',
           },
+          home: '#0f235e',
         },
         danger: '#FF0000',
         warning: '#FFCC00',
