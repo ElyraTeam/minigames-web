@@ -21,7 +21,7 @@ export default async function GamesLayout({
   return (
     <NicknameProvider nickname={nickname}>
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </NicknameProvider>
   );
 }
