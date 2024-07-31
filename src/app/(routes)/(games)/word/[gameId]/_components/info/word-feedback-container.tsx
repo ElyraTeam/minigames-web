@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
-import WordFeedback from './word-feedback';
+
+import WordFeedback from '@/components/modals/word-feedback';
 
 interface WordFeedbackContainerProps {}
 
