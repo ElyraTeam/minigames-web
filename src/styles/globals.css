@@ -32,12 +32,21 @@
   .word-background {
     background: 
     url(/svg/word-background.svg),
-    rgba(0, 0, 0, 0.3);
+    #2177B8;
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
-    background-blend-mode: overlay;
+    background-blend-mode: darken;
     background-repeat: no-repeat;
+  }
+
+  .word-play-background {
+    background: url(/svg/home-play.svg);
+    background-size: cover;
+  }
+
+  .word-play-revert {
+    transform:scaleX(-1);
   }
 }
 
