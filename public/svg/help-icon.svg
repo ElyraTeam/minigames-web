@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="127" height="118.068" viewBox="0 0 127 118.068">
+  <g id="Icon_akar-chat-question" data-name="Icon akar-chat-question" transform="translate(2.5 1)">
+    <path id="Path_1508" data-name="Path 1508"
+      d="M72.6,97.3c21.872,0,32.811,0,39.6-6.8S119,72.772,119,50.9s0-32.811-6.8-39.6S94.472,4.5,72.6,4.5H49.4c-21.872,0-32.811,0-39.6,6.8S3,29.028,3,50.9,3,83.711,9.8,90.5c3.787,3.793,8.862,5.469,16.4,6.206"
+      transform="translate(0)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"
+      stroke-width="11" />
+    <path id="Path_1509" data-name="Path 1509"
+      d="M30.878,19.107c2.9-5.742,5.8-8.607,11.6-8.607a11.386,11.386,0,0,1,11.6,11.472c0,5.736-2.9,5.991-11.6,11.728v5.8m0,14.5v2.9m11.6,23.2C46.91,80.1,39.01,83,31.8,86.741c-11.588,6.015-17.383,9.025-20.236,7.105S9.25,85.987,10.335,74.1l.244-2.7"
+      transform="translate(18.522 17.2)" fill="none" stroke="#11f820" stroke-linecap="round" stroke-width="11" />
+  </g>
+</svg>

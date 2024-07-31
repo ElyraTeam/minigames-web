@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="304.868" height="391.63" viewBox="0 0 304.868 391.63">
+  <g id="Group_266" data-name="Group 266" transform="translate(-656.926 -1365.519)">
+    <g id="Group_265" data-name="Group 265" transform="translate(1203.559 1262.278) rotate(104)">
+      <path id="Path_1507" data-name="Path 1507" d="M201.385,201.732c231.346-12.909,187.587,112.327,344.692,170.955"
+        transform="translate(0)" fill="none" stroke="#fff" stroke-linecap="square" stroke-width="3"
+        stroke-dasharray="32.5 32" />
+    </g>
+    <path id="Polygon_4" data-name="Polygon 4"
+      d="M15.7,7.521a5,5,0,0,1,8.665,0L35.738,27.27a5,5,0,0,1-4.332,7.5H8.651a5,5,0,0,1-4.332-7.5Z"
+      transform="translate(685.25 1757.149) rotate(-135)" fill="#fff" />
+    <g id="Ellipse_2645" data-name="Ellipse 2645" transform="translate(819 1546)" fill="#0f235e" stroke="#fff"
+      stroke-width="7">
+      <circle cx="35.5" cy="35.5" r="35.5" stroke="none" />
+      <circle cx="35.5" cy="35.5" r="32" fill="none" />
+    </g>
+    <path id="Union_23" data-name="Union 23" d="M-19499.678-10065v-20.479l-6.242,3.6-1.84-3.956,8.758-5.562h4.764v26.4Z"
+      transform="translate(20355 11658)" fill="#fff" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1" />
+  </g>
+</svg>
