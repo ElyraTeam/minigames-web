@@ -28,7 +28,7 @@ const WordMobileChat: React.FC<WordMobileChatProps> = ({ className }) => {
       className={cn(
         'fixed justify-end gap-3 flex flex-col bottom-0 left-0 p-6 z-50',
         isChatOpen && 'w-full h-full',
-        isChatOpen && 'bg-black/50',
+        isChatOpen && 'bg-black/60',
         className
       )}
       onClick={handleClickOutside}
