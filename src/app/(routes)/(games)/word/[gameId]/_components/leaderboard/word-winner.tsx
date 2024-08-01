@@ -43,7 +43,7 @@ const WordWinner: React.FC<WordWinnerProps> = ({
     <div className="flex flex-col items-center justify-end w-1/3 gap-3">
       <div className="flex gap-2">
         <WordRank rank={rank} />
-        <p className="text-xl">{name}</p>
+        <p className="text-xl whitespace-nowrap">{name}</p>
       </div>
       <animated.div
         className={cn(
