@@ -74,11 +74,13 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
           </>
         }
         isOpen={kickModalOpen}
-        onClose={() => {
-          setKickModalOpen(false);
-          setTimeout(() => {
-            setKickingPlayer(null);
-          }, 200);
+        onOpenChange={(open) => {
+          setKickModalOpen(open);
+          if (!open) {
+            setTimeout(() => {
+              setKickingPlayer(null);
+            }, 200);
+          }
         }}
         onConfirm={handleKick}
       />

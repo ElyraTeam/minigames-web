@@ -52,7 +52,7 @@ const WordGameIcons: React.FC<WordGameIconsProps> = ({}) => {
       <ConfirmModal
         subtitle="هل انت متأكد من رغبتك بالمغادرة؟"
         isOpen={leaveModalShow}
-        onClose={() => setLeaveModalShow(false)}
+        onOpenChange={(open) => setLeaveModalShow(open)}
         onConfirm={handleLeave}
         loading={loading}
       />

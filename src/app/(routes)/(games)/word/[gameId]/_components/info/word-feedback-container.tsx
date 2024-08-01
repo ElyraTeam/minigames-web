@@ -13,7 +13,7 @@ const WordFeedbackContainer: React.FC<WordFeedbackContainerProps> = ({}) => {
     <>
       <WordFeedback
         isOpen={feedbackModalShow}
-        onClose={() => setFeedbackModalShow(false)}
+        onOpenChange={(open) => setFeedbackModalShow(open)}
       />
       <div className="py-8 px-3 text-center font-light flex gap-2 justify-center text-sm shadow-[0px_-10px_10px_rgba(0,0,0,0.1)]">
         <p>واجهتك مشكلة؟</p>

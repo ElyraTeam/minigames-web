@@ -11,10 +11,10 @@ const WordHomeContact: React.FC<WordHomeContactProps> = ({}) => {
 
   return (
     <>
-      <WordFeedback isOpen={isOpen} onClose={() => setOpen(false)} />
+      <WordFeedback isOpen={isOpen} onOpenChange={(open) => setOpen(open)} />
       <WordButton
         variant="solid"
-        className="w-28 py-2 bg-transparent hover:bg-white/10 border-word-game-800"
+        className="w-full py-2 bg-transparent hover:bg-white/10 border-word-game-800"
         onClick={() => setOpen(true)}
       >
         تواصل معنا
