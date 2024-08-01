@@ -24,7 +24,7 @@ const WordAppbar: React.FC<WordAppbarProps> = ({}) => {
             <p className="font-bold text-lg lg:text-xl">{WORD_GAME_NAME_AR}</p>
           </div>
         </div>
-        <div className="w-56 items-center gap-5 hidden sm:flex">
+        <div className="w-72 items-center gap-5 hidden sm:flex">
           <WordAppbarButtons />
         </div>
         <WordAppbarMobile />
