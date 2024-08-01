@@ -16,14 +16,15 @@ const WordChatMessages: React.FC<WordChatMessagesProps> = ({}) => {
   const nickname = useLocalStore((state) => state.nickname);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
-    if (messagesEndRef.current)
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-  };
-
   useEffect(() => {
+    const scrollToBottom = () => {
+      if (messagesEndRef.current)
+        messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    setTimeout(() => scrollToBottom(), 400);
     scrollToBottom();
-  }, [messages]);
+  }, [messagesEndRef, messages]);
 
   const renderMessage = (msg: ChatMessage, index: number) => {
     const previousMessage = index >= 1 && messages[index - 1];
