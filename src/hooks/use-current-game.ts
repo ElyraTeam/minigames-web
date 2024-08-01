@@ -103,7 +103,9 @@ const useCurrentGame = (roomId: string) => {
         // Chat
         localPlayer.onChat((msg) => {
           addChatMessage(msg);
-          addNewMessage();
+          if (msg.type !== 'system') {
+            addNewMessage();
+          }
           playChatSound();
         });
 
