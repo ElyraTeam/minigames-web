@@ -40,7 +40,11 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="w-[450px]">
+    <Modal
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      className="w-[90%] lg:w-[450px]"
+    >
       <h4>ايه المشكلة يصاحبي؟</h4>
       <form
         className="space-y-4"
