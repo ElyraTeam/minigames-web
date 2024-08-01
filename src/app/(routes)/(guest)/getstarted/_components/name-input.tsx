@@ -7,6 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import useLocalStore from '@/state/local';
 import { saveSession } from '@/services/local';
 import SlideButton from '@/components/ui/slide-button';
+import { MAX_NICKNAME_LENGTH, MIN_NICKNAME_LENGTH } from '@/config/constants';
 
 interface NameInputProps {}
 
@@ -23,7 +24,12 @@ const NameInput: React.FC<NameInputProps> = ({}) => {
   async function updateNickname() {
     if (loading) return false;
     setLoading(true);
-    if (!newName || newName.trim().length == 0) return setLoading(false);
+    if (
+      !newName ||
+      newName.trim().length <= MIN_NICKNAME_LENGTH ||
+      newName.trim().length >= MAX_NICKNAME_LENGTH
+    )
+      return setLoading(false);
     try {
       setNickname(newName.trim());
       await saveSession(newName.trim());
@@ -48,6 +54,7 @@ const NameInput: React.FC<NameInputProps> = ({}) => {
       onKeyPress={(k) => k == 'Enter' && updateNickname()}
       placeholderLabel="اكتب اسمك"
       className="w-[250px]"
+      maxLength={MAX_NICKNAME_LENGTH}
     >
       <Image
         onClick={updateNickname}
