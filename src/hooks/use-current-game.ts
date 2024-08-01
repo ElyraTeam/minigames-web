@@ -51,8 +51,14 @@ const useCurrentGame = (roomId: string) => {
 
     joinRoom(nickname, roomId).then(
       ({ playerId, authToken, error, roomOptions, errorCode }) => {
-        if (error) return toast.error(`Error #${errorCode}: ${error}`);
-        if (!authToken) return toast.error('Unable to find auth token.');
+        if (error) {
+          toast.error(`Error #${errorCode}: ${error}`);
+          return router.push('/word');
+        }
+        if (!authToken) {
+          toast.error('Unable to find auth token.');
+          return router.push('/word');
+        }
         resetChatMessages();
         setToken(authToken);
         setRoom({ id: roomId, options: roomOptions });
