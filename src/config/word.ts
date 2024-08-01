@@ -4,9 +4,19 @@ export const WORD_GAME_NAME = 'Word';
 export const WORD_GAME_NAME_AR = 'كلمة';
 
 export const WORD_GAME_DESCRIPTION_AR =
-  'نسخة الويب للعبة الشهيرة (واد - بنت - حيوان..)';
+  'نسخة الويب للعبة الشهيرة (ولد - بنت - حيوان..)';
 
 export const WORD_SOUNDS_URL = `${API_HOST}/assets/sounds`;
+
+export enum WordSound {
+  AFTER_LOSE = '/after_lose.wav',
+  AFTER_WIN = '/after_win.wav',
+  AFTER_WRITE = '/after_write.wav',
+  BETWEEN_VOTES = '/between_votes.wav',
+  CHAT = '/chat.wav',
+  TIMER_END = '/timer_end.wav',
+  TIMER_TICK = '/timer_tick.wav',
+}
 
 export const DEFAULT_CATEGORIES_ARABIC = [
   'ولد',
