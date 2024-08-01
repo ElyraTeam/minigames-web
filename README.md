@@ -2,7 +2,7 @@
 
 <h1 align="center">Elyra Games Website</h1>
 
-Online party minigames you can play with friends. Visit our [website](https://elyra.games) (only Arabic for now and doesn't fully support mobile yet) for more information.
+Online party minigames you can play with friends. Visit our [website](https://elyragames.netlify.app) (only Arabic for now and doesn't fully support mobile yet) for more information.
 
 ![word-1](https://imgur.com/1tbobfr.gif)
 ![word-2](https://imgur.com/oMQxUja.gif)
@@ -10,7 +10,7 @@ Online party minigames you can play with friends. Visit our [website](https://el
 
 ## Games
 
-- [Word](https://elyra.games/word)
+- [Word](https://elyragames.netlify.app/word)
 - More coming soon.
 
 ## ElyraTeam
