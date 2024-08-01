@@ -1,9 +1,12 @@
-import { useMemo } from 'react';
 import { FaMedal } from 'react-icons/fa';
+import { useEffect, useMemo } from 'react';
 
 import { uid } from '@/lib/utils';
+import { WordSound } from '@/config/word';
+import useLocalStore from '@/state/local';
 import usePlayersStore from '@/state/players';
 import Modal from '@/components/modals/modal';
+import useWordSound from '@/hooks/use-word-sound';
 
 import WordWinner from './word-winner';
 
@@ -16,6 +19,8 @@ const WordWinnersModal: React.FC<WordWinnersModalProps> = ({
   isOpen,
   onOpenChange,
 }) => {
+  const [playWinnerSound] = useWordSound(WordSound.AFTER_WIN);
+  const currentPlayerId = useLocalStore((state) => state.playerId);
   const gamePlayers = usePlayersStore((state) => state.players?.players);
 
   const sortedPlayers = useMemo(() => {
@@ -38,11 +43,19 @@ const WordWinnersModal: React.FC<WordWinnersModalProps> = ({
   const secondPlr = sortedPlayers[1] ?? generatePlayer();
   const thirdPlr = sortedPlayers[2] ?? generatePlayer();
 
+  useEffect(() => {
+    if (!isOpen) return;
+    if (currentPlayerId && firstPlr && currentPlayerId === firstPlr.id) {
+      playWinnerSound();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPlayerId, firstPlr, isOpen]);
+
   return (
     <Modal
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      className="p-0 overflow-hidden border-none w-[90%] lg:w-[500px]"
+      className="p-0 overflow-hidden w-[90%] lg:w-[500px] border-4 border-white"
       closeClassName="text-white"
     >
       <div className="flex flex-col items-center bg-word-game-800 rounded-b-2xl gap-3 p-8 text-white">
