@@ -8,7 +8,12 @@ const usePlaySound = (url: string) => {
   const play = () => {
     const isMuted = useLocalStore.getState().isMuted;
     if (isMuted) return false;
-    load(url, { autoplay: true, format: 'wav', html5: true });
+    load(url, {
+      autoplay: true,
+      format: 'wav',
+      html5: true,
+      initialVolume: 0.5,
+    });
   };
 
   return [play];
