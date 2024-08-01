@@ -21,6 +21,7 @@ interface WordAppbarNicknameProps {}
 
 const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
   const nickname = useLocalStore((state) => state.nickname);
+  const [open, setOpen] = useState(false);
   const setNickname = useLocalStore((state) => state.setNickname);
   const [newNickname, setNewNickname] = useState('');
 
@@ -41,13 +42,14 @@ const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
     try {
       await saveSession(newName);
       toast.success('تم تعديل الاسم.');
+      setOpen(false);
     } catch (err) {
       console.error(err);
     }
   };
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={(open) => setOpen(open)}>
       <PopoverTrigger className="w-full rounded-xl py-2 bg-word-game-800 hover:bg-word-game-800/80 border-none space-x-1 rtl:space-x-reverse flex items-center justify-center shadow-[inset_0_0_10px_rgba(0,0,0,0.5)] transition-colors">
         <IoPerson className="inline text-lg" />
         <WordNickname />
