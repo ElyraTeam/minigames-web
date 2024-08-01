@@ -60,7 +60,7 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
         )}
         {checkmark && (
           <Tooltip text={checkmarkText} position="top">
-            <span className="text-word-game text-2xl animate-in fade-in duration-500">
+            <span className="text-word-game text-xl animate-in fade-in duration-500">
               <IoIosCheckmarkCircle />
             </span>
           </Tooltip>
