@@ -1,4 +1,5 @@
-import getNicknameFromCookies from '@/actions/get-nickname';
+import { CookiesProvider } from 'next-client-cookies/server';
+
 import NicknameProvider from '@/components/providers/nickname-provider';
 
 export default async function GamesLayout({
@@ -6,12 +7,12 @@ export default async function GamesLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const nickname = getNicknameFromCookies();
-
   return (
-    <NicknameProvider nickname={nickname}>
-      {children}
-      {/* <Footer /> */}
-    </NicknameProvider>
+    <CookiesProvider>
+      <NicknameProvider>
+        {children}
+        {/* <Footer /> */}
+      </NicknameProvider>
+    </CookiesProvider>
   );
 }
