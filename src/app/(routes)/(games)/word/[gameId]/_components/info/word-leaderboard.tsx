@@ -106,7 +106,7 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
               setKickModalOpen(true);
               setKickingPlayer(plr);
             }}
-            checkmarkText={plr.ready ? 'مستعد' : 'تم التصويت'}
+            checkmarkText={gameStatus === State.LOBBY ? 'مستعد' : 'تم التصويت'}
             style={{
               zIndex: sortedPlayers.length - index,
               ...style,
