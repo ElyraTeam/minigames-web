@@ -28,11 +28,6 @@ const WordWinnersModal: React.FC<WordWinnersModalProps> = ({
     return [...(gamePlayers || [])].sort((a, b) => b.totalScore - a.totalScore);
   }, [gamePlayers]);
 
-  const generatePlayer = () => {
-    const id = uid();
-    return { id, nickname: '-----', totalScore: 0 };
-  };
-
   const getRankByIndex = (index: number) => {
     if (index === 1) return 1;
     if (index === 0) return 3;
@@ -40,21 +35,33 @@ const WordWinnersModal: React.FC<WordWinnersModalProps> = ({
     return index;
   };
 
-  const firstPlr = sortedPlayers[0] ?? generatePlayer();
-  const secondPlr = sortedPlayers[1] ?? generatePlayer();
-  const thirdPlr = sortedPlayers[2] ?? generatePlayer();
+  const renderWinner = (index: number, plr?: Player | null) => {
+    return (
+      <WordWinner
+        key={`word-winner-${uid()}`}
+        name={plr?.nickname ?? '-----'}
+        score={plr?.totalScore ?? 0}
+        rank={getRankByIndex(index)}
+        height={((plr?.totalScore ?? 0) / firstPlr?.totalScore) * 100}
+      />
+    );
+  };
+
+  const firstPlr = sortedPlayers[0];
+  const secondPlr = sortedPlayers[1];
+  const thirdPlr = sortedPlayers[2];
 
   useEffect(() => {
     if (!isOpen) return;
-    if (currentPlayerId && firstPlr) {
-      if (currentPlayerId === firstPlr.id) {
+    if (currentPlayerId && sortedPlayers[0]) {
+      if (currentPlayerId === sortedPlayers[0].id) {
         playWinnerSound();
       } else {
         playLoseSound();
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPlayerId, firstPlr, isOpen]);
+  }, [currentPlayerId, sortedPlayers, isOpen]);
 
   return (
     <Modal
@@ -68,15 +75,9 @@ const WordWinnersModal: React.FC<WordWinnersModalProps> = ({
         <h4 className="font-bold">انتهت اللعبة!</h4>
       </div>
       <div className="flex gap-2 px-8 py-4 h-64">
-        {[thirdPlr, firstPlr, secondPlr].map((plr, index) => (
-          <WordWinner
-            key={`word-winner-${plr.id}`}
-            name={plr.nickname}
-            score={plr.totalScore}
-            rank={getRankByIndex(index)}
-            height={(plr.totalScore / firstPlr.totalScore) * 100}
-          />
-        ))}
+        {[thirdPlr, firstPlr, secondPlr].map((plr, index) =>
+          renderWinner(index, plr)
+        )}
       </div>
     </Modal>
   );
