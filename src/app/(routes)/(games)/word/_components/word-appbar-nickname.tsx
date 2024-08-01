@@ -47,7 +47,7 @@ const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
       </PopoverTrigger>
       <PopoverContent
         sideOffset={16}
-        className="flex flex-col gap-3 justify-center text-center bg-white w-56 z-[99999] rounded-2xl border-none"
+        className="flex flex-col gap-4 justify-center text-center bg-white w-56 z-[99999] rounded-2xl border-none"
       >
         <p>تعديل الاسم</p>
         <Input
@@ -58,7 +58,7 @@ const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
           onChange={(e) => setNewNickname(e.target.value)}
         />
         <Button
-          className="w-[70%] self-center bg-word-game-700 hover:bg-word-game-700/90"
+          className="w-[60%] text-base py-1 self-center bg-word-game-700 hover:bg-word-game-700/90"
           onClick={handleSaveNickname}
         >
           حفظ
