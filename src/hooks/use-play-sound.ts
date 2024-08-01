@@ -12,7 +12,7 @@ const usePlaySound = (url: string) => {
       autoplay: true,
       format: 'wav',
       html5: true,
-      initialVolume: 0.5,
+      initialVolume: 0.3,
     });
   };
 
