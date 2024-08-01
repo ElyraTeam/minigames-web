@@ -25,6 +25,8 @@ const useCurrentGame = (roomId: string) => {
   const setPlayers = usePlayersStore((state) => state.setPlayers);
   const addChatMessage = useChatStore((state) => state.addChatMessage);
   const resetChatMessages = useChatStore((state) => state.resetChatMessages);
+  const addNewMessage = useChatStore((state) => state.addNewMessage);
+  const clearNewMessages = useChatStore((state) => state.clearNewMessages);
   // const players = usePlayersStore((state) => state.players?.players) || [];
   const setCategoryVoteData = useVoteStore(
     (state) => state.setCategoryVoteData
@@ -60,6 +62,7 @@ const useCurrentGame = (roomId: string) => {
           return router.push('/word');
         }
         resetChatMessages();
+        clearNewMessages();
         setToken(authToken);
         setRoom({ id: roomId, options: roomOptions });
         setPlayerId(playerId);
@@ -89,6 +92,7 @@ const useCurrentGame = (roomId: string) => {
         // Chat
         localPlayer.onChat((msg) => {
           addChatMessage(msg);
+          addNewMessage();
           playChatSound();
         });
 
