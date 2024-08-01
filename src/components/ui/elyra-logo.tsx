@@ -15,7 +15,7 @@ const ElyraLogo: React.FC<ElyraLogoProps> = ({
 }) => {
   return (
     <Image
-      src={isWhite ? '/svg/elyra-white.svg' : '/svg/elyra.svg'}
+      src={isWhite ? '/svg/elyra-white.svg' : '/img/elyra.png'}
       width={size}
       height={size}
       alt="elyra-logo"
