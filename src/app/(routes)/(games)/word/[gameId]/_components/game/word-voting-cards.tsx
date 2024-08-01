@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { cn } from '@/lib/utils';
-import { Vote } from '@/config/word';
 import localPlayer from '@/api/socket';
 import useVoteStore from '@/state/vote';
 import { getPlayerById } from '@/lib/word';
 import usePlayersStore from '@/state/players';
+import { Vote, WordSound } from '@/config/word';
+import useWordSound from '@/hooks/use-word-sound';
 import useCurrentPlayer from '@/hooks/use-current-player';
 
 import WordVotingCard from './word-voting-card';
@@ -20,6 +21,7 @@ const WordVotingCards: React.FC<WordVotingCardsProps> = ({}) => {
   const [fade, setFade] = useState(false);
   const cardsRef = useRef<HTMLDivElement>(null);
   const currentCategoryIndex = useRef(categoryData?.categoryIndex ?? 0);
+  const [playBetweenVotes] = useWordSound(WordSound.BETWEEN_VOTES);
   const allVotes = Object.keys(categoryData?.values || {}).sort((a, b) => {
     if (a === currentPlayer?.id) return 1;
     if (b === currentPlayer?.id) return -1;
@@ -51,11 +53,13 @@ const WordVotingCards: React.FC<WordVotingCardsProps> = ({}) => {
       return;
     currentCategoryIndex.current = categoryData.categoryIndex;
     // Fade when new category is being voted on
+    playBetweenVotes();
     setFade(true);
     const timeout = setTimeout(() => {
       setFade(false);
     }, 300);
     return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryData]);
 
   return (
