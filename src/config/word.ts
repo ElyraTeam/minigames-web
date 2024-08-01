@@ -1,8 +1,12 @@
+import { API_HOST } from './constants';
+
 export const WORD_GAME_NAME = 'Word';
 export const WORD_GAME_NAME_AR = 'كلمة';
 
 export const WORD_GAME_DESCRIPTION_AR =
   'نسخة الويب للعبة الشهيرة (واد - بنت - حيوان..)';
+
+export const WORD_SOUNDS_URL = `${API_HOST}/assets/sounds`;
 
 export const DEFAULT_CATEGORIES_ARABIC = [
   'ولد',
