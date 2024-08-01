@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 
+import { State } from '@/types/word';
 import { joinRoom } from '@/api/rooms';
 import localPlayer from '@/api/socket';
 import useChatStore from '@/state/chat';
@@ -43,8 +44,18 @@ const useCurrentGame = (roomId: string) => {
   const [playLastTick] = useWordSound(WordSound.TIMER_END);
   const { countdown, setCountdown } = useCountdown({
     startFrom: 0,
-    onCountdownUpdate: (s) => playTick(),
-    onCountdownFinish: () => playLastTick(),
+    onCountdownUpdate: (s) => {
+      const state = useGameStore.getState().game?.state;
+      if (state && (state === State.LOBBY || state === State.INGAME)) {
+        playTick();
+      }
+    },
+    onCountdownFinish: () => {
+      const state = useGameStore.getState().game?.state;
+      if (state && (state === State.LOBBY || state === State.INGAME)) {
+        playLastTick();
+      }
+    },
   });
   const router = useRouter();
 
