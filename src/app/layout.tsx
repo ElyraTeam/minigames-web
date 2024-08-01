@@ -1,5 +1,7 @@
-import { APP_NAME_AR, APP_NAME_EN, TEAM_NAME_EN } from '@/config/constants';
 import '@/styles/globals.css';
+
+import { TooltipProvider } from '@/components/ui/tooltip-desktop';
+import { APP_NAME_AR, APP_NAME_EN, TEAM_NAME_EN } from '@/config/constants';
 
 import type { Metadata } from 'next';
 import { Cairo } from 'next/font/google';
@@ -21,7 +23,7 @@ export default function RootLayout({
     <html lang="en" dir="rtl">
       <body className={font.className}>
         <Toaster position="top-center" />
-        {children}
+        <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>
   );
