@@ -28,7 +28,8 @@ const useCountdown = ({
       onCountdownUpdate && onCountdownUpdate(countdown);
       startLocalTimer();
     }
-  }, [countdown, onCountdownFinish, onCountdownUpdate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [countdown]);
 
   return { countdown, setCountdown };
 };
