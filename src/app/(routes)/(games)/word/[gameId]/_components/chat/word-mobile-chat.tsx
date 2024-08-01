@@ -7,6 +7,7 @@ import { MdOutlineChat } from 'react-icons/md';
 import { cn } from '@/lib/utils';
 
 import WordChatContainer from './word-chat-container';
+import useChatStore from '@/state/chat';
 
 interface WordMobileChatProps {
   className?: string;
@@ -14,12 +15,21 @@ interface WordMobileChatProps {
 
 const WordMobileChat: React.FC<WordMobileChatProps> = ({ className }) => {
   const [isChatOpen, setChatOpen] = useState(false);
+  const clearNewMessages = useChatStore((state) => state.clearNewMessages);
+  const newMessages = useChatStore((state) => state.newMessages);
 
   const handleClickOutside = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     if (e.target === e.currentTarget) {
-      setChatOpen(false);
+      handleChatOpen(false);
+    }
+  };
+
+  const handleChatOpen = (open: boolean) => {
+    setChatOpen(open);
+    if (open) {
+      clearNewMessages();
     }
   };
 
@@ -41,13 +51,18 @@ const WordMobileChat: React.FC<WordMobileChatProps> = ({ className }) => {
         />
       )}
       <div
-        className="flex self-end items-center justify-center w-14 h-14 p-4 bg-word-game-950 rounded-full cursor-pointer shadow-xl"
-        onClick={() => setChatOpen(!isChatOpen)}
+        className="relative flex self-end items-center justify-center w-14 h-14 p-4 bg-word-game-950 rounded-full cursor-pointer shadow-xl"
+        onClick={() => handleChatOpen(!isChatOpen)}
       >
         {isChatOpen ? (
           <RxCross2 className="text-3xl" />
         ) : (
           <MdOutlineChat className="text-3xl" />
+        )}
+        {newMessages !== 0 && (
+          <div className="absolute flex items-center justify-center -top-1 -right-1 p-3 w-3 h-3 text-sm rounded-full bg-danger">
+            {newMessages}
+          </div>
         )}
       </div>
     </div>
