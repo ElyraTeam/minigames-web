@@ -6,13 +6,16 @@ import { usePathname, useRouter } from 'next/navigation';
 import useLocalStore from '@/state/local';
 
 interface NicknameProviderProps {
+  nickname?: string;
   children: React.ReactNode;
 }
 
-const NicknameProvider: React.FC<NicknameProviderProps> = ({ children }) => {
+const NicknameProvider: React.FC<NicknameProviderProps> = ({
+  nickname,
+  children,
+}) => {
   const router = useRouter();
   const pathname = usePathname();
-  const nickname = useLocalStore((state) => state.nickname);
   const setNickname = useLocalStore((state) => state.setNickname);
 
   useEffect(() => {

@@ -12,6 +12,7 @@ import {
 import Input from '@/components/ui/input';
 import useLocalStore from '@/state/local';
 import Button from '@/components/ui/button';
+import { saveSession } from '@/services/local';
 import { MAX_NICKNAME_LENGTH, MIN_NICKNAME_LENGTH } from '@/config/constants';
 
 import WordNickname from './word-nickname';
@@ -28,15 +29,21 @@ const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
     setNewNickname(nickname);
   }, [nickname]);
 
-  const handleSaveNickname = () => {
+  const handleSaveNickname = async () => {
+    const newName = newNickname.trim();
     if (
-      !newNickname ||
-      newNickname.trim().length <= MIN_NICKNAME_LENGTH ||
-      newNickname.trim().length >= MAX_NICKNAME_LENGTH
+      !newName ||
+      newName.length <= MIN_NICKNAME_LENGTH ||
+      newName.length >= MAX_NICKNAME_LENGTH
     )
       return;
-    setNickname(newNickname);
-    toast.success('تم تعديل الاسم.');
+    setNickname(newName);
+    try {
+      await saveSession(newName);
+      toast.success('تم تعديل الاسم.');
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
