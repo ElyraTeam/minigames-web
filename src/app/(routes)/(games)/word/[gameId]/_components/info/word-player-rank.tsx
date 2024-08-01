@@ -6,6 +6,8 @@ import { cn } from '@/lib/utils';
 import useOwner from '@/hooks/use-owner';
 import Tooltip from '@/components/ui/tooltip';
 
+import WordRank from '../word-rank';
+
 interface WordPlayerRankProps {
   rank: number;
   isPlayer?: boolean;
@@ -47,19 +49,7 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
       style={style}
     >
       <div className="flex items-center gap-3 flex-grow">
-        <p
-          className={cn(
-            'w-6 h-6 rounded-full text-center text-white/80',
-            rank == 1 &&
-              'bg-gradient-to-r from-yellow-600 to-white to-[200%] text-white',
-            rank == 2 &&
-              'bg-gradient-to-r from-gray-500 to-white to-[200%] text-white',
-            rank == 3 &&
-              'bg-gradient-to-r from-yellow-800 to-white to-[200%] text-white'
-          )}
-        >
-          {rank}
-        </p>
+        <WordRank rank={rank} />
         <p className="text-lg overflow-hidden overflow-ellipsis max-w-[6.5rem] whitespace-nowrap font-semibold">
           {name || '------'}
         </p>
