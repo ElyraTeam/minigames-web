@@ -69,7 +69,7 @@ const SlideButton: React.FC<SlideButtonProps> = ({
       </div>
       <WordButton
         className={cn(
-          'text-2xl translate-x-0 w-full h-full cursor-text transition-all duration-500 group-hover:translate-x-full group-hover:text-lg',
+          'text-xl translate-x-0 w-full h-full cursor-text transition-all duration-500 group-hover:translate-x-full group-hover:text-lg',
           isFocus && 'translate-x-full'
         )}
       >
