@@ -1,36 +1,30 @@
 import { cn } from '@/lib/utils';
-import Card from '@/components/ui/card';
-import Overlay from '@/components/ui/overlay';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 interface ModalProps {
   isOpen?: boolean;
   children?: React.ReactNode;
   className?: string;
-  inactiveClassName?: string;
-  onClose?: () => any;
+  closeClassName?: string;
+  onOpenChange?: (open: boolean) => any;
 }
 
 const Modal: React.FC<ModalProps> = ({
   isOpen,
   children,
   className,
-  inactiveClassName,
-  onClose,
+  closeClassName,
+  onOpenChange,
 }) => {
   return (
-    <>
-      <Card
-        className={cn(
-          'fixed transition-transform duration-500 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[100] bg-white text-black rounded-2xl font-normal text-base text-start',
-          !isOpen && 'scale-0',
-          !isOpen && inactiveClassName,
-          className
-        )}
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
+      <DialogContent
+        className={cn('bg-white', className)}
+        closeClassName={closeClassName}
       >
         {children}
-      </Card>
-      {isOpen && <Overlay onClick={onClose} />}
-    </>
+      </DialogContent>
+    </Dialog>
   );
 };
 
