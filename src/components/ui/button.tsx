@@ -1,5 +1,8 @@
-import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
+
+import { cn } from '@/lib/utils';
+
+import Spinner from './spinner';
 
 const buttonVariants = cva(
   'text-xl px-8 py-3 rounded-xl w-full transition-all',
@@ -28,10 +31,18 @@ const Button: React.FC<ButtonProps> = ({
   variant,
   className,
   loading,
+  disabled,
+  children,
   ...props
 }) => {
   return (
-    <button className={cn(buttonVariants({ variant, className }))} {...props} />
+    <button
+      className={cn(buttonVariants({ variant, className }))}
+      disabled={loading || disabled}
+      {...props}
+    >
+      {loading ? <Spinner /> : children}
+    </button>
   );
 };
 
