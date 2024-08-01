@@ -32,7 +32,18 @@
   .word-background {
     background: 
     url(/svg/word-background.svg),
-    #2177B8;
+    rgba(33, 119, 184, 1);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-blend-mode: darken;
+    background-repeat: no-repeat;
+  }
+
+  .word-dark-background {
+    background: 
+    url(/svg/word-background.svg),
+    rgb(16, 74, 119);
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
