@@ -6,7 +6,7 @@ export const TEAM_NAME_EN = 'Elyra';
 export const API_HOST = isDev
   ? 'http://localhost:5000'
   : `https://elyra-minis-dev.hossamohsen.me`;
-export const HOST = `https://next14-migration--elyragames.netlify.app`;
+export const HOST = `https://elyragames.netlify.app`;
 
 export const NEXTJS_SESSION_KEY = 'nextjs.session';
 
