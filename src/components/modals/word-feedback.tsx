@@ -3,16 +3,20 @@ import toast from 'react-hot-toast';
 
 import Input from '@/components/ui/input';
 import { sendFeedback } from '@/api/rooms';
-import Button from '@/components/ui/button';
 import Modal from '@/components/modals/modal';
 import TextArea from '@/components/ui/text-area';
 
+import WordButton from '../word/word-button';
+
 interface WordFeedbackProps {
   isOpen: boolean;
-  onClose: () => void;
+  onOpenChange: (open: boolean) => void;
 }
 
-const WordFeedback: React.FC<WordFeedbackProps> = ({ isOpen, onClose }) => {
+const WordFeedback: React.FC<WordFeedbackProps> = ({
+  isOpen,
+  onOpenChange,
+}) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
@@ -32,15 +36,11 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({ isOpen, onClose }) => {
     setEmail('');
     setName('');
     setMessage('');
-    onClose();
+    onOpenChange(false);
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      className="space-y-6 w-[450px] p-8"
-    >
+    <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="w-[450px]">
       <h4>ايه المشكلة يصاحبي؟</h4>
       <form
         className="space-y-4"
@@ -75,7 +75,12 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({ isOpen, onClose }) => {
             onChange={(e) => setMessage(e.target.value)}
           />
         </div>
-        <Button>ارسال</Button>
+        <WordButton
+          variant="outline"
+          className="hover:bg-word-game-600 hover:text-white"
+        >
+          ارسال
+        </WordButton>
       </form>
     </Modal>
   );

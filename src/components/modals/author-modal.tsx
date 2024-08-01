@@ -15,7 +15,7 @@ interface AuthorModalProps {
   children?: React.ReactNode;
 }
 
-const AuthorModal: React.FC<AuthorModalProps> = ({ className, children }) => {
+const AuthorModal: React.FC<AuthorModalProps> = ({ children }) => {
   const [showCreds, setShowCreds] = useState(false);
   const [creds, setCredits] = useState<UserCredit[]>([]);
 
@@ -25,35 +25,21 @@ const AuthorModal: React.FC<AuthorModalProps> = ({ className, children }) => {
     shuffleCredits();
   }, []);
 
+  const handleCreditsOpen = () => {
+    setShowCreds(true);
+  };
+
   return (
     <>
-      <p className={cn(className)}>
-        {children}{' '}
-        <AuthorText
-          onClick={() => {
-            setShowCreds((oldShow) => {
-              const show = !oldShow;
-              if (show) {
-                shuffleCredits();
-              }
-              return show;
-            });
-          }}
-        />
-      </p>
+      <div className="cursor-pointer" onClick={handleCreditsOpen}>
+        {children}
+      </div>
       <Modal
         className="w-[25rem] sm:w-[30rem]"
         isOpen={showCreds}
-        onClose={() => setShowCreds(false)}
+        onOpenChange={(open) => setShowCreds(open)}
       >
         <CreditsList credits={creds} />
-        <WordButton
-          variant="text"
-          className="py-2 text-md self-center w-fit"
-          onClick={() => setShowCreds(false)}
-        >
-          إغلاق
-        </WordButton>
       </Modal>
     </>
   );

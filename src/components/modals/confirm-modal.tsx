@@ -3,13 +3,13 @@ import Button from '@/components/ui/button';
 import Modal from './modal';
 
 interface ConfirmModalProps {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => any;
   title?: string;
   subtitle?: React.ReactNode;
   icon?: React.ReactNode;
-  isOpen?: boolean;
   loading?: boolean;
   confirmVariant?: 'danger' | 'warning';
-  onClose?: () => any;
   onConfirm?: () => any;
 }
 
@@ -20,13 +20,13 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
   isOpen,
   loading,
   confirmVariant = 'danger',
-  onClose,
+  onOpenChange,
   onConfirm,
 }) => {
   return (
     <Modal
       isOpen={isOpen}
-      onClose={onClose}
+      onOpenChange={onOpenChange}
       className="py-8 px-16 space-y-8 text-center"
     >
       {icon}
@@ -43,7 +43,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
         </Button>
         <Button
           variant="text"
-          onClick={onClose}
+          onClick={() => onOpenChange(false)}
           loading={loading}
           className="w-fit text-base"
         >
