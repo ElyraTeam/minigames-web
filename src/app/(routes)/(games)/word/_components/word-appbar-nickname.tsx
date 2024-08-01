@@ -22,6 +22,7 @@ interface WordAppbarNicknameProps {}
 const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
   const nickname = useLocalStore((state) => state.nickname);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const setNickname = useLocalStore((state) => state.setNickname);
   const [newNickname, setNewNickname] = useState('');
 
@@ -32,12 +33,15 @@ const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
 
   const handleSaveNickname = async () => {
     const newName = newNickname.trim();
+    console.log(newName);
     if (
+      loading ||
       !newName ||
       newName.length <= MIN_NICKNAME_LENGTH ||
       newName.length >= MAX_NICKNAME_LENGTH
     )
       return;
+    setLoading(true);
     setNickname(newName);
     try {
       await saveSession(newName);
@@ -46,6 +50,7 @@ const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
     } catch (err) {
       console.error(err);
     }
+    setLoading(false);
   };
 
   return (
@@ -67,8 +72,9 @@ const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
           onChange={(e) => setNewNickname(e.target.value)}
         />
         <Button
-          className="w-[60%] text-base py-1 self-center bg-word-game-700 hover:bg-word-game-700/90"
+          className="w-[60%] text-base py-1 self-center bg-word-game-700 hover:bg-word-game-700/90 disabled:bg-word-game-700/40"
           onClick={handleSaveNickname}
+          loading={loading}
         >
           حفظ
         </Button>
