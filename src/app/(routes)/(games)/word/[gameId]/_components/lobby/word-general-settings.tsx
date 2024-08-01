@@ -47,7 +47,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
         <Select
           className="bg-word-secondary/50 w-20 scrollbar-track-word-secondary/20"
           value={maxPlayers}
-          disabled={!isOwner || currentRound !== 1}
+          disabled={!isOwner}
           onChange={(e) => handleMaxPlayers(e.target.value)}
           tooltip={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
           tooltipClassName="text-sm"
@@ -72,7 +72,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
         <Select
           className="bg-word-secondary/50 w-20 scrollbar-thin scrollbar-track-word-secondary/20"
           value={rounds}
-          disabled={!isOwner || currentRound !== 1}
+          disabled={!isOwner}
           onChange={(e) => handleRounds(e.target.value)}
           tooltip={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
           tooltipClassName="text-sm"
@@ -96,7 +96,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
       >
         <Switch
           className="peer-checked:bg-word-secondary/80"
-          disabled={!isOwner || currentRound !== 1}
+          disabled={!isOwner}
           checked={isPrivate}
           onChange={(e) => handlePrivacy(e.target.checked)}
           tooltip={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
