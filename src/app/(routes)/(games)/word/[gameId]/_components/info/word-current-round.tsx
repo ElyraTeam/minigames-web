@@ -4,6 +4,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { MdRefresh } from 'react-icons/md';
 
+import { State } from '@/types/word';
 import localPlayer from '@/api/socket';
 import useGameStore from '@/state/game';
 import useRoomStore from '@/state/room';
@@ -21,10 +22,18 @@ const WordCurrentRound: React.FC<WordCurrentRoundProps> = ({}) => {
   const [resetModalShow, setResetModalShow] = useState(false);
   const isOwner = useOwner();
 
+  const currentRound = gameState?.currentRound;
+
   const handleReset = () => {
     localPlayer.resetGame();
     toast.success('تم اعادة اللعبة.', { id: 'word-reset-game' });
     setResetModalShow(false);
+  };
+
+  const renderRoundText = () => {
+    if (!currentRound) return '?';
+    if (gameState?.state === State.GAME_OVER) return currentRound;
+    return currentRound - 1;
   };
 
   return (
@@ -32,7 +41,7 @@ const WordCurrentRound: React.FC<WordCurrentRoundProps> = ({}) => {
       <ConfirmModal
         subtitle="هل انت متأكد من رغبتك في اعادة اللعبة؟"
         isOpen={resetModalShow}
-        onClose={() => setResetModalShow(false)}
+        onOpenChange={(open) => setResetModalShow(open)}
         onConfirm={handleReset}
         confirmVariant="warning"
       />
@@ -42,7 +51,7 @@ const WordCurrentRound: React.FC<WordCurrentRoundProps> = ({}) => {
           <span className="font-light">
             {roomOptions?.options?.rounds || '?'}/
           </span>
-          {gameState?.currentRound || '?'}
+          {renderRoundText()}
         </span>
         {isOwner && (
           <IconButton
