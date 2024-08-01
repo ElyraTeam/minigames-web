@@ -20,6 +20,7 @@ const WordWinnersModal: React.FC<WordWinnersModalProps> = ({
   onOpenChange,
 }) => {
   const [playWinnerSound] = useWordSound(WordSound.AFTER_WIN);
+  const [playLoseSound] = useWordSound(WordSound.AFTER_LOSE);
   const currentPlayerId = useLocalStore((state) => state.playerId);
   const gamePlayers = usePlayersStore((state) => state.players?.players);
 
@@ -45,8 +46,12 @@ const WordWinnersModal: React.FC<WordWinnersModalProps> = ({
 
   useEffect(() => {
     if (!isOpen) return;
-    if (currentPlayerId && firstPlr && currentPlayerId === firstPlr.id) {
-      playWinnerSound();
+    if (currentPlayerId && firstPlr) {
+      if (currentPlayerId === firstPlr.id) {
+        playWinnerSound();
+      } else {
+        playLoseSound();
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPlayerId, firstPlr, isOpen]);
