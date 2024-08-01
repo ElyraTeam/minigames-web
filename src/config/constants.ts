@@ -10,6 +10,9 @@ export const HOST = `https://next14-migration--elyragames.netlify.app`;
 
 export const NEXTJS_SESSION_KEY = 'nextjs.session';
 
+export const MIN_NICKNAME_LENGTH = 1;
+export const MAX_NICKNAME_LENGTH = 10;
+
 export const CREDITS: UserCredit[] = [
   {
     name: 'كريم وائل',
