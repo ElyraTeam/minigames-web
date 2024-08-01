@@ -137,6 +137,7 @@ const useCurrentGame = (roomId: string) => {
       localPlayer.offAll();
       localPlayer.disconnect();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     nickname,
     roomId,
