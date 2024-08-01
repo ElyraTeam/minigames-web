@@ -1,17 +1,17 @@
-import useSound from 'use-sound';
+import { useAudioPlayer } from 'react-use-audio-player';
 
 import useLocalStore from '@/state/local';
 
 const usePlaySound = (url: string) => {
-  const [playSound] = useSound(url);
-  const isMuted = useLocalStore((state) => state.isMuted);
+  const { load } = useAudioPlayer();
 
   const play = () => {
-    if (!isMuted) return false;
-    playSound();
+    const isMuted = useLocalStore.getState().isMuted;
+    if (isMuted) return false;
+    load(url, { autoplay: true, format: 'wav', html5: true });
   };
 
-  return { play };
+  return [play];
 };
 
 export default usePlaySound;
