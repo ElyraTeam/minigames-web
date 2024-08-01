@@ -43,10 +43,11 @@ const NameInput: React.FC<NameInputProps> = ({}) => {
     <SlideButton
       onInputTextChange={setNewName}
       center
-      label="ابدأ اللعب"
+      label="اكتب اسمك"
       initialValue={nickname || ''}
       onKeyPress={(k) => k == 'Enter' && updateNickname()}
       placeholderLabel="اكتب اسمك"
+      className="w-[250px]"
     >
       <Image
         onClick={updateNickname}
