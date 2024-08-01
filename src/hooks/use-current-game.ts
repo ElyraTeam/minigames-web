@@ -35,13 +35,16 @@ const useCurrentGame = (roomId: string) => {
   const setCategoryValues = useLocalStore(
     (state) => state.setCategoryInputValues
   );
+  const [playChatSound] = useWordSound(WordSound.CHAT);
+  const [playAfterWrite] = useWordSound(WordSound.AFTER_WRITE);
+  const [playTick] = useWordSound(WordSound.TIMER_TICK);
+  const [playLastTick] = useWordSound(WordSound.TIMER_END);
   const { countdown, setCountdown } = useCountdown({
     startFrom: 0,
-    // onCountdownUpdate: (s) => playTick(),
-    // onCountdownFinish: () => playLastTick(),
+    onCountdownUpdate: (s) => playTick(),
+    onCountdownFinish: () => playLastTick(),
   });
   const router = useRouter();
-  const [playChatSound] = useWordSound(WordSound.CHAT);
 
   useEffect(() => {
     if (!nickname || !roomId) return;
@@ -88,6 +91,7 @@ const useCurrentGame = (roomId: string) => {
           const categoryValues = useLocalStore.getState().categoryInputValues;
           callback(categoryValues);
           setCountdown(3);
+          playAfterWrite();
         });
 
         // Votes
