@@ -108,6 +108,7 @@ const useCurrentGame = (roomId: string) => {
         localPlayer.onStartVote((categoryData) => {
           setCategoryVoteData(categoryData);
           setVoteCount(0);
+          setMyVotes({});
 
           const votes = categoryData.votes;
           const myVotes = useVoteStore.getState().myVotes;
