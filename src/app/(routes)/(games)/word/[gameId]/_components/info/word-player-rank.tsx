@@ -50,7 +50,7 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
     >
       <div className="flex items-center gap-3 flex-grow">
         <WordRank rank={rank} />
-        <p className="text-lg overflow-hidden overflow-ellipsis max-w-[6.5rem] whitespace-nowrap font-semibold">
+        <p className="text-base overflow-hidden overflow-ellipsis max-w-[6.5rem] whitespace-nowrap font-semibold">
           {name || '------'}
         </p>
         {isOwner && (
