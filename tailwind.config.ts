@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 import tailwindAnimate from 'tailwindcss-animate';
 import tailwindScrollbar from 'tailwind-scrollbar';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 const config: Config = {
   content: [
@@ -9,6 +10,10 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      xs: '385px',
+      ...defaultTheme.screens,
+    },
     extend: {
       colors: {
         word: {
