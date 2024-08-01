@@ -1,17 +1,19 @@
-import { useEffect } from "react";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
-import { joinRoom } from "@/api/rooms";
-import localPlayer from "@/api/socket";
-import useChatStore from "@/state/chat";
-import useRoomStore from "@/state/room";
-import useGameStore from "@/state/game";
-import useVoteStore from "@/state/vote";
-import useLocalStore from "@/state/local";
-import usePlayersStore from "@/state/players";
+import { joinRoom } from '@/api/rooms';
+import localPlayer from '@/api/socket';
+import useChatStore from '@/state/chat';
+import useRoomStore from '@/state/room';
+import useGameStore from '@/state/game';
+import useVoteStore from '@/state/vote';
+import useLocalStore from '@/state/local';
+import { WordSound } from '@/config/word';
+import usePlayersStore from '@/state/players';
 
-import useCountdown from "./use-countdown";
+import useCountdown from './use-countdown';
+import useWordSound from './use-word-sound';
 
 const useCurrentGame = (roomId: string) => {
   const currentPlayerId = useLocalStore((state) => state.playerId);
@@ -39,6 +41,7 @@ const useCurrentGame = (roomId: string) => {
     // onCountdownFinish: () => playLastTick(),
   });
   const router = useRouter();
+  const [playChatSound] = useWordSound(WordSound.CHAT);
 
   useEffect(() => {
     if (!nickname || !roomId) return;
@@ -46,7 +49,7 @@ const useCurrentGame = (roomId: string) => {
     joinRoom(nickname, roomId).then(
       ({ playerId, authToken, error, roomOptions, errorCode }) => {
         if (error) return toast.error(`Error #${errorCode}: ${error}`);
-        if (!authToken) return toast.error("Unable to find auth token.");
+        if (!authToken) return toast.error('Unable to find auth token.');
         resetChatMessages();
         setToken(authToken);
         setRoom({ id: roomId, options: roomOptions });
@@ -57,7 +60,7 @@ const useCurrentGame = (roomId: string) => {
 
         const doAuth = () => {
           localPlayer.authenticate(
-            { authToken, nickname, roomId: roomId, game: "word" },
+            { authToken, nickname, roomId: roomId, game: 'word' },
             (res) => {
               // if (res == 'good') {
               // }
@@ -66,16 +69,19 @@ const useCurrentGame = (roomId: string) => {
         };
 
         // Sync
-        localPlayer.socket.on("sync", (sync: GameSync) => setGame(sync));
-        localPlayer.socket.on("options", (options: GameOptionsSync) =>
+        localPlayer.socket.on('sync', (sync: GameSync) => setGame(sync));
+        localPlayer.socket.on('options', (options: GameOptionsSync) =>
           setRoom(options)
         );
-        localPlayer.socket.on("players", (players: GamePlayersSync) =>
+        localPlayer.socket.on('players', (players: GamePlayersSync) =>
           setPlayers(players)
         );
 
         // Chat
-        localPlayer.onChat((msg) => addChatMessage(msg));
+        localPlayer.onChat((msg) => {
+          addChatMessage(msg);
+          playChatSound();
+        });
 
         // When server requests category values
         localPlayer.onRequestValues((callback) => {
@@ -118,11 +124,11 @@ const useCurrentGame = (roomId: string) => {
         // Local player kicked
         localPlayer.onKick((kickMsg) => {
           toast.error(kickMsg);
-          router.push("/word");
+          router.push('/word');
         });
 
         // Connect
-        localPlayer.socket.on("connect", doAuth);
+        localPlayer.socket.on('connect', doAuth);
         localPlayer.socket.connect();
       }
     );
