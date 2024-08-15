@@ -9,9 +9,18 @@ import AuthorModal from '@/components/modals/author-modal';
 import WordBackground from '@/components/word/word-background';
 
 import NameInput from './_components/name-input';
+import { defaultMetadata } from '@/config/metadata';
 
 export const metadata: Metadata = {
+  ...defaultMetadata,
   title: `Get Started`,
+  description: 'Welcome to ElyraGames!',
+  openGraph: {
+    ...defaultMetadata.openGraph,
+    title: `Get Started`,
+    description: 'Welcome to ElyraGames!',
+    url: `/`,
+  },
 };
 
 export default function GetStarted() {
