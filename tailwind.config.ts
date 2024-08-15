@@ -64,9 +64,14 @@ const config: Config = {
           '0%': { translate: '-300%' },
           '50%, 100%': { translate: '300%' },
         },
+        height: {
+          '0%': { height: '0' },
+          '200%': { height: 'auto' },
+        },
       },
       animation: {
         'blurry-move': 'blurry-move 2.5s ease-out infinite',
+        height: 'height 2s ease-out',
       },
     },
   },
