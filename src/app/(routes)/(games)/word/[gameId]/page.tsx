@@ -1,11 +1,9 @@
 import { Metadata } from 'next';
-import { redirect } from 'next/navigation';
 
 import { HOST } from '@/config/constants';
 import checkRoomId from '@/actions/check-room';
 
 import WordMainCard from './_components/word-main-card';
-import getNicknameFromCookies from '@/actions/get-nickname';
 
 interface WordRoomPageProps {
   params: {
@@ -16,31 +14,31 @@ interface WordRoomPageProps {
 export async function generateMetadata({
   params: { gameId },
 }: WordRoomPageProps): Promise<Metadata> {
-  return {
-    description: 'Join this game of Word!',
-    openGraph: {
-      title: 'Join Word Game',
-      description: "You're invited to join this Word game!",
-      url: `${HOST}/word/${gameId}`,
-    },
-  };
+  try {
+    const { owner } = await checkRoomId(gameId);
+    return {
+      description: `Join this game of Word by ${owner}`,
+      openGraph: {
+        title: `Join Word Game by ${owner}`,
+        description: "You're invited to join this Word game!",
+        url: `/word/${gameId}`,
+      },
+    };
+  } catch (err) {
+    return {
+      description: "Room doesn't exist",
+      openGraph: {
+        title: 'Room not found',
+        description: "Room doesn't exist",
+        url: `/word`,
+      },
+    };
+  }
 }
 
 const WordRoomPage: React.FC<WordRoomPageProps> = async ({
   params: { gameId },
 }) => {
-  // const nickname = getNicknameFromCookies();
-  const res = await checkRoomId(gameId);
-
-  if (!res.success)
-    throw new Error(
-      res.errorCode == 403
-        ? 'Nickname is taken'
-        : res.errorCode == 404
-        ? 'Room not found'
-        : 'Internal server error.'
-    );
-
   return <WordMainCard roomId={gameId} />;
 };
 
