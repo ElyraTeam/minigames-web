@@ -21,6 +21,7 @@ const NicknameProvider: React.FC<NicknameProviderProps> = ({ children }) => {
     if (!cookies) return;
     const nickname = cookies.get(NEXTJS_SESSION_KEY);
     if (!nickname) return router.push(`/getstarted?next=${pathname}`);
+    setNickname(nickname);
   }, [cookies, pathname, router, setNickname]);
 
   return <>{children}</>;
