@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
+import useUIStore from '@/state/ui';
 import { State } from '@/types/word';
 import useGameStore from '@/state/game';
 import { getPlayerById } from '@/lib/word';
@@ -28,13 +27,10 @@ interface WordMainCardProps {
 const WordMainCard: React.FC<WordMainCardProps> = ({ roomId }) => {
   const game = useGameStore((state) => state.game);
   const players = usePlayersStore((state) => state.players?.players) || [];
-  const [winnersOpen, setWinnersOpen] = useState(false);
+  const winnersOpen = useUIStore((state) => state.winnersOpen);
+  const setWinnersOpen = useUIStore((state) => state.setWinnersOpen);
+  const winners = useGameStore((state) => state.winners);
   const { countdown } = useCurrentGame(roomId);
-
-  useEffect(() => {
-    if (!game?.state) return;
-    if (game.state === State.GAME_OVER) setWinnersOpen(true);
-  }, [game?.state]);
 
   const renderContentFromState = () => {
     if (game && countdown) {
@@ -82,10 +78,13 @@ const WordMainCard: React.FC<WordMainCardProps> = ({ roomId }) => {
 
   return (
     <>
-      <WordWinnersModal
-        isOpen={winnersOpen}
-        onOpenChange={(open) => setWinnersOpen(open)}
-      />
+      {winners && (
+        <WordWinnersModal
+          isOpen={winnersOpen}
+          onOpenChange={(open) => setWinnersOpen(open)}
+          winners={winners}
+        />
+      )}
       <WordCard className="flex flex-col bg-word-game py-3 px-3 lg:px-6 gap-3 overflow-y-auto scrollbar-thin">
         <WordGameHeader />
         <WordGameContent>{renderContentFromState()}</WordGameContent>
