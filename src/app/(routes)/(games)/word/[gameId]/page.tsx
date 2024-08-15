@@ -30,8 +30,6 @@ export async function generateMetadata({
   } catch (err) {
     return {
       ...defaultWordMetadata,
-      title: 'Room not found',
-      description: "Room doesn't exist",
       openGraph: {
         ...defaultWordMetadata.openGraph,
         title: 'Room not found',
