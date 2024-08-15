@@ -100,6 +100,10 @@ class LocalPlayer {
     this.socket.on('player-votes', ack);
   }
 
+  onGameOver(ack: (winners: Player[]) => void) {
+    this.socket.on('game-over', ack);
+  }
+
   offAll() {
     this.socket.removeAllListeners('start-timer');
     this.socket.removeAllListeners('kick');
