@@ -5,7 +5,7 @@ interface GameState {
   game?: GameSync | null;
   winners?: Player[] | null;
   setGame: (game: GameSync) => void;
-  setWinners: (winners: Player[]) => void;
+  setWinners: (winners?: Player[] | null) => void;
 }
 
 const useGameStore = create<GameState>()(
