@@ -54,6 +54,7 @@ interface GamePlayersSync {
 
 interface Player {
   id: string;
+  sessionId: string;
   nickname: string;
   online: boolean;
   owner: boolean;
