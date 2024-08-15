@@ -22,6 +22,14 @@ export async function generateMetadata({
         title: `Join Word Game by ${owner}`,
         description: "You're invited to join this Word game!",
         url: `/word/${gameId}`,
+        images: [
+          {
+            url: `/logo.png`,
+            width: 512,
+            height: 512,
+            alt: 'Word Logo',
+          },
+        ],
       },
     };
   } catch (err) {
@@ -31,6 +39,14 @@ export async function generateMetadata({
         title: 'Room not found',
         description: "Room doesn't exist",
         url: `/word`,
+        images: [
+          {
+            url: `/logo.png`,
+            width: 512,
+            height: 512,
+            alt: 'Word Logo',
+          },
+        ],
       },
     };
   }
