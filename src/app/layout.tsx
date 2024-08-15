@@ -1,13 +1,17 @@
 import '@/styles/globals.css';
 
+import { Cairo } from 'next/font/google';
+import { Toaster } from 'react-hot-toast';
+import type { Metadata, Viewport } from 'next';
+
 import { TooltipProvider } from '@/components/ui/tooltip-desktop';
 import { APP_NAME_EN, HOST, TEAM_NAME_EN } from '@/config/constants';
 
-import type { Metadata } from 'next';
-import { Cairo } from 'next/font/google';
-import { Toaster } from 'react-hot-toast';
-
 const font = Cairo({ subsets: ['latin'] });
+
+export const viewport: Viewport = {
+  themeColor: '#A86CCD',
+};
 
 export const metadata: Metadata = {
   title: {
