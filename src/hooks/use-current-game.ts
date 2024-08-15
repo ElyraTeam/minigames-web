@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 
+import useUIStore from '@/state/ui';
 import { State } from '@/types/word';
 import { joinRoom } from '@/api/rooms';
 import localPlayer from '@/api/socket';
@@ -23,6 +24,7 @@ const useCurrentGame = (roomId: string) => {
   const setRoom = useRoomStore((state) => state.setRoom);
   const setGame = useGameStore((state) => state.setGame);
   const setWinners = useGameStore((state) => state.setWinners);
+  const setWinnersOpen = useUIStore((state) => state.setWinnersOpen);
   const setToken = useLocalStore((state) => state.setToken);
   const setPlayers = usePlayersStore((state) => state.setPlayers);
   const addChatMessage = useChatStore((state) => state.addChatMessage);
@@ -43,6 +45,8 @@ const useCurrentGame = (roomId: string) => {
   const [playAfterWrite] = useWordSound(WordSound.AFTER_WRITE);
   const [playTick] = useWordSound(WordSound.TIMER_TICK);
   const [playLastTick] = useWordSound(WordSound.TIMER_END);
+  const [playWinnerSound] = useWordSound(WordSound.AFTER_WIN);
+  const [playLoseSound] = useWordSound(WordSound.AFTER_LOSE);
   const { countdown, setCountdown } = useCountdown({
     startFrom: 0,
     onCountdownUpdate: (s) => {
@@ -73,6 +77,7 @@ const useCurrentGame = (roomId: string) => {
           toast.error('Unable to find auth token.');
           return router.push('/word');
         }
+        setWinners(null);
         resetChatMessages();
         clearNewMessages();
         setToken(authToken);
@@ -112,6 +117,7 @@ const useCurrentGame = (roomId: string) => {
 
         // When server requests category values
         localPlayer.onRequestValues((callback) => {
+          setWinners(null);
           const categoryValues = useLocalStore.getState().categoryInputValues;
           callback(categoryValues);
           setCountdown(3);
@@ -159,6 +165,12 @@ const useCurrentGame = (roomId: string) => {
         // Game over
         localPlayer.onGameOver((winners) => {
           setWinners(winners);
+          setWinnersOpen(true);
+          if (currentPlayerId === winners[0].sessionId) {
+            playWinnerSound();
+          } else {
+            playLoseSound();
+          }
         });
 
         // Connect
