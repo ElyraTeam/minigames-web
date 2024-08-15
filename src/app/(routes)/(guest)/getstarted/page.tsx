@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
-import { APP_NAME_EN } from '@/config/constants';
 import ElyraLogo from '@/components/ui/elyra-logo';
 import WordLogo from '@/components/word/word-logo';
 import AuthorLinks from '@/components/about/author-links';
@@ -12,7 +11,7 @@ import WordBackground from '@/components/word/word-background';
 import NameInput from './_components/name-input';
 
 export const metadata: Metadata = {
-  title: `${APP_NAME_EN} | Get Started`,
+  title: `Get Started`,
 };
 
 export default function GetStarted() {
