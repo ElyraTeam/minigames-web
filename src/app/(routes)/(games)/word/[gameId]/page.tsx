@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
-import { HOST } from '@/config/constants';
 import checkRoomId from '@/actions/check-room';
+import { defaultWordMetadata } from '@/config/metadata';
 
 import WordMainCard from './_components/word-main-card';
 
@@ -18,36 +18,25 @@ export async function generateMetadata({
     const { owner } = await checkRoomId(gameId);
     if (!owner) throw new Error('Room not found');
     return {
+      ...defaultWordMetadata,
       description: `Join this game of Word by ${owner}`,
       openGraph: {
+        ...defaultWordMetadata.openGraph,
         title: `Join Word Game by ${owner}`,
         description: "You're invited to join this Word game!",
         url: `/word/${gameId}`,
-        images: [
-          {
-            url: `/logo.png`,
-            width: 512,
-            height: 512,
-            alt: 'Word Logo',
-          },
-        ],
       },
     };
   } catch (err) {
     return {
+      ...defaultWordMetadata,
+      title: 'Room not found',
       description: "Room doesn't exist",
       openGraph: {
+        ...defaultWordMetadata.openGraph,
         title: 'Room not found',
         description: "Room doesn't exist",
         url: `/word`,
-        images: [
-          {
-            url: `/logo.png`,
-            width: 512,
-            height: 512,
-            alt: 'Word Logo',
-          },
-        ],
       },
     };
   }
