@@ -16,6 +16,7 @@ export async function generateMetadata({
 }: WordRoomPageProps): Promise<Metadata> {
   try {
     const { owner } = await checkRoomId(gameId);
+    if (!owner) throw new Error('Room not found');
     return {
       description: `Join this game of Word by ${owner}`,
       openGraph: {
