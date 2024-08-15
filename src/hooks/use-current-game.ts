@@ -22,6 +22,7 @@ const useCurrentGame = (roomId: string) => {
   const setPlayerId = useLocalStore((state) => state.setPlayerId);
   const setRoom = useRoomStore((state) => state.setRoom);
   const setGame = useGameStore((state) => state.setGame);
+  const setWinners = useGameStore((state) => state.setWinners);
   const setToken = useLocalStore((state) => state.setToken);
   const setPlayers = usePlayersStore((state) => state.setPlayers);
   const addChatMessage = useChatStore((state) => state.addChatMessage);
@@ -153,6 +154,11 @@ const useCurrentGame = (roomId: string) => {
         localPlayer.onKick((kickMsg) => {
           toast.error(kickMsg);
           router.push('/word');
+        });
+
+        // Game over
+        localPlayer.onGameOver((winners) => {
+          setWinners(winners);
         });
 
         // Connect
