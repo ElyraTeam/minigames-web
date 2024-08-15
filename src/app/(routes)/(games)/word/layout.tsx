@@ -1,6 +1,7 @@
 import { Metadata, Viewport } from 'next';
 
 import { WORD_GAME_NAME } from '@/config/word';
+import { defaultWordMetadata } from '@/config/metadata';
 import WordBackground from '@/components/word/word-background';
 
 export const viewport: Viewport = {
@@ -8,19 +9,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  ...defaultWordMetadata,
   title: WORD_GAME_NAME,
   openGraph: {
+    ...defaultWordMetadata.openGraph,
     title: WORD_GAME_NAME,
     description: 'Play Word Game and improve your vocabulary!',
     url: `/word`,
-    images: [
-      {
-        url: `/logo.png`,
-        width: 512,
-        height: 512,
-        alt: 'Word Logo',
-      },
-    ],
   },
 };
 
