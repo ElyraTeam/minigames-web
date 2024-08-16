@@ -26,8 +26,8 @@ const NameInput: React.FC<NameInputProps> = ({}) => {
     setLoading(true);
     if (
       !newName ||
-      newName.trim().length <= MIN_NICKNAME_LENGTH ||
-      newName.trim().length >= MAX_NICKNAME_LENGTH
+      newName.trim().length < MIN_NICKNAME_LENGTH ||
+      newName.trim().length > MAX_NICKNAME_LENGTH
     )
       return setLoading(false);
     try {
