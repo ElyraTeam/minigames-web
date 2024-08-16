@@ -48,9 +48,16 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
       )}
       style={style}
     >
-      <div className="flex items-center gap-3 flex-grow">
+      <div className="flex items-center gap-2 flex-grow">
         <WordRank rank={rank} />
-        <p className="text-base overflow-hidden overflow-ellipsis max-w-[6.5rem] whitespace-nowrap font-semibold">
+        <p
+          className={cn(
+            'text-base overflow-hidden overflow-ellipsis max-w-[8rem] whitespace-nowrap font-semibold',
+            (isMeOwner || isOwner || checkmark) && 'max-w-[7.5rem]',
+            ((isMeOwner && checkmark) || (isOwner && checkmark)) &&
+              'max-w-[5.5rem]'
+          )}
+        >
           {name || '------'}
         </p>
         {isOwner && (
@@ -68,7 +75,7 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
       </div>
       {isMeOwner && !isOwner && isPlayer && (
         <IoIosCloseCircle
-          className="mx-4 text-white/15 hover:text-white/20 cursor-pointer transition-colors text-2xl"
+          className="mx-2 text-white/15 hover:text-white/20 cursor-pointer transition-colors text-2xl"
           onClick={onKick}
         />
       )}
