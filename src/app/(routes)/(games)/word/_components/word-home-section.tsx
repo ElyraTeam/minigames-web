@@ -27,7 +27,7 @@ const WordHomeSection: React.FC<WordHomeSectionProps> = ({}) => {
       </AppearOnTransition>
       <div className="flex items-center justify-center py-8 rounded-t-3xl lg:rounded-t-none lg:justify-end lg:pl-12 h-full bg-black/40">
         <WordHomeCreateCard />
-        <div className="absolute w-64 h-64 xl:w-96 xl:h-96 bottom-28 xl:bottom-14 left-1/2 -translate-x-1/2 hidden lg:block">
+        <div className="absolute w-64 h-64 xl:w-96 xl:h-96 2xl:w-[35rem] 2xl:h-[35rem] bottom-28 xl:bottom-14 left-1/2 -translate-x-1/2 hidden lg:block">
           <Image src="/svg/home-arrow-1.svg" alt="home-arrow-1" fill />
         </div>
       </div>
