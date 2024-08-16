@@ -66,9 +66,9 @@ const WordGameIcons: React.FC<WordGameIconsProps> = ({}) => {
       <WordGameIcon onClick={handleShare} tooltip="نسخ الرابط">
         <FaShareAlt />
       </WordGameIcon>
-      <WordGameIcon>
+      {/* <WordGameIcon>
         <FaInfoCircle className="w-6 h-6" />
-      </WordGameIcon>
+      </WordGameIcon> */}
       <div className="w-[2px] bg-word-secondary/40 h-6" />
       <WordGameIcon
         onClick={() => setLeaveModalShow(true)}
