@@ -80,6 +80,7 @@ const WordVotingCards: React.FC<WordVotingCardsProps> = ({}) => {
           vote={getVote(playerId)}
           selectedCard={currentPlayer?.id === playerId}
           voted={currentPlayer?.voted}
+          hasValue={!!categoryData?.values[playerId]}
         />
       ))}
     </div>
