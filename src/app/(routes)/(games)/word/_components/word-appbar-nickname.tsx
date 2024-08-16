@@ -37,8 +37,8 @@ const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
     if (
       loading ||
       !newName ||
-      newName.length <= MIN_NICKNAME_LENGTH ||
-      newName.length >= MAX_NICKNAME_LENGTH
+      newName.length < MIN_NICKNAME_LENGTH ||
+      newName.length > MAX_NICKNAME_LENGTH
     )
       return;
     setLoading(true);
@@ -55,7 +55,7 @@ const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
 
   return (
     <Popover open={open} onOpenChange={(open) => setOpen(open)}>
-      <PopoverTrigger className="w-full rounded-xl py-2 bg-word-game-800 hover:bg-word-game-800/80 border-none space-x-1 rtl:space-x-reverse flex items-center justify-center shadow-[inset_0_0_10px_rgba(0,0,0,0.5)] transition-colors">
+      <PopoverTrigger className="w-full rounded-xl py-2 bg-word-game-800 hover:bg-word-game-800/80 border-none space-x-1 rtl:space-x-reverse flex items-center justify-center shadow-[inset_0_0_10px_rgba(0,0,0,0.5)] transition-colors px-1">
         <IoPerson className="inline text-lg" />
         <WordNickname />
       </PopoverTrigger>
