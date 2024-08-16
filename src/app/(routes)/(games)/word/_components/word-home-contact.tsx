@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+
 import WordButton from '@/components/word/word-button';
 import WordFeedback from '@/components/modals/word-feedback';
 

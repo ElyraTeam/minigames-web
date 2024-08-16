@@ -45,7 +45,7 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
       onOpenChange={onOpenChange}
       className="w-[90%] lg:w-[450px]"
     >
-      <h4>ايه المشكلة يصاحبي؟</h4>
+      <h4>ما هي مشكلتك؟</h4>
       <form
         className="space-y-4"
         onSubmit={(e) => {
@@ -54,7 +54,7 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
         }}
       >
         <div className="space-y-2">
-          <label>ايميلك ايه؟</label>
+          <label>الايميل</label>
           <Input
             type="email"
             className="focus:border-word-game-700"
@@ -64,7 +64,7 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
           />
         </div>
         <div className="space-y-2">
-          <label>اسمك ايه؟</label>
+          <label>الاسم</label>
           <Input
             className="focus:border-word-game-700"
             value={name}
@@ -72,7 +72,7 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
           />
         </div>
         <div className="space-y-2">
-          <label>رسالتك ايه؟</label>
+          <label>الرسالة</label>
           <TextArea
             className="h-32 focus:border-word-game-700"
             value={message}
