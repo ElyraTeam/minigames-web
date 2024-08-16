@@ -6,6 +6,7 @@ import {
   HybridTooltip,
   HybridTooltipContent,
   HybridTooltipTrigger,
+  TouchProvider,
 } from './hybrid-tooltip';
 
 interface TooltipProps {
@@ -24,20 +25,22 @@ const Tooltip: React.FC<TooltipProps> = ({
   delayDuration,
 }) => {
   return (
-    <HybridTooltip delayDuration={delayDuration}>
-      <HybridTooltipTrigger asChild>{children}</HybridTooltipTrigger>
-      {text && (
-        <HybridTooltipContent
-          side={position}
-          className={cn(
-            'bg-gray-700 whitespace-nowrap py-2 px-4 rounded-xl text-white text-sm font-normal border-none',
-            className
-          )}
-        >
-          {text}
-        </HybridTooltipContent>
-      )}
-    </HybridTooltip>
+    <TouchProvider>
+      <HybridTooltip delayDuration={delayDuration}>
+        <HybridTooltipTrigger asChild>{children}</HybridTooltipTrigger>
+        {text && (
+          <HybridTooltipContent
+            side={position}
+            className={cn(
+              'bg-gray-700 whitespace-nowrap py-2 px-4 rounded-xl text-white text-sm font-normal border-none',
+              className
+            )}
+          >
+            {text}
+          </HybridTooltipContent>
+        )}
+      </HybridTooltip>
+    </TouchProvider>
   );
 };
 
