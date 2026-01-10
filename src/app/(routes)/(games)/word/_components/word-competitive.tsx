@@ -14,7 +14,7 @@ const WordCompetitive: React.FC<WordCompetitiveProps> = ({}) => {
           <AppearOnTransition className="slide-in-from-right-20">
             <WordHomeCard
               title="كن اسرع"
-              description="تسابق مع باقي اللاعبين واملأ جميع الفئات تنتهي مرحلة الكتابة مع انتهاء اول لاعب"
+              description="تسابق مع باقي اللاعبين واملأ جميع الفئات تنتهي مرحلة الكتابة مع انتهاء أول لاعب"
             />
           </AppearOnTransition>
           <AppearOnTransition className="slide-in-from-left-20">
