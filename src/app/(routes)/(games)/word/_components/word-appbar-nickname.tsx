@@ -12,7 +12,6 @@ import {
 import Input from '@/components/ui/input';
 import useLocalStore from '@/state/local';
 import Button from '@/components/ui/button';
-import { saveSession } from '@/services/local';
 import { MAX_NICKNAME_LENGTH, MIN_NICKNAME_LENGTH } from '@/config/constants';
 
 import WordNickname from './word-nickname';
@@ -22,7 +21,6 @@ interface WordAppbarNicknameProps {}
 const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
   const nickname = useLocalStore((state) => state.nickname);
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
   const setNickname = useLocalStore((state) => state.setNickname);
   const [newNickname, setNewNickname] = useState('');
 
@@ -31,26 +29,17 @@ const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
     setNewNickname(nickname);
   }, [nickname]);
 
-  const handleSaveNickname = async () => {
+  const handleSaveNickname = () => {
     const newName = newNickname.trim();
-    console.log(newName);
     if (
-      loading ||
       !newName ||
       newName.length < MIN_NICKNAME_LENGTH ||
       newName.length > MAX_NICKNAME_LENGTH
     )
       return;
-    setLoading(true);
     setNickname(newName);
-    try {
-      await saveSession(newName);
-      toast.success('تم تعديل الاسم.');
-      setOpen(false);
-    } catch (err) {
-      console.error(err);
-    }
-    setLoading(false);
+    toast.success('تم تعديل الاسم.');
+    setOpen(false);
   };
 
   return (
@@ -74,7 +63,6 @@ const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
         <Button
           className="w-[60%] text-base py-1 self-center bg-word-game-700 hover:bg-word-game-700/90 disabled:bg-word-game-700/40"
           onClick={handleSaveNickname}
-          loading={loading}
         >
           حفظ
         </Button>

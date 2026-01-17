@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import useLocalStore from '@/state/local';
-import { saveSession } from '@/services/local';
 import SlideButton from '@/components/ui/slide-button';
 import { MAX_NICKNAME_LENGTH, MIN_NICKNAME_LENGTH } from '@/config/constants';
 
@@ -21,7 +20,7 @@ const NameInput: React.FC<NameInputProps> = ({}) => {
     setNewName(nickname);
   }, [nickname]);
 
-  async function updateNickname() {
+  function updateNickname() {
     if (loading) return false;
     setLoading(true);
     if (
@@ -30,17 +29,12 @@ const NameInput: React.FC<NameInputProps> = ({}) => {
       newName.trim().length > MAX_NICKNAME_LENGTH
     )
       return setLoading(false);
-    try {
-      setNickname(newName.trim());
-      await saveSession(newName.trim());
-      const nextUrl = params.get('next');
-      if (nextUrl && nextUrl.trim().length !== 0) {
-        window.location.href = nextUrl;
-      } else {
-        window.location.href = '/word';
-      }
-    } catch (err) {
-      console.error(err);
+    setNickname(newName.trim());
+    const nextUrl = params.get('next');
+    if (nextUrl && nextUrl.trim().length !== 0) {
+      window.location.href = nextUrl;
+    } else {
+      window.location.href = '/word';
     }
     setLoading(false);
   }

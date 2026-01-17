@@ -1,11 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useCookies } from 'next-client-cookies';
+import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
 import useLocalStore from '@/state/local';
-import { NEXTJS_SESSION_KEY } from '@/config/constants';
 
 interface NicknameProviderProps {
   children: React.ReactNode;
@@ -13,16 +11,21 @@ interface NicknameProviderProps {
 
 const NicknameProvider: React.FC<NicknameProviderProps> = ({ children }) => {
   const router = useRouter();
-  const cookies = useCookies();
   const pathname = usePathname();
-  const setNickname = useLocalStore((state) => state.setNickname);
+  const nickname = useLocalStore((state) => state.nickname);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Wait for Zustand to hydrate from localStorage
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
 
   useEffect(() => {
-    if (!cookies) return;
-    const nickname = cookies.get(NEXTJS_SESSION_KEY);
-    if (!nickname) return router.push(`/getstarted?next=${pathname}`);
-    setNickname(nickname);
-  }, [cookies, pathname, router, setNickname]);
+    if (!isHydrated) return;
+    if (!nickname) {
+      router.push(`/getstarted?next=${pathname}`);
+    }
+  }, [isHydrated, nickname, pathname, router]);
 
   return <>{children}</>;
 };

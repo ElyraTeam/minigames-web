@@ -8,8 +8,6 @@ export const API_HOST = isDev
   : `https://elyra-minis-dev.hossamohsen.me`;
 export const HOST = `https://elyra.games`;
 
-export const NEXTJS_SESSION_KEY = 'nextjs.session';
-
 export const MIN_NICKNAME_LENGTH = 1;
 export const MAX_NICKNAME_LENGTH = 10;
 
