@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
 
 @layer base {
   h1 {
@@ -30,7 +29,7 @@
 
 @layer utilities {
   .word-background {
-    background: 
+    background:
     url(/svg/word-background.svg),
     rgba(33, 119, 184, 1);
     background-size: cover;
@@ -41,7 +40,7 @@
   }
 
   .word-dark-background {
-    background: 
+    background:
     url(/svg/word-background.svg),
     rgb(16, 74, 119);
     background-size: cover;
