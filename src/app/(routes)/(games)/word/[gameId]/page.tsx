@@ -6,14 +6,13 @@ import { defaultWordMetadata } from '@/config/metadata';
 import WordMainCard from './_components/word-main-card';
 
 interface WordRoomPageProps {
-  params: {
-    gameId: string;
-  };
+  params: Promise<{ gameId: string }>;
 }
 
 export async function generateMetadata({
-  params: { gameId },
+  params,
 }: WordRoomPageProps): Promise<Metadata> {
+  const { gameId } = await params;
   try {
     const { owner } = await checkRoomId(gameId);
     if (!owner) throw new Error('Room not found');
@@ -40,9 +39,8 @@ export async function generateMetadata({
   }
 }
 
-const WordRoomPage: React.FC<WordRoomPageProps> = async ({
-  params: { gameId },
-}) => {
+const WordRoomPage = async ({ params }: WordRoomPageProps) => {
+  const { gameId } = await params;
   return <WordMainCard roomId={gameId} />;
 };
 
