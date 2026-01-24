@@ -1,16 +1,16 @@
-import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
-import { API_HOST } from '@/config/constants';
-import useLocalStore from '@/state/local';
+import { API_HOST } from "@/config/constants";
+import useLocalStore from "@/state/local";
 
 const client = axios.create({
   baseURL: API_HOST,
-  responseType: 'json',
+  responseType: "json",
   validateStatus: (s) => true,
 });
 
 // Fetch a new HTTP token from the server
-const fetchHttpToken = async (): Promise<string> => {
+export const fetchHttpToken = async (): Promise<string> => {
   const res = await axios.get(`${API_HOST}/token`, {
     validateStatus: (s) => true,
   });
@@ -39,7 +39,7 @@ client.interceptors.request.use(
   },
   (error: AxiosError) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 // Response interceptor - handle token expiry (errorCode 1012)
@@ -58,11 +58,11 @@ client.interceptors.response.use(
   },
   (error: AxiosError) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 export const createRoom = async (nickname: string) => {
-  const res = await client.post('/word/room/create', {
+  const res = await client.post("/word/room/create", {
     nickname,
   });
   return res.data as CreateRoomResponse;
@@ -88,7 +88,7 @@ export const kickPlayer = async (roomId: string, toKickId: string) => {
 };
 
 export const sendFeedback = (email: string, name: string, message: string) => {
-  return client.post('/feedback', { email, name, message, game: 'word' });
+  return client.post("/feedback", { email, name, message, game: "word" });
 };
 
 // export const changeRoomOptions = async (
