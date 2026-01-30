@@ -8,12 +8,14 @@ interface LocalState {
   httpToken?: string | null;
   categoryInputValues: CategoryValues;
   isMuted: boolean;
+  showNicknameModal: boolean;
   setPlayerId: (playerId: string) => void;
   setNickname: (nickname: string) => void;
   setToken: (token: string) => void;
   setHttpToken: (httpToken: string) => void;
   toggleMute: () => void;
   setCategoryInputValues: (values: CategoryValues) => void;
+  setShowNicknameModal: (show: boolean) => void;
 }
 
 const useLocalStore = create<LocalState>()(
@@ -26,6 +28,7 @@ const useLocalStore = create<LocalState>()(
         httpToken: null,
         isMuted: false,
         categoryInputValues: {},
+        showNicknameModal: false,
         setNickname: (nickname) => set(() => ({ nickname })),
         setToken: (token) => set(() => ({ token })),
         setHttpToken: (httpToken) => set(() => ({ httpToken })),
@@ -33,13 +36,16 @@ const useLocalStore = create<LocalState>()(
         setPlayerId: (playerId) => set(() => ({ playerId })),
         setCategoryInputValues: (categoryInputValues) =>
           set(() => ({ categoryInputValues })),
+        setShowNicknameModal: (showNicknameModal) =>
+          set(() => ({ showNicknameModal })),
       }),
       {
         name: 'local-player-storage',
         partialize: (state) =>
           Object.fromEntries(
             Object.entries(state).filter(
-              ([key]) => !['categoryInputValues'].includes(key)
+              ([key]) =>
+                !['categoryInputValues', 'showNicknameModal'].includes(key)
             )
           ),
       }

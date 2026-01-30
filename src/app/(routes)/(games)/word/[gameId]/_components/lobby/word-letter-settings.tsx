@@ -1,6 +1,7 @@
 import toast from 'react-hot-toast';
 
 import useOwner from '@/hooks/use-owner';
+import useGameStore from '@/state/game';
 import Switch from '@/components/ui/switch';
 import { CHARS_ARABIC } from '@/config/word';
 import useRoomOptions from '@/hooks/use-room-options';
@@ -13,6 +14,7 @@ interface WordLetterSettingsProps {}
 const WordLetterSettings: React.FC<WordLetterSettingsProps> = ({}) => {
   const { currentOptions, updateRoomOptions } = useRoomOptions();
   const chosenLetters = currentOptions?.letters || [];
+  const doneLetters = useGameStore((state) => state.game?.doneLetters) || [];
   const isOwner = useOwner();
 
   const handleLetterClick = (letter: string, checked: boolean) => {
@@ -54,6 +56,7 @@ const WordLetterSettings: React.FC<WordLetterSettingsProps> = ({}) => {
       </WordSettingHeader>
       <WordSelectLetters
         chosenLetters={chosenLetters}
+        doneLetters={doneLetters}
         onLetterUpdate={handleLetterClick}
       />
     </div>

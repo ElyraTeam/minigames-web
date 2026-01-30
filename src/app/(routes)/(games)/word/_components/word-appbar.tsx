@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { WORD_GAME_NAME_AR } from '@/config/word';
 import WordLogo from '@/components/word/word-logo';
 import ElyraLogo from '@/components/ui/elyra-logo';
+import AuthorModal from '@/components/modals/author-modal';
 
 import WordAppbarMobile from './word-appbar-mobile';
 import WordAppbarButtons from './word-appbar-buttons';
@@ -15,10 +16,12 @@ const WordAppbar: React.FC<WordAppbarProps> = ({}) => {
     <>
       <WordAppbarBackground>
         <div className="flex items-center gap-3 lg:gap-5">
-          <ElyraLogo size={60} />
+          <AuthorModal>
+            <ElyraLogo size={60} />
+          </AuthorModal>
           <div className="border-r-2 border-white/10 h-8 " />
           <div className="flex items-center gap-3">
-            <Link href="/word">
+            <Link href="/">
               <WordLogo size={65} />
             </Link>
             <p className="font-bold text-lg lg:text-xl">{WORD_GAME_NAME_AR}</p>

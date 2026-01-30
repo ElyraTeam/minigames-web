@@ -123,6 +123,10 @@ class LocalPlayer {
     this.socket.emit("confirm-vote");
   }
 
+  onAlert(ack: (msg: string, severity: "success" | "error" | "warning" | "info") => void) {
+    this.socket.on("alert", ack);
+  }
+
   onStartTimer(ack: (countdown: number) => void) {
     this.socket.on("start-timer", ack);
   }
@@ -151,6 +155,7 @@ class LocalPlayer {
     this.socket.removeAllListeners("start-timer");
     this.socket.removeAllListeners("kick");
     this.socket.removeAllListeners("chat");
+    this.socket.removeAllListeners("alert");
     this.socket.removeAllListeners("update-vote-count");
     this.socket.removeAllListeners("start-vote");
     this.socket.removeAllListeners("request-values");

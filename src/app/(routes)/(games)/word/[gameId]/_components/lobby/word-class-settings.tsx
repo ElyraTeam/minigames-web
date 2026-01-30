@@ -55,7 +55,7 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
         >
           <div
             className={cn(
-              'space-x-2 rtl:space-x-reverse cursor-pointer',
+              'gap-2 hover:text-white/80 transition-all flex items-center cursor-pointer',
               !isOwner && 'opacity-70 cursor-not-allowed'
             )}
             onClick={() => isOwner && resetClasses()}

@@ -71,11 +71,11 @@ const useCurrentGame = (roomId: string) => {
       ({ playerId, authToken, error, roomOptions, errorCode }) => {
         if (error) {
           toast.error(`Error #${errorCode}: ${error}`);
-          return router.push('/word');
+          return router.push('/');
         }
         if (!authToken) {
           toast.error('Unable to find auth token.');
-          return router.push('/word');
+          return router.push('/');
         }
         setWinners(null);
         resetChatMessages();
@@ -105,6 +105,14 @@ const useCurrentGame = (roomId: string) => {
         localPlayer.socket.on('players', (players: GamePlayersSync) =>
           setPlayers(players)
         );
+
+        // Alert
+        localPlayer.onAlert((msg, severity) => {
+          if (severity == "error" || severity == "warning") {
+            return toast.error(msg);
+          }
+          return toast.success(msg);
+        });
 
         // Chat
         localPlayer.onChat((msg) => {
@@ -159,7 +167,7 @@ const useCurrentGame = (roomId: string) => {
         // Local player kicked
         localPlayer.onKick((kickMsg) => {
           toast.error(kickMsg);
-          router.push('/word');
+          router.push('/');
         });
 
         // Game over
@@ -175,6 +183,9 @@ const useCurrentGame = (roomId: string) => {
 
         // Connect
         localPlayer.socket.on('connect', doAuth);
+        // Ensure socket auth token is current before connecting
+        const currentHttpToken = useLocalStore.getState().httpToken;
+        localPlayer.socket.auth = { token: currentHttpToken };
         localPlayer.socket.connect();
       }
     );

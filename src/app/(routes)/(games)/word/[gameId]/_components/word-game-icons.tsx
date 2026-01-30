@@ -33,7 +33,7 @@ const WordGameIcons: React.FC<WordGameIconsProps> = ({}) => {
     setLoading(true);
     try {
       await leaveRoom(roomId);
-      router.push('/word');
+      router.push('/');
     } catch (err) {
       console.error(err);
       toast.error("Couldn't leave this room.");

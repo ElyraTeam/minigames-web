@@ -32,8 +32,7 @@ const WordCurrentRound: React.FC<WordCurrentRoundProps> = ({}) => {
 
   const renderRoundText = () => {
     if (!currentRound) return '?';
-    if (gameState?.state === State.GAME_OVER) return currentRound;
-    return currentRound - 1;
+    return currentRound;
   };
 
   return (
@@ -45,7 +44,7 @@ const WordCurrentRound: React.FC<WordCurrentRoundProps> = ({}) => {
         onConfirm={handleReset}
         confirmVariant="warning"
       />
-      <WordSideCardHeader className="flex items-center justify-center space-x-3 rtl:space-x-reverse">
+      <WordSideCardHeader className="flex items-center justify-center gap-2 rtl:space-x-reverse">
         <span>الجولة</span>
         <span>
           <span className="font-light">

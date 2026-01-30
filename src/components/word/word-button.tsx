@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-const buttonVariants = cva('text-xl px-8 py-3 rounded-xl w-full', {
+const buttonVariants = cva('text-xl px-8 py-3 rounded-xl cursor-pointer w-full', {
   variants: {
     variant: {
       default:
@@ -13,6 +13,8 @@ const buttonVariants = cva('text-xl px-8 py-3 rounded-xl w-full', {
       text: 'text-word-primary hover:text-word-primary/70 transition-all p-0',
       solid:
         'border-2 bg-white/20 py-1 px-1 text-sm hover:bg-white/30 transition-colors disabled:cursor-default disabled:opacity-40 disabled:hover:bg-white/20',
+      regular:
+        'text-white bg-word-game-600 transition-all hover:bg-word-game-600/80',
     },
   },
   defaultVariants: {

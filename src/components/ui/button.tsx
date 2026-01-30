@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import Spinner from './spinner';
 
 const buttonVariants = cva(
-  'text-xl px-8 py-3 rounded-xl w-full transition-all',
+  'text-xl px-8 py-3 rounded-xl w-full cursor-pointer transition-all',
   {
     variants: {
       variant: {

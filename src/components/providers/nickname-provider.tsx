@@ -1,18 +1,20 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
 
 import useLocalStore from '@/state/local';
+import NicknameModal from '@/components/modals/nickname-modal';
 
 interface NicknameProviderProps {
   children: React.ReactNode;
 }
 
 const NicknameProvider: React.FC<NicknameProviderProps> = ({ children }) => {
-  const router = useRouter();
-  const pathname = usePathname();
   const nickname = useLocalStore((state) => state.nickname);
+  const showNicknameModal = useLocalStore((state) => state.showNicknameModal);
+  const setShowNicknameModal = useLocalStore(
+    (state) => state.setShowNicknameModal
+  );
   const [isHydrated, setIsHydrated] = useState(false);
 
   // Wait for Zustand to hydrate from localStorage
@@ -23,11 +25,16 @@ const NicknameProvider: React.FC<NicknameProviderProps> = ({ children }) => {
   useEffect(() => {
     if (!isHydrated) return;
     if (!nickname) {
-      router.push(`/getstarted?next=${pathname}`);
+      setShowNicknameModal(true);
     }
-  }, [isHydrated, nickname, pathname, router]);
+  }, [isHydrated, nickname, setShowNicknameModal]);
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <NicknameModal isOpen={showNicknameModal} />
+    </>
+  );
 };
 
 export default NicknameProvider;

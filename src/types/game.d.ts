@@ -39,6 +39,7 @@ interface GameSync {
   ownerId?: string;
   currentRound?: number;
   currentLetter?: string;
+  doneLetters: string[];
   stopClicker?: string;
 }
 

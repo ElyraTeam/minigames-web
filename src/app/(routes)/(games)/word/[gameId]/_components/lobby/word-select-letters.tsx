@@ -5,15 +5,18 @@ import useOwner from '@/hooks/use-owner';
 
 interface WordSelectLettersProps {
   chosenLetters: string[];
+  doneLetters: string[];
   onLetterUpdate: (letter: string, checked: boolean) => any;
 }
 
 const WordSelectLetters: React.FC<WordSelectLettersProps> = ({
   chosenLetters,
+  doneLetters,
   onLetterUpdate,
 }) => {
   const isOwner = useOwner();
   const isChecked = (letter: string) => chosenLetters.includes(letter);
+  const isDone = (letter: string) => doneLetters.includes(letter);
 
   return (
     <div className="flex flex-wrap justify-center items-end gap-4 lg:px-12">
@@ -22,6 +25,7 @@ const WordSelectLetters: React.FC<WordSelectLettersProps> = ({
           key={`word-letter-${letter}`}
           letter={letter}
           checked={isChecked(letter)}
+          isDone={isDone(letter)}
           onChange={(e) => onLetterUpdate(letter, e.target.checked)}
           disabled={!isOwner}
         />
