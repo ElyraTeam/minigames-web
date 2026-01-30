@@ -1,5 +1,5 @@
 [[redirects]]
-  from = "/"
-  to = "/word"
+  from = "/word"
+  to = "/"
   status = 301
   force = false

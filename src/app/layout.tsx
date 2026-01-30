@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" dir="rtl">
       <body className={font.className}>
-        <Toaster position="top-center" />
+        <Toaster position="top-center" containerStyle={{ zIndex: 999999 }} />
         <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>

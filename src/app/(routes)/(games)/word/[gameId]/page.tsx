@@ -33,7 +33,7 @@ export async function generateMetadata({
         ...defaultWordMetadata.openGraph,
         title: 'Room not found',
         description: "Room doesn't exist",
-        url: `/word`,
+        url: `/`,
       },
     };
   }

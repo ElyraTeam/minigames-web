@@ -4,6 +4,13 @@ import { WORD_GAME_NAME } from '@/config/word';
 import { defaultWordMetadata } from '@/config/metadata';
 import WordBackground from '@/components/word/word-background';
 
+import WordAppbar from './word/_components/word-appbar';
+import WordGetPoints from './word/_components/word-get-points';
+import WordExperience from './word/_components/word-experience';
+import WordPlayHeader from './word/_components/word-play-header';
+import WordCompetitive from './word/_components/word-competitive';
+import WordHomeSection from './word/_components/word-home-section';
+
 export const viewport: Viewport = {
   themeColor: '#0DF822',
 };
@@ -19,14 +26,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function WordLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function HomePage() {
   return (
     <WordBackground className="text-white scrollbar-thumb-word-secondary scrollbar-track-transparent scrollbar-thumb-rounded-lg">
-      {children}
+      <div className="min-h-screen overflow-x-hidden">
+        <WordAppbar />
+        <WordHomeSection />
+        <WordPlayHeader />
+        <WordExperience />
+        <WordCompetitive />
+        <WordGetPoints />
+      </div>
     </WordBackground>
   );
 }
