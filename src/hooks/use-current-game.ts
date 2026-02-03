@@ -98,7 +98,13 @@ const useCurrentGame = (roomId: string) => {
         };
 
         // Sync
-        localPlayer.socket.on('sync', (sync: GameSync) => setGame(sync));
+        localPlayer.socket.on('sync', (sync: GameSync) => {
+          const prevState = useGameStore.getState().game?.state;
+          setGame(sync);
+          if (sync.state === State.INGAME && prevState !== State.INGAME) {
+            setCategoryValues({});
+          }
+        });
         localPlayer.socket.on('options', (options: GameOptionsSync) =>
           setRoom(options)
         );
