@@ -15,6 +15,7 @@ interface TabListProps {
   activeTabIndex?: number;
   className?: string;
   parentClassName?: string;
+  navClassName?: string;
   tabSwitchClassName?: string;
   activeClassName?: string;
 }
@@ -24,6 +25,7 @@ const TabList: React.FC<TabListProps> = ({
   activeTabIndex = 0,
   className,
   parentClassName,
+  navClassName,
   tabSwitchClassName,
   activeClassName,
 }) => {
@@ -40,7 +42,7 @@ const TabList: React.FC<TabListProps> = ({
   return (
     <TabProvider.Provider value={{ activeTab }}>
       <div className={cn(parentClassName)}>
-        <nav>
+        <nav className={navClassName}>
           <ul
             className={cn(
               'flex justify-center relative transition-transform',

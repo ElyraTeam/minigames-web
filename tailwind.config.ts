@@ -12,7 +12,11 @@ const config: Config = {
   theme: {
     screens: {
       xs: '385px',
-      ...defaultTheme.screens,
+      sm: '640px',
+      md: '768px',
+      lg: '1028px',
+      xl: '1280px',
+      '2xl': '1536px',
     },
     extend: {
       colors: {
@@ -36,6 +40,7 @@ const config: Config = {
             DEFAULT: '#1a8c90',
           },
           side: {
+            100: '#749ea8',
             200: '#2D6F7F',
             300: '#436DA1',
             400: '#2D607B',
@@ -45,9 +50,11 @@ const config: Config = {
           },
           game: {
             500: '#64EB97',
+            550: '#56dd83',
             600: '#4CD375',
             700: '#39B97E',
             800: '#52C074',
+            850: '#44B47F',
             900: '#288345',
             950: '#43A277',
             DEFAULT: '#64EB97',
