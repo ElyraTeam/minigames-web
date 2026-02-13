@@ -1,110 +1,70 @@
-import { FaLock } from 'react-icons/fa';
 import { FaUserGroup } from 'react-icons/fa6';
 import { IoGameController } from 'react-icons/io5';
 
-import useGameStore from '@/state/game';
 import useOwner from '@/hooks/use-owner';
-import Switch from '@/components/ui/switch';
-import Select from '@/components/ui/select';
 import useRoomOptions from '@/hooks/use-room-options';
 import { DEFAULT_MAX_PLAYERS, DEFAULT_ROUNDS } from '@/config/word';
 
-import WordGeneralOption from './word-general-option';
+import WordNumberStepper from './word-number-stepper';
 
 interface WordGeneralSettingsProps {}
 
 const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
   const { currentOptions, updateRoomOptions } = useRoomOptions();
-  const currentRound = useGameStore((state) => state.game?.currentRound) || 1;
   const maxPlayers = currentOptions?.maxPlayers || DEFAULT_MAX_PLAYERS;
   const rounds = currentOptions?.rounds || DEFAULT_ROUNDS;
-  const isPrivate = currentOptions?.isPrivate || false;
-  const lettersNumber = currentOptions?.letters.length || 0;
+  const lettersNumber = currentOptions?.letters.length || 1;
   const isOwner = useOwner();
 
-  const handlePrivacy = (privacy: boolean) => {
+  const handleMaxPlayers = (newMaxPlayers: number) => {
     if (!currentOptions) return;
-    updateRoomOptions({ ...currentOptions, isPrivate: privacy });
+    updateRoomOptions({ ...currentOptions, maxPlayers: newMaxPlayers });
   };
 
-  const handleMaxPlayers = (newMaxPlayers: string) => {
-    if (!currentOptions || Number.isNaN(+newMaxPlayers)) return;
-    updateRoomOptions({ ...currentOptions, maxPlayers: +newMaxPlayers });
+  const handleRounds = (newRounds: number) => {
+    if (!currentOptions) return;
+    updateRoomOptions({ ...currentOptions, rounds: newRounds });
   };
 
-  const handleRounds = (newRounds: string) => {
-    if (!currentOptions || Number.isNaN(+newRounds)) return;
-    updateRoomOptions({ ...currentOptions, rounds: +newRounds });
-  };
+  const playerOptions = Array.from({ length: 15 }, (_, i) => i + 2);
+  const roundOptions = Array.from({ length: lettersNumber }, (_, i) => i + 1);
 
   return (
-    <>
-      <WordGeneralOption
-        title="عدد اللاعبين"
-        description="أقصي عدد من اللاعبين مسموح في الغرفة"
-        icon={<FaUserGroup className="text-3xl lg:text-4xl" />}
-      >
-        <Select
-          className="bg-word-secondary/50 w-20 scrollbar-track-word-secondary/20"
+    <div className="flex flex-col items-center gap-2 py-8 px-6">
+      {/* Number of Players */}
+      <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2">
+          <FaUserGroup className="text-white text-lg" />
+          <span className="text-white font-semibold text-base">
+            عدد اللاعبين
+          </span>
+        </div>
+        <WordNumberStepper
           value={maxPlayers}
+          options={playerOptions}
           disabled={!isOwner}
-          onChange={(e) => handleMaxPlayers(e.target.value)}
-          tooltip={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
-          tooltipClassName="text-sm"
-          tooltipPosition="top"
-        >
-          {Array.from(new Array(15), (_, index) => (
-            <option
-              key={`round-key-${index}`}
-              className="bg-word-secondary/80"
-              value={index + 2}
-            >
-              {index + 2}
-            </option>
-          ))}
-        </Select>
-      </WordGeneralOption>
-      <WordGeneralOption
-        title="عدد الجولات"
-        description="عدد الجولات التي تلعب قبل تحديد الفائز"
-        icon={<IoGameController className="text-3xl lg:text-4xl" />}
-      >
-        <Select
-          className="bg-word-secondary/50 w-20 scrollbar-thin scrollbar-track-word-secondary/20"
-          value={rounds}
-          disabled={!isOwner}
-          onChange={(e) => handleRounds(e.target.value)}
-          tooltip={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
-          tooltipClassName="text-sm"
-          tooltipPosition="top"
-        >
-          {Array.from(new Array(lettersNumber), (_, index) => (
-            <option
-              key={`round-key-${index}`}
-              className="bg-word-secondary/80"
-              value={index + 1}
-            >
-              {index + 1}
-            </option>
-          ))}
-        </Select>
-      </WordGeneralOption>
-      <WordGeneralOption
-        title="غرفة خاصة"
-        description="لن يتمكن أحد بدون رابط الغرفة من الدخول لها"
-        icon={<FaLock className="text-3xl lg:text-4xl" />}
-      >
-        <Switch
-          className="peer-checked:bg-word-secondary/80"
-          disabled={!isOwner}
-          checked={isPrivate}
-          onChange={(e) => handlePrivacy(e.target.checked)}
-          tooltip={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
-          tooltipClassName="text-sm"
-          tooltipPosition="top"
+          tooltip="فقط صاحب الغرفة يستطيع التعديل"
+          onChange={handleMaxPlayers}
         />
-      </WordGeneralOption>
-    </>
+      </div>
+
+      {/* Number of Rounds */}
+      <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2">
+          <IoGameController className="text-white text-lg" />
+          <span className="text-white font-semibold text-base">
+            عدد الجولات
+          </span>
+        </div>
+        <WordNumberStepper
+          value={rounds}
+          options={roundOptions}
+          disabled={!isOwner}
+          tooltip="فقط صاحب الغرفة يستطيع التعديل"
+          onChange={handleRounds}
+        />
+      </div>
+    </div>
   );
 };
 

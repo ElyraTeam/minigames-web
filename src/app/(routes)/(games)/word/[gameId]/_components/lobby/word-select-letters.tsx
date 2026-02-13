@@ -1,12 +1,12 @@
 import { CHARS_ARABIC } from '@/config/word';
+import useOwner from '@/hooks/use-owner';
 
 import WordLetter from './word-letter';
-import useOwner from '@/hooks/use-owner';
 
 interface WordSelectLettersProps {
   chosenLetters: string[];
   doneLetters: string[];
-  onLetterUpdate: (letter: string, checked: boolean) => any;
+  onLetterUpdate: (letter: string, checked: boolean) => void;
 }
 
 const WordSelectLetters: React.FC<WordSelectLettersProps> = ({
@@ -19,8 +19,9 @@ const WordSelectLetters: React.FC<WordSelectLettersProps> = ({
   const isDone = (letter: string) => doneLetters.includes(letter);
 
   return (
-    <div className="flex flex-wrap justify-center items-end gap-4 lg:px-12">
-      {CHARS_ARABIC.map((letter) => (
+    <div className="flex justify-center">
+      <div className="grid grid-cols-4 lg:grid-cols-7 gap-5 lg:gap-6">
+        {CHARS_ARABIC.map((letter) => (
         <WordLetter
           key={`word-letter-${letter}`}
           letter={letter}
@@ -30,6 +31,7 @@ const WordSelectLetters: React.FC<WordSelectLettersProps> = ({
           disabled={!isOwner}
         />
       ))}
+      </div>
     </div>
   );
 };

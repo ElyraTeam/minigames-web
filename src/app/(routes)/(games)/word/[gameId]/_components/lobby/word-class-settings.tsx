@@ -8,8 +8,7 @@ import Tooltip from '@/components/ui/tooltip';
 import useRoomOptions from '@/hooks/use-room-options';
 import { DEFAULT_CATEGORIES_ARABIC } from '@/config/word';
 
-import WordAddClass from './word-class-add';
-import WordSettingHeader from './word-setting-header';
+import WordClassAdd from './word-class-add';
 import WordSelectClasses from './word-select-classes';
 
 interface WordClassSettingsProps {}
@@ -46,33 +45,42 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
   };
 
   return (
-    <div className="space-y-8">
-      <WordSettingHeader title="اختر الفئات">
+    <div className="py-10 pb-6 px-4 space-y-6">
+      {/* Categories Grid */}
+      <WordSelectClasses classes={classes} onDelete={deleteClass} />
+
+      {/* Bottom row: Add Input + Restore link */}
+      <div className="flex flex-col items-center gap-4 lg:gap-6">
+        {/* Add Category Input */}
+        <div className="w-full lg:max-w-[200px]">
+          <WordClassAdd
+            value={className}
+            setValue={(newValue) => setClassName(newValue)}
+            onClassAdd={addClass}
+          />
+        </div>
+
+        {/* Restore Link */}
         <Tooltip
           position="top"
           text={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
           className="text-sm"
         >
-          <div
+          <button
             className={cn(
-              'gap-2 hover:text-white/80 transition-all flex items-center cursor-pointer',
-              !isOwner && 'opacity-70 cursor-not-allowed'
+              'flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer justify-center',
+              !isOwner && 'opacity-70 !cursor-not-allowed'
             )}
             onClick={() => isOwner && resetClasses()}
+            disabled={!isOwner}
           >
-            <span>استرجاع</span>
-            <FiRefreshCcw className="inline" />
-          </div>
+            <div className="flex items-center justify-center size-7 rounded-full bg-word-secondary">
+              <FiRefreshCcw className="text-white text-sm" />
+            </div>
+            <span className="font-semibold text-white">استرجاع</span>
+          </button>
         </Tooltip>
-      </WordSettingHeader>
-      <WordSelectClasses classes={classes} onDelete={deleteClass} />
-      {isOwner && (
-        <WordAddClass
-          value={className}
-          setValue={(newValue) => setClassName(newValue)}
-          onClassAdd={addClass}
-        />
-      )}
+      </div>
     </div>
   );
 };

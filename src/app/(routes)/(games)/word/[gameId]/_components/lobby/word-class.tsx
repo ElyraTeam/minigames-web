@@ -14,23 +14,36 @@ const WordClass: React.FC<WordClassProps> = ({ name, style, onDelete }) => {
   const isOwner = useOwner();
 
   return (
-    <animated.div
-      className="relative bg-white/10 border-2 border-white rounded-lg w-28 text-center px-2 py-1"
-      style={style}
-    >
-      <p className="overflow-hidden overflow-ellipsis whitespace-nowrap text-lg">
-        {name}
-      </p>
-      {isOwner && (
-        <span
+    <animated.div className="overflow-hidden" style={style}>
+      <div className="relative pt-2 pr-2">
+        {/* Delete button */}
+        {isOwner && (
+          <button
+            className={cn(
+              'absolute top-0 right-0 z-10',
+              'flex items-center justify-center',
+              'size-[22px] rounded-full bg-danger',
+              'cursor-pointer hover:bg-danger/80 transition-colors'
+            )}
+            onClick={onDelete}
+          >
+            <IoClose className="text-white text-sm" />
+          </button>
+        )}
+
+        {/* Tag */}
+        <div
           className={cn(
-            'flex flex-col items-center justify-center absolute rounded-full -top-2 -right-2 w-5 h-5 bg-danger cursor-pointer'
+            'bg-word-game-850 border border-white',
+            'rounded-2xl shadow-md',
+            'px-4 lg:px-12 py-2 lg:min-w-[90px] text-center'
           )}
-          onClick={onDelete}
         >
-          <IoClose className="text-lg" />
-        </span>
-      )}
+          <span className="text-white font-medium text-base overflow-hidden text-ellipsis whitespace-nowrap block">
+            {name}
+          </span>
+        </div>
+      </div>
     </animated.div>
   );
 };

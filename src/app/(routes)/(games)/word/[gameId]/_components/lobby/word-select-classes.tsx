@@ -12,21 +12,24 @@ const WordSelectClasses: React.FC<WordSelectClassesProps> = ({
   onDelete,
 }) => {
   const transitions = useTransition(classes, {
-    from: { opacity: 0, transform: 'translate3d(0, -40px, 0)' },
-    enter: { opacity: 1, transform: 'translate3d(0, 0, 0)' },
-    leave: { opacity: 0, transform: 'translate3d(0, -40px, 0)' },
+    from: { opacity: 0, transform: 'scale(0.9)', maxWidth: 0, margin: '8px 0' },
+    enter: { opacity: 1, transform: 'scale(1)', maxWidth: 250, margin: '8px' },
+    leave: { opacity: 0, transform: 'scale(0.9)', maxWidth: 0, margin: '8px 0' },
+    config: { tension: 170, friction: 26 },
   });
 
   return (
-    <div className="flex justify-center flex-wrap gap-5 lg:px-4">
-      {transitions((style, className) => (
-        <WordClass
-          key={`word-class-${className}`}
-          name={className}
-          onDelete={() => onDelete(className)}
-          style={style}
-        />
-      ))}
+    <div className="lg:flex lg:justify-center">
+      <div className="flex flex-wrap justify-center">
+        {transitions((style, className) => (
+          <WordClass
+            key={`word-class-${className}`}
+            name={className}
+            onDelete={() => onDelete(className)}
+            style={style}
+          />
+        ))}
+      </div>
     </div>
   );
 };

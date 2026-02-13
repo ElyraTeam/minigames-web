@@ -6,7 +6,6 @@ import Switch from '@/components/ui/switch';
 import { CHARS_ARABIC } from '@/config/word';
 import useRoomOptions from '@/hooks/use-room-options';
 
-import WordSettingHeader from './word-setting-header';
 import WordSelectLetters from './word-select-letters';
 
 interface WordLetterSettingsProps {}
@@ -39,26 +38,25 @@ const WordLetterSettings: React.FC<WordLetterSettingsProps> = ({}) => {
   };
 
   return (
-    <div className="space-y-8">
-      <WordSettingHeader title="اختر الحروف">
-        <div className="flex items-center gap-3">
-          <p>كل الحروف</p>
-          <Switch
-            className="peer-checked:bg-word-secondary/80"
-            disabled={!isOwner}
-            onChange={(e) => handleCheckAll(e.target.checked)}
-            checked={chosenLetters.length === CHARS_ARABIC.length}
-            tooltip={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
-            tooltipClassName="text-sm"
-            tooltipPosition="top"
-          />
-        </div>
-      </WordSettingHeader>
+    <div className="py-10 pb-6 px-4 space-y-6">
       <WordSelectLetters
         chosenLetters={chosenLetters}
         doneLetters={doneLetters}
         onLetterUpdate={handleLetterClick}
       />
+      {/* All Letters Toggle */}
+      <div className="flex items-center justify-center gap-3">
+        <span className="text-white font-semibold">كل الحروف</span>
+        <Switch
+          className="peer-checked:bg-word-secondary/80"
+          disabled={!isOwner}
+          onChange={(e) => handleCheckAll(e.target.checked)}
+          checked={chosenLetters.length === CHARS_ARABIC.length}
+          tooltip={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
+          tooltipClassName="text-sm"
+          tooltipPosition="top"
+        />
+      </div>
     </div>
   );
 };
