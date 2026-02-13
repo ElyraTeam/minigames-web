@@ -14,7 +14,7 @@ const WordChatContainer: React.FC<WordChatContainerProps> = ({ className }) => {
   return (
     <WordSideCard className={cn('flex flex-col', className)}>
       <WordSideCardHeader className="space-x-1 rtl:space-x-reverse">
-        <span>المحادثة</span> <MdMessage className="text-2xl inline" />
+        <span>الرسائل</span> <MdMessage className="text-2xl inline" />
       </WordSideCardHeader>
       <div className="flex flex-col mt-4 px-4 pt-10 pb-6 h-full overflow-y-auto scrollbar-thin">
         <WordChatMessages />

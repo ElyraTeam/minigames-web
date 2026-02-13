@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { MdOutlineChat } from 'react-icons/md';
 
@@ -14,7 +13,8 @@ interface WordMobileChatProps {
 }
 
 const WordMobileChat: React.FC<WordMobileChatProps> = ({ className }) => {
-  const [isChatOpen, setChatOpen] = useState(false);
+  const isChatOpen = useChatStore((state) => state.isMobileChatOpen);
+  const setChatOpen = useChatStore((state) => state.setMobileChatOpen);
   const clearNewMessages = useChatStore((state) => state.clearNewMessages);
   const newMessages = useChatStore((state) => state.newMessages);
 

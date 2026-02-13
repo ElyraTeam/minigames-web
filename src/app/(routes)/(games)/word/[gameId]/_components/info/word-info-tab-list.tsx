@@ -10,7 +10,8 @@ interface WordInfoTabListProps {}
 const WordInfoTabList: React.FC<WordInfoTabListProps> = ({}) => {
   return (
     <TabList
-      parentClassName="flex flex-col overflow-y-auto flex-grow scrollbar-thin overflow-x-hidden"
+      parentClassName="flex flex-col overflow-y-auto flex-grow min-h-0 scrollbar-thin overflow-x-hidden"
+      navClassName="sticky top-0 z-10"
       className="mx-5 mt-10 mb-5 rounded-xl bg-word-side-400/40"
       activeClassName="bg-word-side-200/80 rounded-xl shadow-md"
       tabSwitchClassName="p-3"
