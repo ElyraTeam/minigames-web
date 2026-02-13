@@ -4,7 +4,13 @@ interface WordCardProps extends React.ComponentProps<'div'> {}
 
 const WordCard: React.FC<WordCardProps> = ({ className, ...props }) => {
   return (
-    <div className={cn('rounded-2xl border-[3px]', className)} {...props} />
+    <div
+      className={cn(
+        'rounded-none lg:rounded-2xl border-0 lg:border-[3px] h-full flex-1',
+        className
+      )}
+      {...props}
+    />
   );
 };
 
