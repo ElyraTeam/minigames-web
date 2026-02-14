@@ -28,7 +28,7 @@ const WordCountdown: React.FC<WordCountdownProps> = ({
           </p>
         </div>
       </div>
-      <div className="fixed lg:absolute bottom-14 lg:-bottom-6 inset-x-0 lg:inset-x-auto w-full h-36">
+      <div className="fixed lg:absolute bottom-14 lg:-bottom-8 inset-x-0 lg:inset-x-auto w-full h-40">
         <div className="relative h-full">
           <Image
             src="/svg/word-waves.svg"

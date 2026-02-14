@@ -31,7 +31,7 @@ const WordLetter: React.FC<WordLetterProps> = ({
         {letter}
       </span>
       {isDone && (
-        <div className="absolute -top-1 -right-2 bg-word-game-700 rounded-full p-0.5 z-10">
+        <div className="absolute top-0 -right-1 bg-word-game-700 rounded-full p-0.5 z-10">
           <IoMdCheckmark className="text-white text-xs" />
         </div>
       )}

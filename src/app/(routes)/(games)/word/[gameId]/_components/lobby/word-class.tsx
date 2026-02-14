@@ -14,7 +14,7 @@ const WordClass: React.FC<WordClassProps> = ({ name, style, onDelete }) => {
   const isOwner = useOwner();
 
   return (
-    <animated.div className="overflow-hidden" style={style}>
+    <animated.div className="overflow-hidden pb-2" style={style}>
       <div className="relative pt-2 pr-2">
         {/* Delete button */}
         {isOwner && (
