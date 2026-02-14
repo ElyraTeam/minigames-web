@@ -4,7 +4,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { ImExit } from 'react-icons/im';
 import { useRouter } from 'next/navigation';
-import { FaInfoCircle, FaShareAlt } from 'react-icons/fa';
+import { FaShareAlt } from 'react-icons/fa';
 import { IoVolumeMute, IoVolumeHigh } from 'react-icons/io5';
 
 import useGameStore from '@/state/game';
@@ -13,11 +13,13 @@ import useLocalStore from '@/state/local';
 import { HOST } from '@/config/constants';
 import ConfirmModal from '@/components/modals/confirm-modal';
 
-import WordGameIcon from './word-game-icon';
+import WordHeaderIcon from './word-header-icon';
 
-interface WordGameIconsProps {}
+interface WordGameIconsProps {
+  theme?: 'light' | 'dark';
+}
 
-const WordGameIcons: React.FC<WordGameIconsProps> = ({}) => {
+const WordGameIcons: React.FC<WordGameIconsProps> = ({ theme = 'dark' }) => {
   const router = useRouter();
   const isMuted = useLocalStore((state) => state.isMuted);
   const nickname = useLocalStore((state) => state.nickname);
@@ -48,7 +50,7 @@ const WordGameIcons: React.FC<WordGameIconsProps> = ({}) => {
   };
 
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex items-center gap-3">
       <ConfirmModal
         subtitle="هل انت متأكد من رغبتك بالمغادرة؟"
         isOpen={leaveModalShow}
@@ -56,27 +58,19 @@ const WordGameIcons: React.FC<WordGameIconsProps> = ({}) => {
         onConfirm={handleLeave}
         loading={loading}
       />
-      <WordGameIcon
-        onClick={toggleMute}
-        active={isMuted}
-        tooltip={isMuted ? 'الغاء الكتم' : 'كتم الصوت'}
-      >
-        {isMuted ? <IoVolumeMute /> : <IoVolumeHigh />}
-      </WordGameIcon>
-      <WordGameIcon onClick={handleShare} tooltip="نسخ الرابط">
-        <FaShareAlt />
-      </WordGameIcon>
-      {/* <WordGameIcon>
-        <FaInfoCircle className="w-6 h-6" />
-      </WordGameIcon> */}
-      <div className="w-[2px] bg-word-secondary/40 h-6" />
-      <WordGameIcon
-        onClick={() => setLeaveModalShow(true)}
-        className="hover:bg-danger"
-        tooltip="خروج"
-      >
-        <ImExit className="text-danger group-hover:text-white transition-all" />
-      </WordGameIcon>
+      <WordHeaderIcon onClick={handleShare} theme={theme}>
+        <FaShareAlt className="text-lg" />
+      </WordHeaderIcon>
+      <WordHeaderIcon onClick={toggleMute} theme={theme}>
+        {isMuted ? (
+          <IoVolumeMute className="text-xl" />
+        ) : (
+          <IoVolumeHigh className="text-xl" />
+        )}
+      </WordHeaderIcon>
+      <WordHeaderIcon onClick={() => setLeaveModalShow(true)} variant="danger" theme={theme}>
+        <ImExit className="text-xl" />
+      </WordHeaderIcon>
     </div>
   );
 };
