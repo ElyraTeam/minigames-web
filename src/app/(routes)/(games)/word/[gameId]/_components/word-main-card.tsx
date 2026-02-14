@@ -85,7 +85,7 @@ const WordMainCard: React.FC<WordMainCardProps> = ({ roomId }) => {
           winners={winners}
         />
       )}
-      <WordCard className="flex flex-col min-h-0 bg-word-game-600 lg:bg-word-game py-3 px-3 lg:px-6 gap-3 overflow-hidden">
+      <WordCard className="flex flex-col min-h-0 bg-word-game-600 lg:bg-word-game py-3 px-3 lg:px-6 overflow-hidden">
         {/* Header - desktop only */}
         <div className="hidden lg:block">
           <WordGameHeader />
