@@ -14,10 +14,10 @@ const WordCategoryBox: React.FC<WordCategoryBoxProps> = ({
   onChange,
 }) => {
   return (
-    <div className="space-y-2 text-center">
-      <label className="text-base lg:text-lg">{label}</label>
+    <div className="flex flex-col gap-2 text-center">
+      <label className="font-bold text-base lg:text-lg">{label}</label>
       <Input
-        className="placeholder:text-white/60 bg-white/[0.275] text-green-800 border-transparent focus:border-word-primary-900 overflow-y-hidden px-4"
+        className="placeholder:text-white/60 bg-white/11 outline-none text-green-800 border-[1px] border-white/50 focus:border-word-primary-900 overflow-y-hidden px-4"
         placeholder={`${letter}ـ..`}
         value={value}
         onChange={(e) => onChange?.(e.target.value)}

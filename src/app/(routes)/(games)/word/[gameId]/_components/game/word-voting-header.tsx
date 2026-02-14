@@ -32,7 +32,7 @@ const WordVotingHeader: React.FC<WordVotingHeaderProps> = ({}) => {
           </div>
         }
       >
-        <p className="text-sm lg:text-lg bg-word-game p-2 rounded-full font-bold w-6 h-6 lg:w-5 lg:h-5 flex flex-col items-center justify-center">
+        <p className="text-sm lg:text-lg bg-word-secondary/70 text-word-game p-2 rounded-full font-bold w-6 h-6 lg:w-5 lg:h-5 flex flex-col items-center justify-center">
           ?
         </p>
       </Tooltip>
