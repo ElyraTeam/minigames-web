@@ -16,9 +16,11 @@ const WordWinner: React.FC<WordWinnerProps> = ({
   height,
 }) => {
   return (
-    <div className="flex flex-col justify-end w-1/3">
+    <div className="flex w-1/3 flex-col justify-end">
       <div
-        className="flex flex-col gap-3 justify-end items-center w-full h-52 min-h-14"
+        className="
+          flex h-52 min-h-14 w-full flex-col items-center justify-end gap-3
+        "
         style={{ height: `${height}%` }}
       >
         <div className="flex gap-2">
@@ -27,13 +29,22 @@ const WordWinner: React.FC<WordWinnerProps> = ({
         </div>
         <div
           className={cn(
-            'w-full h-full bg-yellow-500 flex flex-col items-center transition-all animate-height py-3',
+            `
+              flex h-full w-full animate-height flex-col items-center
+              bg-yellow-500 py-3 transition-all
+            `,
             rank === 1 &&
-              'bg-gradient-to-l from-yellow-600 to-white to-[300%] text-white',
+              'bg-linear-to-l from-yellow-600 to-white to-300% text-white',
             rank === 2 &&
-              'bg-gradient-to-l from-gray-500 to-white to-[300%] text-white rounded-bl-2xl',
+              `
+                rounded-bl-2xl bg-linear-to-l from-gray-500 to-white to-300%
+                text-white
+              `,
             rank === 3 &&
-              'bg-gradient-to-l from-yellow-800 to-white to-[300%] text-white rounded-br-2xl'
+              `
+                rounded-br-2xl bg-linear-to-l from-yellow-800 to-white to-300%
+                text-white
+              `
           )}
         >
           <h3 className="font-semibold">{score}</h3>

@@ -15,19 +15,28 @@ const WordAppbar: React.FC<WordAppbarProps> = ({}) => {
   return (
     <>
       <WordAppbarBackground>
-        <div className="flex items-center gap-3 lg:gap-5">
+        <div className="
+          flex items-center gap-3
+          lg:gap-5
+        ">
           <AuthorModal>
             <ElyraLogo size={60} />
           </AuthorModal>
-          <div className="border-r-2 border-white/10 h-8 " />
+          <div className="h-8 border-r-2 border-white/10" />
           <div className="flex items-center gap-3">
             <Link href="/">
               <WordLogo size={65} />
             </Link>
-            <p className="font-bold text-lg lg:text-xl">{WORD_GAME_NAME_AR}</p>
+            <p className="
+              text-lg font-bold
+              lg:text-xl
+            ">{WORD_GAME_NAME_AR}</p>
           </div>
         </div>
-        <div className="w-80 items-center gap-5 hidden sm:flex">
+        <div className="
+          hidden w-80 items-center gap-5
+          sm:flex
+        ">
           <WordAppbarButtons />
         </div>
         <WordAppbarMobile />

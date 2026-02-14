@@ -45,20 +45,20 @@ const TabList: React.FC<TabListProps> = ({
         <nav className={navClassName}>
           <ul
             className={cn(
-              'flex justify-center relative transition-transform',
+              'relative flex justify-center transition-transform',
               className
             )}
             role="tablist"
             aria-orientation="horizontal"
           >
             {tabs.map((tab, index) => (
-              <li className="w-full z-10" key={`tab-${index}`}>
+              <li className="z-10 w-full" key={`tab-${index}`}>
                 <button
                   role="tab"
                   aria-selected={activeTab === index}
                   onClick={() => handleTabClick(index)}
                   className={cn(
-                    'text-sm w-full transition-opacity duration-200',
+                    'w-full text-sm transition-opacity duration-200',
                     tabSwitchClassName,
                     activeTab !== index && 'opacity-30'
                   )}
@@ -69,7 +69,7 @@ const TabList: React.FC<TabListProps> = ({
             ))}
             <span
               className={cn(
-                'absolute h-full left-0 transition-all duration-500',
+                'absolute left-0 h-full transition-all duration-500',
                 activeClassName
               )}
               style={{

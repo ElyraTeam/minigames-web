@@ -6,7 +6,7 @@ const WordHomeContainer: React.FC<WordHomeContainerProps> = ({
   className,
   ...props
 }) => {
-  return <div className={cn('py-4 px-12', className)} {...props} />;
+  return <div className={cn('px-12 py-4', className)} {...props} />;
 };
 
 export default WordHomeContainer;

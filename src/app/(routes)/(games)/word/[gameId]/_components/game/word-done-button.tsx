@@ -37,7 +37,7 @@ const WordDoneButton: React.FC<WordDoneButtonProps> = ({ state }) => {
       if (myVotesLength < playersLength - 1) return 'صوت أولًا';
       if (currentPlayer?.voted)
         return (
-          <p className="leading-none font-bold text-xl">
+          <p className="text-xl leading-none font-bold">
             <span className="leading-5">{`${votedCount}`}</span>
             <span className="opacity-50">{`/${playersLength}`}</span>
           </p>

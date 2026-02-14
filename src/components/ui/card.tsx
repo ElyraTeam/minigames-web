@@ -8,7 +8,7 @@ const Card: React.FC<CardProps> = ({ className, ...props }) => {
   return (
     <div
       className={cn(
-        'flex flex-col shadow-[0_2px_8px_0_rgba(0,0,0,0.35)] p-5',
+        'flex flex-col p-5 shadow-[0_2px_8px_0_rgba(0,0,0,0.35)]',
         className
       )}
       {...props}

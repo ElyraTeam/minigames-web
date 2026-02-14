@@ -54,14 +54,17 @@ const NicknameModal: React.FC<NicknameModalProps> = ({ isOpen }) => {
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogContent
-        className="bg-white p-0 pt-0 border-none"
+        className="border-none bg-white p-0 pt-0"
         hideCloseButton={!canClose}
         onPointerDownOutside={(e) => !canClose && e.preventDefault()}
         onEscapeKeyDown={(e) => !canClose && e.preventDefault()}
         onInteractOutside={(e) => !canClose && e.preventDefault()}
       >
         <div className="pt-8 pb-6">
-          <div className="flex flex-col items-center gap-8 px-12 sm:px-16 pb-7">
+          <div className="
+            flex flex-col items-center gap-8 px-12 pb-7
+            sm:px-16
+          ">
             <WordLogo size={100} />
             <h2 className="text-2xl font-semibold">مرحبًا بك في كلمة!</h2>
             <SlideButton

@@ -7,7 +7,10 @@ const WordGameContainer: React.FC<WordGameContainerProps> = ({
   ...props
 }) => {
   return (
-    <div className={cn('pt-8 pb-6 px-4 lg:py-4 lg:px-10', className)} {...props} />
+    <div className={cn(`
+      px-4 pt-8 pb-6
+      lg:px-10 lg:py-4
+    `, className)} {...props} />
   );
 };
 

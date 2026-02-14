@@ -6,7 +6,10 @@ const TextArea: React.FC<TextAreaProps> = ({ className, ...props }) => {
   return (
     <textarea
       className={cn(
-        'block border-2 outline-none w-full rounded-2xl p-3 text-sm resize-none transition-colors',
+        `
+          block w-full resize-none rounded-2xl border-2 p-3 text-sm
+          transition-colors outline-none
+        `,
         className
       )}
       {...props}

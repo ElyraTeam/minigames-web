@@ -20,7 +20,7 @@ const AppearOnTransition: React.FC<AppearOnTransitionProps> = ({
   return (
     <div
       ref={ref}
-      className={cn(isVisible && 'animate-in fade-in duration-700', className)}
+      className={cn(isVisible && 'duration-700 animate-in fade-in', className)}
     >
       {children}
     </div>

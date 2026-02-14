@@ -27,7 +27,7 @@ const WordReadyButton: React.FC<WordReadyButtonProps> = ({}) => {
     if (allReady) return 'بانتظار المنشئ..';
     return (
       <div>
-        <p className="leading-none font-bold text-lg mb-1">
+        <p className="mb-1 text-lg leading-none font-bold">
           <span className="leading-5">{`${numberOfReadyPlayers}`}</span>
           <span className="opacity-50">{`/${players?.length}`}</span>
         </p>

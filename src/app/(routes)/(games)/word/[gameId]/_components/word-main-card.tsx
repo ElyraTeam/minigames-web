@@ -65,7 +65,7 @@ const WordMainCard: React.FC<WordMainCardProps> = ({ roomId }) => {
   };
 
   return (
-    <div className="flex flex-col flex-1 min-h-0">
+    <div className="flex min-h-0 flex-1 flex-col">
       {winners && (
         <WordWinnersModal
           isOpen={winnersOpen}
@@ -73,14 +73,23 @@ const WordMainCard: React.FC<WordMainCardProps> = ({ roomId }) => {
           winners={winners}
         />
       )}
-      <WordCard className="flex flex-col min-h-0 bg-word-game-600 lg:bg-word-game py-3 px-3 lg:px-6 overflow-hidden">
+      <WordCard className="
+        flex min-h-0 flex-col overflow-hidden bg-word-game-600 px-3 py-3
+        lg:bg-word-game lg:px-6
+      ">
         {/* Header - desktop only */}
-        <div className="hidden lg:block">
+        <div className="
+          hidden
+          lg:block
+        ">
           <WordGameHeader />
         </div>
         <WordGameContent>{renderContentFromState()}</WordGameContent>
         {/* Button - desktop only (mobile uses bottom bar) */}
-        <div className="hidden lg:flex lg:justify-center">
+        <div className="
+          hidden
+          lg:flex lg:justify-center
+        ">
           <WordActionButton />
         </div>
       </WordCard>

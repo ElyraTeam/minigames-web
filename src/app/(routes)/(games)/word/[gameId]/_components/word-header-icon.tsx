@@ -26,8 +26,8 @@ const WordHeaderIcon: React.FC<WordHeaderIconProps> = ({
   return (
     <button
       className={cn(
-        'flex items-center justify-center size-10 rounded-full',
-        'transition-colors cursor-pointer',
+        'flex size-10 items-center justify-center rounded-full',
+        'cursor-pointer transition-colors',
         themeStyles[theme][variant],
         className
       )}

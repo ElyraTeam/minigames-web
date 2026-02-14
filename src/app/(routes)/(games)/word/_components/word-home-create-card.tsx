@@ -8,7 +8,11 @@ interface WordHomeCreateCardProps {}
 const WordHomeCreateCard: React.FC<WordHomeCreateCardProps> = ({}) => {
   return (
     <AppearOnTransition className="slide-in-from-top-20">
-      <div className="flex flex-col items-center gap-16 lg:gap-20 justify-center border-2 border-word-game rounded-3xl py-16 lg:py-20 px-12 w-80">
+      <div className="
+        flex w-80 flex-col items-center justify-center gap-16 rounded-3xl
+        border-2 border-word-game px-12 py-16
+        lg:gap-20 lg:py-20
+      ">
         <h2 className="font-bold">ابدأ اللعب</h2>
         <div className="space-y-3">
           <WordCreateGame />

@@ -44,7 +44,10 @@ const WordCurrentRound: React.FC<WordCurrentRoundProps> = ({}) => {
         onConfirm={handleReset}
         confirmVariant="warning"
       />
-      <WordSideCardHeader className="flex items-center justify-center gap-2 rtl:space-x-reverse">
+      <WordSideCardHeader className="
+        flex items-center justify-center gap-2
+        rtl:space-x-reverse
+      ">
         <span>الجولة</span>
         <span>
           <span className="font-light">

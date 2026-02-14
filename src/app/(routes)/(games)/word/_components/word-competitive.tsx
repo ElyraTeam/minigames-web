@@ -8,9 +8,16 @@ interface WordCompetitiveProps {}
 
 const WordCompetitive: React.FC<WordCompetitiveProps> = ({}) => {
   return (
-    <div className="relative h-[100vh]">
-      <div className="absolute items-center bottom-0 word-play-background word-play-revert h-full w-full -top-24">
-        <div className="flex flex-col lg:flex-row items-center w-full h-full scale-x-[-1] justify-center lg:justify-between lg:pr-[5%] xl:pr-[20%]">
+    <div className="relative h-screen">
+      <div className="
+        word-play-background word-play-revert absolute -top-24 bottom-0 h-full
+        w-full items-center
+      ">
+        <div className="
+          flex h-full w-full scale-x-[-1] flex-col items-center justify-center
+          lg:flex-row lg:justify-between lg:pr-[5%]
+          xl:pr-[20%]
+        ">
           <AppearOnTransition className="slide-in-from-right-20">
             <WordHomeCard
               title="كن اسرع"
@@ -18,7 +25,11 @@ const WordCompetitive: React.FC<WordCompetitiveProps> = ({}) => {
             />
           </AppearOnTransition>
           <AppearOnTransition className="slide-in-from-left-20">
-            <div className="relative w-[350px] h-[280px] xs:w-[350px] xs:h-[330px] lg:w-[600px] lg:h-[600px]">
+            <div className="
+              relative h-[280px] w-[350px]
+              xs:h-[330px] xs:w-[350px]
+              lg:h-[600px] lg:w-[600px]
+            ">
               <Image
                 src="/img/word-game.png"
                 alt="word-game"
@@ -30,7 +41,11 @@ const WordCompetitive: React.FC<WordCompetitiveProps> = ({}) => {
           </AppearOnTransition>
         </div>
       </div>
-      <div className="absolute -bottom-[134px] left-[33%] xl:left-[37%] z-50 hidden lg:block">
+      <div className="
+        absolute -bottom-[134px] left-[33%] z-50 hidden
+        lg:block
+        xl:left-[37%]
+      ">
         <Image
           src="/svg/home-arrow-4.svg"
           alt="home-arrow-4"

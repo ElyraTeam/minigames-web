@@ -11,12 +11,21 @@ const WordGameButton: React.FC<WordGameButtonProps> = ({
   return (
     <Button3D
       className={cn(
-        'w-fit self-center bg-word-game-700 rounded-2xl disabled:bg-word-game-950',
+        `
+          w-fit self-center rounded-2xl bg-word-game-700
+          disabled:bg-word-game-950
+        `,
         className
       )}
       frontClassName={cn(
         frontClassName,
-        'from-word-game-600 to-word-game-700 to-[200%] text-base rounded-2xl -translate-y-[8px] group-active:-translate-y-[3px] group-disabled:-translate-y-[5px] h-[50px] py-2 group-disabled:from-word-game-800 group-disabled:to-word-game-900 group-disabled:to-[800%] px-4 w-[150px] content-center'
+        `
+          h-[50px] w-[150px] -translate-y-[8px] content-center rounded-2xl
+          from-word-game-600 to-word-game-700 to-200% px-4 py-2 text-base
+          group-active:-translate-y-[3px]
+          group-disabled:-translate-y-[5px] group-disabled:from-word-game-800
+          group-disabled:to-word-game-900 group-disabled:to-800%
+        `
       )}
       {...props}
     />

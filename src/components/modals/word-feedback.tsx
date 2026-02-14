@@ -99,7 +99,10 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
     <Modal
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      className="w-[90%] lg:w-[450px]"
+      className="
+        w-[90%]
+        lg:w-[450px]
+      "
     >
       <h4>ما هي مشكلتك؟</h4>
       <form
@@ -113,7 +116,11 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
           <label>الايميل</label>
           <Input
             type="email"
-            className={`border border-black/40 focus:border-word-game-600 ${touched.email && errors.email ? 'border-red-500' : ''}`}
+            className={`
+              border border-black/40
+              focus:border-word-game-600
+              ${touched.email && errors.email ? `border-red-500` : ''}
+            `}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             onBlur={() => handleBlur('email')}
@@ -126,7 +133,11 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
         <div className="flex flex-col gap-2">
           <label>الاسم</label>
           <Input
-            className={`border border-black/40 focus:border-word-game-600 ${touched.name && errors.name ? 'border-red-500' : ''}`}
+            className={`
+              border border-black/40
+              focus:border-word-game-600
+              ${touched.name && errors.name ? `border-red-500` : ''}
+            `}
             value={name}
             onChange={(e) => setName(e.target.value)}
             onBlur={() => handleBlur('name')}
@@ -138,7 +149,11 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
         <div className="flex flex-col gap-2">
           <label>الرسالة</label>
           <TextArea
-            className={`h-32 border border-black/40  focus:border-word-game-600 ${touched.message && errors.message ? 'border-red-500' : ''}`}
+            className={`
+              h-32 border border-black/40
+              focus:border-word-game-600
+              ${touched.message && errors.message ? `border-red-500` : ''}
+            `}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onBlur={() => handleBlur('message')}

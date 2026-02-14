@@ -47,12 +47,12 @@ const WordChatMessages: React.FC<WordChatMessagesProps> = ({}) => {
   return (
     <>
       {messages.length !== 0 && (
-        <div className="flex flex-col justify-end flex-grow">
+        <div className="flex grow flex-col justify-end">
           {messages.map((chatMsg, i) =>
             chatMsg.type !== 'system' ? (
               renderMessage(chatMsg, i)
             ) : (
-              <p key={i} className="text-center text-sm text-white/30 mt-4">
+              <p key={i} className="mt-4 text-center text-sm text-white/30">
                 <ChatParts parts={chatMsg.parts} />
               </p>
             )
@@ -60,7 +60,9 @@ const WordChatMessages: React.FC<WordChatMessagesProps> = ({}) => {
         </div>
       )}
       {messages.length === 0 && (
-        <div className="flex flex-col gap-2 my-auto justify-center items-center text-white/30">
+        <div className="
+          my-auto flex flex-col items-center justify-center gap-2 text-white/30
+        ">
           <LuMessageCircle className="text-3xl" />
           <p className="text-[15px]">لا توجد رسائل حتى الآن</p>
         </div>

@@ -45,14 +45,20 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
   };
 
   return (
-    <div className="py-10 pb-6 px-4 space-y-6">
+    <div className="space-y-6 px-4 py-10 pb-6">
       {/* Categories Grid */}
       <WordSelectClasses classes={classes} onDelete={deleteClass} />
 
       {/* Bottom row: Add Input + Restore link */}
-      <div className="flex flex-col items-center gap-4 lg:gap-6">
+      <div className="
+        flex flex-col items-center gap-4
+        lg:gap-6
+      ">
         {/* Add Category Input */}
-        <div className="w-full lg:max-w-[200px]">
+        <div className="
+          w-full
+          lg:max-w-[200px]
+        ">
           <WordClassAdd
             value={className}
             setValue={(newValue) => setClassName(newValue)}
@@ -68,14 +74,21 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
         >
           <button
             className={cn(
-              'flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer justify-center',
-              !isOwner && 'opacity-70 !cursor-not-allowed'
+              `
+                flex cursor-pointer items-center justify-center gap-2
+                transition-opacity
+                hover:opacity-80
+              `,
+              !isOwner && 'cursor-not-allowed! opacity-70'
             )}
             onClick={() => isOwner && resetClasses()}
             disabled={!isOwner}
           >
-            <div className="flex items-center justify-center size-7 rounded-full bg-word-secondary">
-              <FiRefreshCcw className="text-white text-sm" />
+            <div className="
+              flex size-7 items-center justify-center rounded-full
+              bg-word-secondary
+            ">
+              <FiRefreshCcw className="text-sm text-white" />
             </div>
             <span className="font-semibold text-white">استرجاع</span>
           </button>

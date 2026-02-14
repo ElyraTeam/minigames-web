@@ -12,9 +12,16 @@ const WordGame: React.FC<WordGameProps> = ({}) => {
   return (
     <WordGameContainer className='space-y-8'>
       <WordContentHeader>
-        <div className="flex items-center justify-center text-xl lg:text-2xl">
+        <div className="
+          flex items-center justify-center text-xl
+          lg:text-2xl
+        ">
           <p>اكتب كلمات تبدأ بحرف الـ{' '}</p>
-          <div className="flex items-center justify-center bg-word-side/20 w-12 h-12 rounded-full px-4 py-1 text-xl lg:text-2xl mx-1">
+          <div className="
+            mx-1 flex h-12 w-12 items-center justify-center rounded-full
+            bg-word-side/20 px-4 py-1 text-xl
+            lg:text-2xl
+          ">
             {game?.currentLetter}
           </div>
         </div>

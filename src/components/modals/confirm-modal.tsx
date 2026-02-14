@@ -27,7 +27,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
     <Modal
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      className="py-8 px-16 text-center"
+      className="px-16 py-8 text-center"
     >
       {icon}
       {title && <h4>{title}</h4>}

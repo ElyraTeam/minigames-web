@@ -12,7 +12,10 @@ const WordSideCardHeader: React.FC<WordSideCardHeaderProps> = ({
   return (
     <div
       className={cn(
-        'text-[26px] font-bold text-center p-6 bg-word-side-200 rounded-b-3xl shadow-[theme("colors.word.side.400")_0px_0px_0px_16px]',
+        `
+          rounded-b-3xl bg-word-side-200 p-6 text-center text-[26px] font-bold
+          shadow-[var(--color-word-side-400)_0px_0px_0px_16px]
+        `,
         className
       )}
     >

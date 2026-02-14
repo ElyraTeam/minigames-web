@@ -7,7 +7,10 @@ interface WordRoomInfoContainerProps {}
 
 const WordRoomInfoContainer: React.FC<WordRoomInfoContainerProps> = ({}) => {
   return (
-    <WordSideCard className="flex flex-col min-h-0 row-start-2 lg:row-start-auto">
+    <WordSideCard className="
+      row-start-2 flex min-h-0 flex-col
+      lg:row-start-auto
+    ">
       <WordCurrentRound />
       <WordInfoTabList />
       <WordFeedbackContainer />

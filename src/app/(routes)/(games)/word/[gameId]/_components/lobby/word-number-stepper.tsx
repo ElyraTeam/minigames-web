@@ -30,10 +30,13 @@ const WordNumberStepper: React.FC<WordNumberStepperProps> = ({
           disabled={disabled}
           onChange={(e) => onChange(Number(e.target.value))}
           className={cn(
-            'appearance-none bg-word-game-700 text-white text-sm font-semibold',
-            'rounded-full pl-7 pr-3 h-7 min-w-[60px] leading-7',
-            'cursor-pointer focus:outline-none',
-            'disabled:opacity-70 disabled:cursor-not-allowed'
+            'appearance-none bg-word-game-700 text-sm font-semibold text-white',
+            'h-7 min-w-[60px] rounded-full pr-3 pl-7 leading-7',
+            `
+              cursor-pointer
+              focus:outline-none
+            `,
+            'disabled:cursor-not-allowed disabled:opacity-70'
           )}
         >
           {options.map((option) => (
@@ -46,7 +49,10 @@ const WordNumberStepper: React.FC<WordNumberStepperProps> = ({
             </option>
           ))}
         </select>
-        <IoChevronDown className="absolute left-2 top-1/2 -translate-y-1/2 text-white text-sm pointer-events-none" />
+        <IoChevronDown className="
+          pointer-events-none absolute top-1/2 left-2 -translate-y-1/2 text-sm
+          text-white
+        " />
       </div>
     </Tooltip>
   );

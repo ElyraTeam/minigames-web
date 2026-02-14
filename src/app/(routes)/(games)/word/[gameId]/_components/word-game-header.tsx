@@ -8,9 +8,12 @@ interface WordGameHeaderProps {}
 
 const WordGameHeader: React.FC<WordGameHeaderProps> = ({}) => {
   return (
-    <div className="flex justify-center items-center gap-3 py-5 relative">
+    <div className="relative flex items-center justify-center gap-3 py-5">
       <WordGameIcons theme="light" />
-      <div className="absolute right-0 hidden lg:block">
+      <div className="
+        absolute right-0 hidden
+        lg:block
+      ">
         <WordLogo />
       </div>
     </div>

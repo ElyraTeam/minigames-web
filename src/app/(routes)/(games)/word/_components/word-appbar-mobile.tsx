@@ -32,10 +32,14 @@ const WordAppbarMobile: React.FC<WordAppbarMobileProps> = ({}) => {
 
   return (
     <div className="sm:hidden">
-      <MdMenu className="text-3xl cursor-pointer" onClick={handleOpen} />
+      <MdMenu className="cursor-pointer text-3xl" onClick={handleOpen} />
       <div
         className={cn(
-          'absolute top-20 right-0 h-screen w-screen z-[9999] bg-word-home flex flex-col items-center gap-3 p-12 animate-in slide-in-from-left-full',
+          `
+            absolute top-20 right-0 z-9999 flex h-screen w-screen flex-col
+            items-center gap-3 bg-word-home p-12 animate-in
+            slide-in-from-left-full
+          `,
           isClosing && 'animate-out slide-out-to-left-full',
           !isOpen && 'hidden'
         )}

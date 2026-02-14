@@ -42,14 +42,20 @@ const WordWinnersModal: React.FC<WordWinnersModalProps> = ({
     <Modal
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      className="p-0 overflow-hidden w-[90%] lg:w-[500px] border-4 border-white"
+      className="
+        w-[90%] overflow-hidden border-4 border-white p-0
+        lg:w-[500px]
+      "
       closeClassName="text-white"
     >
-      <div className="flex flex-col items-center bg-word-game-800 rounded-b-2xl gap-3 p-8 text-white">
+      <div className="
+        flex flex-col items-center gap-3 rounded-b-2xl bg-word-game-800 p-8
+        text-white
+      ">
         <FaMedal className="text-4xl" />
         <h4 className="font-bold">انتهت اللعبة!</h4>
       </div>
-      <div className="flex gap-2 px-8 py-4 h-64">
+      <div className="flex h-64 gap-2 px-8 py-4">
         {[thirdPlr, firstPlr, secondPlr].map((plr, index) =>
           renderWinner(index, plr)
         )}

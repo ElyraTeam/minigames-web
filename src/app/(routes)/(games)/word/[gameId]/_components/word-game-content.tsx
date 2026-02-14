@@ -9,11 +9,20 @@ const WordGameContent: React.FC<WordGameContentProps> = ({
   return (
     <div
       className={cn(
-        'flex flex-col w-full min-h-0 flex-1',
+        'flex min-h-0 w-full flex-1 flex-col',
         'lg:shadow-[inset_0_-1px_20px_0px_rgba(0,0,0,0.25)]',
-        'rounded-none lg:rounded-2xl bg-word-game-600 overflow-y-auto scrollbar-thin',
-        'border-0 lg:border-8 border-word-game',
-        'mb-0 lg:mb-4',
+        `
+          scrollbar-thin overflow-y-auto rounded-none bg-word-game-600
+          lg:rounded-2xl
+        `,
+        `
+          border-0 border-word-game
+          lg:border-8
+        `,
+        `
+          mb-0
+          lg:mb-4
+        `,
         className
       )}
       {...props}

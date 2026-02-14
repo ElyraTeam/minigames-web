@@ -7,7 +7,12 @@ const AuthorText: React.FC<AuthorTextProps> = ({ className, ...props }) => {
   return (
     <span
       className={cn(
-        'text-transparent bg-clip-text bg-gradient-to-tr from-teamgradient-from to-teamgradient-to gradient cursor-pointer opacity-80 hover:opacity-100 font-bold transition-opacity',
+        `
+          gradient cursor-pointer bg-linear-to-tr from-teamgradient-from
+          to-teamgradient-to bg-clip-text font-bold text-transparent opacity-80
+          transition-opacity
+          hover:opacity-100
+        `,
         className
       )}
       {...props}

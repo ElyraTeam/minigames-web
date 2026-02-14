@@ -29,7 +29,11 @@ const WordAppbarBackground: React.FC<WordAppbarBackgroundProps> = ({
   return (
     <div
       className={cn(
-        'fixed w-full flex items-center justify-between py-4 px-4 lg:px-12 z-[9999] transition-colors',
+        `
+          fixed z-9999 flex w-full items-center justify-between px-4 py-4
+          transition-colors
+          lg:px-12
+        `,
         scrolled && 'bg-word-home/80 backdrop-blur-md'
       )}
     >

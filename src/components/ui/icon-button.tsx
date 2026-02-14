@@ -15,7 +15,11 @@ const IconButton: React.FC<IconButtonProps> = ({
     <Tooltip text={tooltip}>
       <span
         className={cn(
-          'bg-gray-400/30 w-8 h-8 rounded-full cursor-pointer hover:bg-gray-400/50 transition-colors flex flex-col items-center justify-center',
+          `
+            flex h-8 w-8 cursor-pointer flex-col items-center justify-center
+            rounded-full bg-gray-400/30 transition-colors
+            hover:bg-gray-400/50
+          `,
           className
         )}
         {...props}

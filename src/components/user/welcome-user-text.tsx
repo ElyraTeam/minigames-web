@@ -12,11 +12,18 @@ const WelcomeUserText: React.FC<WelcomeUserTextProps> = ({}) => {
   );
 
   return (
-    <h1 className="text-3xl lg:text-5xl">
+    <h1 className="
+      text-3xl
+      lg:text-5xl
+    ">
       مرحبا <UsernameText />!
       <button
         onClick={() => setShowNicknameModal(true)}
-        className="text-lg sm:text-xl px-2 cursor-pointer hover:text-word-primary"
+        className="
+          cursor-pointer px-2 text-lg
+          hover:text-word-primary
+          sm:text-xl
+        "
       >
         (تغيير)
       </button>

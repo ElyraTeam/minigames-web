@@ -65,7 +65,11 @@ const WordVotingCards: React.FC<WordVotingCardsProps> = ({}) => {
   return (
     <div
       className={cn(
-        'flex flex-wrap justify-center gap-6 py-8 px-2 lg:px-8 overflow-y-auto scrollbar-thin animate-in fade-in duration-500',
+        `
+          scrollbar-thin flex flex-wrap justify-center gap-6 overflow-y-auto
+          px-2 py-8 duration-500 animate-in fade-in
+          lg:px-8
+        `,
         fade && 'animate-out fade-out'
       )}
       ref={cardsRef}

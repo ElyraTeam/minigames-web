@@ -32,7 +32,10 @@ const Tooltip: React.FC<TooltipProps> = ({
           <HybridTooltipContent
             side={position}
             className={cn(
-              'bg-gray-700 whitespace-nowrap py-2 px-4 rounded-xl text-white text-sm font-normal border-none',
+              `
+                rounded-xl border-none bg-gray-700 px-4 py-2 text-sm font-normal
+                whitespace-nowrap text-white
+              `,
               className
             )}
           >

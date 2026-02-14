@@ -10,29 +10,43 @@ const WordVotingHeader: React.FC<WordVotingHeaderProps> = ({}) => {
   const categoryData = useVoteStore((state) => state.categoryVoteData);
 
   return (
-    <div className="text-base lg:text-lg flex gap-5 items-center self-center bg-white/15 w-fit rounded-b-2xl pt-2 px-12 pb-2 shadow-lg">
+    <div className="
+      flex w-fit items-center gap-5 self-center rounded-b-2xl bg-white/15 px-12
+      pt-2 pb-2 text-base shadow-lg
+      lg:text-lg
+    ">
       <Tooltip
         text={
-          <div className="text-sm lg:text-base">
-            <h6 className="text-base lg:text-lg text-center font-bold mb-3">
+          <div className="
+            text-sm
+            lg:text-base
+          ">
+            <h6 className="
+              mb-3 text-center text-base font-bold
+              lg:text-lg
+            ">
               طريقة التصويت
             </h6>
             <p className="leading-[1.8]">
-              صوت بـ<span className="text-[#1e8893] font-bold">10</span> للكلمة
+              صوت بـ<span className="font-bold text-[#1e8893]">10</span> للكلمة
               الصحيحة الغير مكررة
             </p>
             <p className="leading-[1.8]">
-              صوت بـ<span className="text-[#1e8893] font-bold">5</span> للكلمة
+              صوت بـ<span className="font-bold text-[#1e8893]">5</span> للكلمة
               الصحيحة المكررة
             </p>
             <p className="leading-[1.8]">
-              صوت بـ<span className="text-[#1e8893] font-bold">0</span> للكلمة
+              صوت بـ<span className="font-bold text-[#1e8893]">0</span> للكلمة
               الغير صحيحة
             </p>
           </div>
         }
       >
-        <p className="text-sm lg:text-lg bg-word-secondary/70 text-word-game p-2 rounded-full font-bold w-6 h-6 lg:w-5 lg:h-5 flex flex-col items-center justify-center">
+        <p className="
+          flex h-6 w-6 flex-col items-center justify-center rounded-full
+          bg-word-secondary/70 p-2 text-sm font-bold text-word-game
+          lg:h-5 lg:w-5 lg:text-lg
+        ">
           ?
         </p>
       </Tooltip>

@@ -5,14 +5,23 @@ import { cn } from '@/lib/utils';
 import Spinner from './spinner';
 
 const buttonVariants = cva(
-  'text-xl px-8 py-3 rounded-xl w-full cursor-pointer transition-all',
+  'w-full cursor-pointer rounded-xl px-8 py-3 text-xl transition-all',
   {
     variants: {
       variant: {
-        default: 'text-white bg-black',
-        danger: 'text-white bg-danger hover:bg-danger/80',
-        warning: 'text-white bg-warning hover:bg-warning/80',
-        text: 'text-black hover:text-black/60 p-0',
+        default: 'bg-black text-white',
+        danger: `
+          bg-danger text-white
+          hover:bg-danger/80
+        `,
+        warning: `
+          bg-warning text-white
+          hover:bg-warning/80
+        `,
+        text: `
+          p-0 text-black
+          hover:text-black/60
+        `,
       },
     },
     defaultVariants: {

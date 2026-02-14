@@ -1,3 +1,4 @@
+import useOwner from '@/hooks/use-owner';
 import { cn } from '@/lib/utils';
 
 interface WordSettingCardProps extends React.ComponentProps<'div'> {
@@ -10,11 +11,18 @@ const WordSettingCard: React.FC<WordSettingCardProps> = ({
   children,
   ...props
 }) => {
+  const isOwner = useOwner();
+
   return (
     <div className={cn('relative pt-4', className)} {...props}>
       {/* Floating Header */}
       <div className="absolute top-0 right-1/2 w-40 translate-x-1/2 z-10">
-        <div className="bg-word-game-700 w-full text-center border-2 border-white rounded-2xl px-4 py-1 font-bold text-lg text-white">
+        <div
+          className={cn(
+            'bg-word-game-700 w-full text-center border-2 border-white rounded-2xl px-4 py-1 font-bold text-lg text-white',
+            !isOwner && 'opacity-80'
+          )}
+        >
           {title}
         </div>
       </div>

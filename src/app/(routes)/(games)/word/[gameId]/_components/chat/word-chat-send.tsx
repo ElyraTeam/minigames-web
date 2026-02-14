@@ -36,7 +36,13 @@ const WordChatSend: React.FC<WordChatSendProps> = ({}) => {
   return (
     <div className="flex items-center gap-3">
       <input
-        className="flex-1 min-w-0 rounded-full bg-transparent outline-none border-2 border-word-side-200 px-4 py-2 text-sm text-white placeholder:text-white/60 focus:border-word-secondary-300 transition-colors"
+        className="
+          min-w-0 flex-1 rounded-full border-2 border-word-side-200
+          bg-transparent px-4 py-2 text-sm text-white transition-colors
+          outline-none
+          placeholder:text-white/60
+          focus:border-word-secondary-300
+        "
         placeholder="اكتب رسالة..."
         value={msg}
         onChange={(e) => setMessage(e.target.value)}
@@ -44,9 +50,17 @@ const WordChatSend: React.FC<WordChatSendProps> = ({}) => {
       />
       <button
         onClick={sendMessage}
-        className="flex items-center justify-center w-12 h-12 lg:w-10 lg:h-10 rounded-full bg-word-game-700 shrink-0 cursor-pointer hover:bg-word-game/80 transition-colors"
+        className="
+          flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center
+          rounded-full bg-word-game-700 transition-colors
+          hover:bg-word-game/80
+          lg:size-10
+        "
       >
-        <BsSendFill className="text-xl lg:text-lg -rotate-90" />
+        <BsSendFill className="
+          -rotate-90 text-xl
+          lg:text-lg
+        " />
       </button>
     </div>
   );

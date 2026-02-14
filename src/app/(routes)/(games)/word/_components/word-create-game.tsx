@@ -41,7 +41,10 @@ const WordCreateGame: React.FC<WordCreateGameProps> = ({}) => {
 
   return (
     <Button3D
-      className="self-center bg-word-game-950 rounded-2xl disabled:bg-word-game-950"
+      className="
+        self-center rounded-2xl bg-word-game-950
+        disabled:bg-word-game-950
+      "
       frontClassName={
         'from-word-game-800 to-word-game-900 to-[200%] text-base rounded-2xl -translate-y-[8px] group-active:-translate-y-[3px] group-disabled:-translate-y-[5px] h-[50px] py-2 group-disabled:from-word-game-800 group-disabled:to-word-game-900 group-disabled:to-[800%] px-4 content-center'
       }

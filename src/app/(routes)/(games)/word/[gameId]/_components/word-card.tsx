@@ -6,7 +6,10 @@ const WordCard: React.FC<WordCardProps> = ({ className, ...props }) => {
   return (
     <div
       className={cn(
-        'rounded-none lg:rounded-2xl border-0 lg:border-[3px] h-full flex-1',
+        `
+          h-full flex-1 rounded-none border-0
+          lg:rounded-2xl lg:border-[3px]
+        `,
         className
       )}
       {...props}

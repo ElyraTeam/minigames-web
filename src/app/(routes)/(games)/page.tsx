@@ -28,7 +28,10 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <WordBackground className="text-white scrollbar-thumb-word-secondary scrollbar-track-transparent scrollbar-thumb-rounded-lg">
+    <WordBackground className="
+      text-white scrollbar-thumb-rounded-lg scrollbar-thumb-word-secondary
+      scrollbar-track-transparent
+    ">
       <div className="min-h-screen overflow-x-hidden">
         <WordAppbar />
         <WordHomeSection />

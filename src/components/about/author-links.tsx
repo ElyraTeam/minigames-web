@@ -6,7 +6,7 @@ interface AuthorLinksProps {}
 
 const AuthorLinks: React.FC<AuthorLinksProps> = ({}) => {
   return (
-    <div className="flex justify-center items-center mt-6">
+    <div className="mt-6 flex items-center justify-center">
       <SocialLink
         link="https://github.com/ElyraTeam/minigames-web"
         className="hover:opacity-75"

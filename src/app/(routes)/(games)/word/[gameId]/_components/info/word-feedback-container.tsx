@@ -15,7 +15,7 @@ const WordFeedbackContainer: React.FC<WordFeedbackContainerProps> = ({}) => {
         isOpen={feedbackModalShow}
         onOpenChange={(open) => setFeedbackModalShow(open)}
       />
-      <div className="py-8 px-3 text-center font-light flex items-center gap-3 justify-center text-sm shadow-[0px_-10px_10px_rgba(0,0,0,0.1)]">
+      <div className="py-8 px-3 text-center font-light flex items-center gap-3 justify-center text-sm bg-word-side-400 shadow-2xl">
         <p>واجهتك مشكلة؟</p>
         <p
           className="px-4 py-1 border-word-game border rounded-full text-word-game cursor-pointer"

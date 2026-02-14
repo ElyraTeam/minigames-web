@@ -13,10 +13,16 @@ const WordContentHeader: React.FC<WordContentHeaderProps> = ({
     <div
       className={cn(
         // Mobile styles
-        'bg-word-game-500/40 border-4 border-word-side-400/3 rounded-2xl shadow-md',
-        'text-center py-5 font-black',
+        `
+          rounded-2xl border-4 border-word-side-400/3 bg-word-game-500/40
+          shadow-md
+        `,
+        'py-5 text-center font-black',
         // Desktop styles
-        'lg:mx-0 lg:bg-word-game-700/60 lg:border-0 lg:rounded-none lg:shadow-lg lg:py-7',
+        `
+          lg:mx-0 lg:rounded-none lg:border-0 lg:bg-word-game-700/60 lg:py-7
+          lg:shadow-lg
+        `,
         className
       )}
     >

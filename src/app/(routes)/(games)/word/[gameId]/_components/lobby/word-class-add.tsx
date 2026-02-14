@@ -32,7 +32,10 @@ const WordClassAdd: React.FC<WordClassAddProps> = ({
       <div
         className={cn(
           'flex items-center',
-          'bg-white border border-black/40 focus-within:border-word-side rounded-full',
+          `
+            rounded-full border border-black/40 bg-white
+            focus-within:border-word-side
+          `,
           'overflow-hidden'
         )}
       >
@@ -45,8 +48,11 @@ const WordClassAdd: React.FC<WordClassAddProps> = ({
           onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
           disabled={!isOwner}
           className={cn(
-            'flex-1 bg-transparent text-word-side-400 py-2 pl-1 pr-4',
-            'text-right placeholder:text-word-side-200/60',
+            'flex-1 bg-transparent py-2 pr-4 pl-1 text-word-side-400',
+            `
+              text-right
+              placeholder:text-word-side-200/60
+            `,
             'focus:outline-none',
             'disabled:cursor-not-allowed'
           )}
@@ -60,8 +66,11 @@ const WordClassAdd: React.FC<WordClassAddProps> = ({
             'flex items-center justify-center',
             'px-3 py-2',
             'bg-transparent text-word-side-200',
-            'hover:bg-word-side-200/10 transition-colors',
-            'disabled:opacity-50 disabled:cursor-not-allowed'
+            `
+              transition-colors
+              hover:bg-word-side-200/10
+            `,
+            'disabled:cursor-not-allowed disabled:opacity-50'
           )}
         >
           <IoAdd className="text-2xl" />

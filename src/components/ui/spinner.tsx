@@ -3,7 +3,7 @@ interface SpinnerProps {}
 const Spinner: React.FC<SpinnerProps> = ({}) => {
   return (
     <svg
-      className="text-white/40 animate-spin inline"
+      className="inline animate-spin text-white/40"
       viewBox="0 0 64 64"
       fill="none"
       width="24"

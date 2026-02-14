@@ -15,7 +15,10 @@ const WordHomeContact: React.FC<WordHomeContactProps> = ({}) => {
       <WordFeedback isOpen={isOpen} onOpenChange={(open) => setOpen(open)} />
       <WordButton
         variant="solid"
-        className="w-full py-2 bg-transparent hover:bg-white/10 border-word-game-800"
+        className="
+          w-full border-word-game-800 bg-transparent py-2
+          hover:bg-white/10
+        "
         onClick={() => setOpen(true)}
       >
         تواصل معنا

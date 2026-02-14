@@ -38,7 +38,7 @@ const WordLetterSettings: React.FC<WordLetterSettingsProps> = ({}) => {
   };
 
   return (
-    <div className="py-10 pb-6 px-4 space-y-6">
+    <div className="space-y-6 px-4 py-10 pb-6">
       <WordSelectLetters
         chosenLetters={chosenLetters}
         doneLetters={doneLetters}
@@ -46,7 +46,7 @@ const WordLetterSettings: React.FC<WordLetterSettingsProps> = ({}) => {
       />
       {/* All Letters Toggle */}
       <div className="flex items-center justify-center gap-3">
-        <span className="text-white font-semibold">كل الحروف</span>
+        <span className="font-semibold text-white">كل الحروف</span>
         <Switch
           className="peer-checked:bg-word-secondary/80"
           disabled={!isOwner}

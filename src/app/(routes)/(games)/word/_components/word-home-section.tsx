@@ -9,25 +9,52 @@ interface WordHomeSectionProps {}
 
 const WordHomeSection: React.FC<WordHomeSectionProps> = ({}) => {
   return (
-    <div className="grid grid-rows-[1fr_2fr] lg:grid-rows-none lg:grid-cols-[1fr_450px] pt-24 lg:pt-0 lg:justify-normal items-center h-screen relative">
+    <div className="
+      relative grid h-screen grid-rows-[1fr_2fr] items-center pt-24
+      lg:grid-cols-[1fr_450px] lg:grid-rows-none lg:justify-normal lg:pt-0
+    ">
       <AppearOnTransition className="slide-in-from-top-20">
-        <div className="space-y-4 lg:space-y-8 px-2 sm:px-4 lg:px-12 text-center lg:text-start">
-          <h1 className="font-black text-3xl xs:text-5xl lg:text-7xl">
+        <div className="
+          space-y-4 px-2 text-center
+          sm:px-4
+          lg:space-y-8 lg:px-12 lg:text-start
+        ">
+          <h1 className="
+            text-3xl font-black
+            xs:text-5xl
+            lg:text-7xl
+          ">
             لعبة {WORD_GAME_NAME_AR}
           </h1>
           <div className="space-y-2">
-            <p className="text-sm xs:text-lg lg:text-3xl">
+            <p className="
+              text-sm
+              xs:text-lg
+              lg:text-3xl
+            ">
               {WORD_GAME_DESCRIPTION_AR}
             </p>
-            <p className="text-xs xs:text-sm lg:text-xl">
+            <p className="
+              text-xs
+              xs:text-sm
+              lg:text-xl
+            ">
               أنشئ غرفة والعب بسهولة مع اصدقائك!
             </p>
           </div>
         </div>
       </AppearOnTransition>
-      <div className="flex items-center justify-center py-8 rounded-t-3xl lg:rounded-t-none lg:justify-end lg:pl-12 h-full bg-black/40">
+      <div className="
+        flex h-full items-center justify-center rounded-t-3xl bg-black/40 py-8
+        lg:justify-end lg:rounded-t-none lg:pl-12
+      ">
         <WordHomeCreateCard />
-        <div className="absolute w-64 h-64 xl:w-96 xl:h-96 2xl:w-[30rem] 2xl:h-[30rem] bottom-28 xl:bottom-14 left-1/2 -translate-x-1/2 hidden lg:block">
+        <div className="
+          absolute bottom-28 left-1/2 hidden h-64 w-64 -translate-x-1/2
+          lg:block
+          xl:bottom-14 xl:h-96 xl:w-96
+          2xl:h-120 2xl:w-120
+        ">
           <Image src="/svg/home-arrow-1.svg" alt="home-arrow-1" fill />
         </div>
       </div>

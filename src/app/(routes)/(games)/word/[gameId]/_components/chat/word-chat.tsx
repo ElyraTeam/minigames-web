@@ -6,7 +6,10 @@ interface WordChatProps {}
 const WordChat: React.FC<WordChatProps> = ({}) => {
   return (
     <>
-      <WordChatContainer className="hidden lg:flex" />
+      <WordChatContainer className="
+        hidden
+        lg:flex
+      " />
       <WordMobileChat className="lg:hidden" />
     </>
   );

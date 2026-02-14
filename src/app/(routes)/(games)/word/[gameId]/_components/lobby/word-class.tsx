@@ -23,23 +23,32 @@ const WordClass: React.FC<WordClassProps> = ({ name, style, onDelete }) => {
               'absolute top-0 right-0 z-10',
               'flex items-center justify-center',
               'size-[22px] rounded-full bg-danger',
-              'cursor-pointer hover:bg-danger/80 transition-colors'
+              `
+                cursor-pointer transition-colors
+                hover:bg-danger/80
+              `
             )}
             onClick={onDelete}
           >
-            <IoClose className="text-white text-sm" />
+            <IoClose className="text-sm text-white" />
           </button>
         )}
 
         {/* Tag */}
         <div
           className={cn(
-            'bg-word-game-850 border border-white',
+            'border border-white bg-word-game-850',
             'rounded-2xl shadow-md',
-            'px-4 lg:px-12 py-2 lg:min-w-[90px] text-center'
+            `
+              px-4 py-2 text-center
+              lg:min-w-[90px] lg:px-12
+            `
           )}
         >
-          <span className="text-white font-medium text-base overflow-hidden text-ellipsis whitespace-nowrap block">
+          <span className="
+            block overflow-hidden text-base font-medium text-ellipsis
+            whitespace-nowrap text-white
+          ">
             {name}
           </span>
         </div>

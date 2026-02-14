@@ -20,7 +20,10 @@ const WordSelectLetters: React.FC<WordSelectLettersProps> = ({
 
   return (
     <div className="flex justify-center">
-      <div className="grid grid-cols-4 lg:grid-cols-7 gap-5 lg:gap-6">
+      <div className="
+        grid grid-cols-4 gap-5
+        lg:grid-cols-7 lg:gap-6
+      ">
         {CHARS_ARABIC.map((letter) => (
         <WordLetter
           key={`word-letter-${letter}`}

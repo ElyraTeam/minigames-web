@@ -15,9 +15,18 @@ export default async function WordGameLayout({
       <WordMobileHeader />
 
       {/* Main Layout */}
-      <div className="bg-word-game-600 lg:bg-transparent pt-[102px] pb-[80px] lg:pt-12 lg:pb-12 lg:px-6 min-h-screen flex flex-col lg:grid lg:grid-cols-[minmax(200px,275px)_minmax(550px,1fr)_minmax(200px,275px)] lg:h-screen lg:max-h-screen lg:overflow-hidden lg:justify-center lg:items-stretch lg:gap-4">
+      <div className="
+        flex min-h-screen flex-col bg-word-game-600 pt-[102px] pb-[80px]
+        lg:grid lg:h-screen lg:max-h-screen
+        lg:grid-cols-[minmax(200px,275px)_minmax(550px,1fr)_minmax(200px,275px)]
+        lg:items-stretch lg:justify-center lg:gap-4 lg:overflow-hidden
+        lg:bg-transparent lg:px-6 lg:pt-12 lg:pb-12
+      ">
         {/* Sidebar - Room Info (desktop only) */}
-        <div className="hidden lg:flex lg:flex-col lg:min-h-0">
+        <div className="
+          hidden
+          lg:flex lg:min-h-0 lg:flex-col
+        ">
           <WordRoomInfoContainer />
         </div>
 
@@ -25,7 +34,10 @@ export default async function WordGameLayout({
         {children}
 
         {/* Sidebar - Chat (desktop only) */}
-        <div className="hidden lg:flex lg:flex-col lg:min-h-0">
+        <div className="
+          hidden
+          lg:flex lg:min-h-0 lg:flex-col
+        ">
           <WordChatContainer />
         </div>
       </div>

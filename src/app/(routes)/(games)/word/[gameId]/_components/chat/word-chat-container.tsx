@@ -5,16 +5,14 @@ import WordChatSend from './word-chat-send';
 import WordChatMessages from './word-chat-messages';
 import { cn } from '@/lib/utils';
 
-interface WordChatContainerProps {
-  className?: string;
+interface WordChatContainerProps extends React.ComponentProps<'div'> {
   onClose?: () => void;
-  onAnimationEnd?: () => void;
 }
 
 const WordChatContainer: React.FC<WordChatContainerProps> = ({
   className,
   onClose,
-  onAnimationEnd,
+  ...props
 }) => {
   return (
     <div
@@ -22,7 +20,7 @@ const WordChatContainer: React.FC<WordChatContainerProps> = ({
         'flex flex-col h-full bg-gradient-to-t from-word-side-700 to-[190%] to-word-side-300 rounded-[20px] lg:rounded-2xl lg:border-[3px] overflow-hidden',
         className
       )}
-      onAnimationEnd={onAnimationEnd}
+      {...props}
     >
       <div className="flex items-center justify-center gap-2 p-4 bg-word-side-200 shadow-[0px_4px_4px_0px_rgba(18,18,18,0.2)] relative">
         <span className="text-[22px]">الرسائل</span>

@@ -18,7 +18,10 @@ const WordPublicRoomsButton: React.FC<WordPublicRoomsButtonProps> = ({}) => {
       />
       <WordButton
         variant="outline"
-        className="text-lg rounded-2xl hover:bg-white/10"
+        className="
+          rounded-2xl text-lg
+          hover:bg-white/10
+        "
         onClick={() => setMaintenanceOpen(true)}
       >
         جميع الغرف

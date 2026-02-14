@@ -41,33 +41,41 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
   return (
     <animated.div
       className={cn(
-        'py-5 px-4 flex items-center w-full absolute',
+        'absolute flex w-full items-center px-4 py-5',
         isOdd && 'bg-word-secondary-700/15',
         isLocalPlayer && 'text-word-game',
         !isOnline && 'text-white/20'
       )}
       style={style}
     >
-      <div className="flex items-center gap-2 flex-grow">
+      <div className="flex grow items-center gap-2">
         <WordRank rank={rank} />
         <p
           className={cn(
-            'text-base overflow-hidden overflow-ellipsis max-w-[8rem] whitespace-nowrap font-semibold',
-            (isMeOwner || isOwner || checkmark) && 'max-w-[7.5rem]',
+            `
+              max-w-32 overflow-hidden text-base font-semibold text-ellipsis
+              whitespace-nowrap
+            `,
+            (isMeOwner || isOwner || checkmark) && 'max-w-30',
             ((isMeOwner && checkmark) || (isOwner && checkmark)) &&
-              'max-w-[5.5rem]'
+              'max-w-22'
           )}
         >
           {name || '------'}
         </p>
         {isOwner && (
-          <span className="flex flex-col justify-center items-center bg-white w-5 h-5 rounded-full">
+          <span className="
+            flex h-5 w-5 flex-col items-center justify-center rounded-full
+            bg-white
+          ">
             <FaCrown className="text-sm text-yellow-500" />
           </span>
         )}
         {checkmark && (
           <Tooltip text={checkmarkText} position="top">
-            <span className="text-word-game text-xl animate-in fade-in duration-500">
+            <span className="
+              text-xl text-word-game duration-500 animate-in fade-in
+            ">
               <IoIosCheckmarkCircle />
             </span>
           </Tooltip>
@@ -75,12 +83,15 @@ const WordPlayerRank: React.FC<WordPlayerRankProps> = ({
       </div>
       {isMeOwner && !isOwner && isPlayer && (
         <IoIosCloseCircle
-          className="mx-2 text-white/15 hover:text-white/20 cursor-pointer transition-colors text-2xl"
+          className="
+            mx-2 cursor-pointer text-2xl text-white/15 transition-colors
+            hover:text-white/20
+          "
           onClick={onKick}
         />
       )}
-      <div className="border-r-2 border-white/20 w-12 text-center" dir="ltr">
-        <p className="font-semibold text-sm">{score || 0}</p>
+      <div className="w-12 border-r-2 border-white/20 text-center" dir="ltr">
+        <p className="text-sm font-semibold">{score || 0}</p>
       </div>
     </animated.div>
   );

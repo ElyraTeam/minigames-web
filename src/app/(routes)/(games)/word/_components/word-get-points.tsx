@@ -8,10 +8,20 @@ interface WordGetPointsProps {}
 
 const WordGetPoints: React.FC<WordGetPointsProps> = ({}) => {
   return (
-    <div className="relative h-[100vh]">
-      <div className="absolute flex flex-col-reverse lg:flex-row justify-center lg:justify-between lg:pl-[5%] xl:pl-[20%] items-center bottom-0 word-play-background h-full w-full -top-24">
+    <div className="relative h-screen">
+      <div className="
+        word-play-background absolute -top-24 bottom-0 flex h-full w-full
+        flex-col-reverse items-center justify-center
+        lg:flex-row lg:justify-between lg:pl-[5%]
+        xl:pl-[20%]
+      ">
         <AppearOnTransition className="slide-in-from-right-20">
-          <div className="relative w-[300px] h-[320px] xs:w-[350px] xs:h-[370px] lg:w-[500px] lg:h-[500px] xl:w-[600px] xl:h-[600px]">
+          <div className="
+            relative h-[320px] w-[300px]
+            xs:h-[370px] xs:w-[350px]
+            lg:h-[500px] lg:w-[500px]
+            xl:h-[600px] xl:w-[600px]
+          ">
             <Image
               src="/img/word-votes.png"
               alt="word-settings"

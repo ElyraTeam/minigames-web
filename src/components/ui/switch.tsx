@@ -23,11 +23,20 @@ const Switch: React.FC<SwitchProps> = ({
       className={tooltipClassName}
       position={tooltipPosition}
     >
-      <label className="relative inline-block w-12 h-6">
-        <input type="checkbox" className="peer opacity-0 w-0 h-0" {...props} />
+      <label className="relative inline-block h-6 w-12">
+        <input type="checkbox" className="peer h-0 w-0 opacity-0" {...props} />
         <span
           className={cn(
-            "absolute bg-slate-300/50 top-0 left-0 right-0 bottom-0 cursor-pointer transition-all duration-300 rounded-full before:content-[''] before:absolute before:transition-all before:duration-300 before:rounded-full before:h-[18px] before:w-[18px] before:bg-white before:top-1/2 before:-translate-y-1/2 before:right-[3px] peer-checked:before:right-[27px] peer-disabled:cursor-not-allowed",
+            `
+              absolute top-0 right-0 bottom-0 left-0 cursor-pointer rounded-full
+              bg-slate-300/50 transition-all duration-300
+              peer-disabled:cursor-not-allowed
+              before:absolute before:top-1/2 before:right-[3px] before:h-[18px]
+              before:w-[18px] before:-translate-y-1/2 before:rounded-full
+              before:bg-white before:transition-all before:duration-300
+              before:content-['']
+              peer-checked:before:right-[27px]
+            `,
             className
           )}
         />

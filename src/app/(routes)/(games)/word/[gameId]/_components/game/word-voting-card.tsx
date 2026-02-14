@@ -50,23 +50,55 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
   return (
     <div
       className={cn(
-        'grid grid-rows-[40px_90px_90px] sm:grid-cols-[min(150px,100%)_2fr_min(200px,100%)] sm:grid-rows-none lg:grid-rows-[60px_100px_100px] lg:grid-cols-none 2xl:grid-rows-none 2xl:grid-cols-[min(175px,100%)_2fr_min(200px,100%)] items-center bg-word-game/50 rounded-2xl text-center w-full overflow-hidden border-[3px]',
+        `
+          grid w-full grid-rows-[40px_90px_90px] items-center overflow-hidden
+          rounded-2xl border-[3px] bg-word-game/50 text-center
+          sm:grid-cols-[min(150px,100%)_2fr_min(200px,100%)] sm:grid-rows-none
+          lg:grid-cols-none lg:grid-rows-[60px_100px_100px]
+          2xl:grid-cols-[min(175px,100%)_2fr_min(200px,100%)] 2xl:grid-rows-none
+        `,
         selectedCard && 'bg-word-secondary/70'
       )}
     >
-      <p className="text-lg lg:text-xl text-white leading-none p-3 mx-auto sm:mx-0 lg:mx-auto 2xl 2xl:mx-0 border-b-4 sm:border-l-2 sm:border-b-0 lg:border-b-4 lg:border-l-0 2xl 2xl:border-b-0 2xl 2xl:border-l-2 border-white/30">
+      <p className="
+        2xl mx-auto border-b-4 border-white/30 p-3 text-lg leading-none
+        text-white
+        sm:mx-0 sm:border-b-0 sm:border-l-2
+        lg:mx-auto lg:border-b-4 lg:border-l-0 lg:text-xl
+        2xl:mx-0 2xl:border-b-0 2xl:border-l-2
+      ">
         {name} {selectedCard && '(أنت)'}
       </p>
-      <h3 className="text-3xl lg:text-4xl font-black leading-none">{value}</h3>
-      <div className="flex flex-row sm:flex-col sm:rtl:flex-col-reverse lg:flex-row lg:rtl:flex-row-reverse xl:flex-col bg-black/5 py-8 px-2 xs:px-4 2xl 2xl:px-9 h-full 2xl 2xl:rtl:flex-col-reverse justify-center items-center rounded-2xl self-end gap-1 sm:gap-3 2xl 2xl:gap-3">
+      <h3 className="
+        text-3xl leading-none font-black
+        lg:text-4xl
+      ">{value}</h3>
+      <div className="
+        2xl flex h-full flex-row items-center justify-center gap-1 self-end
+        rounded-2xl bg-black/5 px-2 py-8
+        xs:px-4
+        sm:flex-col sm:gap-3
+        lg:flex-row
+        xl:flex-col
+        2xl:gap-3 2xl:px-9
+        sm:rtl:flex-col-reverse
+        lg:rtl:flex-row-reverse
+        2xl:rtl:flex-col-reverse
+      ">
         {availableVotes.map((voteNumber) => (
           <div
-            className="flex flex-col sm:flex-row lg:flex-col 2xl 2xl:flex-row w-full items-center justify-between gap-2 xs:gap-4 2xl 2xl:gap-7"
+            className="
+              2xl flex w-full flex-col items-center justify-between gap-2
+              xs:gap-4
+              sm:flex-row
+              lg:flex-col
+              2xl:flex-row 2xl:gap-7
+            "
             key={`word-voting-card-${name}-${voteNumber}`}
           >
             <Tooltip
               delayDuration={0}
-              className="py-2 px-3"
+              className="px-3 py-2"
               text={
                 votesToPlayers[voteNumber]
                   ? votesToPlayers[voteNumber].map((plr) => (
@@ -77,7 +109,12 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
             >
               <div
                 className={cn(
-                  'text-xs flex items-center justify-center bg-white/10 rounded-full p-2.5 w-5 h-5 hover:bg-white/20 transition-colors font-semibold border-[1px] border-white/50'
+                  `
+                    flex h-5 w-5 items-center justify-center rounded-full border
+                    border-white/50 bg-white/10 p-2.5 text-xs font-semibold
+                    transition-colors
+                    hover:bg-white/20
+                  `
                 )}
               >
                 <p>{votesToPlayers[voteNumber]?.length || 0}</p>
@@ -88,10 +125,18 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
               dir="ltr"
               onClick={() => onChangeVote(voteNumber)}
               className={cn(
-                'w-16 sm:w-32 lg:w-20',
+                `
+                  w-16
+                  sm:w-32
+                  lg:w-20
+                `,
                 !selectedCard &&
                   vote === voteNumber &&
-                  'bg-word-secondary hover:bg-word-secondary/80 transition-colors disabled:hover:bg-word-secondary'
+                  `
+                    bg-word-secondary transition-colors
+                    hover:bg-word-secondary/80
+                    disabled:hover:bg-word-secondary
+                  `
               )}
               disabled={selectedCard || !hasValue || voted}
             >

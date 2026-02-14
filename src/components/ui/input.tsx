@@ -18,7 +18,10 @@ const Input: React.FC<InputProps> = ({
     <div className={cn('relative', parentClassName)}>
       <input
         className={cn(
-          'rounded-lg bg-transparent outline-none border-2 w-full p-[8px] transition-colors text-sm leading-7',
+          `
+            w-full rounded-lg border-2 bg-transparent p-[8px] text-sm/7
+            transition-colors outline-none
+          `,
           icon && 'rtl:pe-10',
           className
         )}
@@ -27,7 +30,7 @@ const Input: React.FC<InputProps> = ({
       />
       <div
         className={cn(
-          'absolute inset-y-0 end-0 pe-3 flex items-center z-10',
+          'absolute inset-y-0 end-0 z-10 flex items-center pe-3',
           onIconClick && !disabled && 'cursor-pointer',
           disabled && 'cursor-not-allowed'
         )}

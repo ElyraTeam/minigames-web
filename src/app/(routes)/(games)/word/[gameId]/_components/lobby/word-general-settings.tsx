@@ -30,12 +30,12 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
   const roundOptions = Array.from({ length: lettersNumber }, (_, i) => i + 1);
 
   return (
-    <div className="flex flex-col items-center gap-2 py-8 px-6">
+    <div className="flex flex-col items-center gap-2 px-6 py-8">
       {/* Number of Players */}
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-2">
-          <FaUserGroup className="text-white text-lg" />
-          <span className="text-white font-semibold text-base">
+          <FaUserGroup className="text-lg text-white" />
+          <span className="text-base font-semibold text-white">
             عدد اللاعبين
           </span>
         </div>
@@ -51,8 +51,8 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
       {/* Number of Rounds */}
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-2">
-          <IoGameController className="text-white text-lg" />
-          <span className="text-white font-semibold text-base">
+          <IoGameController className="text-lg text-white" />
+          <span className="text-base font-semibold text-white">
             عدد الجولات
           </span>
         </div>
