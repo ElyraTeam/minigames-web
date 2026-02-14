@@ -77,18 +77,18 @@ const WordMobileHeader: React.FC<WordMobileHeaderProps> = ({}) => {
           <button
             onClick={() => setSidebarOpen(true)}
             className={cn(
-              'flex items-center gap-2',
+              'flex items-center gap-1.5',
               'border-2 border-word-side-100 bg-word-side-100/10',
-              'rounded-full px-4 py-2',
+              'rounded-full px-3 py-1.5',
               'transition-colors hover:bg-word-side-100/20'
             )}
           >
-            <IoGameController className="text-white text-xl" />
-            <span className="text-white text-lg">اللاعبون</span>
+            <IoGameController className="text-white text-lg" />
+            <span className="text-white text-base">اللاعبون</span>
           </button>
 
           {/* Right side: Icon buttons + Logo */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center flex-1 justify-evenly sm:flex-none sm:justify-end sm:gap-3">
             <IconButton onClick={handleShare}>
               <FaShareAlt className="text-lg" />
             </IconButton>

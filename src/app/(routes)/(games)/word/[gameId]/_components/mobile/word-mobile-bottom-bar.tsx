@@ -1,6 +1,6 @@
 'use client';
 
-import { IoChatbubbles, IoClose } from 'react-icons/io5';
+import { IoChatbubbles } from 'react-icons/io5';
 
 import { cn } from '@/lib/utils';
 import { State } from '@/types/word';
@@ -155,11 +155,7 @@ const WordMobileBottomBar: React.FC<WordMobileBottomBarProps> = ({}) => {
             onClick={handleChatToggle}
             className="relative flex items-center justify-center size-[53px] rounded-full bg-word-game-850 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.3)]"
           >
-            {isChatOpen ? (
-              <IoClose className="text-white text-3xl" />
-            ) : (
-              <IoChatbubbles className="text-white text-2xl" />
-            )}
+            <IoChatbubbles className="text-white text-2xl" />
             {!isChatOpen && newMessages !== 0 && (
               <div className="absolute flex items-center justify-center -top-1 -right-1 p-3 w-3 h-3 text-sm rounded-full bg-danger">
                 {newMessages}
