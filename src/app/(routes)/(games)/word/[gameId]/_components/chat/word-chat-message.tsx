@@ -21,18 +21,19 @@ const WordChatMessage: React.FC<WordChatMessageProps> = ({
     <div
       className={cn(
         'flex flex-col gap-2 animate-in slide-in-from-bottom-1/2',
-        !self && 'items-end'
+        self ? 'items-start' : 'items-end'
       )}
       style={{ marginTop: spacing }}
     >
-      {!self && sender && (
-        <label className="text-sm opacity-60">{sender}</label>
+      {sender && (
+        <label className={cn('text-[15px] opacity-60', !self && 'text-end')}>
+          {sender} {self && '(أنت)'}
+        </label>
       )}
       <p
         className={cn(
-          'rounded-b-2xl rounded-tl-2xl px-4 py-2 bg-word-secondary w-fit text-wrap break-words max-w-full text-[14px] select-text',
-          !self && 'bg-word-side rounded-tl-none rounded-tr-2xl',
-          !rounded && 'rounded-tr-2xl rounded-tl-2xl'
+          'px-4 py-2 w-fit text-wrap wrap-break-word max-w-full text-[17px] select-text rounded-t-[15px]',
+          self ? 'bg-word-secondary rounded-bl-[15px]' : 'bg-white text-black rounded-br-[15px]'
         )}
       >
         <WordChatParts parts={content} />

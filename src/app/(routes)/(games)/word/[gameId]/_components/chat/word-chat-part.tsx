@@ -18,7 +18,7 @@ const WordChatPart: React.FC<WordChatPartProps> = ({
   return (
     <span
       className={cn(
-        bold && 'font-bold',
+        bold && 'text-white',
         italic && 'italic',
         underline && 'underline'
       )}

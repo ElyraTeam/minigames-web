@@ -1,7 +1,6 @@
 'use client';
 
-import { RxCross2 } from 'react-icons/rx';
-import { MdOutlineChat } from 'react-icons/md';
+import { useState, useEffect } from 'react';
 
 import { cn } from '@/lib/utils';
 
@@ -15,56 +14,57 @@ interface WordMobileChatProps {
 const WordMobileChat: React.FC<WordMobileChatProps> = ({ className }) => {
   const isChatOpen = useChatStore((state) => state.isMobileChatOpen);
   const setChatOpen = useChatStore((state) => state.setMobileChatOpen);
-  const clearNewMessages = useChatStore((state) => state.clearNewMessages);
-  const newMessages = useChatStore((state) => state.newMessages);
+  const [isClosing, setIsClosing] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (isChatOpen) {
+      setIsVisible(true);
+      setIsClosing(false);
+    }
+  }, [isChatOpen]);
 
   const handleClickOutside = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     if (e.target === e.currentTarget) {
-      handleChatOpen(false);
+      handleClose();
     }
   };
 
-  const handleChatOpen = (open: boolean) => {
-    setChatOpen(open);
-    if (open) {
-      clearNewMessages();
+  const handleClose = () => {
+    setIsClosing(true);
+  };
+
+  const handleAnimationEnd = () => {
+    if (isClosing) {
+      setIsVisible(false);
+      setIsClosing(false);
+      setChatOpen(false);
     }
   };
+
+  if (!isVisible) return null;
 
   return (
     <div
       className={cn(
-        'fixed justify-end gap-3 flex flex-col bottom-0 left-0 p-6 z-50',
-        isChatOpen && 'w-full h-full',
-        isChatOpen && 'bg-black/60',
+        'fixed inset-0 z-[60] flex flex-col justify-end transition-colors duration-300',
+        isClosing ? 'bg-black/0' : 'bg-black/60',
         className
       )}
       onClick={handleClickOutside}
     >
-      {isChatOpen && (
-        <WordChatContainer
-          className={cn(
-            'flex-grow animate-in slide-in-from-bottom-1/2 duration-300'
-          )}
-        />
-      )}
-      <div
-        className="relative flex self-end items-center justify-center w-14 h-14 p-4 bg-word-game-950 rounded-full cursor-pointer shadow-xl"
-        onClick={() => handleChatOpen(!isChatOpen)}
-      >
-        {isChatOpen ? (
-          <RxCross2 className="text-3xl" />
-        ) : (
-          <MdOutlineChat className="text-3xl" />
+      <WordChatContainer
+        className={cn(
+          'h-[85%] rounded-t-[40px] duration-300',
+          isClosing
+            ? 'animate-out slide-out-to-bottom'
+            : 'animate-in slide-in-from-bottom'
         )}
-        {newMessages !== 0 && (
-          <div className="absolute flex items-center justify-center -top-1 -right-1 p-3 w-3 h-3 text-sm rounded-full bg-danger">
-            {newMessages}
-          </div>
-        )}
-      </div>
+        onClose={handleClose}
+        onAnimationEnd={handleAnimationEnd}
+      />
     </div>
   );
 };

@@ -1,28 +1,48 @@
-import { MdMessage } from 'react-icons/md';
+import { MdOutlineChat } from 'react-icons/md';
+import { IoClose } from 'react-icons/io5';
 
 import WordChatSend from './word-chat-send';
-import WordSideCard from '../word-side-card';
 import WordChatMessages from './word-chat-messages';
-import WordSideCardHeader from '../word-side-card-header';
 import { cn } from '@/lib/utils';
 
 interface WordChatContainerProps {
   className?: string;
+  onClose?: () => void;
+  onAnimationEnd?: () => void;
 }
 
-const WordChatContainer: React.FC<WordChatContainerProps> = ({ className }) => {
+const WordChatContainer: React.FC<WordChatContainerProps> = ({
+  className,
+  onClose,
+  onAnimationEnd,
+}) => {
   return (
-    <WordSideCard className={cn('flex flex-col', className)}>
-      <WordSideCardHeader className="space-x-1 rtl:space-x-reverse">
-        <span>الرسائل</span> <MdMessage className="text-2xl inline" />
-      </WordSideCardHeader>
-      <div className="flex flex-col mt-4 px-4 pt-10 pb-6 h-full overflow-y-auto scrollbar-thin">
+    <div
+      className={cn(
+        'flex flex-col h-full bg-gradient-to-t from-word-side-700 to-[190%] to-word-side-300 rounded-[20px] lg:rounded-2xl lg:border-[3px] overflow-hidden',
+        className
+      )}
+      onAnimationEnd={onAnimationEnd}
+    >
+      <div className="flex items-center justify-center gap-2 p-4 bg-word-side-200 shadow-[0px_4px_4px_0px_rgba(18,18,18,0.2)] relative">
+        <span className="text-[22px]">الرسائل</span>
+        <MdOutlineChat className="text-4xl" />
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="absolute right-4 w-10 h-10 flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity"
+          >
+            <IoClose className="text-3xl opacity-60" />
+          </button>
+        )}
+      </div>
+      <div className="flex flex-col px-6 py-4 flex-1 min-h-0 overflow-y-auto scrollbar-thin">
         <WordChatMessages />
       </div>
-      <div className="py-4 px-4 border-t-2 border-white/10">
+      <div className="py-6 px-4 border-t border-white/5">
         <WordChatSend />
       </div>
-    </WordSideCard>
+    </div>
   );
 };
 
