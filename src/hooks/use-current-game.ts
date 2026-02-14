@@ -123,10 +123,11 @@ const useCurrentGame = (roomId: string) => {
         // Chat
         localPlayer.onChat((msg) => {
           addChatMessage(msg);
-          if (msg.type !== 'system') {
+          const isChatOpen = useChatStore.getState().isMobileChatOpen;
+          if (msg.type !== 'system' && msg.sender !== nickname && !isChatOpen) {
             addNewMessage();
+            playChatSound();
           }
-          playChatSound();
         });
 
         // When server requests category values
