@@ -11,13 +11,10 @@ import WordCard from './word-card';
 import WordGame from './game/word-game';
 import WordVoting from './game/word-voting';
 import WordCountdown from './word-countdown';
-import WordGameButton from './word-game-button';
 import WordGameHeader from './word-game-header';
+import WordActionButton from './word-action-button';
 import WordGameContent from './word-game-content';
-import WordDoneButton from './game/word-done-button';
-import WordReadyButton from './lobby/word-ready-button';
 import WordGameSettings from './lobby/word-game-settings';
-import WordResetGame from './leaderboard/word-reset-game';
 import WordWinnersModal from './leaderboard/word-winners-modal';
 
 interface WordMainCardProps {
@@ -67,15 +64,6 @@ const WordMainCard: React.FC<WordMainCardProps> = ({ roomId }) => {
     if (game.state === State.VOTING) return <WordVoting />;
   };
 
-  const renderButtonFromState = () => {
-    if (countdown) return <WordGameButton className="invisible" />;
-    if (!game || game.state === State.LOBBY) return <WordReadyButton />;
-    if (game.state === State.VOTING || game.state === State.INGAME)
-      return <WordDoneButton state={game.state} />;
-    if (game.state === State.GAME_OVER) return <WordResetGame />;
-    return <WordGameButton className="invisible" />;
-  };
-
   return (
     <div className="flex flex-col flex-1 min-h-0">
       {winners && (
@@ -93,7 +81,7 @@ const WordMainCard: React.FC<WordMainCardProps> = ({ roomId }) => {
         <WordGameContent>{renderContentFromState()}</WordGameContent>
         {/* Button - desktop only (mobile uses bottom bar) */}
         <div className="hidden lg:flex lg:justify-center">
-          {renderButtonFromState()}
+          <WordActionButton />
         </div>
       </WordCard>
     </div>

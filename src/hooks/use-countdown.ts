@@ -1,22 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+
+import useGameStore from '@/state/game';
 
 interface UseCountdownProps {
-  startFrom: number;
   onCountdownUpdate?: (s: number) => void;
   onCountdownFinish?: () => void;
 }
 
 const useCountdown = ({
-  startFrom,
   onCountdownUpdate,
   onCountdownFinish,
 }: UseCountdownProps) => {
-  const [countdown, setCountdown] = useState(startFrom);
+  const countdown = useGameStore((state) => state.countdown);
+  const setCountdown = useGameStore((state) => state.setCountdown);
 
   useEffect(() => {
     const startLocalTimer = () => {
       setTimeout(() => {
-        const newCountdown = countdown! - 1;
+        const newCountdown = countdown - 1;
         setCountdown(newCountdown);
         if (newCountdown == 0) {
           onCountdownFinish && onCountdownFinish();

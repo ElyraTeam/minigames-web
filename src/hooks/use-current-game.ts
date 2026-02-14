@@ -48,7 +48,6 @@ const useCurrentGame = (roomId: string) => {
   const [playWinnerSound] = useWordSound(WordSound.AFTER_WIN);
   const [playLoseSound] = useWordSound(WordSound.AFTER_LOSE);
   const { countdown, setCountdown } = useCountdown({
-    startFrom: 0,
     onCountdownUpdate: (s) => {
       const state = useGameStore.getState().game?.state;
       if (state && (state === State.LOBBY || state === State.INGAME)) {
