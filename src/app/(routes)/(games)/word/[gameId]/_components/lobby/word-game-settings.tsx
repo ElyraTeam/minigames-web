@@ -8,8 +8,8 @@ interface WordGameSettingsProps {}
 
 const WordGameSettings: React.FC<WordGameSettingsProps> = ({}) => {
   return (
-    <WordGameContainer className="animate-in fade-in duration-500">
-      <WordSettingCard title="اعدادات عامة" className='mt-4'>
+    <WordGameContainer className="animate-in fade-in duration-500 space-y-8">
+      <WordSettingCard title="اعدادات عامة">
         <WordGeneralSettings />
       </WordSettingCard>
 
