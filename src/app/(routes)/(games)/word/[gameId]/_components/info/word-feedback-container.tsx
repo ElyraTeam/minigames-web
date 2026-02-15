@@ -15,10 +15,16 @@ const WordFeedbackContainer: React.FC<WordFeedbackContainerProps> = ({}) => {
         isOpen={feedbackModalShow}
         onOpenChange={(open) => setFeedbackModalShow(open)}
       />
-      <div className="py-8 px-3 text-center font-light flex items-center gap-3 justify-center text-sm bg-word-side-400 shadow-2xl">
+      <div className="
+        flex items-center justify-center gap-3 bg-word-side-400 px-3 py-8
+        text-center text-sm font-light shadow-2xl
+      ">
         <p>واجهتك مشكلة؟</p>
         <p
-          className="px-4 py-1 border-word-game border rounded-full text-word-game cursor-pointer"
+          className="
+            cursor-pointer rounded-full border border-word-game px-4 py-1
+            text-word-game
+          "
           onClick={() => setFeedbackModalShow(true)}
         >
           تواصل معنا

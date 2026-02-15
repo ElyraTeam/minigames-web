@@ -16,10 +16,13 @@ const WordSettingCard: React.FC<WordSettingCardProps> = ({
   return (
     <div className={cn('relative pt-4', className)} {...props}>
       {/* Floating Header */}
-      <div className="absolute top-0 right-1/2 w-40 translate-x-1/2 z-10">
+      <div className="absolute top-0 right-1/2 z-10 w-40 translate-x-1/2">
         <div
           className={cn(
-            'bg-word-game-700 w-full text-center border-2 border-white rounded-2xl px-4 py-1 font-bold text-lg text-white',
+            `
+              w-full rounded-2xl border-2 border-white bg-word-game-700 px-4
+              py-1 text-center text-lg font-bold text-white
+            `,
             !isOwner && 'opacity-80'
           )}
         >
@@ -28,7 +31,11 @@ const WordSettingCard: React.FC<WordSettingCardProps> = ({
       </div>
 
       {/* Card Body */}
-      <div className="py-3 bg-word-game-550 lg:bg-gradient-to-l lg:from-[rgba(41,53,38,0.03)] lg:to-[rgba(224,207,207,0.03)] rounded-2xl shadow-md">
+      <div className="
+        rounded-2xl bg-word-game-550 py-3 shadow-md
+        lg:bg-linear-to-l lg:from-[rgba(41,53,38,0.03)]
+        lg:to-[rgba(224,207,207,0.03)]
+      ">
         {children}
       </div>
     </div>

@@ -78,7 +78,10 @@ const WordMobileChat: React.FC<WordMobileChatProps> = ({ className }) => {
   return (
     <div
       className={cn(
-        'fixed inset-0 z-[60] flex flex-col justify-end transition-colors duration-300',
+        `
+          fixed inset-0 z-60 flex flex-col justify-end transition-colors
+          duration-300
+        `,
         isClosing ? 'bg-black/0' : 'bg-black/60',
         className
       )}

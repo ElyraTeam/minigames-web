@@ -51,9 +51,12 @@ const WordMobileSidebar: React.FC<WordMobileSidebarProps> = ({
       {/* Backdrop */}
       <div
         className={cn(
-          'lg:hidden fixed inset-0 bg-black/50 z-[60]',
+          `
+            fixed inset-0 z-60 bg-black/50
+            lg:hidden
+          `,
           'transition-opacity duration-300',
-          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
         )}
         onClick={onClose}
       />
@@ -61,8 +64,11 @@ const WordMobileSidebar: React.FC<WordMobileSidebarProps> = ({
       {/* Sidebar */}
       <div
         className={cn(
-          'lg:hidden fixed top-0 right-0 bottom-0 w-[85%] max-w-[320px] z-[70]',
-          'bg-gradient-to-b from-[#233f61] to-[#0f223a]',
+          `
+            fixed top-0 right-0 bottom-0 z-70 w-[85%] max-w-[320px]
+            lg:hidden
+          `,
+          'bg-linear-to-b from-[#233f61] to-[#0f223a]',
           'flex flex-col overflow-hidden',
           'shadow-[-4px_0_20px_rgba(0,0,0,0.3)]',
           !isSwiping && 'transition-transform duration-300 ease-out',
@@ -76,10 +82,14 @@ const WordMobileSidebar: React.FC<WordMobileSidebarProps> = ({
         onTouchEnd={handleTouchEnd}
       >
         {/* Fixed Header */}
-        <div className="relative flex-shrink-0">
+        <div className="relative shrink-0">
           <button
             onClick={onClose}
-            className="absolute top-2 right-2 z-10 flex items-center justify-center size-10 rounded-full text-white/60 hover:bg-white/20 transition-colors"
+            className="
+              absolute top-2 right-2 z-10 flex size-10 items-center
+              justify-center rounded-full text-white/60 transition-colors
+              hover:bg-white/20
+            "
           >
             <IoClose className="text-3xl" />
           </button>

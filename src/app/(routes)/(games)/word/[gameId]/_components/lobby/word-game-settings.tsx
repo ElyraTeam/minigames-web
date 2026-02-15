@@ -14,16 +14,19 @@ const WordGameSettings: React.FC<WordGameSettingsProps> = ({}) => {
   const isOwner = useOwner();
 
   return (
-    <WordGameContainer className="animate-in fade-in duration-500 space-y-8">
+    <WordGameContainer className="space-y-8 duration-500 animate-in fade-in">
       {!isOwner && (
         <div className="relative pt-4">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 z-10">
-            <div className="bg-white/20 rounded-full p-2.5">
-              <FaLock className="text-white text-xl" />
+          <div className="absolute top-0 left-1/2 z-10 -translate-x-1/2">
+            <div className="rounded-full bg-white/20 p-2.5">
+              <FaLock className="text-xl text-white" />
             </div>
           </div>
-          <div className="flex items-center justify-center bg-black/10 rounded-xl py-4 pt-7 px-6">
-            <span className="text-white font-bold text-base">
+          <div className="
+            flex items-center justify-center rounded-xl bg-black/10 px-6 py-4
+            pt-7
+          ">
+            <span className="text-base font-bold text-white">
               فقط صاحب الغرفة يستطيع التعديل
             </span>
           </div>

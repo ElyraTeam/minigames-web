@@ -85,7 +85,7 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
         onConfirm={handleKick}
       />
       <div
-        className="flex flex-col grow relative overflow-y-auto scrollbar-none"
+        className="relative scrollbar-none flex grow flex-col overflow-y-auto"
         style={{
           height: PLAYER_RANK_HEIGHT * (roomOptions?.options?.maxPlayers || 0),
         }}

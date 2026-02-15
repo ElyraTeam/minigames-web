@@ -17,27 +17,40 @@ const WordChatContainer: React.FC<WordChatContainerProps> = ({
   return (
     <div
       className={cn(
-        'flex flex-col h-full bg-gradient-to-t from-word-side-700 to-[190%] to-word-side-300 rounded-[20px] lg:rounded-2xl lg:border-[3px] overflow-hidden',
+        `
+          flex h-full flex-col overflow-hidden rounded-[20px] bg-linear-to-t
+          from-word-side-700 to-word-side-300 to-190%
+          lg:rounded-2xl lg:border-[3px]
+        `,
         className
       )}
       {...props}
     >
-      <div className="flex items-center justify-center gap-2 p-4 bg-word-side-200 shadow-[0px_4px_4px_0px_rgba(18,18,18,0.2)] relative">
+      <div className="
+        relative flex items-center justify-center gap-2 bg-word-side-200 p-4
+        shadow-[0px_4px_4px_0px_rgba(18,18,18,0.2)]
+      ">
         <span className="text-[22px]">الرسائل</span>
         <MdOutlineChat className="text-4xl" />
         {onClose && (
           <button
             onClick={onClose}
-            className="absolute right-4 w-10 h-10 flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity"
+            className="
+              absolute right-4 flex h-10 w-10 cursor-pointer items-center
+              justify-center transition-opacity
+              hover:opacity-80
+            "
           >
             <IoClose className="text-3xl opacity-60" />
           </button>
         )}
       </div>
-      <div className="flex flex-col px-6 py-4 flex-1 min-h-0 overflow-y-auto scrollbar-thin">
+      <div className="
+        scrollbar-thin flex min-h-0 flex-1 flex-col overflow-y-auto px-6 py-4
+      ">
         <WordChatMessages />
       </div>
-      <div className="py-6 px-4 border-t border-white/5">
+      <div className="border-t border-white/5 px-4 py-6">
         <WordChatSend />
       </div>
     </div>
