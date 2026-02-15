@@ -22,7 +22,11 @@ const Button3D: React.FC<Button3DProps> = ({
   return (
     <button
       className={cn(
-        'rounded-xl border-none padding-0 cursor-pointer group font-semibold w-full relative overflow-x-clip disabled:cursor-default transition-all',
+        `
+          padding-0 group relative w-full cursor-pointer overflow-x-clip
+          rounded-xl border-none font-semibold transition-all
+          disabled:cursor-default
+        `,
         className
       )}
       disabled={diasbled}
@@ -30,16 +34,26 @@ const Button3D: React.FC<Button3DProps> = ({
     >
       <span
         className={cn(
-          'block py-3 px-12 rounded-lg text-xl -translate-y-[12px] group-active:-translate-y-[5px] bg-gradient-to-r transition-all w-full relative overflow-hidden',
+          `
+            relative block w-full -translate-y-[12px] overflow-hidden rounded-lg
+            bg-linear-to-r px-12 py-3 text-xl transition-all
+            group-active:-translate-y-[5px]
+          `,
           disabled && '-translate-y-[5px]',
           frontClassName
         )}
       >
         {!diasbled && (
-          <span className="absolute bg-gradient-to-tr from-white/50 blur-md to-transparent w-20 h-96 left-0 -top-20 rounded-lg animate-blurry-move rotate-45" />
+          <span className="
+            absolute -top-20 left-0 h-96 w-20 rotate-45 animate-blurry-move
+            rounded-lg bg-linear-to-tr from-white/50 to-transparent blur-md
+          " />
         )}
         {loading ? (
-          <span className="space-x-2 rtl:space-x-reverse">
+          <span className="
+            space-x-2
+            rtl:space-x-reverse
+          ">
             <Spinner />
             <span>{loadingText}</span>
           </span>
