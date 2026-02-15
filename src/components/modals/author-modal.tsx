@@ -35,7 +35,10 @@ const AuthorModal: React.FC<AuthorModalProps> = ({ children }) => {
         {children}
       </div>
       <Modal
-        className="w-[25rem] sm:w-[30rem]"
+        className="
+          w-100
+          sm:w-120
+        "
         isOpen={showCreds}
         onOpenChange={(open) => setShowCreds(open)}
       >
