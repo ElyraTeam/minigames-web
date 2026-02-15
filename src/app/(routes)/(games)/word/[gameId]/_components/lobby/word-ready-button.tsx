@@ -1,5 +1,6 @@
 import localPlayer from '@/api/socket';
 import useOwner from '@/hooks/use-owner';
+import useUIStore from '@/state/ui';
 import useLocalStore from '@/state/local';
 import usePlayersStore from '@/state/players';
 
@@ -14,6 +15,15 @@ const WordReadyButton: React.FC<WordReadyButtonProps> = ({}) => {
   const allReady = numberOfReadyPlayers === players?.length;
   const localReady = players?.some((p) => p.ready && p.nickname === nickname);
   const isOwner = useOwner();
+  const setPlayersSidebarOpen = useUIStore(
+    (state) => state.setPlayersSidebarOpen
+  );
+
+  const isWaitingForPlayers = isOwner && players?.length === 1;
+  const isWaitingForReady =
+    (isOwner && !isWaitingForPlayers && !allReady) ||
+    (!isOwner && localReady && !allReady);
+  const shouldOpenSidebarOnMobile = isWaitingForPlayers || isWaitingForReady;
 
   const handleReady = () => {
     localPlayer.ready();
@@ -21,6 +31,18 @@ const WordReadyButton: React.FC<WordReadyButtonProps> = ({}) => {
 
   const handleStart = () => {
     localPlayer.startRound();
+  };
+
+  const handleClick = () => {
+    if (shouldOpenSidebarOnMobile) {
+      setPlayersSidebarOpen(true);
+      return;
+    }
+    if (isOwner) {
+      handleStart();
+    } else {
+      handleReady();
+    }
   };
 
   const renderPlayersReady = () => {
@@ -41,15 +63,33 @@ const WordReadyButton: React.FC<WordReadyButtonProps> = ({}) => {
       if (localReady) return renderPlayersReady();
       return 'مستعد';
     }
-    if (players?.length == 1) return 'بانتظار اللاعبين..';
+    if (isWaitingForPlayers) return 'بانتظار اللاعبين..';
     if (!allReady) return renderPlayersReady();
     return 'ابدأ الجولات!';
   };
 
+  const isDisabled =
+    !shouldOpenSidebarOnMobile &&
+    localReady &&
+    (!allReady || !isOwner || players?.length === 1);
+
   return (
     <WordGameButton
-      onClick={isOwner ? handleStart : handleReady}
-      disabled={localReady && (!allReady || !isOwner || players?.length == 1)}
+      onClick={handleClick}
+      disabled={isDisabled}
+      className={
+        shouldOpenSidebarOnMobile
+          ? 'lg:pointer-events-none lg:bg-word-game-950'
+          : undefined
+      }
+      frontClassName={
+        shouldOpenSidebarOnMobile
+          ? `
+              lg:-translate-y-[5px] lg:from-word-game-800 lg:to-word-game-900
+              lg:to-800%
+            `
+          : undefined
+      }
     >
       {renderText()}
     </WordGameButton>

@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import { IoGameController } from 'react-icons/io5';
 
 import { cn } from '@/lib/utils';
+import useUIStore from '@/state/ui';
 import usePlayersStore from '@/state/players';
 import WordLogo from '@/components/word/word-logo';
 
@@ -15,7 +15,8 @@ interface WordMobileHeaderProps {}
 const WordMobileHeader: React.FC<WordMobileHeaderProps> = ({}) => {
   const newPlayersCount = usePlayersStore((state) => state.newPlayersCount);
   const clearNewPlayers = usePlayersStore((state) => state.clearNewPlayers);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const sidebarOpen = useUIStore((state) => state.playersSidebarOpen);
+  const setSidebarOpen = useUIStore((state) => state.setPlayersSidebarOpen);
 
   const handlePlayersClick = () => {
     setSidebarOpen(true);
