@@ -10,21 +10,27 @@ const WordVotingHeader: React.FC<WordVotingHeaderProps> = ({}) => {
   const categoryData = useVoteStore((state) => state.categoryVoteData);
 
   return (
-    <div className="
-      flex w-fit items-center gap-5 self-center rounded-b-2xl bg-white/15 px-12
-      pt-2 pb-2 text-base shadow-lg
-      lg:text-lg
-    ">
+    <div
+      className="
+       relative flex w-fit items-center gap-5 self-center rounded-b-2xl bg-white/15
+        px-12 pt-2 pb-2 text-base shadow-lg z-50
+        lg:text-lg
+      "
+    >
       <Tooltip
         text={
-          <div className="
-            text-sm
-            lg:text-base
-          ">
-            <h6 className="
-              mb-3 text-center text-base font-bold
-              lg:text-lg
-            ">
+          <div
+            className="
+              text-sm
+              lg:text-base
+            "
+          >
+            <h6
+              className="
+                mb-3 text-center text-base font-bold
+                lg:text-lg
+              "
+            >
               طريقة التصويت
             </h6>
             <p className="leading-[1.8]">
@@ -42,11 +48,13 @@ const WordVotingHeader: React.FC<WordVotingHeaderProps> = ({}) => {
           </div>
         }
       >
-        <p className="
-          flex h-6 w-6 flex-col items-center justify-center rounded-full
-          bg-word-secondary/70 p-2 text-sm font-bold text-word-game
-          lg:h-5 lg:w-5 lg:text-lg
-        ">
+        <p
+          className="
+            flex h-6 w-6 flex-col items-center justify-center rounded-full
+            bg-word-secondary/70 p-2 text-sm font-bold text-word-game
+            lg:h-5 lg:w-5 lg:text-lg
+          "
+        >
           ?
         </p>
       </Tooltip>

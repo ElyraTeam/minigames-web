@@ -13,12 +13,9 @@ const WordCountdown: React.FC<WordCountdownProps> = ({
   countdown,
 }) => {
   return (
-    <div className="
-      relative flex flex-1 flex-col overflow-hidden pt-20 duration-500
-      animate-in fade-in
-    ">
+    <div className="relative flex flex-1 flex-col overflow-hidden pt-20">
       <div className="
-        relative h-fit px-3 py-10
+        relative h-fit px-3 py-10 duration-500 animate-in fade-in
         lg:px-12
       ">
         <div className="

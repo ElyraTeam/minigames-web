@@ -23,7 +23,7 @@ const WordSettingCard: React.FC<WordSettingCardProps> = ({
               w-full rounded-2xl border-2 border-white bg-word-game-700 px-4
               py-1 text-center text-lg font-bold text-white
             `,
-            !isOwner && 'opacity-80'
+            !isOwner && 'opacity-80',
           )}
         >
           {title}
@@ -31,11 +31,13 @@ const WordSettingCard: React.FC<WordSettingCardProps> = ({
       </div>
 
       {/* Card Body */}
-      <div className="
+      <div
+        className="
         rounded-2xl bg-word-game-550 py-3 shadow-md
         lg:bg-linear-to-l lg:from-[rgba(41,53,38,0.03)]
         lg:to-[rgba(224,207,207,0.03)]
-      ">
+      "
+      >
         {children}
       </div>
     </div>
