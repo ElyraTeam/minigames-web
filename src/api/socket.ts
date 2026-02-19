@@ -101,6 +101,10 @@ class LocalPlayer {
     this.socket.emit("reset-game");
   }
 
+  reroll() {
+    this.socket.emit("reroll");
+  }
+
   ready() {
     this.socket.emit("ready");
   }

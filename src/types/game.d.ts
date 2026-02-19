@@ -63,6 +63,7 @@ interface Player {
   lastRoundScore: number;
   voted: boolean;
   ready: boolean;
+  votedReroll?: boolean;
 }
 
 interface CategoryVoteData {
