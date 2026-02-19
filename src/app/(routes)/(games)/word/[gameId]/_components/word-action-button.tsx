@@ -12,7 +12,7 @@ const WordActionButton: React.FC = () => {
   const game = useGameStore((state) => state.game);
   const countdown = useGameStore((state) => state.countdown);
 
-  if (countdown) return <WordGameButton className="invisible" />;
+  if (countdown) return <WordGameButton disabled>جاري البدأ</WordGameButton>;
   if (!game || game.state === State.LOBBY) return <WordReadyButton />;
   if (game.state === State.VOTING || game.state === State.INGAME)
     return <WordDoneButton state={game.state} />;
