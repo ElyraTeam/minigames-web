@@ -1,6 +1,13 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
+interface SavedGameSettings {
+  maxPlayers?: number;
+  rounds?: number;
+  letters?: string[];
+  categories?: string[];
+}
+
 interface LocalState {
   playerId?: string | null;
   nickname?: string | null;
@@ -9,6 +16,7 @@ interface LocalState {
   categoryInputValues: CategoryValues;
   isMuted: boolean;
   showNicknameModal: boolean;
+  savedGameSettings: SavedGameSettings;
   setPlayerId: (playerId: string) => void;
   setNickname: (nickname: string) => void;
   setToken: (token: string) => void;
@@ -16,6 +24,7 @@ interface LocalState {
   toggleMute: () => void;
   setCategoryInputValues: (values: CategoryValues) => void;
   setShowNicknameModal: (show: boolean) => void;
+  setSavedGameSettings: (settings: SavedGameSettings) => void;
 }
 
 const useLocalStore = create<LocalState>()(
@@ -29,6 +38,7 @@ const useLocalStore = create<LocalState>()(
         isMuted: false,
         categoryInputValues: {},
         showNicknameModal: false,
+        savedGameSettings: {},
         setNickname: (nickname) => set(() => ({ nickname })),
         setToken: (token) => set(() => ({ token })),
         setHttpToken: (httpToken) => set(() => ({ httpToken })),
@@ -38,6 +48,8 @@ const useLocalStore = create<LocalState>()(
           set(() => ({ categoryInputValues })),
         setShowNicknameModal: (showNicknameModal) =>
           set(() => ({ showNicknameModal })),
+        setSavedGameSettings: (savedGameSettings) =>
+          set(() => ({ savedGameSettings })),
       }),
       {
         name: 'local-player-storage',

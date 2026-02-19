@@ -14,6 +14,7 @@ const WordCreateGame: React.FC<WordCreateGameProps> = ({}) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const nickname = useLocalStore((state) => state.nickname);
+  const savedGameSettings = useLocalStore((state) => state.savedGameSettings);
 
   const createGame = async () => {
     if (!nickname) {
@@ -21,7 +22,11 @@ const WordCreateGame: React.FC<WordCreateGameProps> = ({}) => {
     }
     setLoading(true);
     try {
-      const res = await createRoom(nickname);
+      // Pass saved settings if available
+      const options = savedGameSettings && Object.keys(savedGameSettings).length > 0
+        ? savedGameSettings
+        : undefined;
+      const res = await createRoom(nickname, options);
       if (res.error) {
         toast.error(res.error);
         setLoading(false);

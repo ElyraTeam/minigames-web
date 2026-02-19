@@ -61,9 +61,10 @@ client.interceptors.response.use(
   },
 );
 
-export const createRoom = async (nickname: string) => {
+export const createRoom = async (nickname: string, options?: Partial<RoomOptions>) => {
   const res = await client.post("/word/room/create", {
     nickname,
+    ...(options && { options }),
   });
   return res.data as CreateRoomResponse;
 };
