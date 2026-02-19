@@ -27,6 +27,7 @@ const useCurrentGame = (roomId: string) => {
   const setWinnersOpen = useUIStore((state) => state.setWinnersOpen);
   const setToken = useLocalStore((state) => state.setToken);
   const setPlayers = usePlayersStore((state) => state.setPlayers);
+  const clearNewPlayers = usePlayersStore((state) => state.clearNewPlayers);
   const addChatMessage = useChatStore((state) => state.addChatMessage);
   const resetChatMessages = useChatStore((state) => state.resetChatMessages);
   const addNewMessage = useChatStore((state) => state.addNewMessage);
@@ -79,6 +80,7 @@ const useCurrentGame = (roomId: string) => {
         setWinners(null);
         resetChatMessages();
         clearNewMessages();
+        clearNewPlayers();
         setToken(authToken);
         setRoom({ id: roomId, options: roomOptions });
         setPlayerId(playerId);
