@@ -2,6 +2,8 @@ import { State } from '@/types/word';
 import localPlayer from '@/api/socket';
 
 import useVoteStore from '@/state/vote';
+import useRoomStore from '@/state/room';
+import useLocalStore from '@/state/local';
 import usePlayersStore from '@/state/players';
 import useCurrentPlayer from '@/hooks/use-current-player';
 
@@ -19,6 +21,8 @@ const WordDoneButton: React.FC<WordDoneButtonProps> = ({ state }) => {
   const playersLength = (
     usePlayersStore((state) => state.players?.players) || []
   ).length;
+  const categories = useRoomStore((state) => state.options?.options?.categories) || [];
+  const categoryInputValues = useLocalStore((state) => state.categoryInputValues);
 
   const handleDoneButton = () => {
     if (state === State.INGAME) return localPlayer.finishRound();
@@ -28,7 +32,13 @@ const WordDoneButton: React.FC<WordDoneButtonProps> = ({ state }) => {
   };
 
   const isDisabled = () => {
-    if (state === State.INGAME) return false;
+    if (state === State.INGAME) {
+      // Check if all categories have at least 2 characters
+      const allCategoriesFilled = categories.every(
+        (category) => (categoryInputValues[category]?.length ?? 0) >= 2
+      );
+      return !allCategoriesFilled;
+    }
     return myVotesLength < playersLength - 1 || currentPlayer?.voted;
   };
 
