@@ -3,6 +3,7 @@ import { Metadata, Viewport } from 'next';
 import { WORD_GAME_NAME } from '@/config/word';
 import { defaultWordMetadata } from '@/config/metadata';
 import WordBackground from '@/components/word/word-background';
+import RamadanLights from '@/components/ramadan/ramadan-lights';
 
 import WordAppbar from './word/_components/word-appbar';
 import WordGetPoints from './word/_components/word-get-points';
@@ -28,10 +29,15 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <WordBackground className="
+    <WordBackground
+      className="
       text-white scrollbar-thumb-rounded-lg scrollbar-thumb-word-secondary
       scrollbar-track-transparent
-    ">
+    "
+    >
+      {/* Ramadan Decorations */}
+      <RamadanLights className="fixed top-1" />
+
       <div className="min-h-screen overflow-x-hidden">
         <WordAppbar />
         <WordHomeSection />

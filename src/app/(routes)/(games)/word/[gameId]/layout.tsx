@@ -1,3 +1,5 @@
+import RamadanLights from '@/components/ramadan/ramadan-lights';
+
 import WordChatContainer from './_components/chat/word-chat-container';
 import WordMobileChat from './_components/chat/word-mobile-chat';
 import WordRoomInfoContainer from './_components/info/word-room-info-container';
@@ -11,22 +13,29 @@ export default async function WordGameLayout({
 }) {
   return (
     <>
+      {/* Ramadan Decorations */}
+      <RamadanLights className="fixed top-[115px] lg:top-0" />
+
       {/* Mobile Header */}
       <WordMobileHeader />
 
       {/* Main Layout */}
-      <div className="
+      <div
+        className="
         flex min-h-screen flex-col bg-word-game-600 pt-[102px] pb-[80px]
         lg:grid lg:h-screen lg:max-h-screen
         lg:grid-cols-[minmax(200px,275px)_minmax(550px,1fr)_minmax(200px,275px)]
         lg:items-stretch lg:justify-center lg:gap-4 lg:overflow-hidden
         lg:bg-transparent lg:px-6 lg:pt-12 lg:pb-12
-      ">
+      "
+      >
         {/* Sidebar - Room Info (desktop only) */}
-        <div className="
+        <div
+          className="
           hidden
           lg:flex lg:min-h-0 lg:flex-col
-        ">
+        "
+        >
           <WordRoomInfoContainer />
         </div>
 
@@ -34,10 +43,12 @@ export default async function WordGameLayout({
         {children}
 
         {/* Sidebar - Chat (desktop only) */}
-        <div className="
+        <div
+          className="
           hidden
           lg:flex lg:min-h-0 lg:flex-col
-        ">
+        "
+        >
           <WordChatContainer />
         </div>
       </div>
