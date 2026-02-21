@@ -97,6 +97,10 @@ class LocalPlayer {
     this.socket.emit("stop-game");
   }
 
+  submitValues(values: { [name: string]: string }) {
+    this.socket.emit("submit-values", values);
+  }
+
   resetGame() {
     this.socket.emit("reset-game");
   }

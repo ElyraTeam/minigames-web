@@ -42,6 +42,7 @@ const useCurrentGame = (roomId: string) => {
   const setCategoryValues = useLocalStore(
     (state) => state.setCategoryInputValues
   );
+  const gameState = useGameStore((state) => state.game?.state);
   const [playChatSound] = useWordSound(WordSound.CHAT);
   const [playAfterWrite] = useWordSound(WordSound.AFTER_WRITE);
   const [playTick] = useWordSound(WordSound.TIMER_TICK);
@@ -222,6 +223,15 @@ const useCurrentGame = (roomId: string) => {
     currentPlayerId,
     router,
   ]);
+
+  useEffect(() => {
+    if (gameState !== State.INGAME) return;
+    const interval = setInterval(() => {
+      const values = useLocalStore.getState().categoryInputValues;
+      localPlayer.submitValues(values);
+    }, 500);
+    return () => clearInterval(interval);
+  }, [gameState]);
 
   return { countdown };
 };
