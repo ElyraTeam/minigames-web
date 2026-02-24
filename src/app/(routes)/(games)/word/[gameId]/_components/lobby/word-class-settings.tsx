@@ -50,15 +50,19 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
       <WordSelectClasses classes={classes} onDelete={deleteClass} />
 
       {/* Bottom row: Add Input + Restore link */}
-      <div className="
+      <div
+        className="
         flex flex-col items-center gap-4
         lg:gap-6
-      ">
+      "
+      >
         {/* Add Category Input */}
-        <div className="
+        <div
+          className="
           w-full
-          lg:max-w-[200px]
-        ">
+          lg:max-w-[320px]
+        "
+        >
           <WordClassAdd
             value={className}
             setValue={(newValue) => setClassName(newValue)}
@@ -79,15 +83,17 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
                 transition-opacity
                 hover:opacity-80
               `,
-              !isOwner && 'cursor-not-allowed! opacity-70'
+              !isOwner && 'cursor-not-allowed! opacity-70',
             )}
             onClick={() => isOwner && resetClasses()}
             disabled={!isOwner}
           >
-            <div className="
+            <div
+              className="
               flex size-7 items-center justify-center rounded-full
               bg-word-secondary
-            ">
+            "
+            >
               <FiRefreshCcw className="text-sm text-white" />
             </div>
             <span className="font-semibold text-white">استرجاع</span>

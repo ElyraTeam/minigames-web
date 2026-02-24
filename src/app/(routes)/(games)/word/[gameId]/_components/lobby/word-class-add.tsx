@@ -36,7 +36,7 @@ const WordClassAdd: React.FC<WordClassAddProps> = ({
             rounded-full border border-black/40 bg-white
             focus-within:border-word-side
           `,
-          'overflow-hidden'
+          'overflow-hidden',
         )}
       >
         {/* Input */}
@@ -54,7 +54,7 @@ const WordClassAdd: React.FC<WordClassAddProps> = ({
               placeholder:text-word-side-200/60
             `,
             'focus:outline-none',
-            'disabled:cursor-not-allowed'
+            'disabled:cursor-not-allowed',
           )}
         />
 
@@ -70,7 +70,7 @@ const WordClassAdd: React.FC<WordClassAddProps> = ({
               transition-colors
               hover:bg-word-side-200/10
             `,
-            'disabled:cursor-not-allowed disabled:opacity-50'
+            'disabled:cursor-not-allowed disabled:opacity-50',
           )}
         >
           <IoAdd className="text-2xl" />
