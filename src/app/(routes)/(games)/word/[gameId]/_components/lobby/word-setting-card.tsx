@@ -33,10 +33,10 @@ const WordSettingCard: React.FC<WordSettingCardProps> = ({
       {/* Card Body */}
       <div
         className="
-        rounded-2xl bg-word-game-550 py-3 shadow-md
-        lg:bg-linear-to-l lg:from-[rgba(41,53,38,0.03)]
-        lg:to-[rgba(224,207,207,0.03)]
-      "
+          rounded-2xl bg-word-game-550 py-3 shadow-md
+          lg:bg-linear-to-l lg:from-[rgba(41,53,38,0.03)]
+          lg:to-[rgba(224,207,207,0.03)]
+        "
       >
         {children}
       </div>

@@ -15,10 +15,10 @@ const WordRerollVotes: React.FC = () => {
   return (
     <div
       className="
-      fixed bottom-32 left-4 z-40 flex items-center gap-2 rounded-full
-      bg-yellow-300/40 px-4 py-2 shadow-lg border-2 border-yellow-300
-      lg:bottom-4
-    "
+        fixed bottom-32 left-4 z-40 flex items-center gap-2 rounded-full
+        border-2 border-yellow-300 bg-yellow-300/40 px-4 py-2 shadow-lg
+        lg:bottom-4
+      "
     >
       <FiRefreshCw className="text-lg text-white" />
       <span className="font-bold text-white">

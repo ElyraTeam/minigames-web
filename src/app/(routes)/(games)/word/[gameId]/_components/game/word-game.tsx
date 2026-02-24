@@ -15,18 +15,21 @@ const WordGame: React.FC<WordGameProps> = ({}) => {
       <WordContentHeader>
         <div
           className="
-          flex items-center justify-center text-xl
-          lg:text-2xl gap-1
-        "
+            flex items-center justify-center gap-1 text-xl
+            lg:text-2xl
+          "
         >
           <p>كلمات تبدأ بالـ </p>
           <div
             className="
-            mx-1 flex h-16 items-center justify-center gap-3 rounded-full
-            bg-word-side/10 px-6 py-3
-          "
+              mx-1 flex h-16 items-center justify-center gap-3 rounded-full
+              bg-word-side/10 px-6 py-3
+            "
           >
-            <span className="text-2xl lg:text-3xl">{game?.currentLetter}</span>
+            <span className="
+              text-2xl
+              lg:text-3xl
+            ">{game?.currentLetter}</span>
             <WordChangeLetterButton />
           </div>
         </div>

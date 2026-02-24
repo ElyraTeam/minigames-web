@@ -26,7 +26,11 @@ const RamadanLights: React.FC<RamadanLightsProps> = ({ className }) => {
   return (
     <div
       className={cn(
-        'pointer-events-none absolute left-0 right-0 z-50 h-14 overflow-hidden opacity-60 sm:h-20',
+        `
+          pointer-events-none absolute right-0 left-0 z-50 h-14 overflow-hidden
+          opacity-60
+          sm:h-20
+        `,
         className,
       )}
     >
@@ -52,13 +56,16 @@ const RamadanLights: React.FC<RamadanLightsProps> = ({ className }) => {
             className={cn(
               'relative flex-col items-center',
               // Show fewer lanterns on mobile (hide odd indices)
-              lantern.id % 2 === 1 ? 'hidden sm:flex' : 'flex',
+              lantern.id % 2 === 1 ? `
+                hidden
+                sm:flex
+              ` : 'flex',
             )}
             style={{ marginTop: '4px' }}
           >
             {/* String */}
             <div
-              className="w-[1px] bg-[#3d2914]"
+              className="w-px bg-[#3d2914]"
               style={{ height: `${lantern.stringHeight}px` }}
             />
 
@@ -72,14 +79,20 @@ const RamadanLights: React.FC<RamadanLightsProps> = ({ className }) => {
             >
               {/* Glow effect */}
               <div
-                className="absolute -inset-1 rounded-full blur-sm sm:-inset-2 sm:blur-md"
+                className="
+                  absolute -inset-1 rounded-full blur-sm
+                  sm:-inset-2 sm:blur-md
+                "
                 style={{ backgroundColor: lantern.color.glow }}
               />
 
               {/* Lantern SVG */}
               <svg
                 viewBox="0 0 16 28"
-                className="relative h-5 w-3 sm:h-7 sm:w-4"
+                className="
+                  relative h-5 w-3
+                  sm:h-7 sm:w-4
+                "
               >
                 {/* Top cap */}
                 <rect

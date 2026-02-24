@@ -31,9 +31,9 @@ export default function HomePage() {
   return (
     <WordBackground
       className="
-      text-white scrollbar-thumb-rounded-lg scrollbar-thumb-word-secondary
-      scrollbar-track-transparent
-    "
+        text-white scrollbar-thumb-rounded-lg scrollbar-thumb-word-secondary
+        scrollbar-track-transparent
+      "
     >
       {/* Ramadan Decorations */}
       <RamadanLights className="fixed top-1" />

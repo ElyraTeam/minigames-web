@@ -12,8 +12,8 @@ const WordVotingHeader: React.FC<WordVotingHeaderProps> = ({}) => {
   return (
     <div
       className="
-       relative flex w-fit items-center gap-5 self-center rounded-b-2xl bg-white/15
-        px-12 pt-2 pb-2 text-base shadow-lg z-50
+        relative z-50 flex w-fit items-center gap-5 self-center rounded-b-2xl
+        bg-white/15 px-12 pt-2 pb-2 text-base shadow-lg
         lg:text-lg
       "
     >

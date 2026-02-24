@@ -36,7 +36,7 @@ const WordChatContainer: React.FC<WordChatContainerProps> = ({
           <button
             onClick={onClose}
             className="
-              absolute right-4 flex h-10 w-10 cursor-pointer items-center
+              absolute right-4 flex size-10 cursor-pointer items-center
               justify-center transition-opacity
               hover:opacity-80
             "
