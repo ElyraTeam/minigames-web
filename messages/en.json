@@ -1,0 +1,137 @@
+{
+  "Common": {
+    "ownerOnly": "Only the room owner can edit",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "Settings": {
+    "title": "Settings",
+    "sound": "Sound",
+    "language": "Language",
+    "arabic": "Arabic",
+    "english": "English"
+  },
+  "Footer": {
+    "madeWith": "Made with",
+    "byTeam": "by the team",
+    "allRightsReserved": "All rights reserved"
+  },
+  "WordHome": {
+    "gameTitle": "Word Game",
+    "gameDescription": "The web version of the famous game (Boy - Girl - Animal..)",
+    "playWithFriends": "Create a room and play easily with your friends!",
+    "howToPlay": "How to Play",
+    "startPlaying": "Start Playing",
+    "allRooms": "All Rooms",
+    "contactUs": "Contact Us",
+    "createRoom": "Create Room",
+    "noNickname": "Please enter your name first",
+    "welcome": "Welcome",
+    "change": "(change)",
+    "getPoints": {
+      "title": "Collect Points",
+      "description": "Vote with your friends on correct words and have the highest score at the end of all rounds"
+    },
+    "experience": {
+      "title": "Control the Experience",
+      "description": "Customize the game as you like by choosing the letters you want and adding or removing categories"
+    },
+    "competitive": {
+      "title": "Be the Fastest",
+      "description": "Race against other players and fill all categories — the writing phase ends when the first player finishes"
+    }
+  },
+  "WordAppbar": {
+    "gameName": "Word",
+    "nicknameUpdated": "Nickname updated.",
+    "settings": "Settings",
+    "enterName": "Enter your name",
+    "save": "Save"
+  },
+  "WordLobby": {
+    "generalSettings": "General Settings",
+    "chooseLetters": "Choose Letters",
+    "chooseCategories": "Choose Categories",
+    "ownerOnly": "Only the room owner can edit",
+    "maxPlayers": "Max Players",
+    "rounds": "Rounds",
+    "allLetters": "All Letters",
+    "addCategory": "Add category..",
+    "restore": "Restore",
+    "duplicateCategory": "Cannot add a duplicate category",
+    "currentOptionsNotFound": "Current options not found.",
+    "waitingForOwner": "Waiting for owner..",
+    "playersReady": "Ready",
+    "ready": "Ready",
+    "waitingForPlayers": "Waiting for players..",
+    "startRounds": "Start Rounds!",
+    "arabicLetters": "Arabic"
+  },
+  "WordGame": {
+    "voteFirst": "Vote First",
+    "done": "Done",
+    "changeLetterConfirm": "Do you want to vote to change the letter \"{letter}\"?",
+    "round": "Round",
+    "resetGame": "Reset Game",
+    "resetGameConfirm": "Are you sure you want to reset the game?",
+    "gameReset": "Game has been reset.",
+    "votingTitle": "How to Vote",
+    "vote10": "Vote <b>10</b> for a correct unique word",
+    "vote5": "Vote <b>5</b> for a correct duplicate word",
+    "vote0": "Vote <b>0</b> for an incorrect word",
+    "gameOver": "Game Over!",
+    "resetGameButton": "Reset Game",
+    "waitingForOwner": "Waiting for Owner",
+    "currentRound": "Current",
+    "topPlayers": "Top Players",
+    "playerReady": "Ready",
+    "playerVoted": "Voted",
+    "kickConfirm": "Are you sure you want to kick <b>{nickname}</b>?",
+    "wordsStartWith": "Words starting with",
+    "finished": "Finished",
+    "someone": "Someone",
+    "finishedWriting": "from writing!",
+    "votingStartsIn": "Voting starts in:",
+    "getReadyToWrite": "Get ready to write!",
+    "roundStartsIn": "Round starts in:",
+    "starting": "Starting...",
+    "players": "Players",
+    "you": "(You)",
+    "linkCopied": "Room link copied.",
+    "leaveConfirm": "Are you sure you want to leave?",
+    "categoryPlaceholder": "{letter}.."
+  },
+  "WordChat": {
+    "placeholder": "Type a message...",
+    "you": "(You)",
+    "noMessages": "No messages yet",
+    "messages": "Messages"
+  },
+  "WordFeedback": {
+    "hasIssue": "Having an issue?",
+    "contactUs": "Contact Us",
+    "title": "What's your issue?",
+    "email": "Email",
+    "name": "Name",
+    "message": "Message",
+    "send": "Send",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Email is invalid",
+    "nameRequired": "Name is required",
+    "nameMinLength": "Name must be at least {min} characters",
+    "messageRequired": "Message is required",
+    "messageMinLength": "Message must be at least {min} characters",
+    "successMessage": "Your issue has been submitted and will be resolved ASAP",
+    "errorMessage": "Something went wrong"
+  },
+  "NicknameModal": {
+    "title": "Welcome to Word!",
+    "label": "Enter your name",
+    "placeholder": "Enter your name",
+    "developedBy": "Developed by"
+  },
+  "Maintenance": {
+    "title": "Under Development",
+    "message": "This content is currently under development."
+  }
+}

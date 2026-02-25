@@ -1,0 +1,137 @@
+{
+  "Common": {
+    "ownerOnly": "فقط صاحب الغرفة يستطيع التعديل",
+    "yes": "نعم",
+    "no": "لا"
+  },
+  "Settings": {
+    "title": "الإعدادات",
+    "sound": "الصوت",
+    "language": "اللغة",
+    "arabic": "عربي",
+    "english": "إنجليزي"
+  },
+  "Footer": {
+    "madeWith": "صنع بالـ",
+    "byTeam": "بواسطة فريق",
+    "allRightsReserved": "جميع الحقوق محفوظة"
+  },
+  "WordHome": {
+    "gameTitle": "لعبة كلمة",
+    "gameDescription": "نسخة الويب للعبة الشهيرة (ولد - بنت - حيوان..)",
+    "playWithFriends": "أنشئ غرفة والعب بسهولة مع اصدقائك!",
+    "howToPlay": "كيفية اللعب",
+    "startPlaying": "ابدأ اللعب",
+    "allRooms": "جميع الغرف",
+    "contactUs": "تواصل معنا",
+    "createRoom": "أنشئ غرفة",
+    "noNickname": "اكتب اسمك يا شطور",
+    "welcome": "مرحبا",
+    "change": "(تغيير)",
+    "getPoints": {
+      "title": "جمع النقاط",
+      "description": "صوت أنت واصدقائك للكلمات الصحيحة وكن أعلي من يملك نقاطا عند نهاية جميع الجولات"
+    },
+    "experience": {
+      "title": "تحكم فالتجربة",
+      "description": "خصص اللعبة كما تريد عن طريق اختيار الحروف التي تريدها وإضافة أو إزالة فئات حسب رغبتك"
+    },
+    "competitive": {
+      "title": "كن اسرع",
+      "description": "تسابق مع باقي اللاعبين واملأ جميع الفئات تنتهي مرحلة الكتابة مع انتهاء أول لاعب"
+    }
+  },
+  "WordAppbar": {
+    "gameName": "كلمة",
+    "nicknameUpdated": "تم تعديل الاسم.",
+    "settings": "تعديلات",
+    "enterName": "اكتب اسمك",
+    "save": "حفظ"
+  },
+  "WordLobby": {
+    "generalSettings": "اعدادات عامة",
+    "chooseLetters": "اختر الحروف",
+    "chooseCategories": "اختر الفئات",
+    "ownerOnly": "فقط صاحب الغرفة يستطيع التعديل",
+    "maxPlayers": "عدد اللاعبين",
+    "rounds": "عدد الجولات",
+    "allLetters": "كل الحروف",
+    "addCategory": "أضف فئة..",
+    "restore": "استرجاع",
+    "duplicateCategory": "لا يمكن تكرار نفس الفئة",
+    "currentOptionsNotFound": "Current options not found.",
+    "waitingForOwner": "بانتظار المنشئ..",
+    "playersReady": "مستعدون",
+    "ready": "مستعد",
+    "waitingForPlayers": "بانتظار اللاعبين..",
+    "startRounds": "ابدأ الجولات!",
+    "arabicLetters": "العربية"
+  },
+  "WordGame": {
+    "voteFirst": "صوت أولًا",
+    "done": "انتهيت",
+    "changeLetterConfirm": "هل تريد التصويت لتغيير الحرف \"{letter}\"؟",
+    "round": "الجولة",
+    "resetGame": "اعادة اللعبة",
+    "resetGameConfirm": "هل انت متأكد من رغبتك في اعادة اللعبة؟",
+    "gameReset": "تم اعادة اللعبة.",
+    "votingTitle": "طريقة التصويت",
+    "vote10": "صوت بـ<b>10</b> للكلمة الصحيحة الغير مكررة",
+    "vote5": "صوت بـ<b>5</b> للكلمة الصحيحة المكررة",
+    "vote0": "صوت بـ<b>0</b> للكلمة الغير صحيحة",
+    "gameOver": "انتهت اللعبة!",
+    "resetGameButton": "اعادة اللعبة",
+    "waitingForOwner": "بانتظار المنشئ",
+    "currentRound": "الحالية",
+    "topPlayers": "المتصدرون",
+    "playerReady": "مستعد",
+    "playerVoted": "تم التصويت",
+    "kickConfirm": "هل انت متأكد من رغبتك في طرد <b>{nickname}</b>؟",
+    "wordsStartWith": "كلمات تبدأ بالـ",
+    "finished": "انتهي",
+    "someone": "شخص",
+    "finishedWriting": "من الكتابة!",
+    "votingStartsIn": "سيبدأ التصويت بعد:",
+    "getReadyToWrite": "استعد للكتابة!",
+    "roundStartsIn": "ستبدأ الجولة بعد:",
+    "starting": "جاري البدأ",
+    "players": "اللاعبون",
+    "you": "(أنت)",
+    "linkCopied": "تم نسخ رابط الغرفة.",
+    "leaveConfirm": "هل انت متأكد من رغبتك بالمغادرة؟",
+    "categoryPlaceholder": "{letter}ـ.."
+  },
+  "WordChat": {
+    "placeholder": "اكتب رسالة...",
+    "you": "(أنت)",
+    "noMessages": "لا توجد رسائل حتى الآن",
+    "messages": "الرسائل"
+  },
+  "WordFeedback": {
+    "hasIssue": "واجهتك مشكلة؟",
+    "contactUs": "تواصل معنا",
+    "title": "ما هي مشكلتك؟",
+    "email": "الايميل",
+    "name": "الاسم",
+    "message": "الرسالة",
+    "send": "ارسال",
+    "emailRequired": "الايميل مطلوب",
+    "emailInvalid": "الايميل غير صالح",
+    "nameRequired": "الاسم مطلوب",
+    "nameMinLength": "الاسم لازم يكون {min} حروف على الأقل",
+    "messageRequired": "الرسالة مطلوبة",
+    "messageMinLength": "الرسالة لازم تكون {min} حروف على الأقل",
+    "successMessage": "مشكلتك اتبعتت وهتتحل في اسرع وقت",
+    "errorMessage": "مشكلة حصلت"
+  },
+  "NicknameModal": {
+    "title": "مرحبًا بك في كلمة!",
+    "label": "اكتب اسمك",
+    "placeholder": "اكتب اسمك",
+    "developedBy": "تم التطوير بواسطة"
+  },
+  "Maintenance": {
+    "title": "قيد التطوير",
+    "message": "هذا المحتوي قيد التطوير حاليًا."
+  }
+}
