@@ -9,6 +9,8 @@ import { useTranslations } from 'next-intl';
 import {
   CHARS_ARABIC,
   CHARS_ENGLISH,
+  DEFAULT_CATEGORIES_ARABIC,
+  DEFAULT_CATEGORIES_ENGLISH,
   DEFAULT_CHARS_NUMBER,
 } from '@/config/word';
 import useRoomOptions from '@/hooks/use-room-options';
@@ -41,11 +43,19 @@ const WordLetterSettings: React.FC<WordLetterSettingsProps> = ({}) => {
   };
 
   const handleLanguageSwitch = (index: number) => {
-    if (!isOwner) return;
+    if (!isOwner || !currentOptions) return;
     const lang = index === 0 ? 'ar' : 'en';
     const fullAlphabet = index === 0 ? CHARS_ARABIC : CHARS_ENGLISH;
-    const saved = savedGameSettings?.lettersByLanguage?.[lang];
-    setRoomLetters(saved ?? fullAlphabet.slice(0, DEFAULT_CHARS_NUMBER));
+    const defaultCategories =
+      index === 0 ? DEFAULT_CATEGORIES_ARABIC : DEFAULT_CATEGORIES_ENGLISH;
+    const letters =
+      savedGameSettings?.lettersByLanguage?.[lang] ??
+      fullAlphabet.slice(0, DEFAULT_CHARS_NUMBER);
+    const categories =
+      savedGameSettings?.categoriesByLanguage?.[lang] ?? defaultCategories;
+    updateRoomOptions({ ...currentOptions, letters, categories }).then(
+      (error) => error && toast.error(error),
+    );
   };
 
   const setRoomLetters = async (letters: string[]) => {
