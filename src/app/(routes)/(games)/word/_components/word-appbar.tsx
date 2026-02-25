@@ -1,6 +1,6 @@
 import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 
-import { WORD_GAME_NAME_AR } from '@/config/word';
 import WordLogo from '@/components/word/word-logo';
 import ElyraLogo from '@/components/ui/elyra-logo';
 import AuthorModal from '@/components/modals/author-modal';
@@ -11,7 +11,9 @@ import WordAppbarBackground from './word-appbar-background';
 
 interface WordAppbarProps {}
 
-const WordAppbar: React.FC<WordAppbarProps> = ({}) => {
+const WordAppbar: React.FC<WordAppbarProps> = async ({}) => {
+  const t = await getTranslations('WordAppbar');
+
   return (
     <>
       <WordAppbarBackground>
@@ -30,7 +32,7 @@ const WordAppbar: React.FC<WordAppbarProps> = ({}) => {
             <p className="
               text-lg font-bold
               lg:text-xl
-            ">{WORD_GAME_NAME_AR}</p>
+            ">{t('gameName')}</p>
           </div>
         </div>
         <div className="
