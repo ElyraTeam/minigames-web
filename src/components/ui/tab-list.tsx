@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, createContext } from 'react';
+import { useLocale } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 
@@ -17,7 +18,9 @@ interface TabListProps {
   parentClassName?: string;
   navClassName?: string;
   tabSwitchClassName?: string;
+  inactiveTabSwitchClassName?: string;
   activeClassName?: string;
+  onTabChange?: (index: number) => void;
 }
 
 const TabList: React.FC<TabListProps> = ({
@@ -27,16 +30,21 @@ const TabList: React.FC<TabListProps> = ({
   parentClassName,
   navClassName,
   tabSwitchClassName,
+  inactiveTabSwitchClassName,
   activeClassName,
+  onTabChange,
 }) => {
+  const locale = useLocale();
+  const isRtl = locale === 'ar';
   const [activeTab, setActiveTab] = useState(activeTabIndex);
   const handleTabClick = (index: number) => {
     setActiveTab(index);
+    onTabChange?.(index);
   };
 
   const tabs = React.Children.toArray(children).filter(
     (child): child is React.ReactElement<TabItemProps> =>
-      React.isValidElement(child) && child.type == TabItem
+      React.isValidElement(child) && child.type == TabItem,
   );
 
   return (
@@ -46,7 +54,7 @@ const TabList: React.FC<TabListProps> = ({
           <ul
             className={cn(
               'relative flex justify-center transition-transform',
-              className
+              className,
             )}
             role="tablist"
             aria-orientation="horizontal"
@@ -60,7 +68,8 @@ const TabList: React.FC<TabListProps> = ({
                   className={cn(
                     'w-full text-sm transition-opacity duration-200',
                     tabSwitchClassName,
-                    activeTab !== index && 'opacity-30'
+                    activeTab !== index && 'opacity-30',
+                    activeTab !== index && inactiveTabSwitchClassName,
                   )}
                 >
                   {tab.props.label}
@@ -69,12 +78,12 @@ const TabList: React.FC<TabListProps> = ({
             ))}
             <span
               className={cn(
-                'absolute left-0 h-full transition-all duration-500',
-                activeClassName
+                'absolute start-0 h-full transition-all duration-500',
+                activeClassName,
               )}
               style={{
                 width: `${(1 / tabs.length) * 100}%`,
-                translate: `${(tabs.length - 1 - activeTab) * 100}%`,
+                translate: `${activeTab * (isRtl ? -1 : 1) * 100}%`,
               }}
             />
           </ul>

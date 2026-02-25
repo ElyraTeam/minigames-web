@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 import WordButton from '@/components/word/word-button';
 import MaintenanceModal from '@/components/modals/maintenance-modal';
@@ -8,6 +9,7 @@ import MaintenanceModal from '@/components/modals/maintenance-modal';
 interface WordPublicRoomsButtonProps {}
 
 const WordPublicRoomsButton: React.FC<WordPublicRoomsButtonProps> = ({}) => {
+  const t = useTranslations('WordHome');
   const [isMaintenanceOpen, setMaintenanceOpen] = useState(false);
 
   return (
@@ -24,7 +26,7 @@ const WordPublicRoomsButton: React.FC<WordPublicRoomsButtonProps> = ({}) => {
         "
         onClick={() => setMaintenanceOpen(true)}
       >
-        جميع الغرف
+        {t('allRooms')}
       </WordButton>
     </>
   );

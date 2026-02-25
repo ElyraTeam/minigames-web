@@ -1,6 +1,7 @@
 'use client';
 
 import { IoGameController } from 'react-icons/io5';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import useUIStore from '@/state/ui';
@@ -13,6 +14,7 @@ import WordMobileSidebar from './word-mobile-sidebar';
 interface WordMobileHeaderProps {}
 
 const WordMobileHeader: React.FC<WordMobileHeaderProps> = ({}) => {
+  const t = useTranslations('WordGame');
   const newPlayersCount = usePlayersStore((state) => state.newPlayersCount);
   const clearNewPlayers = usePlayersStore((state) => state.clearNewPlayers);
   const sidebarOpen = useUIStore((state) => state.playersSidebarOpen);
@@ -67,7 +69,7 @@ const WordMobileHeader: React.FC<WordMobileHeaderProps> = ({}) => {
             )}
           >
             <IoGameController className="text-lg text-white" />
-            <span className="text-base text-white">اللاعبون</span>
+            <span className="text-base text-white">{t('players')}</span>
             {!sidebarOpen && newPlayersCount > 0 && (
               <div
                 className="

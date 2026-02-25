@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTransition } from '@react-spring/web';
+import { useTranslations } from 'next-intl';
 
 import { State } from '@/types/word';
 import useGameStore from '@/state/game';
@@ -27,6 +28,7 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
     (roomOptions?.options?.maxPlayers || 0) - sortedPlayers.length;
   const [kickingPlayer, setKickingPlayer] = useState<Player | null>(null);
   const [kickModalOpen, setKickModalOpen] = useState(false);
+  const t = useTranslations('WordGame');
 
   let totalHeight = 0;
   const transitions = useTransition(
@@ -67,12 +69,10 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
   return (
     <>
       <ConfirmModal
-        subtitle={
-          <>
-            هل انت متأكد من رغبتك في طرد{' '}
-            <span className="font-bold">{kickingPlayer?.nickname}</span>؟
-          </>
-        }
+        subtitle={t.rich('kickConfirm', {
+          nickname: kickingPlayer?.nickname ?? '',
+          b: (chunks) => <span className="font-bold">{chunks}</span>,
+        })}
         isOpen={kickModalOpen}
         onOpenChange={(open) => {
           setKickModalOpen(open);
@@ -106,7 +106,7 @@ const WordLeaderboard: React.FC<WordLeaderboardProps> = ({ lastRound }) => {
               setKickModalOpen(true);
               setKickingPlayer(plr);
             }}
-            checkmarkText={gameStatus === State.LOBBY ? 'مستعد' : 'تم التصويت'}
+            checkmarkText={gameStatus === State.LOBBY ? t('playerReady') : t('playerVoted')}
             style={{
               zIndex: sortedPlayers.length - index,
               ...style,

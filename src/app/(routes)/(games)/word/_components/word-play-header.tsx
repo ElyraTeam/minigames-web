@@ -1,10 +1,13 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import AppearOnTransition from '@/components/ui/appear-on-transition';
 
 interface WordPlayHeaderProps {}
 
 const WordPlayHeader: React.FC<WordPlayHeaderProps> = ({}) => {
+  const t = useTranslations('WordHome');
+
   return (
     <div className="
       relative flex h-[60vh] flex-col items-center justify-center
@@ -27,7 +30,7 @@ const WordPlayHeader: React.FC<WordPlayHeaderProps> = ({}) => {
             xs:text-3xl
             lg:text-4xl
           ">
-            كيفية اللعب
+            {t('howToPlay')}
           </p>
         </div>
       </AppearOnTransition>

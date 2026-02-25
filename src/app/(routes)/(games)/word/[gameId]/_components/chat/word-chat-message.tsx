@@ -1,3 +1,7 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
+
 import { cn } from '@/lib/utils';
 
 import WordChatParts from './word-chat-parts';
@@ -17,6 +21,8 @@ const WordChatMessage: React.FC<WordChatMessageProps> = ({
   rounded = true,
   spacing = 10,
 }) => {
+  const t = useTranslations('WordChat');
+
   return (
     <div
       className={cn(
@@ -27,7 +33,7 @@ const WordChatMessage: React.FC<WordChatMessageProps> = ({
     >
       {sender && (
         <label className={cn('text-[15px] opacity-60', !self && 'text-end')}>
-          {sender} {self && '(أنت)'}
+          {sender} {self && t('you')}
         </label>
       )}
       <p

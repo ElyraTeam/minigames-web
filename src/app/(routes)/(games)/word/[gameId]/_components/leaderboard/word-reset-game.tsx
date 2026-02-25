@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import localPlayer from '@/api/socket';
 import useOwner from '@/hooks/use-owner';
 
@@ -7,6 +9,7 @@ interface WordResetGameProps {}
 
 const WordResetGame: React.FC<WordResetGameProps> = ({}) => {
   const isOwner = useOwner();
+  const t = useTranslations('WordGame');
 
   const handleResetGame = () => {
     if (!isOwner) return;
@@ -15,7 +18,7 @@ const WordResetGame: React.FC<WordResetGameProps> = ({}) => {
 
   return (
     <WordGameButton onClick={handleResetGame} disabled={!isOwner}>
-      {isOwner ? 'اعادة اللعبة' : 'بانتظار المنشئ'}
+      {isOwner ? t('resetGameButton') : t('waitingForOwner')}
     </WordGameButton>
   );
 };

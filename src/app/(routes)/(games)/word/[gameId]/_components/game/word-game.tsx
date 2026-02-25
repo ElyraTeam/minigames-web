@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import useGameStore from '@/state/game';
 
 import WordCategoryBoxes from './word-category-boxes';
@@ -8,6 +10,7 @@ import WordChangeLetterButton from './word-change-letter-button';
 interface WordGameProps {}
 
 const WordGame: React.FC<WordGameProps> = ({}) => {
+  const t = useTranslations('WordGame');
   const game = useGameStore((state) => state.game);
 
   return (
@@ -19,7 +22,7 @@ const WordGame: React.FC<WordGameProps> = ({}) => {
             lg:text-2xl
           "
         >
-          <p>كلمات تبدأ بالـ </p>
+          <p>{t('wordsStartWith')} </p>
           <div
             className="
               mx-1 flex h-16 items-center justify-center gap-3 rounded-full

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { BsSendFill } from 'react-icons/bs';
+import { useTranslations } from 'next-intl';
 
 import { uid } from '@/lib/utils';
 import localPlayer from '@/api/socket';
@@ -12,6 +13,7 @@ interface WordChatSendProps {}
 const WordChatSend: React.FC<WordChatSendProps> = ({}) => {
   const [msg, setMessage] = useState('');
   const addChatMessage = useChatStore((state) => state.addChatMessage);
+  const t = useTranslations('WordChat');
 
   const sendMessage = async () => {
     if (!msg || msg.trim().length == 0) return;
@@ -43,7 +45,7 @@ const WordChatSend: React.FC<WordChatSendProps> = ({}) => {
           placeholder:text-white/60
           focus:border-word-secondary-300
         "
-        placeholder="اكتب رسالة..."
+        placeholder={t('placeholder')}
         value={msg}
         onChange={(e) => setMessage(e.target.value)}
         onKeyUp={(e) => e.key == 'Enter' && sendMessage()}

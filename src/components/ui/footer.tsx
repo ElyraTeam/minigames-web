@@ -1,10 +1,13 @@
 import { FaHeart } from 'react-icons/fa';
+import { useTranslations } from 'next-intl';
 
 import AuthorModal from '@/components/modals/author-modal';
 
 interface FooterProps {}
 
 const Footer: React.FC<FooterProps> = ({}) => {
+  const t = useTranslations('Footer');
+
   return (
     <footer className="
       fixed bottom-0 left-0 hidden w-full items-end justify-between px-8 py-2
@@ -12,10 +15,10 @@ const Footer: React.FC<FooterProps> = ({}) => {
       lg:flex
     ">
       <AuthorModal>
-        صنع بالـ
-        <FaHeart className="inline text-red-500" /> بواسطة فريق{' '}
+        {t('madeWith')}
+        <FaHeart className="inline text-red-500" /> {t('byTeam')}{' '}
       </AuthorModal>
-      <p>جميع الحقوق محفوظة &copy; {new Date().getFullYear()}</p>
+      <p>{t('allRightsReserved')} &copy; {new Date().getFullYear()}</p>
     </footer>
   );
 };

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import AppearOnTransition from '@/components/ui/appear-on-transition';
 
@@ -7,6 +8,8 @@ import WordHomeCard from './word-home-card';
 interface WordExperienceProps {}
 
 const WordExperience: React.FC<WordExperienceProps> = ({}) => {
+  const t = useTranslations('WordHome');
+
   return (
     <div className="relative h-screen">
       <div className="
@@ -33,9 +36,8 @@ const WordExperience: React.FC<WordExperienceProps> = ({}) => {
         </AppearOnTransition>
         <AppearOnTransition className="slide-in-from-left-20">
           <WordHomeCard
-            title="تحكم فالتجربة"
-            description="خصص اللعبة كما تريد عن طريق 
-          اختيار الحروف التي تريدها وإضافة أو إزالة فئات حسب رغبتك"
+            title={t('experience.title')}
+            description={t('experience.description')}
           />
         </AppearOnTransition>
       </div>

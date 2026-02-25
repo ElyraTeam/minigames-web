@@ -1,4 +1,5 @@
 import { FaMedal } from 'react-icons/fa';
+import { useTranslations } from 'next-intl';
 
 import Modal from '@/components/modals/modal';
 
@@ -15,6 +16,8 @@ const WordWinnersModal: React.FC<WordWinnersModalProps> = ({
   onOpenChange,
   winners,
 }) => {
+  const t = useTranslations('WordGame');
+
   const getRankByIndex = (index: number) => {
     if (index === 1) return 1;
     if (index === 0) return 3;
@@ -53,7 +56,7 @@ const WordWinnersModal: React.FC<WordWinnersModalProps> = ({
         text-white
       ">
         <FaMedal className="text-4xl" />
-        <h4 className="font-bold">انتهت اللعبة!</h4>
+        <h4 className="font-bold">{t('gameOver')}</h4>
       </div>
       <div className="flex h-64 gap-2 px-8 py-4">
         {[thirdPlr, firstPlr, secondPlr].map((plr, index) =>

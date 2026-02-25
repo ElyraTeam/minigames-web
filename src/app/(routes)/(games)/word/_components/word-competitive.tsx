@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import AppearOnTransition from '@/components/ui/appear-on-transition';
 
@@ -7,6 +8,8 @@ import WordHomeCard from './word-home-card';
 interface WordCompetitiveProps {}
 
 const WordCompetitive: React.FC<WordCompetitiveProps> = ({}) => {
+  const t = useTranslations('WordHome');
+
   return (
     <div className="relative h-screen">
       <div className="
@@ -20,8 +23,8 @@ const WordCompetitive: React.FC<WordCompetitiveProps> = ({}) => {
         ">
           <AppearOnTransition className="slide-in-from-right-20">
             <WordHomeCard
-              title="كن اسرع"
-              description="تسابق مع باقي اللاعبين واملأ جميع الفئات تنتهي مرحلة الكتابة مع انتهاء أول لاعب"
+              title={t('competitive.title')}
+              description={t('competitive.description')}
             />
           </AppearOnTransition>
           <AppearOnTransition className="slide-in-from-left-20">

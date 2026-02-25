@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import useUIStore from '@/state/ui';
 import { State } from '@/types/word';
 import useGameStore from '@/state/game';
@@ -22,6 +24,7 @@ interface WordMainCardProps {
 }
 
 const WordMainCard: React.FC<WordMainCardProps> = ({ roomId }) => {
+  const t = useTranslations('WordGame');
   const game = useGameStore((state) => state.game);
   const players = usePlayersStore((state) => state.players?.players) || [];
   const winnersOpen = useUIStore((state) => state.winnersOpen);
@@ -36,24 +39,24 @@ const WordMainCard: React.FC<WordMainCardProps> = ({ roomId }) => {
           <WordCountdown
             title={
               <>
-                انتهي{' '}
+                {t('finished')}{' '}
                 <span className="text-word-secondary-500/40">
                   {(game.stopClicker &&
                     getPlayerById(players, game.stopClicker)?.nickname) ||
-                    'شخص'}
+                    t('someone')}
                 </span>{' '}
-                من الكتابة!
+                {t('finishedWriting')}
               </>
             }
-            subtitle="سيبدأ التصويت بعد:"
+            subtitle={t('votingStartsIn')}
             countdown={countdown}
           />
         );
       }
       return (
         <WordCountdown
-          title="استعد للكتابة!"
-          subtitle="ستبدأ الجولة بعد:"
+          title={t('getReadyToWrite')}
+          subtitle={t('roundStartsIn')}
           countdown={countdown}
         />
       );

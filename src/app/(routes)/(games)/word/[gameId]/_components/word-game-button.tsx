@@ -15,17 +15,17 @@ const WordGameButton: React.FC<WordGameButtonProps> = ({
           w-fit self-center rounded-2xl bg-word-game-700
           disabled:bg-word-game-950
         `,
-        className
+        className,
       )}
       frontClassName={cn(
         frontClassName,
         `
-          h-[50px] w-[150px] -translate-y-[8px] content-center rounded-2xl
+          h-[50px] w-[200px] -translate-y-[8px] content-center rounded-2xl
           from-word-game-600 to-word-game-700 to-200% px-4 py-2 text-base
           group-active:-translate-y-[3px]
           group-disabled:-translate-y-[5px] group-disabled:from-word-game-800
           group-disabled:to-word-game-900 group-disabled:to-800%
-        `
+        `,
       )}
       {...props}
     />

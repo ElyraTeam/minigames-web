@@ -1,4 +1,5 @@
 import { FaTools } from 'react-icons/fa';
+import { useTranslations } from 'next-intl';
 
 import Modal from './modal';
 
@@ -11,6 +12,8 @@ const MaintenanceModal: React.FC<MaintenanceModalProps> = ({
   isOpen,
   onOpenChange,
 }) => {
+  const t = useTranslations('Maintenance');
+
   return (
     <Modal
       isOpen={isOpen}
@@ -19,9 +22,9 @@ const MaintenanceModal: React.FC<MaintenanceModalProps> = ({
     >
       <div className="flex items-center gap-3 text-warning">
         <FaTools className="text-3xl" />
-        <h3 className="font-bold">قيد التطوير</h3>
+        <h3 className="font-bold">{t('title')}</h3>
       </div>
-      <p>هذا المحتوي قيد التطوير حاليًا.</p>
+      <p>{t('message')}</p>
     </Modal>
   );
 };

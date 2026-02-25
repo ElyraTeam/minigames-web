@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import useVoteStore from '@/state/vote';
 import useRoomStore from '@/state/room';
 import Tooltip from '@/components/ui/tooltip';
@@ -8,6 +10,7 @@ const WordVotingHeader: React.FC<WordVotingHeaderProps> = ({}) => {
   const categoriesLength =
     useRoomStore((state) => state.options?.options?.categories.length) || 0;
   const categoryData = useVoteStore((state) => state.categoryVoteData);
+  const t = useTranslations('WordGame');
 
   return (
     <div
@@ -31,19 +34,28 @@ const WordVotingHeader: React.FC<WordVotingHeaderProps> = ({}) => {
                 lg:text-lg
               "
             >
-              طريقة التصويت
+              {t('votingTitle')}
             </h6>
             <p className="leading-[1.8]">
-              صوت بـ<span className="font-bold text-[#1e8893]">10</span> للكلمة
-              الصحيحة الغير مكررة
+              {t.rich('vote10', {
+                b: (chunks) => (
+                  <span className="font-bold text-[#1e8893]">{chunks}</span>
+                ),
+              })}
             </p>
             <p className="leading-[1.8]">
-              صوت بـ<span className="font-bold text-[#1e8893]">5</span> للكلمة
-              الصحيحة المكررة
+              {t.rich('vote5', {
+                b: (chunks) => (
+                  <span className="font-bold text-[#1e8893]">{chunks}</span>
+                ),
+              })}
             </p>
             <p className="leading-[1.8]">
-              صوت بـ<span className="font-bold text-[#1e8893]">0</span> للكلمة
-              الغير صحيحة
+              {t.rich('vote0', {
+                b: (chunks) => (
+                  <span className="font-bold text-[#1e8893]">{chunks}</span>
+                ),
+              })}
             </p>
           </div>
         }

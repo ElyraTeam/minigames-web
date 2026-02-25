@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import { State } from '@/types/word';
 import useGameStore from '@/state/game';
 
@@ -9,10 +11,11 @@ import WordResetGame from './leaderboard/word-reset-game';
 import WordReadyButton from './lobby/word-ready-button';
 
 const WordActionButton: React.FC = () => {
+  const t = useTranslations('WordGame');
   const game = useGameStore((state) => state.game);
   const countdown = useGameStore((state) => state.countdown);
 
-  if (countdown) return <WordGameButton disabled>جاري البدأ</WordGameButton>;
+  if (countdown) return <WordGameButton disabled>{t('starting')}</WordGameButton>;
   if (!game || game.state === State.LOBBY) return <WordReadyButton />;
   if (game.state === State.VOTING || game.state === State.INGAME)
     return <WordDoneButton state={game.state} />;

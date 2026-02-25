@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { LuMessageCircle } from 'react-icons/lu';
+import { useTranslations } from 'next-intl';
 
 import useChatStore from '@/state/chat';
 import useLocalStore from '@/state/local';
@@ -12,6 +13,7 @@ import WordChatMessage from './word-chat-message';
 interface WordChatMessagesProps {}
 
 const WordChatMessages: React.FC<WordChatMessagesProps> = ({}) => {
+  const t = useTranslations('WordChat');
   const messages = useChatStore((state) => state.messages);
   const nickname = useLocalStore((state) => state.nickname);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -64,7 +66,7 @@ const WordChatMessages: React.FC<WordChatMessagesProps> = ({}) => {
           my-auto flex flex-col items-center justify-center gap-2 text-white/30
         ">
           <LuMessageCircle className="text-3xl" />
-          <p className="text-[15px]">لا توجد رسائل حتى الآن</p>
+          <p className="text-[15px]">{t('noMessages')}</p>
         </div>
       )}
       <div ref={messagesEndRef} />

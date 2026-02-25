@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import { State } from '@/types/word';
 import localPlayer from '@/api/socket';
 
@@ -23,6 +25,7 @@ const WordDoneButton: React.FC<WordDoneButtonProps> = ({ state }) => {
   ).length;
   const categories = useRoomStore((state) => state.options?.options?.categories) || [];
   const categoryInputValues = useLocalStore((state) => state.categoryInputValues);
+  const t = useTranslations('WordGame');
 
   const handleDoneButton = () => {
     if (state === State.INGAME) return localPlayer.finishRound();
@@ -33,7 +36,6 @@ const WordDoneButton: React.FC<WordDoneButtonProps> = ({ state }) => {
 
   const isDisabled = () => {
     if (state === State.INGAME) {
-      // Check if all categories have at least 2 characters
       const allCategoriesFilled = categories.every(
         (category) => (categoryInputValues[category]?.length ?? 0) >= 2
       );
@@ -44,7 +46,7 @@ const WordDoneButton: React.FC<WordDoneButtonProps> = ({ state }) => {
 
   const renderButtonText = () => {
     if (state === State.VOTING) {
-      if (myVotesLength < playersLength - 1) return 'صوت أولًا';
+      if (myVotesLength < playersLength - 1) return t('voteFirst');
       if (currentPlayer?.voted)
         return (
           <p className="text-xl leading-none font-bold">
@@ -53,7 +55,7 @@ const WordDoneButton: React.FC<WordDoneButtonProps> = ({ state }) => {
           </p>
         );
     }
-    return 'انتهيت';
+    return t('done');
   };
 
   return (

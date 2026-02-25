@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import Button from '@/components/ui/button';
 
 import Modal from './modal';
@@ -23,6 +25,8 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
   onOpenChange,
   onConfirm,
 }) => {
+  const t = useTranslations('Common');
+
   return (
     <Modal
       isOpen={isOpen}
@@ -39,7 +43,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
           loading={loading}
           className="w-fit text-base"
         >
-          نعم
+          {t('yes')}
         </Button>
         <Button
           variant="text"
@@ -47,7 +51,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
           loading={loading}
           className="w-fit text-base"
         >
-          لا
+          {t('no')}
         </Button>
       </div>
     </Modal>

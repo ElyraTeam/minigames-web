@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { FiRefreshCw } from 'react-icons/fi';
+import { useTranslations } from 'next-intl';
 
 import localPlayer from '@/api/socket';
 import useGameStore from '@/state/game';
@@ -14,6 +15,7 @@ const WordChangeLetterButton: React.FC = () => {
   const players = usePlayersStore((state) => state.players?.players) || [];
   const currentLetter = useGameStore((state) => state.game?.currentLetter);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const t = useTranslations('WordGame');
 
   const currentPlayer = players.find((p) => p.id === playerId);
   const hasVoted = currentPlayer?.votedReroll ?? false;
@@ -36,7 +38,7 @@ const WordChangeLetterButton: React.FC = () => {
       <ConfirmModal
         isOpen={confirmOpen}
         onOpenChange={setConfirmOpen}
-        subtitle={`هل تريد التصويت لتغيير الحرف "${currentLetter}"؟`}
+        subtitle={t('changeLetterConfirm', { letter: currentLetter })}
         confirmVariant="warning"
         onConfirm={handleConfirm}
       />

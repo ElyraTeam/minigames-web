@@ -1,5 +1,8 @@
+'use client';
+
 import { MdOutlineChat } from 'react-icons/md';
 import { IoClose } from 'react-icons/io5';
+import { useTranslations } from 'next-intl';
 
 import WordChatSend from './word-chat-send';
 import WordChatMessages from './word-chat-messages';
@@ -14,6 +17,8 @@ const WordChatContainer: React.FC<WordChatContainerProps> = ({
   onClose,
   ...props
 }) => {
+  const t = useTranslations('WordChat');
+
   return (
     <div
       className={cn(
@@ -30,7 +35,7 @@ const WordChatContainer: React.FC<WordChatContainerProps> = ({
         relative flex items-center justify-center gap-2 bg-word-side-200 p-4
         shadow-[0px_4px_4px_0px_rgba(18,18,18,0.2)]
       ">
-        <span className="text-[22px]">الرسائل</span>
+        <span className="text-[22px]">{t('messages')}</span>
         <MdOutlineChat className="text-4xl" />
         {onClose && (
           <button

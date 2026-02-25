@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import AppearOnTransition from '@/components/ui/appear-on-transition';
 
@@ -7,6 +8,8 @@ import WordHomeCard from './word-home-card';
 interface WordGetPointsProps {}
 
 const WordGetPoints: React.FC<WordGetPointsProps> = ({}) => {
+  const t = useTranslations('WordHome');
+
   return (
     <div className="relative h-screen">
       <div className="
@@ -33,8 +36,8 @@ const WordGetPoints: React.FC<WordGetPointsProps> = ({}) => {
         </AppearOnTransition>
         <AppearOnTransition className="slide-in-from-left-20">
           <WordHomeCard
-            title="جمع النقاط"
-            description="صوت أنت واصدقائك للكلمات الصحيحة وكن أعلي من يملك نقاطا عند نهاية جميع الجولات"
+            title={t('getPoints.title')}
+            description={t('getPoints.description')}
           />
         </AppearOnTransition>
       </div>

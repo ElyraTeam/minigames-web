@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import { cn } from '@/lib/utils';
 import useVoteStore from '@/state/vote';
 import { getPlayerById } from '@/lib/word';
@@ -27,6 +29,7 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
   hasValue,
   onChangeVote,
 }) => {
+  const t = useTranslations('WordGame');
   const playerVotes = useVoteStore((state) => state.votes);
   const players = usePlayersStore((state) => state.players?.players) || [];
   const getVotesToPlayers = () => {
@@ -67,7 +70,7 @@ const WordVotingCard: React.FC<WordVotingCardProps> = ({
         lg:mx-auto lg:border-b-4 lg:border-l-0 lg:text-xl
         2xl:mx-0 2xl:border-b-0 2xl:border-l-2
       ">
-        {name} {selectedCard && '(أنت)'}
+        {name} {selectedCard && t('you')}
       </p>
       <h3 className="
         text-3xl leading-none font-black

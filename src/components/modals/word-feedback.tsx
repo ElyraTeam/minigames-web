@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslations } from 'next-intl';
 
 import Input from '@/components/ui/input';
 import { sendFeedback } from '@/api/rooms';
@@ -27,6 +28,7 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
   isOpen,
   onOpenChange,
 }) => {
+  const t = useTranslations('WordFeedback');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
@@ -37,18 +39,18 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
   const validateField = (field: string, value: string): string | undefined => {
     switch (field) {
       case 'email':
-        if (!value.trim()) return 'الايميل مطلوب';
-        if (!EMAIL_REGEX.test(value)) return 'الايميل غير صالح';
+        if (!value.trim()) return t('emailRequired');
+        if (!EMAIL_REGEX.test(value)) return t('emailInvalid');
         return undefined;
       case 'name':
-        if (!value.trim()) return 'الاسم مطلوب';
+        if (!value.trim()) return t('nameRequired');
         if (value.trim().length < MIN_NAME_LENGTH)
-          return `الاسم لازم يكون ${MIN_NAME_LENGTH} حروف على الأقل`;
+          return t('nameMinLength', { min: MIN_NAME_LENGTH });
         return undefined;
       case 'message':
-        if (!value.trim()) return 'الرسالة مطلوبة';
+        if (!value.trim()) return t('messageRequired');
         if (value.trim().length < MIN_MESSAGE_LENGTH)
-          return `الرسالة لازم تكون ${MIN_MESSAGE_LENGTH} حروف على الأقل`;
+          return t('messageMinLength', { min: MIN_MESSAGE_LENGTH });
         return undefined;
       default:
         return undefined;
@@ -81,7 +83,7 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
     setLoading(true);
     try {
       await sendFeedback(email, name, message);
-      toast.success('مشكلتك اتبعتت وهتتحل في اسرع وقت');
+      toast.success(t('successMessage'));
       setEmail('');
       setName('');
       setMessage('');
@@ -89,7 +91,7 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
       setTouched({});
       onOpenChange(false);
     } catch (err) {
-      toast.error('مشكلة حصلت');
+      toast.error(t('errorMessage'));
       console.error(err);
     }
     setLoading(false);
@@ -104,7 +106,7 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
         lg:w-[450px]
       "
     >
-      <h4>ما هي مشكلتك؟</h4>
+      <h4>{t('title')}</h4>
       <form
         className="space-y-4"
         onSubmit={(e) => {
@@ -113,7 +115,7 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
         }}
       >
         <div className="flex flex-col gap-2">
-          <label>الايميل</label>
+          <label>{t('email')}</label>
           <Input
             type="email"
             className={`
@@ -131,7 +133,7 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
           )}
         </div>
         <div className="flex flex-col gap-2">
-          <label>الاسم</label>
+          <label>{t('name')}</label>
           <Input
             className={`
               border border-black/40
@@ -147,7 +149,7 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
           )}
         </div>
         <div className="flex flex-col gap-2">
-          <label>الرسالة</label>
+          <label>{t('message')}</label>
           <TextArea
             className={`
               h-32 border border-black/40
@@ -163,7 +165,7 @@ const WordFeedback: React.FC<WordFeedbackProps> = ({
           )}
         </div>
         <WordButton variant="regular">
-          ارسال
+          {t('send')}
         </WordButton>
       </form>
     </Modal>

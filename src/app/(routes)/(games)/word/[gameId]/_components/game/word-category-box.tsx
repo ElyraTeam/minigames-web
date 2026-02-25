@@ -1,3 +1,7 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
+
 import Input from '@/components/ui/input';
 
 interface WordCategoryBoxProps {
@@ -13,6 +17,8 @@ const WordCategoryBox: React.FC<WordCategoryBoxProps> = ({
   value,
   onChange,
 }) => {
+  const t = useTranslations('WordGame');
+
   return (
     <div className="flex flex-col gap-2 text-center">
       <label className="
@@ -26,7 +32,7 @@ const WordCategoryBox: React.FC<WordCategoryBoxProps> = ({
           placeholder:text-white/60
           focus:border-word-primary-900
         "
-        placeholder={`${letter}ـ..`}
+        placeholder={t('categoryPlaceholder', { letter })}
         value={value}
         onChange={(e) => onChange?.(e.target.value)}
       />

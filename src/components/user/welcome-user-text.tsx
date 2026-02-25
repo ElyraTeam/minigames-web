@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import useLocalStore from '@/state/local';
 
 import UsernameText from './username-text';
@@ -7,6 +9,7 @@ import UsernameText from './username-text';
 interface WelcomeUserTextProps {}
 
 const WelcomeUserText: React.FC<WelcomeUserTextProps> = ({}) => {
+  const t = useTranslations('WordHome');
   const setShowNicknameModal = useLocalStore(
     (state) => state.setShowNicknameModal
   );
@@ -16,7 +19,7 @@ const WelcomeUserText: React.FC<WelcomeUserTextProps> = ({}) => {
       text-3xl
       lg:text-5xl
     ">
-      مرحبا <UsernameText />!
+      {t('welcome')} <UsernameText />!
       <button
         onClick={() => setShowNicknameModal(true)}
         className="
@@ -25,7 +28,7 @@ const WelcomeUserText: React.FC<WelcomeUserTextProps> = ({}) => {
           sm:text-xl
         "
       >
-        (تغيير)
+        {t('change')}
       </button>
     </h1>
   );

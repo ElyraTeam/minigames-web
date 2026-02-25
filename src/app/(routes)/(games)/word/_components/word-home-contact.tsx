@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 import WordButton from '@/components/word/word-button';
 import WordFeedback from '@/components/modals/word-feedback';
@@ -8,6 +9,7 @@ import WordFeedback from '@/components/modals/word-feedback';
 interface WordHomeContactProps {}
 
 const WordHomeContact: React.FC<WordHomeContactProps> = ({}) => {
+  const t = useTranslations('WordHome');
   const [isOpen, setOpen] = useState(false);
 
   return (
@@ -21,7 +23,7 @@ const WordHomeContact: React.FC<WordHomeContactProps> = ({}) => {
         "
         onClick={() => setOpen(true)}
       >
-        تواصل معنا
+        {t('contactUs')}
       </WordButton>
     </>
   );

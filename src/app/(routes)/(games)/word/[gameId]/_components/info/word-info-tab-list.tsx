@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import TabItem from '@/components/ui/tab-item';
 import TabList from '@/components/ui/tab-list';
 
@@ -8,6 +10,8 @@ import WordLeaderboard from './word-leaderboard';
 interface WordInfoTabListProps {}
 
 const WordInfoTabList: React.FC<WordInfoTabListProps> = ({}) => {
+  const t = useTranslations('WordGame');
+
   return (
     <TabList
       parentClassName="flex flex-col overflow-y-auto flex-grow min-h-0 scrollbar-thin overflow-x-hidden"
@@ -17,7 +21,7 @@ const WordInfoTabList: React.FC<WordInfoTabListProps> = ({}) => {
       tabSwitchClassName="p-3"
     >
       <TabItem
-        label="الحالية"
+        label={t('currentRound')}
         className="
           scrollbar-none overflow-y-auto duration-300 animate-in
           slide-in-from-right-full
@@ -26,7 +30,7 @@ const WordInfoTabList: React.FC<WordInfoTabListProps> = ({}) => {
         <WordLeaderboard lastRound />
       </TabItem>
       <TabItem
-        label="المتصدرون"
+        label={t('topPlayers')}
         className="
           scrollbar-none overflow-y-auto duration-300 animate-in
           slide-in-from-left-full

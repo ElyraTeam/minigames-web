@@ -56,7 +56,7 @@ const WordMobileSidebar: React.FC<WordMobileSidebarProps> = ({
             lg:hidden
           `,
           'transition-opacity duration-300',
-          isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
+          isOpen ? 'opacity-100' : 'pointer-events-none opacity-0',
         )}
         onClick={onClose}
       />
@@ -72,7 +72,7 @@ const WordMobileSidebar: React.FC<WordMobileSidebarProps> = ({
           'flex flex-col overflow-hidden',
           'shadow-[-4px_0_20px_rgba(0,0,0,0.3)]',
           !isSwiping && 'transition-transform duration-300 ease-out',
-          isOpen ? 'translate-x-0' : 'translate-x-full'
+          isOpen ? 'translate-x-0' : 'translate-x-full',
         )}
         style={{
           transform: isOpen ? `translateX(${swipeOffset}px)` : undefined,
