@@ -45,7 +45,7 @@ const WordCreateGame: React.FC<WordCreateGameProps> = ({}) => {
         letters:
           savedGameSettings.lettersByLanguage?.[locale] ?? defaultLetters,
         categories:
-          savedGameSettings.categoriesByLocale?.[locale] ?? defaultCategories,
+          savedGameSettings.categoriesByLanguage?.[locale] ?? defaultCategories,
       };
       const res = await createRoom(nickname, options);
       if (res.error) {

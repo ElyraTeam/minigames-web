@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FiRefreshCcw } from 'react-icons/fi';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import useOwner from '@/hooks/use-owner';
 import Tooltip from '@/components/ui/tooltip';
 import useRoomOptions from '@/hooks/use-room-options';
 import {
+  CHARS_ARABIC,
   DEFAULT_CATEGORIES_ARABIC,
   DEFAULT_CATEGORIES_ENGLISH,
 } from '@/config/word';
@@ -22,8 +23,10 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
   const { currentOptions, updateRoomOptions } = useRoomOptions();
   const classes = currentOptions?.categories || [];
   const isOwner = useOwner();
-  const locale = useLocale();
   const t = useTranslations('WordLobby');
+  const isArabicLetters = CHARS_ARABIC.includes(
+    currentOptions?.letters?.[0] ?? '',
+  );
 
   const deleteClass = (className: string) => {
     if (!classes.includes(className)) return;
@@ -39,8 +42,9 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
   };
 
   const resetClasses = () => {
-    const defaults =
-      locale === 'ar' ? DEFAULT_CATEGORIES_ARABIC : DEFAULT_CATEGORIES_ENGLISH;
+    const defaults = isArabicLetters
+      ? DEFAULT_CATEGORIES_ARABIC
+      : DEFAULT_CATEGORIES_ENGLISH;
     setRoomCategories(defaults);
   };
 

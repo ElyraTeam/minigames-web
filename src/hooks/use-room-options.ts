@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useLocale } from "next-intl";
 
 import useGameStore from "@/state/game";
 import useRoomStore from "@/state/room";
@@ -14,7 +13,6 @@ import useOwner from "./use-owner";
 import localPlayer from "@/api/socket";
 
 const useRoomOptions = () => {
-  const locale = useLocale();
   const nickname = useLocalStore((state) => state.nickname);
   const roomId = useGameStore((state) => state.game?.id);
   const currentOptions = useRoomStore((state) => state.options?.options);
@@ -43,9 +41,9 @@ const useRoomOptions = () => {
           ...savedGameSettings.lettersByLanguage,
           [letterLang]: newOptions.letters,
         },
-        categoriesByLocale: {
-          ...savedGameSettings.categoriesByLocale,
-          [locale]: newOptions.categories,
+        categoriesByLanguage: {
+          ...savedGameSettings.categoriesByLanguage,
+          [letterLang]: newOptions.categories,
         },
       });
     } catch (err) {
@@ -70,11 +68,14 @@ const useRoomOptions = () => {
       ? "ar"
       : "en";
     const defaultCategories =
-      locale === "ar" ? DEFAULT_CATEGORIES_ARABIC : DEFAULT_CATEGORIES_ENGLISH;
+      currentLetterLang === "ar"
+        ? DEFAULT_CATEGORIES_ARABIC
+        : DEFAULT_CATEGORIES_ENGLISH;
     const savedLetters =
       savedGameSettings.lettersByLanguage?.[currentLetterLang];
     const savedCategories =
-      savedGameSettings.categoriesByLocale?.[locale] ?? defaultCategories;
+      savedGameSettings.categoriesByLanguage?.[currentLetterLang] ??
+      defaultCategories;
 
     const newOptions: RoomOptions = {
       ...currentOptions,

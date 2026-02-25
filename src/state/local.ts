@@ -5,7 +5,7 @@ interface SavedGameSettings {
   maxPlayers?: number;
   rounds?: number;
   lettersByLanguage?: { ar?: string[]; en?: string[] };
-  categoriesByLocale?: Record<string, string[]>;
+  categoriesByLanguage?: { ar?: string[]; en?: string[] };
 }
 
 interface LocalState {
