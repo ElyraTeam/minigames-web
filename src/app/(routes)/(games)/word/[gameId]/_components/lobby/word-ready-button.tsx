@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import localPlayer from '@/api/socket';
 import useOwner from '@/hooks/use-owner';
 import useUIStore from '@/state/ui';
@@ -15,6 +17,7 @@ const WordReadyButton: React.FC<WordReadyButtonProps> = ({}) => {
   const allReady = numberOfReadyPlayers === players?.length;
   const localReady = players?.some((p) => p.ready && p.nickname === nickname);
   const isOwner = useOwner();
+  const t = useTranslations('WordLobby');
   const setPlayersSidebarOpen = useUIStore(
     (state) => state.setPlayersSidebarOpen
   );
@@ -46,14 +49,14 @@ const WordReadyButton: React.FC<WordReadyButtonProps> = ({}) => {
   };
 
   const renderPlayersReady = () => {
-    if (allReady) return 'بانتظار المنشئ..';
+    if (allReady) return t('waitingForOwner');
     return (
       <div>
         <p className="mb-1 text-lg leading-none font-bold">
           <span className="leading-5">{`${numberOfReadyPlayers}`}</span>
           <span className="opacity-50">{`/${players?.length}`}</span>
         </p>
-        <p className="text-xs leading-none">مستعدون</p>
+        <p className="text-xs leading-none">{t('playersReady')}</p>
       </div>
     );
   };
@@ -61,11 +64,11 @@ const WordReadyButton: React.FC<WordReadyButtonProps> = ({}) => {
   const renderText = () => {
     if (!isOwner) {
       if (localReady) return renderPlayersReady();
-      return 'مستعد';
+      return t('ready');
     }
-    if (isWaitingForPlayers) return 'بانتظار اللاعبين..';
+    if (isWaitingForPlayers) return t('waitingForPlayers');
     if (!allReady) return renderPlayersReady();
-    return 'ابدأ الجولات!';
+    return t('startRounds');
   };
 
   const isDisabled =

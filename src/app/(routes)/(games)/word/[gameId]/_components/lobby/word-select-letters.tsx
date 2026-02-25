@@ -1,15 +1,16 @@
-import { CHARS_ARABIC } from '@/config/word';
 import useOwner from '@/hooks/use-owner';
 
 import WordLetter from './word-letter';
 
 interface WordSelectLettersProps {
+  alphabet: string[];
   chosenLetters: string[];
   doneLetters: string[];
   onLetterUpdate: (letter: string, checked: boolean) => void;
 }
 
 const WordSelectLetters: React.FC<WordSelectLettersProps> = ({
+  alphabet,
   chosenLetters,
   doneLetters,
   onLetterUpdate,
@@ -24,7 +25,7 @@ const WordSelectLetters: React.FC<WordSelectLettersProps> = ({
         grid grid-cols-4 gap-5
         lg:grid-cols-7 lg:gap-6
       ">
-        {CHARS_ARABIC.map((letter) => (
+        {alphabet.map((letter) => (
         <WordLetter
           key={`word-letter-${letter}`}
           letter={letter}

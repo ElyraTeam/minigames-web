@@ -1,13 +1,20 @@
 import { useState } from "react";
+import { useLocale } from "next-intl";
 
 import useGameStore from "@/state/game";
 import useRoomStore from "@/state/room";
 import useLocalStore from "@/state/local";
+import {
+  CHARS_ARABIC,
+  DEFAULT_CATEGORIES_ARABIC,
+  DEFAULT_CATEGORIES_ENGLISH,
+} from "@/config/word";
 
 import useOwner from "./use-owner";
 import localPlayer from "@/api/socket";
 
 const useRoomOptions = () => {
+  const locale = useLocale();
   const nickname = useLocalStore((state) => state.nickname);
   const roomId = useGameStore((state) => state.game?.id);
   const currentOptions = useRoomStore((state) => state.options?.options);
@@ -25,12 +32,21 @@ const useRoomOptions = () => {
     updateRoom(newOptions);
     try {
       await localPlayer.setOptions(newOptions);
-      // Save settings to localStorage for future games
+      // Detect letter language from the first letter in the new selection
+      const letterLang = CHARS_ARABIC.includes(newOptions.letters?.[0] ?? "")
+        ? "ar"
+        : "en";
       setSavedGameSettings({
         maxPlayers: newOptions.maxPlayers,
         rounds: newOptions.rounds,
-        letters: newOptions.letters,
-        categories: newOptions.categories,
+        lettersByLanguage: {
+          ...savedGameSettings.lettersByLanguage,
+          [letterLang]: newOptions.letters,
+        },
+        categoriesByLocale: {
+          ...savedGameSettings.categoriesByLocale,
+          [locale]: newOptions.categories,
+        },
       });
     } catch (err) {
       console.error(err);
@@ -47,12 +63,25 @@ const useRoomOptions = () => {
       return "No saved settings found";
     }
 
+    // Determine current letter language from active options
+    const currentLetterLang = CHARS_ARABIC.includes(
+      currentOptions.letters?.[0] ?? ""
+    )
+      ? "ar"
+      : "en";
+    const defaultCategories =
+      locale === "ar" ? DEFAULT_CATEGORIES_ARABIC : DEFAULT_CATEGORIES_ENGLISH;
+    const savedLetters =
+      savedGameSettings.lettersByLanguage?.[currentLetterLang];
+    const savedCategories =
+      savedGameSettings.categoriesByLocale?.[locale] ?? defaultCategories;
+
     const newOptions: RoomOptions = {
       ...currentOptions,
       ...(savedGameSettings.maxPlayers && { maxPlayers: savedGameSettings.maxPlayers }),
       ...(savedGameSettings.rounds && { rounds: savedGameSettings.rounds }),
-      ...(savedGameSettings.letters && { letters: savedGameSettings.letters }),
-      ...(savedGameSettings.categories && { categories: savedGameSettings.categories }),
+      ...(savedLetters && { letters: savedLetters }),
+      categories: savedCategories,
     };
 
     return updateRoomOptions(newOptions);

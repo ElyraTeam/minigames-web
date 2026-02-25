@@ -1,5 +1,6 @@
 import { FaUserGroup } from 'react-icons/fa6';
 import { IoGameController } from 'react-icons/io5';
+import { useTranslations } from 'next-intl';
 
 import useOwner from '@/hooks/use-owner';
 import useRoomOptions from '@/hooks/use-room-options';
@@ -15,6 +16,7 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
   const rounds = currentOptions?.rounds || DEFAULT_ROUNDS;
   const lettersNumber = currentOptions?.letters.length || 1;
   const isOwner = useOwner();
+  const t = useTranslations('WordLobby');
 
   const handleMaxPlayers = (newMaxPlayers: number) => {
     if (!currentOptions) return;
@@ -32,35 +34,35 @@ const WordGeneralSettings: React.FC<WordGeneralSettingsProps> = ({}) => {
   return (
     <div className="flex flex-col items-center gap-2 px-6 py-8">
       {/* Number of Players */}
-      <div className="flex items-center gap-6">
+      <div className="flex w-50 items-center justify-between gap-6">
         <div className="flex items-center gap-2">
           <FaUserGroup className="text-lg text-white" />
           <span className="text-base font-semibold text-white">
-            عدد اللاعبين
+            {t('maxPlayers')}
           </span>
         </div>
         <WordNumberStepper
           value={maxPlayers}
           options={playerOptions}
           disabled={!isOwner}
-          tooltip="فقط صاحب الغرفة يستطيع التعديل"
+          tooltip={t('ownerOnly')}
           onChange={handleMaxPlayers}
         />
       </div>
 
       {/* Number of Rounds */}
-      <div className="flex items-center gap-6">
+      <div className="flex w-50 items-center justify-between gap-6">
         <div className="flex items-center gap-2">
           <IoGameController className="text-lg text-white" />
           <span className="text-base font-semibold text-white">
-            عدد الجولات
+            {t('rounds')}
           </span>
         </div>
         <WordNumberStepper
           value={rounds}
           options={roundOptions}
           disabled={!isOwner}
-          tooltip="فقط صاحب الغرفة يستطيع التعديل"
+          tooltip={t('ownerOnly')}
           onChange={handleRounds}
         />
       </div>

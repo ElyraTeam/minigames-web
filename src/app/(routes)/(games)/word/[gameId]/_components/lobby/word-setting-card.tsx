@@ -16,7 +16,7 @@ const WordSettingCard: React.FC<WordSettingCardProps> = ({
   return (
     <div className={cn('relative pt-4', className)} {...props}>
       {/* Floating Header */}
-      <div className="absolute top-0 right-1/2 z-10 w-40 translate-x-1/2">
+      <div className="absolute top-0 right-1/2 z-10 w-48 translate-x-1/2">
         <div
           className={cn(
             `

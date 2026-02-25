@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FiRefreshCcw } from 'react-icons/fi';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import useOwner from '@/hooks/use-owner';
 import Tooltip from '@/components/ui/tooltip';
 import useRoomOptions from '@/hooks/use-room-options';
-import { DEFAULT_CATEGORIES_ARABIC } from '@/config/word';
+import {
+  DEFAULT_CATEGORIES_ARABIC,
+  DEFAULT_CATEGORIES_ENGLISH,
+} from '@/config/word';
 
 import WordClassAdd from './word-class-add';
 import WordSelectClasses from './word-select-classes';
@@ -18,6 +22,8 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
   const { currentOptions, updateRoomOptions } = useRoomOptions();
   const classes = currentOptions?.categories || [];
   const isOwner = useOwner();
+  const locale = useLocale();
+  const t = useTranslations('WordLobby');
 
   const deleteClass = (className: string) => {
     if (!classes.includes(className)) return;
@@ -25,7 +31,7 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
   };
 
   const setRoomCategories = async (categories: string[]) => {
-    if (!currentOptions) return toast.error('Current options not found.');
+    if (!currentOptions) return toast.error(t('currentOptionsNotFound'));
     const error = await updateRoomOptions({ ...currentOptions, categories });
     if (error) {
       toast.error(error);
@@ -33,13 +39,15 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
   };
 
   const resetClasses = () => {
-    setRoomCategories(DEFAULT_CATEGORIES_ARABIC);
+    const defaults =
+      locale === 'ar' ? DEFAULT_CATEGORIES_ARABIC : DEFAULT_CATEGORIES_ENGLISH;
+    setRoomCategories(defaults);
   };
 
   const addClass = (className: string) => {
     if (className.trim().length == 0) return;
     if (classes.includes(className))
-      return toast.error('لا يمكن تكرار نفس الفئة');
+      return toast.error(t('duplicateCategory'));
     setRoomCategories([...classes, className]);
     setClassName('');
   };
@@ -52,16 +60,16 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
       {/* Bottom row: Add Input + Restore link */}
       <div
         className="
-        flex flex-col items-center gap-4
-        lg:gap-6
-      "
+          flex flex-col items-center gap-4
+          lg:gap-6
+        "
       >
         {/* Add Category Input */}
         <div
           className="
-          w-full
-          lg:max-w-[320px]
-        "
+            w-full
+            lg:max-w-[320px]
+          "
         >
           <WordClassAdd
             value={className}
@@ -73,7 +81,7 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
         {/* Restore Link */}
         <Tooltip
           position="top"
-          text={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
+          text={!isOwner ? t('ownerOnly') : undefined}
           className="text-sm"
         >
           <button
@@ -90,13 +98,13 @@ const WordClassSettings: React.FC<WordClassSettingsProps> = ({}) => {
           >
             <div
               className="
-              flex size-7 items-center justify-center rounded-full
-              bg-word-secondary
-            "
+                flex size-7 items-center justify-center rounded-full
+                bg-word-secondary
+              "
             >
               <FiRefreshCcw className="text-sm text-white" />
             </div>
-            <span className="font-semibold text-white">استرجاع</span>
+            <span className="font-semibold text-white">{t('restore')}</span>
           </button>
         </Tooltip>
       </div>

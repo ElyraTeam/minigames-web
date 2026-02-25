@@ -4,8 +4,8 @@ import { devtools, persist } from 'zustand/middleware';
 interface SavedGameSettings {
   maxPlayers?: number;
   rounds?: number;
-  letters?: string[];
-  categories?: string[];
+  lettersByLanguage?: { ar?: string[]; en?: string[] };
+  categoriesByLocale?: Record<string, string[]>;
 }
 
 interface LocalState {

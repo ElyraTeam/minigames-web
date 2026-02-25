@@ -1,7 +1,6 @@
 import { API_HOST } from './constants';
 
 export const WORD_GAME_NAME = 'Word';
-export const WORD_GAME_NAME_AR = 'كلمة';
 
 export const WORD_GAME_DESCRIPTION_AR =
   'نسخة الويب للعبة الشهيرة (ولد - بنت - حيوان..)';
@@ -26,6 +25,21 @@ export const DEFAULT_CATEGORIES_ARABIC = [
   'اكلة',
   'نبات',
   'بلد',
+];
+
+export const DEFAULT_CATEGORIES_ENGLISH = [
+  'Boy name',
+  'Girl name',
+  'Animal',
+  'Country',
+  'Food',
+  'Plant',
+  'Color',
+];
+
+export const CHARS_ENGLISH: string[] = [
+  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+  'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
 ];
 
 export const CHARS_ARABIC: string[] = [

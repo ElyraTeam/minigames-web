@@ -1,4 +1,5 @@
 import { IoAdd } from 'react-icons/io5';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import useOwner from '@/hooks/use-owner';
@@ -16,6 +17,7 @@ const WordClassAdd: React.FC<WordClassAddProps> = ({
   onClassAdd,
 }) => {
   const isOwner = useOwner();
+  const t = useTranslations('WordLobby');
 
   const handleSubmit = () => {
     if (isOwner && value.trim()) {
@@ -27,7 +29,7 @@ const WordClassAdd: React.FC<WordClassAddProps> = ({
     <Tooltip
       position="top"
       className="text-sm"
-      text={!isOwner ? 'فقط صاحب الغرفة يستطيع التعديل' : undefined}
+      text={!isOwner ? t('ownerOnly') : undefined}
     >
       <div
         className={cn(
@@ -42,16 +44,20 @@ const WordClassAdd: React.FC<WordClassAddProps> = ({
         {/* Input */}
         <input
           type="text"
-          placeholder="أضف فئة.."
+          placeholder={t('addCategory')}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
           disabled={!isOwner}
           className={cn(
-            'flex-1 bg-transparent py-2 pr-4 pl-1 text-word-side-400',
             `
-              text-right
+              flex-1 bg-transparent py-2 pr-1 pl-4 text-word-side-400
+              rtl:pr-4 rtl:pl-1
+            `,
+            `
+              text-left
               placeholder:text-word-side-200/60
+              rtl:text-right
             `,
             'focus:outline-none',
             'disabled:cursor-not-allowed',
@@ -63,13 +69,9 @@ const WordClassAdd: React.FC<WordClassAddProps> = ({
           onClick={handleSubmit}
           disabled={!isOwner}
           className={cn(
-            'flex items-center justify-center',
+            'flex cursor-pointer items-center justify-center',
             'px-3 py-2',
             'bg-transparent text-word-side-200',
-            `
-              transition-colors
-              hover:bg-word-side-200/10
-            `,
             'disabled:cursor-not-allowed disabled:opacity-50',
           )}
         >

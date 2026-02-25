@@ -1,4 +1,5 @@
 import { FaLock } from 'react-icons/fa';
+import { useTranslations } from 'next-intl';
 
 import useOwner from '@/hooks/use-owner';
 
@@ -12,6 +13,7 @@ interface WordGameSettingsProps {}
 
 const WordGameSettings: React.FC<WordGameSettingsProps> = ({}) => {
   const isOwner = useOwner();
+  const t = useTranslations('WordLobby');
 
   return (
     <WordGameContainer className="space-y-8 duration-500 animate-in fade-in">
@@ -27,20 +29,20 @@ const WordGameSettings: React.FC<WordGameSettingsProps> = ({}) => {
             pt-7
           ">
             <span className="text-base font-bold text-white">
-              فقط صاحب الغرفة يستطيع التعديل
+              {t('ownerOnly')}
             </span>
           </div>
         </div>
       )}
-      <WordSettingCard title="اعدادات عامة">
+      <WordSettingCard title={t('generalSettings')}>
         <WordGeneralSettings />
       </WordSettingCard>
 
-      <WordSettingCard title="اختر الحروف">
+      <WordSettingCard title={t('chooseLetters')}>
         <WordLetterSettings />
       </WordSettingCard>
 
-      <WordSettingCard title="اختر الفئات">
+      <WordSettingCard title={t('chooseCategories')}>
         <WordClassSettings />
       </WordSettingCard>
     </WordGameContainer>
