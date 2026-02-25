@@ -2,12 +2,14 @@
 
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 import useLocalStore from '@/state/local';
 import ElyraLogo from '@/components/ui/elyra-logo';
 import WordLogo from '@/components/word/word-logo';
 import SlideButton from '@/components/ui/slide-button';
 import AuthorLinks from '@/components/about/author-links';
+import LanguageSelect from '@/components/ui/language-select';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { MAX_NICKNAME_LENGTH, MIN_NICKNAME_LENGTH } from '@/config/constants';
 
@@ -18,6 +20,7 @@ interface NicknameModalProps {
 }
 
 const NicknameModal: React.FC<NicknameModalProps> = ({ isOpen }) => {
+  const t = useTranslations('NicknameModal');
   const [newName, setNewName] = useState<string | null | undefined>(null);
   const { nickname, setNickname, setShowNicknameModal } = useLocalStore();
   const [loading, setLoading] = useState(false);
@@ -66,14 +69,15 @@ const NicknameModal: React.FC<NicknameModalProps> = ({ isOpen }) => {
             sm:px-16
           ">
             <WordLogo size={100} />
-            <h2 className="text-2xl font-semibold">مرحبًا بك في كلمة!</h2>
+            <h2 className="text-2xl font-semibold">{t('title')}</h2>
+            <LanguageSelect />
             <SlideButton
               onInputTextChange={setNewName}
               center
-              label="اكتب اسمك"
+              label={t('label')}
               initialValue={nickname || ''}
               onKeyPress={(k) => k === 'Enter' && updateNickname()}
-              placeholderLabel="اكتب اسمك"
+              placeholderLabel={t('placeholder')}
               className="w-[250px]"
               maxLength={MAX_NICKNAME_LENGTH}
             >
@@ -86,7 +90,7 @@ const NicknameModal: React.FC<NicknameModalProps> = ({ isOpen }) => {
               />
             </SlideButton>
             <div className="flex flex-col items-center gap-1">
-              <p className="text-sm font-semibold">تم التطوير بواسطة</p>
+              <p className="text-sm font-semibold">{t('developedBy')}</p>
               <AuthorModal>
                 <ElyraLogo size={50} isWhite={false} />
               </AuthorModal>

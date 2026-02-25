@@ -2,7 +2,8 @@
 
 import toast from 'react-hot-toast';
 import { IoPerson } from 'react-icons/io5';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 import {
   Popover,
@@ -12,6 +13,7 @@ import {
 import Input from '@/components/ui/input';
 import useLocalStore from '@/state/local';
 import Button from '@/components/ui/button';
+import LanguageSelect from '@/components/ui/language-select';
 import { MAX_NICKNAME_LENGTH, MIN_NICKNAME_LENGTH } from '@/config/constants';
 
 import WordNickname from './word-nickname';
@@ -19,15 +21,16 @@ import WordNickname from './word-nickname';
 interface WordAppbarNicknameProps {}
 
 const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
+  const t = useTranslations('WordAppbar');
   const nickname = useLocalStore((state) => state.nickname);
-  const [open, setOpen] = useState(false);
   const setNickname = useLocalStore((state) => state.setNickname);
+  const [open, setOpen] = useState(false);
   const [newNickname, setNewNickname] = useState('');
 
-  useEffect(() => {
-    if (!nickname) return;
-    setNewNickname(nickname);
-  }, [nickname]);
+  const handleOpenChange = (isOpen: boolean) => {
+    if (isOpen) setNewNickname(nickname || '');
+    setOpen(isOpen);
+  };
 
   const handleSaveNickname = () => {
     const newName = newNickname.trim();
@@ -38,19 +41,21 @@ const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
     )
       return;
     setNickname(newName);
-    toast.success('تم تعديل الاسم.');
+    toast.success(t('nicknameUpdated'));
     setOpen(false);
   };
 
   return (
-    <Popover open={open} onOpenChange={(open) => setOpen(open)}>
-      <PopoverTrigger className="
-        flex w-full items-center justify-center space-x-1 rounded-xl border-none
-        bg-word-game-800 px-1 py-2 shadow-[inset_0_0_10px_rgba(0,0,0,0.5)]
-        transition-colors
-        hover:bg-word-game-800/80
-        rtl:space-x-reverse
-      ">
+    <Popover open={open} onOpenChange={handleOpenChange}>
+      <PopoverTrigger
+        className="
+          flex w-full items-center justify-center space-x-1 rounded-xl
+          border-none bg-word-game-800 px-1 py-2
+          shadow-[inset_0_0_10px_rgba(0,0,0,0.5)] transition-colors
+          hover:bg-word-game-800/80
+          rtl:space-x-reverse
+        "
+      >
         <IoPerson className="inline text-lg" />
         <WordNickname />
       </PopoverTrigger>
@@ -61,9 +66,12 @@ const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
           border-none bg-white text-center
         "
       >
-        <p>تعديل الاسم</p>
+        <div className="flex items-center justify-between">
+          <p>{t('settings')}</p>
+          <LanguageSelect size="sm" />
+        </div>
         <Input
-          placeholder="اكتب اسمك"
+          placeholder={t('enterName')}
           className="
             w-full rounded-2xl
             focus:border-word-game
@@ -80,7 +88,7 @@ const WordAppbarNickname: React.FC<WordAppbarNicknameProps> = ({}) => {
           "
           onClick={handleSaveNickname}
         >
-          حفظ
+          {t('save')}
         </Button>
       </PopoverContent>
     </Popover>
